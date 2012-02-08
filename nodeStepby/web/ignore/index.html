@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>this:last-child</title>
+    <meta charset="utf-8"/>
+    <style>
+        div {
+            width: 200px;
+            height: 14px;
+            margin: 3px 0;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+    <script>
+        (function($) {
+            var d = $.dialog.defaults;
+            d.skin = "${loginUser.themeUrl}";
+        })(art);
+        //
+        function f($){
+            var d = $.dialog.defaults;
+            d.skin = "${loginUser.themeUrl}";
+        }
+        f(art);
+    </script>
+</head>
+<body>
+<div class="className">div1</div>
+<div class="className">div1</div>
+<div class="className">
+    <div class="sub">1</div>
+    <div class="sub">2</div>
+</div>
+</body>
+</html>
