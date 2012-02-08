@@ -72,10 +72,28 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="index.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/ignore/index.html">
+      <file leaf-file-name="timer.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/api_demo/timer.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="12" column="51" selection-start="263" selection-end="263" vertical-scroll-proportion="0.5064935">
+            <state line="11" column="36" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="module.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/api_demo/module.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="4" column="74" selection-start="216" selection-end="216" vertical-scroll-proportion="0.15082957">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="circle.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/api_demo/circle.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="2" column="29" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
@@ -94,6 +112,10 @@
         <option value="$PROJECT_DIR$/web/server.js" />
         <option value="$PROJECT_DIR$/web/index.js" />
         <option value="$PROJECT_DIR$/web/ignore/index.html" />
+        <option value="$PROJECT_DIR$/web/api_demo/hello_webServer.js" />
+        <option value="$PROJECT_DIR$/web/api_demo/timer.js" />
+        <option value="$PROJECT_DIR$/web/api_demo/circle.js" />
+        <option value="$PROJECT_DIR$/web/api_demo/module.js" />
       </list>
     </option>
   </component>
@@ -178,7 +200,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="ignore" />
+              <option name="myItemId" value="api_demo" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -198,6 +220,7 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="D:\github\node_j1\nodeStepby\web\api_demo" />
       <recent name="D:\github\node_j1\nodeStepby\web\ignore" />
       <recent name="D:\github\node_j1\nodeStepby\web" />
     </key>
@@ -341,7 +364,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="672" y="3" width="944" height="876" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -356,7 +379,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.24963716" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24963716" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -443,7 +466,35 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/ignore/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="12" column="51" selection-start="263" selection-end="263" vertical-scroll-proportion="0.5064935">
+        <state line="11" column="27" selection-start="219" selection-end="219" vertical-scroll-proportion="0.4642857">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/api_demo/hello_webServer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="6" column="21" selection-start="224" selection-end="224" vertical-scroll-proportion="0.22624435">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/api_demo/timer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="11" column="36" selection-start="378" selection-end="378" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/api_demo/circle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="2" column="29" selection-start="47" selection-end="47" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/api_demo/module.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="4" column="74" selection-start="216" selection-end="216" vertical-scroll-proportion="0.15082957">
           <folding />
         </state>
       </provider>
