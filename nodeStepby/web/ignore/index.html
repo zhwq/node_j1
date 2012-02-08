@@ -2,7 +2,7 @@
 <html>
 <head>
     <title>this:last-child</title>
-    <meta charset="utf-8"/>
+    <meta charset="utf-8">
     <style>
         div {
             width: 200px;
@@ -10,18 +10,33 @@
             margin: 3px 0;
         }
     </style>
-    <script src="http://code.jquery.com/jquery-1.7.1.js"></script>
+    <script src="jquery-1.7.1.js"></script>
     <script>
-        (function($) {
-            var d = $.dialog.defaults;
-            d.skin = "${loginUser.themeUrl}";
-        })(art);
-        //
-        function f($){
-            var d = $.dialog.defaults;
-            d.skin = "${loginUser.themeUrl}";
-        }
-        f(art);
+        $(function() {
+            $("li.aaa").bind({
+                mouseover:function(e) {
+                    var t = e.target;
+                    if(t && t.nodeType === 3) t = t.parentNode;
+                    if(t.nodeName === "LI"){
+                        //不做处理
+                        //console.log("此时是li,不做处理");
+                    }else {
+                        if(t.nodeName === "A") t = t.parentNode;
+                        if($(t).is("span.syfl_title")){
+                          console.log("找到目标");
+                          $(t).parent().find(">span:last").show().bind("mouseout",function(e){
+                              if(e.target.nodeType != 3 && $(e.target).is("span.piao")){
+                                  console.log("移出tip区域");
+                                  $(e.target).hide();
+                                  e.stopPropagation();
+                                  return false;
+                              }
+                          });
+                        }
+                    }
+                }
+            });
+        });
     </script>
 </head>
 <body>
@@ -31,5 +46,24 @@
     <div class="sub">1</div>
     <div class="sub">2</div>
 </div>
+<ul>
+    <li class="aaa" style="border:1px solid red;">
+        <span class="syfl_title" style="background-color:red;">
+            <a href="">科技</a>
+        </span>
+        <span class="syfl_list" style="background-color:gray;">
+            <a href="">互联网</a><a href="">数码</a><a href="">新媒体</a>
+        </span>
+        <span class="piao" style="position: absolute; display: none;background-color:#efefef;top:100px;left:25px;border:1px solid purple; ">
+            <span class="piao_box">
+                <a href="">互联网</a>
+                <a href="">资讯</a>
+                <a href="">数字时代</a>
+                <a href="">世界人物</a>
+            </span>
+        </span>
+    </li>
+</ul>
+
 </body>
 </html>
