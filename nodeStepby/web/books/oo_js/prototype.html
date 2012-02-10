@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>oojs_prototype</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+var Log = {
+    i: function( obj ) { console.log( obj );},
+    d: function( obj ) { console.dir( obj );}
+};
+/*
+function log( obj ) {
+    console.log( obj );
+};
+function dir( obj ) {
+    console.dir( obj );
+};*/
+//functions object//properties;method;
+function multiple( a, b ) { return a * b;};
+//console.log(multiple.length);
+//console.log(multiple.constructor);
+//prototype is a property that gets created as soon as you define the function
+//定义函数后，立刻创建了prototype属性 初始值是一个 空对象
+//console.log(multiple.prototype);
+//console.log(typeof multiple.prototype);
+//修改prototype属性、方法时，只是会影响用函数multiple作为构造器的对象；只会在
+function Gadget( name, color ) {//this含有构造器返回的对象
+    this.name = name;
+    this.color = color;
+    this.whatAreYou = function() {
+        return "I am a " +this.color + " " + this.name;
+    }
+};
+//通过修改prototype属性 可以给构造器创建的对象添加功能
+//覆写prototype属性(对象)
+Gadget.prototype.price = 100;
+Gadget.prototype.rating = 3;
+Gadget.prototype.getInfo = function() {
+    return "Rating:" + this.rating + ", price:" + this.price;
+};/*
+Gadget.prototype = {
+    price: 100,
+    rating: 3,
+    getInfo: function() {
+        return "Rating:" + this.rating + ", price:" + this.price;
+    }
+};*/
+var newtoy = new Gadget( "webcm", "black");
+//Log.i( newtoy.name );
+//Log.i( newtoy.color );
+//Log.i( newtoy.whatAreYou() );
+//Log.i( newtoy.getInfo() );
+//Log.d( newtoy );
+//prototype 是活的,对象 引用传递 passed by reference
+Gadget.prototype.get = function( what ) {
+    return this[what];
+};
+//Log.i( newtoy.get( "price" ) );
+//Log.i( newtoy.get( "rating" ) );
+// own properties vs prototype properties
+Gadget.prototype.protoGetInfo = function(){
+    return "Rating:" + Gadget.prototype.rating + ", price:" + Gadget.prototype.price;
+};
+//脚本引擎查找目标过程；生命周期
+//对象自己的属性 覆盖 原型的 属性
+Gadget.prototype.color = "__proto_colorName";
+//Log.i("before del:" + newtoy.color);
+//delete newtoy.color;
+//Log.i("after del:" + newtoy.color);
+//迭代属性enumerating properties
+/*Log.i("迭代属性");
+
+for( var prop in newtoy ) {
+//    Log.i(prop + ":" + newtoy[prop]);
+    //属性 方法 迭代的层级level
+//    Log.i("使用hasOwnProperty过滤");
+//    console.log( prop + "type=" + typeof newtoy[ prop ] );
+//    if( newtoy.hasOwnProperty( prop ) && typeof newtoy[prop] !== "function" ) {
+//        Log.i( prop + "=" + newtoy[ prop ] );
+//    }
+    //原型扩展上的属性 方法 的返回值 都是false
+    //constructor length属性 也不可迭代枚举
+    console.log( prop + " is enumerable?, " + newtoy.propertyIsEnumerable( prop ) );
+}
+var lc = [ "constructor", "length" ];
+for ( var prop in lc ) {
+    console.log( lc[ prop ] + " is enumerable?, " + newtoy.propertyIsEnumerable( prop ) );
+}*/
+/*//isPropertyOf()
+var monkey = {
+    hair: true,
+    feeds: "bananas",
+    breathes: "air"
+};
+function Human( name ) {
+    this.name = name;
+};
+Human.prototype = monkey;
+var gorge = new Human( "gorge" );
+Log.i( "isPropertyOf: " + monkey.isPrototypeOf( gorge ));*/
+/*
+//__proto__
+var monkey = {
+    hair: true,
+    feeds: "bananas"
+};
+function Human() {};
+Human.prototype = monkey;
+var developer = new Human();
+developer.feeds = "pizza";
+developer.hack = "ECMA Script";
+*/
+/*//built-in object augments
+if( !String.prototype.reverse ) { //扩展增强之前检测是否存在该功能
+    String.prototype.reverse = function() {
+        return Array.prototype.reverse.call( this.split("")).join("");
+    };
+}
+Log.i("zhangwq".reverse());*/
+//inheritance chain
+//default:prototype chain
+function Shape() {
+    this.name = "shape";
+    this.toString = function() {
+        console.log("Shape toString function");
+        return this.name;
+    };
+};
+// 2d shape
+function TwoDShape() {
+    this.name = "2d shape";
+};
+//三角形
+function Triangle( side, height ) {
+    this.name = "Triangle";
+    this.side = side;
+    this.height = height;
+    this.getArea = function () {
+        return 0.5 * this.side * this.height;
+    };
+};
+//code that performs the inheritance magic go here:
+// all needed here is a instance to inherit from
+TwoDShape.prototype = new Shape();
+Triangle.prototype = new TwoDShape();
+//fix nagative sides
+TwoDShape.prototype.constructor = TwoDShape;
+Triangle.prototype.constructor = Triangle;
+//JavaScript works with objects, not classes
+var myTriangle =  new Triangle( 5, 3 );
+//Log.i( "底边为5，高为3的三角形的面积：" + myTriangle.getArea() );
+//Log.i( myTriangle.constructor );
+//true;true;//true;
+//Log.i( "myTriangle instanceof Triangle " + ( myTriangle instanceof Triangle ) ); //括号 执行顺序
+//Log.i( "myTriangle instanceof TwoDShape " + ( myTriangle instanceof TwoDShape ) );
+//Log.i( "myTriangle instanceof Shape " + ( myTriangle instanceof Shape ) );
+//isPropertyOf
+</script>
+</body>
+</html>
