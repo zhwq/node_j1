@@ -1,0 +1,80 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>oo js 继承</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+//prototype chaining
+/*
+//形状
+function Shape() {
+    this.name = name;
+    this.toString = function() {
+        return this.name;
+    };
+};
+//2d形状
+function TwoDShape() {
+    this.name = "2d";
+};
+//三角形
+function Triangle( side, height ) {
+    this.name = "Triangle";
+    this.side = side;
+    this.height = height;
+    this.getArea = function() {
+        return 0.5 * this.side * this.height;
+    };
+};
+//继承关系
+TwoDShape.prototype = new Shape();
+TwoDShape.prototype.constructor = Shape;
+Triangle.prototype = new TwoDShape();
+Triangle.prototype.constructor = TwoDShape;
+
+//测试
+var tri = new Triangle( 5, 10 );
+console.log( tri.getArea() );*/
+/*
+  ↓将共享的属性移动到prototype中
+**/
+/*//形状
+function Shape() {};
+Shape.prototype.name = "Shape";
+Shape.prototype.toString = function() {
+    return this.name;
+};
+//2d形状
+function TwoDShape() {};
+//继承关系
+TwoDShape.prototype = new Shape();
+TwoDShape.prototype.constructor = Shape;
+//增加属性
+//在实现继承关系之后增强属性;否则给TwoDShape.prototype添加的会被刷掉wiped out;//TODO:@zhng
+TwoDShape.prototype.name = "2d shape";
+
+//三角形
+function Triangle( side, height ) {
+    this.side = side;
+    this.height = height;
+};
+Triangle.prototype = new TwoDShape();
+Triangle.prototype.constructor = TwoDShape;
+//增加属性
+Triangle.prototype.name = "triangle";
+Triangle.prototype.getArea = function() {
+    return 0.5 * this.side * this.height;
+};*/
+/*
+    ↓inherit the prototype only
+* */
+
+//测试
+var tri = new Triangle( 5, 10 );
+console.log( tri.getArea() );
+console.log( tri.toString() );//...Shape.prototype
+</script>
+</body>
+</html>
