@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>角色管理-折叠效果</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width:device-width,initial-scale=1.0"/>
+    <style>
+        .accordion-icon-collapse,.accordion-icon-expand {
+            background: url("../images/uploadaccordion.png");
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+        }
+        .accordion-icon-collapse {
+            background-position: 0 15px;
+        }
+        .accordion-icon-expand {
+            background-position: 15px 15px;
+        }
+    </style>
+    <link href="../css/base.css" rel="stylesheet" charset="utf-8"/>
+    <link href="../css/accordion.css" rel="stylesheet" charset="utf-8"/>
+</head>
+<body>
+    <div class="ui-custom-accordion-container" style="width:500px;margin:100px;height:400px;">
+        <div class="collapse-operation">
+            <a href="#">全部折叠/展开</a>
+        </div><!--/操作-->
+        <div class="accordion-item">
+            <table width="100%" border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                    <td>办公管理</td><!--/权限项-->
+                    <td><a href="#">批量设置范围</a></td><!--/批量设置范围-->
+                    <td><span class="accordion-icon-collapse"></span></td><!--/折叠标识-->
+                </tr>
+                <tr>
+                    <td>办公管理</td><!--/权限项-->
+                    <td><a href="#">批量设置范围</a></td><!--/批量设置范围-->
+                    <td><span class="accordion-icon-expand"></span></td><!--/折叠标识-->
+                </tr>
+            </table>
+        </div><!--/折叠项-->
+        <ul>
+            <li>
+                <ul>
+
+                </ul><!--/具体内容部分-->
+            </li><!--/标题-->
+        </ul>
+        <div>
+            <div></div><!--/第1列-->
+            <div></div><!--/第2列-->
+            <div></div><!--/第3列-->
+            <div></div><!--/第4列-->
+        </div>
+    </div><!--/折叠容器-->
+</body>
+</html>

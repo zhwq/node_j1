@@ -1,0 +1,95 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>角色管理-折叠效果
+        (nth-child ie8及以下不支持,此时会解析不正常)
+    </title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width:device-width,initial-scale=1.0"/>
+    <link href="../css/base.css" rel="stylesheet" charset="utf-8"/>
+    <style>
+        .item {
+            width:100%;
+            height:300px;
+        }
+        .title {
+            width:100%;
+        }
+        .title>span {
+            display: inline-block;
+        }
+        .item > .content {
+            margin-left:60px;
+            overflow:hidden;
+        }
+        .item > .content > li > span.first-child/*,.item > .content > li > span:nth-child(1)*/{
+            overflow:hidden;
+            padding-left:55px;
+            width:74%;
+            display:inline-block;
+             /* background-color:red;*/
+        }
+        .item > .content > li > span.second-child/*,.item > .content > li > span:nth-child(2)*/{
+            overflow:hidden;
+            margin-left:-55px;
+            width:20%;
+            display:inline-block;
+            /*background-color:blue;*/
+        }
+       /* .item > .content > li.first > span:nth-child(1),*/.item > .content > li.first > span.first-child {
+            padding-left: 0;
+        }
+        /*.item > .content > li.first > span:nth-child(2),*/.item > .content > li.first > span.second-child {
+            margin-left: 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="item">
+        <div class="title">
+            <span style="width:75%">菜单项一</span>
+            <span style="width:15%">批量设置范围</span>
+            <span style="width:5%">^^</span>
+        </div><!--/标题-->
+        <ul class="content">
+            <li class="first"><!--/此时有二级标题,不设置左偏移值-->
+                <span class="first-child">
+                    二级菜单
+                    <input type="checkbox"/>三级菜单
+                    <span>
+                        <input type="checkbox"/>添加
+                        <input type="checkbox"/>导入
+                    </span><!--/三级菜单操作-->
+                </span><!--/具体内容部分-->
+                <span class="second-child">
+                    机构、部分、人员
+                </span><!--/权限设置栏;有4中情况-->
+            </li>
+            <li><!--/此时有二级标题,不设置左偏移值-->
+                <span class="first-child">
+                    <input type="checkbox"/>三级菜单
+                    <span>
+                        <input type="checkbox"/>添加
+                        <input type="checkbox"/>导入
+                    </span><!--/三级菜单操作-->
+                </span><!--/具体内容部分-->
+                <span class="second-child">
+                    机构、部分、人员
+                </span><!--/权限设置栏;有4中情况-->
+            </li>
+            <li><!--/此时有二级标题,不设置左偏移值-->
+                <span class="first-child">
+                    <input type="checkbox"/>三级菜单
+                    <span>
+                        <input type="checkbox"/>添加
+                        <input type="checkbox"/>导入
+                    </span><!--/三级菜单操作-->
+                </span><!--/具体内容部分-->
+                <span class="second-child">
+                    机构、部分、人员
+                </span><!--/权限设置栏;有4中情况-->
+            </li>
+        </ul><!--/隐藏显示内容容器-->
+    </div>
+</body>
+</html>
