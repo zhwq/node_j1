@@ -70,11 +70,252 @@ Triangle.prototype.getArea = function() {
 /*
     ↓inherit the prototype only
 * */
+/*//形状
+function Shape() {};
+Shape.prototype.name = "Shape";
+Shape.prototype.toString = function() {
+    return this.name;
+};
+//2d形状
+function TwoDShape() {};
+//继承关系
+TwoDShape.prototype = Shape.prototype;
+TwoDShape.prototype.constructor = TwoDShape;
+//增加属性
+//在实现继承关系之后增强属性;否则给TwoDShape.prototype添加的会被刷掉wiped out;
+TwoDShape.prototype.name = "2d shape";
 
-//测试
+//三角形
+function Triangle( side, height ) {
+    this.side = side;
+    this.height = height;
+};
+Triangle.prototype = TwoDShape.prototype;
+Triangle.prototype.constructor = Triangle;
+//增加属性
+Triangle.prototype.name = "triangle";
+Triangle.prototype.getArea = function() {
+    return 0.5 * this.side * this.height;
+};
+//along side副作用
+Triangle.prototype.name = "副作用，修改Triangle的原型name属性，原型链上的name都变成新的了（之后生成的对象）";
+var shape = new Shape();
+console.log( shape.name );*/
+/*
+A solution to the problem outlined above,
+    where all prototypes point to the same object and
+    the parents get children's properties,
+    is to use an intermediary to break the chain.
+    一种处理继承链上所有的原型对象都指向同一个对象，父级对象获取自己对象的属性问题方案是：
+    使用中间媒介来破坏链条关系
+*/
+/**
+ * ↓使用临时构造器
+ */
+/*//形状
+function Shape() {};
+Shape.prototype.name = "Shape";
+Shape.prototype.toString = function() {
+    return this.name;
+};
+//2d形状
+function TwoDShape() {};
+//继承关系
+
+var F = function() {};
+F.prototype = Shape.prototype;
+TwoDShape.prototype = new F();
+
+TwoDShape.prototype.constructor = TwoDShape;
+//增加属性
+//在实现继承关系之后增强属性;否则给TwoDShape.prototype添加的会被刷掉wiped out;
+TwoDShape.prototype.name = "2d shape";
+
+//三角形
+function Triangle( side, height ) {
+    this.side = side;
+    this.height = height;
+};
+
+var F = function() {};
+F.prototype = Shape.prototype;
+Triangle.prototype = new F()
+
+Triangle.prototype.constructor = Triangle;
+//增加属性
+Triangle.prototype.name = "triangle";
+Triangle.prototype.getArea = function() {
+    return 0.5 * this.side * this.height;
+};
+Triangle.prototype.name = "使用媒介后修改名字会显示吗？";
+var shape = new Shape();
+console.log( "shape name:" + shape.name );
+console.log( "tri name:" + tri.name );*/
+/*//测试
 var tri = new Triangle( 5, 10 );
 console.log( tri.getArea() );
-console.log( tri.toString() );//...Shape.prototype
+console.log( tri.toString() );//...Shape.prototype*/
+
+//从子级对象访问父级//uber- access to the parent from a child object
+/*
+classical OO:
+public class Base {
+    public void upview(){
+        //base code here
+    };
+};
+public class Extend extends Base {
+    public void upview() {
+        super();
+        //extra code here
+    }
+};*/
+/*//为对象一个属性uber 指向父级对象的原型
+//create an uber property that points to the parent's prototype object
+function Shape() {};
+Shape.prototype.name = "shape";
+Shape.prototype.toString = function() {
+    var ret = [];
+    if ( this.constructor.uber ) {
+        ret[ ret.length ] = this.constructor.uber.toString();
+    }
+    ret[ ret.length ] = this.name;
+    return ret.join( ", " );
+};
+
+function TwoDShape() {};
+var F = function() {};
+F.prototype = Shape.prototype;
+TwoDShape.prototype = new F();
+TwoDShape.prototype.constructor = TwoDShape;
+TwoDShape.uber = Shape.prototype;//here augment a link to the parent's prototype
+//Augment
+TwoDShape.prototype.name = "2d shape";
+
+function Triangle( side, height ) {
+    this.side = side;
+    this.height = height;
+};
+var F = function() {};
+F.prototype = TwoDShape.prototype;
+Triangle.prototype = new F();
+Triangle.prototype.constructor = Triangle;
+Triangle.uber = TwoDShape.prototype;//here augment a link to the parent's prototype
+//Augment
+Triangle.prototype.name = "Triangle";
+Triangle.prototype.getArea = function() {
+    return 0.5 * this.side * this.height;
+};
+
+var tri = new Triangle( 5, 10 );
+console.log( tri.toString() );*/
+/**
+ *  ↓ 将继承关系封装到方法中
+ */
+function Extend( Child, Parent ) {
+    var F = function() {};
+    F.prototype  = Parent.prototype;
+    Child.prototype = new F();
+    Child.prototype.constructor = Child;
+    Child.uber = Parent.prototype;
+};  //YUI's approach to implement inheritance
+function Shape() {};
+Shape.prototype.name = "shape";
+Shape.prototype.toString = function() {
+    var ret = [];
+    if(this.constructor.uber ) {
+        ret[ ret.length ] = this.constructor.uber.toString();
+    }
+    ret[ ret.length ] = this.name ;
+    return ret.join( ", ");
+};
+function TwoDShape() {};
+Extend( TwoDShape, Shape );
+TwoDShape.prototype.name = "2d shape";
+function Triangle( side, height ) {
+    this.side = side;
+    this.height = height;
+};
+Extend( Triangle, TwoDShape );
+Triangle.prototype.name = "triangle ";
+Triangle.prototype.getArea = function() {
+    return 0.5 * this.side * this.height;
+};
+var tri = new Triangle( 5, 10 );
+console.log( tri.toString() );
+/**
+ * ↓拷贝属性 copying properties
+ */
+/**
+ *TODO: 此时primitive属性会变成duplicated(不包括引用传递的方法和数组)
+ * @param Child
+ * @param Parent
+ */
+function ExtendCopyProperty( Child, Parent ) {
+    var p = Parent.prototype,
+        c = Child.prototype;
+    for (var i in p ) {
+        c[i] = p[i];
+    };
+    //Child --> Child.prototype;此时采用的是增强，而不是完全复写的方式
+    //constructorFun.prototype.constructor会指向正确的值
+    c.uber = p;
+};
+function Shape() {};
+function TwoDShape() {};
+Shape.prototype.name = "shape";
+Shape.prototype.arrProp = [ 1, 2, 3 ];
+Shape.prototype.toString = function() {
+    var ret = this.arrProp;
+    ret[ ret.length ] = this.name;
+    return ret.join( ", ");
+};
+//Extend( TwoDShape, Shape );//shape;shape;shape;false;false;
+ExtendCopyProperty( TwoDShape, Shape );
+var _2d = new TwoDShape();//shape;shape;shape;false;true;
+//console.log( _2d.name );
+//console.log( TwoDShape.prototype.name );
+//console.log( _2d.__proto__.name );
+//console.log( _2d.hasOwnProperty( "name" ) );
+//console.log( _2d.__proto__.hasOwnProperty( "name" ) );
+//console.log( _2d.arrProp );
+//console.log( TwoDShape.prototype.arrProp );
+//console.log( _2d.__proto__.arrProp );
+//console.log( _2d.hasOwnProperty( "arrProp" ) );
+//console.log( _2d.__proto__.hasOwnProperty( "arrProp" ) );
+////extra info
+//console.log( _2d.__proto__.hasOwnProperty( "toString" ) );
+//console.log( _2d.__proto__.toString === Shape.prototype.toString );
+//console.log( _2d.__proto__.arrProp === Shape.prototype.arrProp );
+//console.log( _2d.__proto__.name === Shape.prototype.name );
+
+//Heads-up When Copying by Reference
+/*function A() {};
+function B() {};
+A.prototype.name = "A";
+A.prototype.arrValue = [ 1, 2, 3 ];
+ExtendCopyProperty( B, A );
+console.log( B.prototype.hasOwnProperty( "name" ));
+console.log( B.prototype.hasOwnProperty( "arrValue" ) ); //copied by reference
+console.log( B.prototype.arrValue );
+//修改B的name值 不影响A的
+console.log( "修改之前的name值："+ B.prototype.name );
+console.log( "修改之前的name值："+ A.prototype.name );
+B.prototype.name = "B";
+console.log( "修改之后的B.prototype.name值："+ B.prototype.name );
+console.log( "修改之后的A.prototype.name值："+ A.prototype.name );
+var a = new A();
+console.log( "修改之前的B.prototype.arrValue值："+ B.prototype.arrValue );
+console.log( "修改之前的a.arrValue值："+ a.arrValue );
+//@这两种方式是不同的
+//B.prototype.arrValue = [ "A", "B" ];此时将B的原型中的arrValue指向了新的地址
+B.prototype.arrValue.push( "A", "B" ); //修改了该地址下的数组的内容,波及了父级别的构造器的原型属性
+console.log( "修改之后的B.prototype.arrValue值："+ B.prototype.arrValue );
+console.log( "修改之后的a.arrValue值："+ a.arrValue );*/
+
+//psedudo-classical inheritance pattern;伪类继承方式
+
+//Objects Inherit from Objects
 </script>
 </body>
 </html>

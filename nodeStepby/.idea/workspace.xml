@@ -72,10 +72,19 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
+      <file leaf-file-name="j-0.1.1.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/web/books/jq_demo/j-0.1.1.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="inheritance.html" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/web/books/oo_js/inheritance.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="73" column="20" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.69984204">
+            <state line="5" column="39" selection-start="93" selection-end="93" vertical-scroll-proportion="0.15273312">
               <folding />
             </state>
           </provider>
@@ -146,6 +155,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -178,33 +188,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="books" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="oo_js" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
-      <pane id="Favorites" />
-      <pane id="Scope" />
       <pane id="PackagesPane" />
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -221,16 +208,16 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\github\node_j1\nodeStepby\web\books\oo_js" />
+      <recent name="D:\github\node_j1\nodeStepby\web\books" />
       <recent name="D:\github\node_j1\nodeStepby\web\j_2012\css" />
       <recent name="D:\github\node_j1\nodeStepby\web\j_2012\images" />
       <recent name="D:\github\node_j1\nodeStepby\web\source\jquery\structure" />
-      <recent name="D:\github\node_j1\nodeStepby\web\ignore\ignoreFolder" />
     </key>
   </component>
   <component name="RunManager">
@@ -307,6 +294,14 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" />
       <module name="" />
@@ -330,14 +325,6 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="FtpUpload" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -373,7 +360,7 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
     <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -475,11 +462,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/api_demo/module.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="21" selection-start="163" selection-end="163" vertical-scroll-proportion="0.08597285" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/api_demo/timer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="11" column="34" selection-start="378" selection-end="378" vertical-scroll-proportion="0.28657618" />
@@ -517,16 +499,12 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/source/jquery/structure/j.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="17" column="53" selection-start="457" selection-end="457" vertical-scroll-proportion="0.48865354">
-          <folding />
-        </state>
+        <state line="17" column="53" selection-start="457" selection-end="457" vertical-scroll-proportion="0.48865354" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/source/jquery/structure/j-1.0.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="29" column="16" selection-start="929" selection-end="929" vertical-scroll-proportion="0.6611195">
-          <folding />
-        </state>
+        <state line="29" column="16" selection-start="929" selection-end="929" vertical-scroll-proportion="0.6611195" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/source/jquery/jquery-1.5.2.js">
@@ -538,35 +516,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/books/oo_js/prototype.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="145" column="22" selection-start="3997" selection-end="3997" vertical-scroll-proportion="1.266129">
-          <folding />
-        </state>
+        <state line="145" column="22" selection-start="3997" selection-end="3997" vertical-scroll-proportion="1.266129" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/j_2012/css/accordion.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="10" selection-end="10" vertical-scroll-proportion="0.057488654">
-          <folding />
-        </state>
+        <state line="2" column="0" selection-start="10" selection-end="10" vertical-scroll-proportion="0.057488654" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/j_2012/roleMgr/form_accordion.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="1" column="77" selection-start="22" selection-end="22" vertical-scroll-proportion="0.030645162">
-          <folding />
-        </state>
+        <state line="1" column="77" selection-start="22" selection-end="22" vertical-scroll-proportion="0.030645162" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/j_2012/css/base.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="36" selection-start="388" selection-end="388" vertical-scroll-proportion="0.37367624">
+        <state line="13" column="36" selection-start="388" selection-end="388" vertical-scroll-proportion="0.37367624" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/books/jq_demo/j-0.1.1.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/books/oo_js/inheritance.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="73" column="20" selection-start="1485" selection-end="1485" vertical-scroll-proportion="0.69984204">
+        <state line="5" column="39" selection-start="93" selection-end="93" vertical-scroll-proportion="0.15273312">
           <folding />
         </state>
       </provider>

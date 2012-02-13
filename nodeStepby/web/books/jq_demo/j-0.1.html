@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jquery 0.1</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+(function(window,undefined) {
+    var document = window.document;
+    var jQ = (function(){
+        var jQ = (function( selector, context ){
+            return new jQ.fn.init( selector, context,rootjQ );//new
+        })();
+        var rootjQ;
+        jQ.fn = jQ.prototype = {
+            constructor: jQ,
+            init: function( selector, context, rootjQ ) {
+
+                if ( !selector ) {
+                    return this;
+                }
+                if ( selector.nodeType ) {
+                    this.context = this[0] = context;
+                    this.length = 1;
+                    return this;
+                }
+                if ( selector === "body" && !context && document.body ) {
+                    this.context = document;
+                    this[0] = document.body;
+                    this.selector = "body";
+                    this.length = 1;
+                    return this;
+                }
+                //制作数组返回
+//                return this;
+            }
+        };
+        jQ.fn.init.prototype = jQ.fn;
+        //所有的对象指会该对象
+        rootjQ = jQ(document); o
+        return jQ;//
+    })();
+    //将闭包中的jQ对象暴露给window对象
+    window.jQ = window.$ = jQ;
+})(window);
+</script>
+</body>
+</html>
