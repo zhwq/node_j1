@@ -1,0 +1,92 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>来自无线前端群-北京-前端-海洋</title>
+    <meta charset="utf-8"/>
+    <title>jquery+CSS3三维动画</title>
+    <style>
+        ul, ol, li, h1, h2, h3, h4, h5, h6, pre, form, body, html, p, blockquote, fieldset, input {
+            margin: 0;
+            padding: 0;
+        }
+
+        #wrapper {
+            width: 960px;
+            margin: 40px auto;
+        }
+
+        #content {
+        }
+
+        #movieposters {
+            list-style: none;
+            margin: 100px 0;
+            height: 550px;
+        }
+
+        #movieposters li {
+            display: inline;
+            float: left;
+            -webkit-perspective: 500;
+            -webkit-transform-style: preserve-3d;
+            -webkit-transition-property: perspective;
+            -webkit-transition-duration: 0.5s;
+        }
+
+        #movieposters li:hover {
+            -webkit-perspective: 5000;
+        }
+
+        #movieposters li img {
+            border: 10px solid #fcfafa;
+            -webkit-transform: rotateY(30deg);
+            -webkit-box-shadow: 0 3px 10px #888;
+            -webkit-transition-property: transform;
+            -webkit-transition-duration: 0.5s;
+        }
+
+        #movieposters li:hover img {
+            -webkit-transform: rotateY(0deg);
+        }
+
+        .movieinfo {
+            border: 10px solid #fcfafa;
+            padding: 20px;
+            width: 200px;
+            height: 180px;
+            background-color: #deddcd;
+            margin: -195px 0 0 55px;
+            position: absolute;
+            -webkit-box-shadow: 0 20px 40px #888;
+            -webkit-transform: translateZ(30px) rotateY(30deg);
+            -webkit-transition-property: transform, box-shadow, margin;
+            -webkit-transition-duration: 0.5s;
+        }
+
+        #movieposters li:hover .movieinfo {
+            -webkit-transform: rotateY(0deg);
+            -webkit-box-shadow: 0 5px 10px #888;
+            margin: -175px 0 0 30px;
+        }
+
+    </style>
+</head>
+<body>
+<div id="wrapper">
+    <div id="content">
+        <ul id="movieposters">
+            <li>
+                <img src=" http://www.codefans.net/jscss/demoimg/201106/01_iron_man_2.jpg" alt="Iron Man 2"/>
+            </li>
+            <li>
+                <img src=" http://www.codefans.net/jscss/demoimg/201106/02_the_last_airbender.jpg"
+                     alt="The Last Airbender"/>
+            </li>
+            <li>
+                <img src=" http://www.codefans.net/jscss/demoimg/201106/03_tron_legacy.jpg" alt="Tron Legacy"/>
+            </li>
+        </ul>
+    </div>
+</div>
+</body>
+</html>

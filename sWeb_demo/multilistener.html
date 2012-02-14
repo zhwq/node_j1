@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>http://180.173.151.37:9020/a/test.html</title>
+    <meta charset="utf-8"/>
+    <style>
+        html {
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+        }
+    </style>
+</head>
+<body style="background-color: rgb(38,38,38);">
+<input type="button" id="t1" value="赋值1">
+<input type="button" id="t2" value="赋值2">
+<input type="button" id="test" value="点我打印">
+<script type="text/javascript">
+    var a = function() {
+        var that = this;
+        this.b = '';
+        this.c = '';
+        this.al = function() {
+            alert(that.c);
+        };
+        document.getElementById('test').addEventListener('click',function(){
+         alert(that.c);
+         },false); /*
+        var test = document.getElementById('test');
+        test.removeEventListener("click");
+        test.addEventListener('click', function() {
+            alert(that.c);
+        }, false);*/
+    }
+    document.getElementById('t1').addEventListener('click', function() {
+        var bb = new a();
+        bb.c = "t1";
+    }, false);
+    document.getElementById('t2').addEventListener('click', function() {
+        var cc = new a();
+        cc.c = "t2";
+    }, false);
+</script>
+</body>
+</html>
