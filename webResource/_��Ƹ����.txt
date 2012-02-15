@@ -1,0 +1,1 @@
+精通主流前端框架（yui、jQuery、tangram、jQueryMobile、extjs、senchaTouch）、ajax、html5、css3（熟悉3d transform）、熟悉移动设备web界面开发。基本上了解这些就可以了
