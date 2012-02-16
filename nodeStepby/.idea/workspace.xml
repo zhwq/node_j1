@@ -72,73 +72,10 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="function_define.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/source/jquery/function_define.html">
+      <file leaf-file-name="object.html" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/web/books/js.enlight/object.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="35" column="9" selection-start="782" selection-end="782" vertical-scroll-proportion="-18.607143">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="first.svg" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/html5/svg/first.svg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="0" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="rectangle.svg" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/html5/svg/rectangle.svg">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="24" column="0" selection-start="695" selection-end="695" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="svg_speci_1.x.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/html5/svg/svg_speci_1.x.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="3" column="20" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jq_test01.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/$_source/jq_test01.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="4" column="54" selection-start="93" selection-end="93" vertical-scroll-proportion="-2.7142856">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jquery-1.5.2.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/$_source/jsLib/jquery-1.5.2.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="325" column="32" selection-start="11765" selection-end="11765" vertical-scroll-proportion="0.4871795">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jq_extend.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/$_source/jq_extend.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="9" column="18" selection-start="132" selection-end="132" vertical-scroll-proportion="-6.107143">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="jq_base.txt" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/web/$_source/jq_base.txt">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
+            <state line="15" column="23" selection-start="268" selection-end="268" vertical-scroll-proportion="0.4488189">
               <folding />
             </state>
           </provider>
@@ -158,7 +95,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/web/j_2012/css/accordion.css" />
         <option value="$PROJECT_DIR$/web/books/oo_js/inheritance.html" />
         <option value="$PROJECT_DIR$/web/j_2012/roleMgr/form_accordion.html" />
         <option value="$PROJECT_DIR$/web/j_2012/roleMgr/form_accordion2.html" />
@@ -174,6 +110,7 @@
         <option value="$PROJECT_DIR$/web/$_source/jq_base.txt" />
         <option value="$PROJECT_DIR$/web/$_source/jq_extend.html" />
         <option value="$PROJECT_DIR$/web/$_source/jsLib/jquery-1.5.2.js" />
+        <option value="$PROJECT_DIR$/web/books/js.enlight/object.html" />
       </list>
     </option>
   </component>
@@ -259,28 +196,6 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="$_source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="$_source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="jsLib" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -479,8 +394,8 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1456" height="876" extended-state="7" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -494,7 +409,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1436865" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23875181" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -581,11 +496,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/web/books/oo_js/inheritance.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="91" column="47" selection-start="1923" selection-end="1923" vertical-scroll-proportion="0.5482315" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/books/jq_demo/j-0.1.1.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -653,13 +563,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/web/$_source/jq_test01.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="4" column="54" selection-start="93" selection-end="93" vertical-scroll-proportion="-2.7142856">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jq_base.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
@@ -669,14 +572,28 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jq_extend.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="9" column="18" selection-start="132" selection-end="132" vertical-scroll-proportion="-6.107143">
+        <state line="11" column="38" selection-start="255" selection-end="255" vertical-scroll-proportion="-7.464286">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jsLib/jquery-1.5.2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="325" column="32" selection-start="11765" selection-end="11765" vertical-scroll-proportion="0.4871795">
+        <state line="214" column="54" selection-start="8144" selection-end="8144" vertical-scroll-proportion="0.6861538">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/$_source/jq_test01.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="25" column="32" selection-start="730" selection-end="730" vertical-scroll-proportion="0.7480315">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/web/books/js.enlight/object.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="23" selection-start="268" selection-end="268" vertical-scroll-proportion="0.4488189">
           <folding />
         </state>
       </provider>

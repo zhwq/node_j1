@@ -668,7 +668,11 @@
                     // Tweaked logic slightly to handle Blackberry 4.7 RegExp issues #6930
                     var type = jQuery.type(array);
 
-                    if (array.length == null || type === "string" || type === "function" || type === "regexp" || jQuery.isWindow(array)) {
+                    if (array.length == null ||
+                            type === "string" ||
+                            type === "function" ||
+                            type === "regexp" ||
+                            jQuery.isWindow(array)) {
                         push.call(ret, array);
                     } else {
                         jQuery.merge(ret, array);
@@ -677,7 +681,7 @@
 
                 return ret;
             },
-
+            //返回数组内容的下标,如果不存在 则返回-1
             inArray: function(elem, array) {
                 if (array.indexOf) {
                     return array.indexOf(elem);
