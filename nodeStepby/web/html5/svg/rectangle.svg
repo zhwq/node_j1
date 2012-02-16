@@ -1,0 +1,24 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN"
+        "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+
+<svg width="100%" height="100%" version="1.1"
+     xmlns="http://www.w3.org/2000/svg">
+
+    <!--/矩形
+        1.坐标 x,y
+        2.宽、高 width height;必须单独写,下载style中没用，不合语法
+        3.填充色 fill
+        4.边框色 stroke;边框宽 stroke-width
+        5.样式 style
+        ...
+    -->
+    <rect width="120px" height="200px"
+          fill="#003399"
+          stroke="red" stroke-width="2px"
+          x="30px" y="40px"/>
+    <rect
+            x="200px" y="40px"
+            width="200px" height="200px"
+            style="fill:red;stroke:black;stroke-width:1px;"/>
+</svg>
