@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jquery structure</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+(function( window, undefined ){//闭包,防止undefined重新定义
+var document = window.document;
+
+//匿名函数的返回值
+var jQuery = ( function() {
+    //使用var方式 定义函数;//function vs var方式定义函数的区别
+    var jQuery = function( selector, context ) {
+        return jQuery.fn.init( selector, context ); //自定义的函数返回值；默认值为undefined
+    };
+    //jQuery.__proto__//指向对象的原型对象;将jQuery的原型对性存在属性fn中中
+    jQuery.fn = jQuery.prototype = {/*primitive object 对象字面量*/
+        constructor: jQuery,
+        init: function( selector, context, rootjQuery /**/) {
+
+            // something
+            if ( !selector ) {
+                return this;
+            }
+            // DOMElement
+            if ( selector.nodeType ) {
+                this.context = this[0] = selector;
+                this.length = 1;
+                return this;
+            }
+            //others;
+            //...
+        }
+
+    };
+    jQuery.fn.init.prototype = jQuery.fn;
+
+    //return
+    return jQuery;
+} )();
+//将jQuery,$附加给window
+window.jQuery = window.$ = jQuery;
+})(window);
+</script>
+</body>
+</html>
