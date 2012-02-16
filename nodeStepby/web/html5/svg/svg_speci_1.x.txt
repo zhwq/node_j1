@@ -1,0 +1,21 @@
+Scalable Vector Graphics (SVG).
+//使用xml1.0描述2d图形
+1.允许三种图形对象
+    矢量图形
+    图片
+    文本
+//图形对象能够 分组、样式、变形、和已解析的对象混合
+2.功能
+    嵌套变形 nested transformations,
+    clipping paths,
+    alpha masks,
+    filter effects
+    template objects.
+//3. svg drawings 可以交互，是动态的 (SVG drawings can be interactive and dynamic.)
+//动画定义触发方式
+    1.声明
+    2.脚本
+//成熟的SVG应用 可能使用增补的脚本语言(访问 SVG dom(提供完整的访问所有元素、属性))
+//可以给SVG对象添加丰富的事件处理
+
+SVG 是一种做富图形内容的语言
