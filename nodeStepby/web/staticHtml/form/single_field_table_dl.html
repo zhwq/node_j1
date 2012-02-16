@@ -1,0 +1,58 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>使用dl;dt;dd表示简单表单</title>
+    <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
+    <link type="text/css" rel="stylesheet" charset="utf-8" href="../cdn/css/base.css"/>
+    <style type="text/css">
+         body {
+            font-family:Arial,"宋体";
+         }
+        .field_width_120 {
+            width:120px;
+        }
+        .form_signle_width {
+            width:400px;
+        }
+        /*一列表单录入*/
+        .ui-custom-form-2d-editor { /*重复项*/
+            clear:both;
+            display:block;
+            padding: 8px 0 3px 0;
+        }
+       .ui-custom-form-2d-editor> dt {
+            float:left;
+            width:60px;
+            text-align:right;
+            margin-right:3px;
+        }
+        .ui-custom-form-2d-editor> dt,.ui-custom-form-2d-editor>dd {
+            font-size:12px;
+            overflow:hidden;
+            margin: 6px 0 3px 0;
+        }
+        .ui-custom-form-2d-editor > dd {
+            padding-left:6px;
+        }
+        .margin_left_6 {
+            margin-left:6px;
+        }
+    </style>
+</head>
+<body>
+    <dl class="ui-custom-form-2d-editor margin_left_6">
+        <dt><span class="color_red">*&nbsp;</span>角色名称:</dt>
+        <dd><input type="text" class="form_signle_width"/>
+        </dd>
+        <dt><span class="color_red">*&nbsp;</span>角色组:</dt>
+        <dd>
+            <select class="field_width_120">
+                <option>请选择</option>
+            </select>
+        </dd>
+        <dt>角色描述:</dt>
+        <dd><textarea class="textarea_default form_signle_width"></textarea></dd>
+    </dl><!--/一列表单2-->
+</body>
+</html>
