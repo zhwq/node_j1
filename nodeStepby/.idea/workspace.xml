@@ -71,17 +71,7 @@
     <favorites_list name="nodeStepby" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="object.html" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/web/books/js.enlight/object.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="23" selection-start="268" selection-end="268" vertical-scroll-proportion="0.4488189">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -146,9 +136,7 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
-      <pane id="Favorites" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -181,26 +169,10 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="nodeStepby" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="web" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="$_source" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
         </subPane>
       </pane>
+      <pane id="Favorites" />
+      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -208,6 +180,7 @@
     <property name="project.structure.last.edited" value="Project" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="options.splitter.main.proportions" value="0.3" />
+    <property name="recentsLimit" value="5" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="options.lastSelected" value="preferences.editor" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
@@ -217,8 +190,8 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -303,6 +276,25 @@
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
+    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
+      <JSDebuggerConfigurationSettings>
+        <option name="engineId" value="embedded" />
+        <option name="fileUrl" />
+      </JSDebuggerConfigurationSettings>
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
+    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
+      <method>
+        <option name="AntTarget" enabled="false" />
+        <option name="BuildArtifacts" enabled="false" />
+        <option name="FtpUpload" enabled="false" />
+        <option name="Maven.BeforeRunTask" enabled="false" />
+      </method>
+    </configuration>
     <configuration default="true" type="JUnit" factoryName="JUnit">
       <extension name="coverage" enabled="false" merge="false" />
       <module name="" />
@@ -326,25 +318,6 @@
         <option name="AntTarget" enabled="false" />
         <option name="BuildArtifacts" enabled="false" />
         <option name="Make" enabled="true" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="PhpUnitRemoteRunConfigurationType" factoryName="PHPUnit on Server">
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
-        <option name="FtpUpload" enabled="false" />
-        <option name="Maven.BeforeRunTask" enabled="false" />
-      </method>
-    </configuration>
-    <configuration default="true" type="JavascriptDebugSession" factoryName="Local">
-      <JSDebuggerConfigurationSettings>
-        <option name="engineId" value="embedded" />
-        <option name="fileUrl" />
-      </JSDebuggerConfigurationSettings>
-      <method>
-        <option name="AntTarget" enabled="false" />
-        <option name="BuildArtifacts" enabled="false" />
         <option name="Maven.BeforeRunTask" enabled="false" />
       </method>
     </configuration>
@@ -395,7 +368,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1456" height="876" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -409,7 +382,7 @@
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23875181" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.23875181" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
@@ -523,79 +496,57 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/web/staticHtml/cdn/css/base.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="18" selection-start="460" selection-end="460" vertical-scroll-proportion="0.45852187">
-          <folding />
-        </state>
+        <state line="22" column="18" selection-start="460" selection-end="460" vertical-scroll-proportion="0.45852187" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/staticHtml/form/single_field_table_dl.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="40" column="20" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.3971061">
-          <folding />
-        </state>
+        <state line="40" column="20" selection-start="1198" selection-end="1198" vertical-scroll-proportion="0.3971061" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/source/jquery/function_define.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="35" column="9" selection-start="782" selection-end="782" vertical-scroll-proportion="-18.607143">
-          <folding />
-        </state>
+        <state line="35" column="9" selection-start="782" selection-end="782" vertical-scroll-proportion="-18.607143" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/html5/svg/first.svg">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="0" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="10" column="0" selection-start="334" selection-end="334" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/html5/svg/rectangle.svg">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="24" column="0" selection-start="695" selection-end="695" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="24" column="0" selection-start="695" selection-end="695" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/html5/svg/svg_speci_1.x.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="3" column="20" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="3" column="20" selection-start="68" selection-end="68" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jq_base.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="2" column="0" selection-start="32" selection-end="32" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jq_extend.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="11" column="38" selection-start="255" selection-end="255" vertical-scroll-proportion="-7.464286">
-          <folding />
-        </state>
+        <state line="11" column="38" selection-start="255" selection-end="255" vertical-scroll-proportion="-7.464286" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jsLib/jquery-1.5.2.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="214" column="54" selection-start="8144" selection-end="8144" vertical-scroll-proportion="0.6861538">
-          <folding />
-        </state>
+        <state line="214" column="54" selection-start="8144" selection-end="8144" vertical-scroll-proportion="0.6861538" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/$_source/jq_test01.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="25" column="32" selection-start="730" selection-end="730" vertical-scroll-proportion="0.7480315">
-          <folding />
-        </state>
+        <state line="25" column="32" selection-start="730" selection-end="730" vertical-scroll-proportion="0.7480315" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/web/books/js.enlight/object.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="23" selection-start="268" selection-end="268" vertical-scroll-proportion="0.4488189">
-          <folding />
-        </state>
+        <state line="15" column="23" selection-start="268" selection-end="268" vertical-scroll-proportion="0.4488189" />
       </provider>
     </entry>
   </component>
