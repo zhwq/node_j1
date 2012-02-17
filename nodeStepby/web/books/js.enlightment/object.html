@@ -1,0 +1,78 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>JavaScript Enlightment</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+ /*   var obj = new Object(); //{}
+    obj.name = "zhng";
+    obj.age = 27;
+    obj.gender = "male";
+    obj.getGender = function() {
+        return this.gender;
+    };
+    console.log( obj );
+    console.log( obj.__proto__ );
+    console.log( obj.getGender() );
+    //自定义构造器
+    function Person( name, age, gender ) {
+        this.name = name;
+        this.age = age;
+        this.gender = gender;
+        this.getGender = function() {
+            return this.gender;
+        };
+    };
+    var per = new Person( "yaosha", "27", "male" );
+    console.log( per );
+    console.log( per.__proto__ );
+    console.log( per.getGender() );
+    //构造器、原型对象不一样
+    //内置构造器
+    //what is going on behind literal/primitive values
+    //要弄清楚在字面量、原始值上的背后处理
+    var primitiveString = "primitive"; //简单字面值
+    var compltexObj = new String("primitive");//String对象值
+    console.log( "primitiveString:" + primitiveString );
+    console.log( "complexObjVal:\r" );
+    console.log( compltexObj );
+    //使用内置构造器+new实例化
+
+    //instantiate an instance for each native constructor using the new keyword
+    var myNumber = new Number(23);
+    var myString = new String('male');
+    var myBoolean = new Boolean(false);
+    var myObject = new Object();
+    var myArray = new Array('foo','bar');
+    var myFunction = new Function("x", "y", "return x*y");
+    var myDate = new Date();
+    var myRegExp = new RegExp('\bt[a-z]+\b');
+    var myError = new Error('Crap!');
+
+    // log/verify which constructor created the object
+    console.log(myNumber.constructor); // logs Number()
+    console.log(myString.constructor); // logs String()
+    console.log(myBoolean.constructor); // logs Boolean()
+    console.log(myObject.constructor); // logs Object()
+    console.log(myArray.constructor); //logs Array(), in modern browsers
+    console.log(myFunction.constructor); // logs Function()
+    console.log(myDate.constructor); // logs Date()
+    console.log(myRegExp.constructor); // logs RegExp()
+    console.log(myError.constructor); // logs Error()
+*/
+    // a complex set of multiple values
+    var myObj = {
+        myString: "yh",
+        myNumber: 20,
+        myBoolean: false,
+        myNull: null,
+        myUndefined: undefined
+    };
+    var myArray = [ "yh", 20, false, null, undefined ];
+    console.log( myObj );
+    console.log( myArray );
+</script>
+</body>
+</html>

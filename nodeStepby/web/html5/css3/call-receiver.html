@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>background-image</title>
+    <meta charset="utf-8"/>
+    <link href="../common/css/base.css" rel="stylesheet"/>
+    <style type="text/css">
+        body>div{
+            margin:20px;
+        }
+        .receiver {
+            width:291px;
+            height:204px;
+            min-height:100px;
+        }
+        .receiver>.title {
+          background-color: #1d8fd5;
+          background-image: -webkit-gradient(linear, left top, left bottom, from(#1d8fd5), to(#1455ac));
+          background-image: -webkit-linear-gradient(top, #1d8fd5, #1455ac);
+          background-image:    -moz-linear-gradient(top, #1d8fd5, #1455ac);
+          background-image:     -ms-linear-gradient(top, #1d8fd5, #1455ac);
+          background-image:      -o-linear-gradient(top, #1d8fd5, #1455ac);
+          background-image:         linear-gradient(to bottom, #1d8fd5, #1455ac);
+          height:30px;
+          line-height:30px;
+        }
+        .receiver>.title>label {
+            color:#ffffff;
+            padding:0 6px;
+        }
+        .call-icon-del {
+            background:url("../common/images/ui-custom-call-icon-del.png") no-repeat scroll transparent;
+            width:11px;
+            height:11px;
+            display:inline-block;
+            float:right;
+            margin:8px 10px 0 0;
+            cursor:pointer;
+        }
+        .receiver>.content{
+            clear:both;
+            display:block;
+            border:1px solid #939292;
+            height:150px;
+            overflow:hidden;
+        }
+        .receiver>.content>p {
+            color:#939292;
+            border-bottom:1px solid #939292;
+            height:24px;
+            line-height:24px;
+            /*padding-left:6px;*/
+            margin:0 6px;
+        }
+        .receiver>.content>.container {
+            height:126px;
+            width:100%;
+            overflow:auto;
+        }
+        .receiver>.content>.container>ul {
+            float:left;
+            margin-left:11px;
+            display:block;
+            height:auto;
+            overflow:auto;
+        }
+        .receiver>.content>.container>ul>li {
+            float:left;
+            padding-right:3px;
+            height:28px;
+            line-height:28px;
+            cursor:pointer;
+            color:#0f3c6e;
+        }
+        .receiver>.content>.container>ul>li.color-mainReceiver {
+            color:#d40cd2;
+        }
+    </style>
+    <script src="http://code.jquery.com/jquery-1.5.2.js"></script>
+</head>
+<body>
+<div class="receiver">
+    <div class="title">
+        <span class="call-icon-del"></span>
+        <label>接收人</label>
+    </div>
+    <div class="content">
+        <p>注:点击姓名，可设置主送人员</p><!--/注释说明-->
+        <div class="container">
+            <ul>
+        <li class="color-mainReceiver">胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+       <!-- <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>
+        <li>胡得就</li>
+        <li>郑永光</li>
+        <li>刘铃音</li>-->
+    </ul><!--/已选择接搜人-->
+        </div>
+    </div>
+</div><!--/接收人-->
+<script>
+    $( "ul>li", "div.receiver" ).click(function(){
+        var $this = $(this);
+        $this.attr("class","color-mainReceiver").siblings("li.color-mainReceiver").attr("class", "");
+        //其他操作
+    });
+</script>
+</body>
+</html>
