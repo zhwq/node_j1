@@ -1,0 +1,53 @@
+﻿<!DOCTYPE html>
+<html><head>
+<meta charset="utf-8">
+<title>Play-http://debug.cnodejs.net/html/1329816297913.html(179936019@无线前端)</title>
+
+<style type="text/css">
+.wrap{width:104px;height:104px;position:relative; z-index:-99999;}
+
+.r1{width:104px;height:104px;background:#ccc; position:absolute;-webkit-border-radius:60px; top:0; left:0; z-index:1}
+.r2{width:96px;height:96px; background:#fff;position:absolute; -webkit-border-radius:60px;top:4px;left:4px; z-index:999}
+
+.round01{
+    width:104px;height:104px;position:absolute;top:0px;left:0px; background:#000; -webkit-border-radius:60px; clip:rect(auto auto 52px 0px); z-index:220; -webkit-transform: rotate(270deg) scale(1);
+	-webkit-animation-name: x-spin;
+	-webkit-animation-duration: 10s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	}
+@-webkit-keyframes x-spin { 
+	0% {-webkit-transform: rotate(-90deg) scale(1);z-index:1} 
+	50% {-webkit-transform: rotate(90deg) scale(1);z-index:110}
+	100% {-webkit-transform: rotate(270deg) scale(1);z-index:220} 
+} 	
+
+.round02{ 
+	width:104px;height:104px;position:absolute;top:0px;left:0px; background:#CCC; -webkit-border-radius:60px; clip:rect(auto auto 52px 0px); z-index:110; -webkit-transform: rotate(-90deg) scale(1)} 	
+	
+	
+.round03{ 
+	width:104px;height:104px;position:absolute;top:0px;left:0px; background:#000; -webkit-border-radius:60px; clip:rect(auto auto 52px 0px); z-index:109; -webkit-transform: rotate(90deg) scale(1);
+	-webkit-animation-name: x-spin3;
+	-webkit-animation-duration: 10s;
+	-webkit-animation-iteration-count: 1;
+	-webkit-animation-timing-function: linear;
+	} 
+@-webkit-keyframes x-spin3 { 
+	0% {-webkit-transform: rotate(-90deg) scale(1)} 
+	50% {-webkit-transform: rotate(-90deg) scale(1)}
+	100% {-webkit-transform: rotate(90deg) scale(1)}
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+	<div class="round01"></div>
+	<div class="round02"></div>
+    <div class="round03"></div>
+    <div class="r1"></div>
+	<div class="r2"></div>
+</div>
+</body></html>
