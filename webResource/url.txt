@@ -4,6 +4,10 @@ qq http://im.qq.com/macqq/index.shtml
 renren http://blog.bingo929.com/google-enjoy-html5-drag-drop-filereaderenren.html
 css3 三分动画 http://debug.cnodejs.net/html/1328843547100.html
 chrome dev channel http://www.chromi.org/chromedownload
-模拟转圈 http://debug.cnodejs.net/html/1329816297913.html;//lan 无线前端
-safari视觉效果指南 http://vdisk.weibo.com/s/2GrZ1/1329814214
+模拟转圈
+	http://debug.cnodejs.net/html/1329816297913.html;//lan 无线前端
+safari视觉效果指南 
+	http://vdisk.weibo.com/s/2GrZ1/1329814214
+淘宝UED手机兼容性测试点（测试结果）V1.0
+	https://public.sheet.zoho.com/public/smbey0nd/%E6%89%8B%E6%9C%BA%E5%85%BC%E5%AE%B9%E6%80%A7%E6%B5%8B%E8%AF%95%E8%A1%A8-%E5%85%AC%E5%BC%80%E7%89%88?mode=html
 	
