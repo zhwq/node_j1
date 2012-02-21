@@ -4,4 +4,5 @@ qq http://im.qq.com/macqq/index.shtml
 renren http://blog.bingo929.com/google-enjoy-html5-drag-drop-filereaderenren.html
 css3 三分动画 http://debug.cnodejs.net/html/1328843547100.html
 chrome dev channel http://www.chromi.org/chromedownload
+模拟转圈 http://debug.cnodejs.net/html/1329816297913.html;//lan 无线前端
 	
