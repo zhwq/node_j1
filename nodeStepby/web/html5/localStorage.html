@@ -1,0 +1,84 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>本地存储</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+    /*ui.js中有定义，此处简单定义*/
+var jui = {};
+    jui.fn = jui.fn || {};
+//本地存储版本1
+jui.fn.localStorage = {
+    _s: window.localStorage,//本地存储对象
+    set: function( key, value ) {
+        var t, ret = {};
+        if ( !this._s ) {
+            //浏览器不支持本地存储
+            alert( "浏览器不支持本地存储" );
+            return;
+        }
+        if ( key && value ) { //先测试功能，再优化
+            t = value.constructor === Array;
+            if ( t ) { // 数组
+                ret.type = "array";
+                ret.data = {};
+                ret.length = value.length;
+                for (var i=0; i<value.length; i++ ) {
+                    ret[ "data" ][ i ] = value[ i ];
+                }
+                value = JSON.stringify( ret );
+            }
+            if ( typeof value === "object" ) {
+                //认为为普通对象
+                value = JSON.stringify( value );
+            }
+            /*//json字面量
+            try {
+                var pVal = JSON.parse( value );
+            } catch( error ) {
+                //普通字面量
+            }*/
+            //认为为普通字面量
+            this._s.setItem( key, value );
+        }
+    },
+    get: function( key ) {
+        var ret, obj = this._s.getItem( key );
+         // obj.charAt("0") === "{" && obj.charAt( obj.length - 1 ) === "}"
+        ///^\{[`~!@#$%^&*()-=\\_+|\[\]\{\},.\/<>?]*\}$/.test( obj )
+        if ( obj.charAt("0") === "{" && obj.charAt( obj.length - 1 ) === "}" ) {
+            ret = JSON.parse( obj );
+            if( ret.type && ret.type === "array" ) {
+                var data = ret["data"],r = [];
+                for( var i=0; i< ret.length; i++ ) {
+                    r[i] = data[i];
+                }
+                ret = r;
+            }
+        } else {
+            ret = obj;
+        }
+        console.log( ret );
+        return ret;
+    },
+    iterate: function() {
+        var ret = {};
+        for( var i=0; i<this._s.length; i++ ) {
+            var key = this._s.key( i );
+            ret[ key ] = this.get( key );
+        }
+        return ret;
+    }
+};
+jui.fn.localStorage.set( "1", "abc123");
+jui.fn.localStorage.set( "2", { name: "zhangwq", age: 25} );
+jui.fn.localStorage.set( "3", [1, 2, 3, 4 ] );
+jui.fn.localStorage.get( "1" );
+jui.fn.localStorage.get( "2" );
+jui.fn.localStorage.get( "3" );
+jui.fn.localStorage.iterate();
+</script>
+</body>
+</html>
