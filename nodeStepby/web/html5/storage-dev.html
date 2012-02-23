@@ -1,0 +1,232 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>本地存储</title>
+    <meta charset="utf-8"/>
+    <style>
+        ul,li,dl,dt,dd {
+            list-style:none;
+            padding:0;
+            margin:0;
+        }
+        header {
+            height:30px;line-height:30px;
+            text-align:left;
+            width:100%;
+            -webkit-border-radius:25px;
+            border-radius:25px;
+            margin: 6px 8px 6px 0;
+            padding:3px;
+        }
+        dl {
+            clear:both;
+            width:600px;
+            height:auto;
+            border:1px solid gray;
+            margin:3px;
+        }
+        dt,dd {
+            height:26px;
+            line-height:26px;
+            font-style:italic;
+        }
+        dt {
+            text-align:center;
+            float:left;
+            width:60px;
+            background-color:#efefef;
+        }
+        dd {
+            padding-left:6px;
+            width:auto;
+            overflow:hidden;
+        }
+    </style>
+</head>
+<body>
+<article>
+    <header>本地存储</header>
+    <section>
+        <dl id="ls">
+            <dt>Key:</dt>
+            <dd>Value</dd>
+        </dl>
+    </section>
+    <section>
+        <input type="button" value="初始化测试数据" id="init"/>
+        <dl>
+            <dt>Key:</dt>
+            <dd><input type="text" id="setKey"/></dd>
+            <dt>Value:</dt>
+            <dd>
+                <input type="text" id="setValue"/>
+            </dd>
+            <dt>操作:</dt>
+            <dd>
+                <input type="button" value="设值" id="set"/>
+            </dd>
+        </dl>
+        <dl>
+            <dt>Key:</dt>
+            <dd><input type="text" id="getKey"/></dd>
+            <dt>Value:</dt>
+            <dd>
+                <input type="text" id="getValue"  readonly/>
+            </dd>
+            <dt>操作:</dt>
+            <dd>
+                <input type="button" value="取值" id="get"/>
+            </dd>
+        </dl>
+        <input type="button" value="迭代" id="iterate"/>
+    </section>
+</article>
+<script>
+    /*ui.js中有定义，此处简单定义*/
+var jui = {};
+    jui.fn = jui.fn || {};
+//本地存储版本1
+jui.fn.storage = {
+    _s: window.localStorage,//本地存储对象
+    set: function( ) {
+        var t, ret = {},key,value;
+        if ( !this._s ) return;
+        if ( arguments.length !==2 ) return;
+        key = arguments[0],value = arguments[1];
+        t = value.constructor === Array;
+        if ( t ) { // 数组
+            ret.type = "array";
+            ret.data = {};
+            ret.length = value.length;
+            for ( var i=0; i<value.length; i++ ) {
+                ret[ "data" ][ i ] = value[ i ];
+            }
+            value = JSON.stringify( ret );
+        }
+        if ( typeof value === "object" ) {
+            //认为为普通对象
+            value = JSON.stringify( value );
+        }
+        /*//json字面量
+        try {
+            var pVal = JSON.parse( value );
+        } catch( error ) {
+            //普通字面量
+        }*/
+        //认为为普通字面量
+        this._s.setItem( key, value );
+    },
+    get: function( ) {
+        if ( !this._s ) return;
+        if ( arguments.length !== 1 ) {//认为做迭代操作
+            return this._iterate();
+        }
+        var ret, obj = this._s.getItem( arguments[0] );
+        ///^\{[`~!@#$%^&*()-=\\_+|\[\]\{\},.\/<>?]*\}$/.test( obj )
+        if ( obj.charAt("0") === "{" && obj.charAt( obj.length - 1 ) === "}" ) {
+            ret = JSON.parse( obj );
+            if( ret.type && ret.type === "array" ) {
+                var data = ret["data"],r = [];
+                for( var i=0; i< ret.length; i++ ) {
+                    r[i] = data[i];
+                }
+                ret = r;
+            }
+        } else {
+            ret = obj;
+        }
+        return ret;
+    },
+    _iterate: function() {
+        if ( !this._s ) return;
+        var ret = {};
+        for( var i=0; i<this._s.length; i++ ) {
+            var key = this._s.key( i );
+            ret[ key ] = this.get( key );
+        }
+        return ret;
+    }
+};
+jui.storage = jui.fn.storage;
+
+</script>
+<script>
+function _init() {
+    window.localStorage.clear();//清楚本地存储数据
+    var inputData =
+        [
+            "zhng",
+             12,
+             new Date().getTime(),
+             [ 1, 2, 4, 5,
+                 {
+                     arr1:1,
+                     arr2:2
+                 }
+             ],
+            {
+                id: "123",
+                name: "jui",
+                children: {
+                    child1: 1,
+                    child2: 2
+                }
+            }
+        ];
+    var newObj = new Object();
+        newObj.name = "new fn";
+        newObj.obj = { id:1,name:"z"};
+    inputData[ inputData.length ] = newObj;
+
+    for ( var i=0; i<inputData.length; i++ ) {
+        jui.storage.set( i, inputData[i] );
+    }
+    _clear();
+};
+    function _r( ret ) {//只判断了2层
+        var _r = "";
+        if ( ret.constructor === Array ) {
+            for ( var i in ret ) {
+                _r += ( typeof ret[ i ]  === "object" ) ? JSON.stringify( ret[ i ] ) : ret[i] + " ";
+            }
+        } else {
+            _r += typeof ret === "object" ? JSON.stringify( ret ) : ret + " ";
+        }
+        return _r;
+    };
+    var ls = document.getElementById( "ls" ),
+        initBtn = document.getElementById( "init" ),
+         setBtn = document.getElementById( "set" ),
+         getBtn = document.getElementById( "get" ),
+         iterateBtn = document.getElementById( "iterate" );
+    //迭代
+    function _iterate() {
+        var ret,dls = "<dt>Key:</dt><dd>Value</dd>";
+        ret =jui.storage.get();
+        for( var k in ret ) {
+            dls += "<dt>" + k + "</dt>" + "<dd>" + _r( ret[ k ] ) + "</dd>";
+        }
+        ls.innerHTML = dls;
+    };
+    //_iterate();
+    initBtn.onclick = _init;
+    setBtn.onclick = function() {
+        var _key = document.getElementById( "setKey" ).value;
+        var _value = document.getElementById( "setValue" ).value;
+        if ( !_key || _key == "" ) return;
+        jui.storage.set( _key, _value );
+        _iterate();
+    };
+    getBtn.onclick = function() {
+        var _key = document.getElementById( "getKey" ).value;
+        var _value = document.getElementById( "getValue" );
+        if ( !_key || _key == "" ) return;
+        _value.value = jui.storage.get( _key );
+    };
+    iterateBtn.onclick = _iterate;
+    function _clear() {
+        ls.innerHTML = "<dt>Key:</dt><dd>Value</dd>";
+    };
+</script>
+</body>
+</html>
