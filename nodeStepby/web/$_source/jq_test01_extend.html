@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jquery structure</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+(function( window, undefined ){//闭包,防止undefined重新定义
+var document = window.document;
+
+//匿名函数的返回值
+var jQuery = ( function() {
+    //使用var方式 定义函数;//function vs var方式定义函数的区别
+    var jQuery = function( selector, context ) {
+        return jQuery.fn.init( selector, context ); //自定义的函数返回值；默认值为undefined
+    };
+    //jQuery.__proto__//指向对象的原型对象;将jQuery的原型对性存在属性fn中中
+    jQuery.fn = jQuery.prototype = {/*primitive object 对象字面量*/
+        constructor: jQuery,
+        init: function( selector, context, rootjQuery /**/) {
+
+            // something
+            if ( !selector ) {
+                return this;
+            }
+            // DOMElement
+            if ( selector.nodeType ) {
+                this.context = this[0] = selector;
+                this.length = 1;
+                return this;
+            }
+            //others;
+            //...
+        }
+
+    };
+    jQuery.fn.init.prototype = jQuery.fn;
+		 //class2type 使用Object原型的toString方法构建常用类型映射-->判断变量类型
+    	//Boolean Number String Function Array Date RegExp Object
+    	//不在映射表中的数据类型统一为object
+    	//空值null 返回 String(null);
+		//====================extend core
+		//作用: 增强this或者传入的参数
+		//TODO:常用的调用方式和结果
+		jQuery.extend = jQuery.fn.extend = function() {
+			var options, 
+					name, 
+					src, 
+					copy, 
+					copyIsArray,
+					clone,
+				target = arguments[0] || {},//初始化返回的对象
+				i = 1,
+				length = arguments.length,
+				deep = false;
+		
+			/**深度拷贝参数 Handle a deep copy situation
+				//游标移动
+				//配置深度拷贝参数
+				//变更返回对象
+			*/
+			if ( typeof target === "boolean" ) {
+				deep = target;
+				target = arguments[1] || {};
+				// skip the boolean and the target//for in循环中会拷贝属性
+				i = 2;//0 1--->2
+			}
+		
+			// Handle case when target is a string or something (possible in deep copy)
+			//返回值target不是对象类型或者不是函数时, 初始化为空对象(primitive object)
+			if ( typeof target !== "object" && !jQuery.isFunction(target) ) {
+				target = {};
+			}
+		
+			// extend jQuery itself if only one argument is passed
+			//i == 2 则第一个为深度拷贝配置
+			//i == 1 则此时不是深度拷贝场景
+			//此时 length 1;2时;传入的参数构不成被增强对象和待增强的属性对象;
+			//此时 也及时增强extend的父对象;this的指向
+			if ( length === i ) {
+				target = this;
+				--i;
+			}//'游标'为深度拷贝参数后的第一个参数的下标
+		
+			//增强之前一些参数的值
+			//deep 深度拷贝参数值
+			//i 第一个非深度拷贝参数的下标
+			//target 第一个非深度拷贝参数的引用;this对象;空对象(通常没有用,测试具体的场景);
+			for ( ; i < length; i++ ) {
+				// Only deal with non-null/undefined values
+				if ( (options = arguments[ i ]) != null ) {
+					// Extend the base object
+					for ( name in options ) {
+						src = target[ name ];//返回对象中对应key的值
+						copy = options[ name ];//增强的值
+		
+						// Prevent never-ending loop
+						if ( target === copy ) {//此时 target为传入的参数的'某个'
+							continue;
+						}
+		
+						// Recurse if we're merging plain objects or arrays
+						if ( deep && //深度拷贝 
+									copy && //有需要增强的属性
+									( jQuery.isPlainObject(copy) || (copyIsArray = jQuery.isArray(copy)) )//待增强的是普通对象变量(不是dom节点或者window head object)或者数组 
+								) {
+							if ( copyIsArray ) {//如果为合并数组
+								copyIsArray = false;
+								//如果被增强对象中存在该项值+该项值为数组
+								// 返回数组对象
+								clone = src && jQuery.isArray(src) ? src : []; 
+		
+							} else {
+								//如果被增强对象中存在该项值+该项值为普通对象
+								// 返回对象
+								clone = src && jQuery.isPlainObject(src) ? src : {};
+							}
+		
+							// Never move original objects, clone them
+							// 永不使用原始对象 克隆他们copy---> clone return clone;-->增强target
+							target[ name ] = jQuery.extend( deep, clone, copy );
+		
+						// Don't bring in undefined values
+						//非深度拷贝情景中 拷贝非空值
+						} else if ( copy !== undefined ) {
+							target[ name ] = copy;
+						}
+					}
+				}
+			}
+		
+			// Return the modified object
+			return target;
+		};
+		//====================extend core
+    //return
+    return jQuery;
+} )();
+//将jQuery,$附加给window
+window.jQuery = window.$ = jQuery;
+})(window);
+</script>
+</body>
+</html>
