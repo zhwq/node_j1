@@ -1,0 +1,21 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title>空白的测试文件</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+var _argTest = function( i ) {  //i未测试
+    //console.log( arguments.callee );
+    return function( value ) {
+        //console.log( arguments.callee );
+        console.log( arguments.length );
+        var a = arguments.length > 1 ? [].slice.call( arguments, 0) : "__aa" ;
+        console.log( a );
+    }
+};
+(_argTest())( "1", [1,2,3] );
+</script>
+</body>
+</html>

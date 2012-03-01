@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jq deferred callback queue commonJS promises/A</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script src="jsLib/jquery-1.5.2.js"></script>
+<script>
+    //919-1086
+
+    var // Promise methods
+            promiseMethods = "then done fail isResolved isRejected promise".split(" "),
+        // Static reference to slice
+            sliceDeferred = [].slice;
+
+    jQuery.extend({
+        // Create a simple deferred (one callbacks list)
+        _Deferred: function() {
+            var // callbacks list
+                    callbacks = [],
+                // stored [ context , args ]
+                    fired, //存储上下文和参数;0|undefined;
+                // to avoid firing when already doing so
+                    firing,
+                // flag to know if the deferred has been cancelled
+                    cancelled,//undefined 1   //在此情景中的 cancelled:(undefined;1);firing:(undefined;0;1)
+                // the deferred itself
+                    deferred = {
+
+                        // done( f1, f2, ...)
+                        done: function() {
+                            if (!cancelled) {//约定尚未取消
+                                var args = arguments,//函数运行时参数伪数组对象
+                                        i,
+                                        length,
+                                        elem,  //存储遍历中的参数成员值
+                                        type,  //elem经由$.type处理的返回值
+                                        _fired;//上下文+参数的本地引用
+                                if (fired) {//这个分支在什么场景中会执行;有执行约定后
+                                    _fired = fired;
+                                    fired = 0;
+                                }
+                                for (i = 0,length = args.length; i < length; i++) {
+                                    elem = args[ i ];
+                                    type = jQuery.type(elem);
+                                    if (type === "array") {//数组 则传入改项参数值执行
+                                        deferred.done.apply(deferred, elem);
+                                    } else if (type === "function") {//函数 则入回调队列
+                                        callbacks.push(elem);
+                                    }
+                                }
+                                if (_fired) {
+                                    deferred.resolveWith(_fired[ 0 ], _fired[ 1 ]);
+                                }
+                            }
+                            return this;
+                        },
+
+                        // resolve with given context and args
+                        //使用给定上下文和参数进行处理
+                        resolveWith: function(context, args) {
+                            if (
+                                    !cancelled &&
+                                    !fired &&
+                                    !firing
+                                ) {//unfullfilled中间态
+                                // make sure args are available (#8421)//确保参数已定义
+                                args = args || [];
+                                firing = 1;//更新信号量 将进行处理
+                                try {
+                                    while (callbacks[ 0 ]) { //回调'队列'中存在等待项//循环执行;
+                                        callbacks.shift().apply(context, args);
+                                    }
+                                }
+                                finally {
+                                    fired = [ context, args ];
+                                    firing = 0;
+                                }
+                            }
+                            return this;
+                        },
+
+                        // resolve with this as context and given arguments
+                        //进行处理
+                        resolve: function() {
+                            deferred.resolveWith(this, arguments);
+                            return this;
+                        },
+
+                        // Has this deferred been resolved?
+                        isResolved: function() {//是否已处理
+                            return !!( firing || fired );
+                        },
+
+                        // Cancel
+                        cancel: function() { //更新信号量 并返回当前this指向
+                            cancelled = 1;
+                            callbacks = [];
+                            return this;
+                        }
+                    };
+
+            return deferred;
+        },
+
+        // Full fledged deferred (two callbacks list)
+        Deferred: function(func) {//成熟的回调队列
+            var deferred = jQuery._Deferred(),//回调队列
+                failDeferred = jQuery._Deferred(),//回调队列
+                promise;
+            // Add errorDeferred methods, then and promise
+            // 扩展回调队列-->添加失败回调队列， then 和 promise 方法
+            jQuery.extend(deferred, {
+                then: function(doneCallbacks, failCallbacks) {
+                    deferred.done(doneCallbacks).fail(failCallbacks);
+                    return this;//约定 执行then方法后返回一个新的约定
+                },
+                fail: failDeferred.done,
+                rejectWith: failDeferred.resolveWith,
+                reject: failDeferred.resolve,
+                isRejected: failDeferred.isResolved,
+                // Get a promise for this deferred
+                // If obj is provided, the promise aspect is added to the object
+                promise: function(obj) {
+                    if (obj == null) {
+                        if (promise) {
+                            return promise;
+                        }
+                        promise = obj = {};//约定是一个对象
+                    }
+                    var i = promiseMethods.length;
+                    while (i--) {
+                        obj[ promiseMethods[i] ] = deferred[ promiseMethods[i] ];
+                    }//拷贝约定中的方法
+                    return obj;//返回一个新的约定
+                }
+            });
+            // Make sure only one callback list will be used
+            deferred.done(failDeferred.cancel).fail(deferred.cancel);
+            // Unexpose cancel
+            delete deferred.cancel;
+            // Call given func if any
+            if (func) {
+                func.call(deferred, deferred);
+            }
+            return deferred;
+        },
+
+        // Deferred helper
+        when: function(firstParam) {
+            var args = arguments,   //参数伪数组队列
+                    i = 0,          //游标
+                    length = args.length,//参数数目
+                    count = length,      //计数器 初始为参数数目
+                    deferred = length <= 1 && firstParam && jQuery.isFunction(firstParam.promise) ?
+                            firstParam :
+                            jQuery.Deferred(); //如果传入的是一个回调队列 则使用该队列，否则创建一个
+
+            //准备
+                // sliceDefered是[].slice的本地量
+            function resolveFunc(i) {  //注意这个i
+                return function(value) {
+                    args[ i ] = arguments.length > 1
+                                    ?
+                                        sliceDeferred.call(arguments, 0)//传入多于1个的参数时将参数转换成数组
+                                    :
+                                        value;
+                    if (!( --count )) {
+                        // Strange bug in FF4:
+                        // Values changed onto the arguments object sometimes end up as undefined values
+                        // outside the $.when method. Cloning the object into a fresh array solves the issue
+                        deferred.resolveWith(deferred, sliceDeferred.call(args, 0));
+                    }
+                };
+            }
+
+            if (length > 1) {
+                for (; i < length; i++) {
+                    if (args[ i ] && jQuery.isFunction(args[ i ].promise)) {
+                        args[ i ].promise().then(resolveFunc(i), deferred.reject);
+                    } else {
+                        --count;
+                    }
+                }
+                if (!count) {
+                    deferred.resolveWith(deferred, args);
+                }
+            } else if (deferred !== firstParam) { //deferred是新建的
+                deferred.resolveWith(deferred, length ? [ firstParam ] : []);
+            }
+            return deferred.promise();
+        }
+    });
+</script>
+</body>
+</html>
