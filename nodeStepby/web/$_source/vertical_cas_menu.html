@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>树状层级菜单</title>
+<meta charset="utf-8"/>
+<style>
+/*base.css*/
+html, body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, a, del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: inherit;
+    font-style: inherit;
+    vertical-align: middle;
+    text-decoration: none;
+    font-size: 100%;
+}
+
+* {
+    margin: 0px;
+    padding: 0px;
+}
+
+html {
+    overflow: auto;
+}
+
+body {
+    font-family: "宋体", Arial Helvetica, sans-serif;
+    font-size: 12px;
+    color: #333333;
+}
+
+ul, li {
+    list-style-type: none;
+}
+
+input {
+    vertical-align: middle;
+}
+/*base.css*/
+</style>
+<style>
+body {
+    font-size:13px;
+}
+#con {
+    margin:30px 0 0 40px;
+    padding-top:8px;
+    padding-bottom:6px;
+    background-color:#b1f1f1;
+    border-radius:5px;
+    width:112px;
+    height:auto;
+    overflow:hidden;
+   /* position:relative;
+  此时ol绝对定位出不来
+   */
+}
+#con > ul.v-cas-menu {}
+#con > ul.v-cas-menu > li {
+    height:32px;
+    line-height:32px;
+    width:100%;
+    text-align:center;
+}
+#con > ul.v-cas-menu > li:hover,#con > ul.v-cas-menu > li.has {
+    background-color:#b1b1f1;
+    border-radius:6px;
+}
+#con > ul.v-cas-menu > li.has > ol {
+    display:none;
+    width:96px;
+    height:auto;
+    text-align:center;
+    overflow:hidden;
+    position:absolute;
+    left:152px;
+    background-color:pink;
+    border-radius:3px;
+    padding:3px 0 4px 0;
+}
+#con > ul.v-cas-menu > li.has:hover > ol {
+    display:block;
+}
+#con > ul.v-cas-menu > li.has > ol>li:hover {
+    background-color:#ffe1fa;
+    border-radius:3px;
+}
+</style>
+</head>
+<body>
+<div id="con">
+    <ul class="v-cas-menu">
+        <li>
+            <a>菜单一</a>
+        </li>
+        <li class="has">
+            <ol>
+                <li>子菜单一</li>
+                <li>子菜单二</li>
+                <li>子菜单三</li>
+                <li>子菜单四</li>
+            </ol><!--/子菜单-->
+            <a>菜单二</a>
+        </li>
+        <li>
+            <a>菜单三</a>
+        </li>
+        <li>
+            <a>菜单四</a>
+        </li>
+    </ul>
+</div><!--/树状层级菜单-->
+</body>
+</html>
