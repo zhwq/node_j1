@@ -1,0 +1,60 @@
+准备：
+1.Safari浏览器清楚缓存:“齿轮”图标-->还原safai-->(选择对应选项执行还原即可)
+
+错误:
+1.TypeError: 'undefined' is not an object (evaluating 'window.parent.document.frames['diaryRight']')
+	框架集错误，在子框架页需要互相操作时常出现
+	frame需要同时设置id和name的值，值相同，
+	同时应该和相关业务的相同（否则，在ipad下出现两个任务标签的子框架交叉消失的问题）
+2.TypeError: 'null' is not an object (evaluating '_.substr')
+  Uncaught TypeError: Cannot call method 'toLowerCase' of null
+	2.1，日历控件脚本错误，在获取script标签中对应属性是出错，
+	     该错误由于在metaTemp.jsp中添加了内部的script内容而触发暴露，
+	     需要修改WdatePicker.js文件中的J方法
+	2.2，系统使用的日历控件为My97DatePicker
+	     2.2.1，在绝大多数页面中使用的路径为：WebRoot\uiBase\widgets\My97DatePicker
+	     2.2.2，在日程中使用的为：WebRoot\js\date\My97DatePicker
+3.需要在关闭标签时如果存在则会到原来的任务标签的任务标签的调用方式
+	3.1>jcs.menu.js 修改jmenu.removeChain的值为 0
+	3.2>window.top.openTargetByUrl( 地址, 任务标签显示名称, 菜单的ID, 执行此方法的页面所在标签的ID );
+
+4. frameset框架集frame的获取
+frameset.html
+------------
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>frameset</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	</head>
+	<frameset COLS="213,*" rows="*" name="frameName" framespacing="0" frameborder="no" border="0">
+		<frame  src="frame1.html" name="busi1Frame" id="busi1Frame" scrolling="no"/>
+		<frame  src="frame2.html" name="busi2Frame" id="busi2Frame" noresize="noresize" scrolling="auto"/>
+	</frameset>
+</html>
+------------
+frame1.html
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+	<head>
+		<title>frameset</title>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/> 
+	</head>
+	<body>
+		<script type="text/javascript">
+			//获取到frame2.html的window对象
+			var framesetWindow = window.parent;
+			//#1 方式1
+			//不允许使用framesetWindow.document.frame["busi2Frame"],此种方式在w3c系列浏览器中不支持
+			var frame2Window = framesetWindow.frames["busi2Frame"];
+			//#2 方式2
+			var frame2 = framesetWindow.document.getElementById( "busi2Frame" );//frameset.html中的元素frame对象
+			var frame2Window02 = frame2.contentWindow;
+			
+			//为实现跨越IE,W3C系列浏览器,跨平台(ipad,此处为主框架实现的带来的限制),请注意一下：
+			!1,2,3,frameset页面中的frame元素,请同时给id和name属性赋值,而且该值必须相同,同时和具体业务相关(在拷贝的时候不要偷懒,不改名字)
+			!4,在子页面操作另外的子页面时,获取子页面的window对象的方式,请使用上面的方式,注意杜绝使用注释中不允许使用的方式
+		</script>
+	</body>
+</html>
+5.
