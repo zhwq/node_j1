@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ajax index</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+//创建ajax 对象
+var xhr = new XMLHttpRequest;
+var url = "../ajaxServelt";
+var params = [
+    "id=123",
+    "limit=25"
+    ];
+    //处理xhr
+    xhr.onreadystatechange = xhrHandler;
+    //打开连接，配置头信息
+    xhr.open( "POST", url, true);
+    xhr.setRequestHeader( "Content-Type", "application/x-www-form-urlencoded" );
+    //xhr.setRequestHeader( "Content-Length", params.length );//Refused to set unsafe header "Content-Length"
+    //发送数据
+    xhr.send( params.join( "&" ));
+//xhr 回调
+function xhrHandler() {
+    if( xhr.readyState == 4 ) {
+        if( xhr.status == 200 ) {
+            //正确返回
+            //console.log( xhr.responseText );
+            //var xmlData = xhr.responseXML;
+            var json = eval("("+xhr.responseText+")");  //eval的替代方案
+            console.dir( json );
+        }
+    }
+}
+</script>
+</body>
+</html>

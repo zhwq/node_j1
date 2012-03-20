@@ -1,0 +1,49 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <title> xml parser 1</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+    var ZJ = {};
+    ZJ.parseXML = function( data ) { // jquery parseXML
+        var tmp,xml;
+        if ( 'DOMParser' in window ) { //标准方式
+            tmp = new DOMParser();
+            xml = tmp.parseFromString( data, "text/xml" );
+        } else { //IE
+            xml = new ActiveXObject("Microsoft.XMLDOM");  //不同版本的XML解析实现;
+            xml.async = "false";
+            xml.loadXML( data );//将数据加载赋值给xml;返回值表示是否加载成功
+        }
+        //获取XML的根节点 来判断是否加载成功//IE?
+        tmp = xml.documentElement;
+        /*
+        <html>
+            <body xmlns="http://www.w3.org/1999/xhtml">
+                <parsererror style="display: block; white-space: pre; border: 2px solid #c77; padding: 0 1em 0 1em; margin: 1em; background-color: #fdd; color: black">
+                    <h3>This page contains the following errors:</h3>
+                    <div style="font-family:monospace;font-size:12px">
+                        error on line 1 at column 1: Document is empty
+                    </div>
+                    <h3>Below is a rendering of the page up to the first error.</h3>
+                </parsererror>
+            </body>
+        </html>
+
+         */
+        if ( !tmp || !tmp.nodeName /*|| tmp.nodeName === "parsererror" */) {
+            alert( "\u65e0\u6548\u7684XML\uff0c\u52a0\u8f7d\u5931\u8d25!" );//无效的XML，加载失败!
+        }
+        return xml;
+    };
+    var xmlString = '<root><item id="001">zhng</item><item id="002">zhwq</item></root>';
+    var xmlDoc = ZJ.parseXML( xmlString );
+    var rootEl = xmlDoc.documentElement;
+</script>
+<p>
+
+</p>
+</body>
+</html>

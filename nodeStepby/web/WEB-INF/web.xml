@@ -4,5 +4,12 @@
            xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
 		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
            version="2.5">
-
+<servlet>
+	<servlet-name>AjaxServlet</servlet-name>
+	<servlet-class>org.ibase.ajax.AjaxServlet</servlet-class>
+</servlet>
+<servlet-mapping>
+	<servlet-name>AjaxServlet</servlet-name>
+	<url-pattern>/ajaxServelt</url-pattern>
+</servlet-mapping>
 </web-app>

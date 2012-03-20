@@ -1,0 +1,18 @@
+/* toolbar */
+.ui-toolbar {
+	height:28px;
+	line-height:28px;
+	padding:3px 6px;
+	background-color: #f1f8fd;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#f1f8fd), to(#e3f1fd)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #f1f8fd, #e3f1fd); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #f1f8fd, #e3f1fd); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #f1f8fd, #e3f1fd); /* IE10 */
+	background-image:      -o-linear-gradient(top, #f1f8fd, #e3f1fd); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #f1f8fd, #e3f1fd);
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#f1f8fd', EndColorStr='#e3f1fd'); /* IE6–IE9 */
+ overflow:hidden;
+}
+.ui-toolbarTop{ border-bottom:solid 1px #bccce1;}
+.ui-toolbarBottom{ border-top:solid 1px #bccce1;}
+.ui-toolbar label{ height:24px; line-height:24px; display:inline-block; margin:2px; vertical-align:top;}
