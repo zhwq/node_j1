@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>contact xml</title>
+    <meta charset="utf-8"/>
+    <style>
+        table,td {
+            border:0;
+            border-collapse: collapse;
+        }
+        th {
+            background-color: pink;
+        }
+        td {
+            padding: 3px;
+        }
+        tr:nth-child(2n+1) {
+            background-color: #efefef;
+        }
+    </style>
+</head>
+<body>
+<div id="element"></div><!--/存放生成的表格-->
+<script>
+function loadXML( path, callback ) {
+    var xhr = new XMLHttpRequest;
+    //var xml;
+    xhr.onreadystatechange = function() {
+        if ( xhr.readyState == 4 ) {
+            if ( xhr.status == 200 ) {
+                callback( xhr.responseXML );
+            }
+        }         
+    }
+    xhr.open("GET", path, true );
+    xhr.send( null );
+    //return xml;//TODO:此时会发生什么呢？ 
+}    
+// This function uses makeTable()
+function displayAddressBook() {
+    var schema = {
+        rowtag: "contact",
+        columns: [
+            {tagname: "@name", label: "Name"},
+            {tagname: "email", label: "Address"}
+        ]
+    };
+    loadXML( "cdn/xml/contact.xml", function( xmldoc) {
+        makeTable( xmldoc, schema, "element" );
+    } );
+}
+function makeTable( xmldoc, schema, element ) {
+    // create the <table> element
+    var table = document.createElement( "table" );
+
+    // create the header row of <th> elements in a <tr> in a <thead>
+    var thead = document.createElement( "thead" );
+    var header = document.createElement( "tr" );
+    for ( var i = 0; i < schema.columns.length; i++ ) {
+        var c = schema.columns[ i ];
+        var label = ( typeof c === "string" ) ? c : c.label;
+        var cell = document.createElement( "th" );
+        cell.appendChild( document.createTextNode( label ) );
+        header.appendChild( cell );
+    }
+
+    // put the header into the table
+    thead.appendChild( header );
+    table.appendChild( thead );
+
+    // the remaining rows of the table go in a <tbody>
+    var tbody = document.createElement( "tbody" );
+    table.appendChild( tbody );//TODO:?
+
+    // get the elements that contain our data from the xml document
+    var xmlrows = xmldoc.getElementsByTagName( schema.rowtag );
+    // loop through these elements. each one contains a row of the table
+    for ( var i = 0; i < xmlrows.length; i++ ) {
+        // xml element that holds the data for the row
+        var xmlrow = xmlrows[ i ];
+
+        var row = document.createElement( "tr" );
+        for ( var j = 0; j < schema.columns.length; j++ ) {    //重复循环获取了schema.columns 可提取
+            var c = schema.columns[ j ];
+            var tagname = ( typeof c === "string" ) ? c : c.tagname;
+            var celltext;
+            if ( tagname.charAt( 0 ) === "@" ) {
+                // if the tabname begins with '@', it is an attribute name
+                celltext = xmlrow.getAttribute( tagname.substring(1) );
+            } else {
+                // find the xml element that holds the data from this column
+                var xmlcell = xmlrow.getElementsByTagName( tagname )[ 0 ];
+                celltext = xmlcell.firstChild.nodeValue;//TODO:?
+            }
+            // create the html element for this cell
+            var cell = document.createElement( "td" );
+            cell.appendChild( document.createTextNode( celltext ) );
+            row.appendChild( cell );
+        }
+        // add the row fto the tbody of the table
+        tbody.appendChild( row );
+    }
+    table.frame = "border";//TODO:dhtml?
+    if ( typeof element === "string" ) element = document.getElementById( element );
+    element.appendChild( table );
+
+}
+//执行
+displayAddressBook();
+</script>
+</body>
+</html>

@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>包裹-无线前端-bj-海洋</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        * {
+            magrin: 0px;
+            padding: 0px;
+        }
+
+        #ceshiCSS3 {
+            background-color: #000;
+            width: 160px;
+            height: 160px;
+            -webkit-animation-name: baoguo;
+            -webkit-animation-duration: 0.5s;
+            -webkit-animation-timing-function: ease-in;
+            -webkit-animation-iteration-count: 1;
+            -webkit-animation-direction: normal;
+        }
+
+        .baoguo {
+            background-color: #000;
+            width: 160px;
+            height: 160px;
+            -webkit-transform: rotate(45deg)
+        }
+
+        @-webkit-keyframes baoguo {
+    0% {
+		-webkit-transform:translate(0px,0px) rotate(0deg) scale(1.00,1.00);
+
+    }
+    100% {
+        -webkit-transform:translate(0px,00px) rotate(45deg) scale(1.00,1.00);
+    }
+}
+    </style>
+</head>
+
+<body>
+<div id="ceshiCSS3" class="baoguo"></div>
+<!--
+卷圈
+http://debug.cnodejs.net/html/1329816297913.html
+-->
+</body>
+</html>

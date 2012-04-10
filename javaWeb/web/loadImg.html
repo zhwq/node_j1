@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片加载事件</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+var body = document.body;
+//创建img标签
+var imgDom = document.createElement( "img" );
+//以置顶地址的方式请求图片资源
+    imgDom.src = "cdn/images/tweengirls_error.jpg";
+    imgDom.alt = "双胞胎女孩";
+    imgDom.title = "双胞胎女孩";
+//将img标签插入到页面
+body.appendChild( imgDom);
+//绑定加载事件
+imgDom.onload = function( event ) {
+    console.log("图片加载事件");
+};
+imgDom.onerror = function( event ) {
+    console.log( "图片加载失败，访问的图片资源不存在或者已被移除" );
+    body.removeChild( imgDom );
+};
+</script>
+</body>
+</html>

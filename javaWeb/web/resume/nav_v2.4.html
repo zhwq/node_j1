@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>正余弦数学模型制作圆形导航;@zhng(zhangwen77@qq.com)</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+        }
+        body {
+            font:"宋体" 12px;
+        }
+        #sun {
+            position:absolute;
+            top:100px;
+            left:100px;
+            width:400px;
+            height:400px;
+            /*background-color:#fef000;*/
+            -webkit-border-radius:200px;
+            border-radius:200px;
+        }
+        .star {/*#star0,#star,*/
+            position:absolute;
+            top:80px;
+            left:280px;
+            width:40px;
+            height:40px;
+            background-color:gray;
+            -webkit-border-radius:20px;
+            border-radius:20px;
+            text-align: center;
+            vertical-align: middle;
+        }
+            /*.star:hover,*/.currentStar {
+                                width: 80px;
+                                height: 80px;
+                                -webkit-border-radius:40px;
+                                border-radius:40px;
+                            }
+        .menu {
+            position: absolute;
+            top:175px;
+            left:216px;
+            width: 164px;
+            height: 250px;
+            padding:6px;
+            background-color: red;
+        }
+        .menu > li {
+            width: 100%;
+            height: 28px;
+            line-height: 28px;
+            padding: 6px 0 0 0;
+            text-align: center;
+        }
+        .menu > li:hover {
+            background-color: purple;
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 3px;
+        }
+    </style>
+</head>
+<body>
+<div id="sun"></div><!--/中心为旋转的中心点-->
+<div id="star0" class="star">0</div>
+<div id="star1" class="star">1</div>
+<div id="star2" class="star">2</div>
+<div id="star3" class="star">3</div>
+<div id="star4" class="star">4</div>
+<div id="star5" class="star">5</div>
+<div id="star6" class="star">6</div>
+<div id="star7" class="star">7</div>
+<ul id="menu0" class="menu" style="display: none;">
+    <li>0二级弹出菜单1</li>
+    <li>0二级弹出菜单2</li>
+    <li>0二级弹出菜单3</li>
+    <li>0二级弹出菜单4</li>
+    <li>0二级弹出菜单5</li>
+    <li>0二级弹出菜单6</li>
+    <li>0二级弹出菜单7</li>
+</ul><!--/放置到小球内部定位会受影响-->
+<ul id="menu1" class="menu" style="display: none;">
+    <li>1二级弹出菜单1</li>
+    <li>1二级弹出菜单2</li>
+    <li>1二级弹出菜单3</li>
+    <li>1二级弹出菜单4</li>
+    <li>1二级弹出菜单5</li>
+    <li>1二级弹出菜单6</li>
+    <li>1二级弹出菜单7</li>
+</ul>
+<ul id="menu2" class="menu" style="display: none;">
+    <li>2二级弹出菜单1</li>
+    <li>2二级弹出菜单2</li>
+    <li>2二级弹出菜单3</li>
+    <li>2二级弹出菜单4</li>
+    <li>2二级弹出菜单5</li>
+    <li>2二级弹出菜单6</li>
+    <li>2二级弹出菜单7</li>
+</ul>
+<ul id="menu3" class="menu" style="display: none;">
+    <li>3二级弹出菜单1</li>
+    <li>3二级弹出菜单2</li>
+    <li>3二级弹出菜单3</li>
+    <li>3二级弹出菜单4</li>
+    <li>3二级弹出菜单5</li>
+    <li>3二级弹出菜单6</li>
+    <li>3二级弹出菜单7</li>
+</ul>
+<ul id="menu4" class="menu" style="display: none;">
+    <li>4二级弹出菜单1</li>
+    <li>4二级弹出菜单2</li>
+    <li>4二级弹出菜单3</li>
+    <li>4二级弹出菜单4</li>
+    <li>4二级弹出菜单5</li>
+    <li>4二级弹出菜单6</li>
+    <li>4二级弹出菜单7</li>
+</ul>
+<ul id="menu5" class="menu" style="display: none;">
+    <li>5二级弹出菜单1</li>
+    <li>5二级弹出菜单2</li>
+    <li>5二级弹出菜单3</li>
+    <li>5二级弹出菜单4</li>
+    <li>5二级弹出菜单5</li>
+    <li>5二级弹出菜单6</li>
+    <li>5二级弹出菜单7</li>
+</ul>
+<ul id="menu6" class="menu" style="display: none;">
+    <li>6二级弹出菜单1</li>
+    <li>6二级弹出菜单2</li>
+    <li>6二级弹出菜单3</li>
+    <li>6二级弹出菜单4</li>
+    <li>6二级弹出菜单5</li>
+    <li>6二级弹出菜单6</li>
+    <li>6二级弹出菜单7</li>
+</ul>
+<ul id="menu7" class="menu" style="display: none;">
+    <li>7二级弹出菜单1</li>
+    <li>7二级弹出菜单2</li>
+    <li>7二级弹出菜单3</li>
+    <li>7二级弹出菜单4</li>
+    <li>7二级弹出菜单5</li>
+    <li>7二级弹出菜单6</li>
+    <li>7二级弹出菜单7</li>
+</ul>
+<script>
+var _M = Math,
+    _pi = _M.PI,
+    navConfig = { //参数配置
+        _n: 8, //小球个数
+        cx: 300,//大球圆心坐标x值
+        cy: 300,//大球圆心坐标y值
+        r: 200,////大球半径
+        mr: 20,//小球半径
+        angle:1,//角度制
+        frequency: 0.2,//单位秒
+        deltaTime: 200, //延时时间
+        currentPhase:[],//当前相位值
+        //deltaPhase: navConfig.angle * ( navConfig.deltaTime / navConfig.frequency ),
+        focus: [ 300, 100, 20 ]//聚焦区域
+    };
+//相位变化值
+navConfig.deltaPhase = navConfig.angle * ( navConfig.deltaTime / navConfig.frequency );
+//计算初始相位
+( function() {
+    var i, len;
+    for ( i = 0, len = navConfig._n; i < len; i++ ) {
+        navConfig.currentPhase[ i ] = calPhase( i, len );
+    }
+} )();
+//更新坐标函数
+function updateOffset(  _menu, objs, direction ) {
+    var cx = navConfig.cx,
+        cy = navConfig.cy,
+        mr = navConfig.mr,
+        r = navConfig.r,
+        deltaPhase = navConfig.deltaPhase;
+    function _x( q ) {
+        return cx + r * _M.cos( q ) - mr + "px";
+    }
+    function _y( q ) {
+        return cy + r * _M.sin( q ) - mr + "px";
+    }
+    var i, len;
+    if ( direction != undefined || "+" === direction ) {
+        for ( i = 0, len = navConfig._n; i < len; i++ ) {
+            navConfig.currentPhase[ i ] += deltaPhase;
+            objs[ i ].style.left = _x( navConfig.currentPhase[ i ] );
+            objs[ i ].style.top = _y( navConfig.currentPhase[ i ] );
+        }
+    } else {
+        for ( i = 0, len = navConfig._n; i < len; i++ ) {
+            navConfig.currentPhase[ i ] -= deltaPhase;
+            objs[ i ].style.left = _x( navConfig.currentPhase[ i ] );
+            objs[ i ].style.top = _y( navConfig.currentPhase[ i ] );
+        }
+    }
+    showMenu( _menu, objs );
+}
+//判断小球是否在焦点区域内
+function compareXY( o ) {
+    var _x = navConfig.focus[ 0 ],
+        _y = navConfig.focus[ 1 ],
+        _z = navConfig.focus[ 2 ];
+    if ( Math.abs( _x - o.x) < _z && Math.abs( _y - o.y ) < _z) {
+        return true;
+    }
+}
+//top值最小
+// (TODO:同时在限定变化区间内)
+// 显示子级菜单
+function minOffsetTop( tops ) {
+    var middle,minIndex,i,len;
+    middle = tops[ 0 ], minIndex = 0;
+    for ( i = 1, len = tops.length; i < len; i++ ) {
+        var _t = tops[ i ];
+        if ( middle > _t ) {
+            middle = -t;
+            minIndex = i;
+        }
+    }
+    return minIndex;
+}
+//子项菜单的显示隐藏
+function showMenu( _menus, _stars) {
+    var i,
+        len,
+        _menu,
+        _s,
+        top,mi;
+    for ( i = 0, len = _menus.length; i < len; i++ ) {
+        _menu = _menus[ i ];
+        _s = _stars[ i ];
+        var _t = parseFloat( getStyle( _s, "top" ) );
+        if ( top != undefined ) {
+            if ( top > _t ) {
+                top = _t;
+                mi = i;
+            }            
+        } else {
+            top = _t;
+            mi = i;
+        }
+        _menu.style.display = "none";
+        _s.className = "star";
+    }
+    _menus[ mi ].style.display = "block";
+    _stars[ mi ].className = "star currentStar";
+    //TODO:需要去除
+    //updateOffset.queueSize = 0;
+}
+function hideMenu( _menus, _stars ) {
+    var i,len;
+    for ( var i = 0, len = _menu.length; i < len; i++ ) {
+        _menus[ i ].style.display = "none";
+        _stars[ i ].className = "star";
+    }
+}
+//utils
+/**
+ * 获取应用的样式,未处理className;float等
+ * @param elem 元素节点
+ * @param styleName 样式属性的script名称 驼峰式名称
+ */
+function getStyle( elem, styleName ) {
+    if ( 'getComputedStyle' in window ) {
+        return getComputedStyle( elem, null )[ styleName ];
+    } else {
+        elem.currentStyle && elem.currentStyle[ styleName ];
+    }
+}
+//简化的根据id获取元素
+function $id( id ) {
+    return document.getElementById( id ) ;
+}
+//事件绑定工具
+function addEvent( elem, type, handler ) {
+    if ( 'addEventListener' in document ) {
+        elem.addEventListener( type, handler, false );
+    } else {
+        elem.attachEvent( "on" + type, handler );
+    }
+}
+//柯里化，可传入上下文和额外的参数
+//参考JS高级程序设计
+function bind( addEvent, context ) {
+    var slice = Array.prototype.slice;
+    var args = slice.call( arguments,2);
+    return function() {
+        var innerArgs = slice.call( arguments );
+        var finalArgs = args.concat( innerArgs );
+        addEvent.apply( context, finalArgs );
+    }
+}
+//角度值转弧度制
+function angelTraverse( angle ) {
+    return angle * _pi / 180;
+}
+//计算初始相位
+function calPhase( i, n ) {
+    return ( 2 * i - n ) * _pi / (  n );
+}
+//执行
+//小球
+var _star = [
+    $id( "star0" ),
+    $id( "star1" ),
+    $id( "star2" ),
+    $id( "star3" ),
+    $id( "star4" ),
+    $id( "star5" ),
+    $id( "star6" ),
+    $id( "star7" )
+];
+//子项菜单
+var _menu = [
+    $id( "menu0" ),
+    $id( "menu1" ),
+    $id( "menu2" ),
+    $id( "menu3" ),
+    $id( "menu4" ),
+    $id( "menu5" ),
+    $id( "menu6" ),
+    $id( "menu7" )
+];
+//(1)定时器循环
+//setInterval( function() {
+//    updateOffset( _star );
+//}, navConfig.deltaTime );
+//(2)键盘事件
+var timerSignal = null;
+var showTimeSignal = null;
+//初始化
+updateOffset( _menu, _star );
+showMenu( _menu, _star );
+//监听按键事件
+addEvent( document, "keydown", function( evt ){
+    //隐藏子项菜单
+    hideMenu( _menu, _star );
+    //左箭头
+    if ( evt.keyCode == 37 ) {//逆时针
+        //console.log("左箭头");
+        timerSignal = setTimeout( function() {
+            updateOffset( _menu, _star );
+        }, navConfig.deltaTime );
+    } else if ( evt.keyCode == 39 ) {//右箭头 顺时针
+        //console.log("右箭头");
+        timerSignal = setTimeout( function() {
+            updateOffset( _menu, _star, "+" );
+        }, navConfig.deltaTime );
+    }
+});
+//停止转动 清除
+addEvent( document, "keyup", function( evt ){
+    //console.log("队列事件数[" + updateOffset.queueSize + "]");
+    clearTimeout(timerSignal );
+    timerSignal = null;
+});
+</script>
+<!--
+问题:updateOffset.queueSize值不准确,添加统一事件处理,在队列中还在存在改事件实例时，不会被添加进去
+1，方向键按住不放,转动事件添加到队列中
+    1,1 定位事件执行完毕时机暂不能掌握 造成定位元素不符合要求
+    1,2 此时该测试实现中，在每次定位坐标和执行子项菜单的显示，虽然定位准确，但不符合要求
+    1,3 精确更新队列中需要执行的事件数
+-------------
+问题
+1，方向键按住不放,转动事件添加到队列中
+   此时不能精确确定执行当前转动响应时，事件队列是否为空，
+   子项菜单定位不准确，（此时测试的实例中，转动过程中，子项菜单也在显示，不符合要求）
+-->
+</body>
+</html>

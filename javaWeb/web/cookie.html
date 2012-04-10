@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>操作cookie</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+//document.cookie
+//大致的认识
+//构成
+//key=value;key=value;
+//expires;max-age;
+//path;
+//domain;
+//secure;
+//使用
+//设定、更新、删除
+//==============
+//编码 解码
+//function Cookie() {}
+//document.cookie = "key1=" + encodeURIComponent( "@zhng;") + "; max-age=" + (60*60*24*7) + "; path=/";
+//alert( document.cookie );
+function Cookie( name ) {
+    this.$name = name;
+
+    var allCookies = document.cookie;
+    if ( allCookies ) {
+        return;
+    }
+    var cookies = allCookies.split( ";" );
+    var cookie = null;
+    for ( var i = 0; i < cookie.length; i++ ) {
+        //是否匹配传入的name
+        if ( cookies[ i ].substring( 0, name.length + 1 ) == name + "=" ) {
+            cookie = cookies[ i ];
+            break;
+        }
+    }
+    if ( cookie == null ) {
+        return;
+    }
+    var cookieval = cookie.substring( name.length + 1 );
+    var a = cookieval.split( "&" );
+    for ( var i = 0; i < a.length; i++ ) {
+        a[ i ] = a[ i ].split( ":" );
+    }
+    for ( var i = 0; i < a.length; i++ ) {
+        a[ i ][ 0 ] = decodeURIComponent( a[ i][ 1 ] );
+    }
+}
+Cookie.prototype.store = function( daysToLive, path, domain, secure ) {
+
+}
+</script>
+</body>
+</html>

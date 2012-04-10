@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>垂直水平居中</title>
+    <meta charset="utf-8"/>
+    <style>
+        #div {
+            width: 500px;
+            height: 400px;
+            margin:0 auto;
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div id="div"></div>
+<script>
+    var divDom = document.getElementById("div");
+    //document.body.scrollHeighto
+    var bodyHeight = parseInt( document.documentElement.scrollHeight, 10);
+    alert(bodyHeight);
+//    var divHeight = divDom.style.height;
+    var marginTop = (bodyHeight - 200 )/2;
+    alert( marginTop );
+    divDom.style.marginTop = marginTop + "px";
+</script>
+</body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>表单的提交</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<form id="form1" name="form1" onsubmit="">
+    <label for="name">姓名:</label>
+    <input type="text" id="name"/>
+    <select id="one">
+        <option value="1">1</option>
+        <option value="2">2</option>
+    </select>
+    <select id="mul" multiple="multiple">
+        <optgroup label=">>>">
+            <option value="1">1</option>
+            <option value="2">2</option>
+            <option value="3">3</option>
+        </optgroup>
+        <option value="4">4</option>
+        <option value="5">5</option>
+        <option value="6">6</option>
+        <option value="7">7</option>
+        <option value="8">8</option>
+        <option value="9">9</option>
+    </select>
+    <input type="radio" name="radioGroup" value="1" id="r1"/>1
+    <input type="radio" name="radioGroup" value="2" id="r2"/>2
+    <input type="submit" id="submit"  value="提交"/>
+    <input type="button" id="button"  value="点击"/>
+    <button><em>格式化的文本值</em></button><!--怪异地执行了form.onsubmit-->
+</form>
+<!--/并没有什么效果-->
+<a href="http://www.baidu.com" onmouseover="window.status='Help!';return true;">onmouseover return true;stop show the href over the status bar</a>
+<input type="button" value="上下文测试" onclick="direct(this);alert(this.type);"/>
+<script>
+    var form = document.getElementById( "form1" );
+    var submitBtn = document.getElementById( "submit" );
+    var buttonBtn = document.getElementById( "button" );
+    //form的onsubmit句柄触发测试
+    form.onsubmit = function() {//点击执行submit按钮时才会触发
+        alert( "form的onsubmit被触发" );
+    }
+    submitBtn.onclick = function() {
+        alert( "点击提交按钮" );
+        return false;//阻断事件,不触发form的onsubmit方法
+    }
+    buttonBtn.onclick = function() {
+        alert( "普通按钮被点击" );
+    }
+    function direct(o) {
+        alert( o.value ); // button
+        console.dir( this );  //window
+    }
+</script>
+</body>
+</html>

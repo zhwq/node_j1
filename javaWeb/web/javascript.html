@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>javascript</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<input type="button" value="inputButton" id="btn"/>
+<script>
+function $id( id ) {
+    //document.querySelector( id );
+    return document.getElementById( id );
+}
+//person1
+//function Person( name, age, job ) {
+//    this.name = name;
+//    this.age = age;
+//    this.job = job;
+//}
+//person2
+//作用域安全的构造函数
+function Person( name, age,job ) {
+    if ( this instanceof Person ) {
+        this.name = name;
+        this.age = age;
+        this.job = job;
+    } else {
+        return new Person( name, age, job );
+    }
+}
+//构造函数窃取模式的继承+不使用原型链
+function Polygon( sides ) {
+    if ( this instanceof Polygon ) {
+        this.sides = sides;
+        this.getArea = function() {
+            return 0 ;
+        }
+    } else {
+        return new Polygon( sides );
+    }
+}
+function Rectangle( width, height ) {
+    //构造函数窃取
+    Polygon.call( this, 2 );//存在return语句
+    // Rectangle对象是否被增强
+    this.width = width;
+    this.height = height;
+    this.getArea = function() {
+        return this.width * this.height;
+    }
+}
+//var r = new Rectangle( 10, 20 );
+//alert( r.sides );   // undefined
+//alert( r.width );
+//alert( r.getArea() );
+//+使用原型链 需要在实例化之前绑定
+Rectangle.prototype = new Polygon();
+var r2 = new Rectangle( 5, 10 );
+//alert( "[--->]" + r2.sides ); //2
+//js高级程序设计
+function createXHR() {
+    if ( "XMLHttpRequest" in window ) {
+        return new XMLHttpRequest;
+    } else if ( "ActiveXObject" in window )  {
+        var msxml_proid = [
+                "MSXML2.XMLHTTP.6.0",
+                "MSXML2.XMLHTTP",
+                "MSXML2.XMLHTTP.3.0"//不支持readyState 3
+            ],
+            i,len;
+        for ( i = 0, len = msxml_proid.length; i < len; i++ ) {
+            try {
+                new ActiveXObject( msxml_proid[ i ] );
+                arguments.callee.activeXProid = msxml_proid[ i ];
+                break;
+            } catch ( ex ) {
+                //跳过
+            }
+        }
+        return new ActiveXObject( arguments.callee.activeXProid );
+    } else {
+        throw new Error( "No XHR Object available" );
+    }
+}
+//无阻塞加载模式
+//深层嵌套
+//yui2 connection manager                    .
+function xhr() {
+    //msdn ActiveXObject
+    var msxml_proid = [
+        "MSXML2.XMLHTTP.6.0",
+        "MSXML3.XMLHTTP",
+        "Microsoft.XMLHTTP",//不支持readyState 3
+        "MSXML2.XMLHTTP.3.0"//不支持readyState 3
+    ];
+    var xhr = null;
+    try {
+        xhr = new XMLHttpRequest;
+    } catch ( e ) {
+        for ( var i=0, len=msxml_proid.length; i<len; i++ ) {
+            try {
+                xhr = new ActiveXObject( msxml_proid[ i ] );
+                break;//退出循环
+            } catch ( e2 ) {
+                //ignore
+            }
+        }
+    } finally {
+        return xhr;
+    }
+}
+//事件绑定工具
+var EventUtil = {};
+EventUtil.addHandler = function( obj, type, handler ) {
+    //未处理兼容
+    obj.addEventListener( type, handler, false);
+}
+//将函数绑定到一个指定环境
+//function bind( fn, context ) {
+//    return fn.apply( context, arguments ); //此时是直接调用，没有作用
+//}
+function bind( fn, context ) {
+    return function() {
+        return fn.apply( context, arguments );
+    }
+}
+
+//函数绑定 柯里化
+var handler = {
+    message: "Event handled",
+    handleClick: function( event ) {
+        alert( this.message + "==>" + event.type );
+    }
+};
+var btn = $id( "btn" );
+//1
+//EventUtil.addHandler( btn, "click", handler.handleClick ); //undefined
+//2
+//EventUtil.addHandler( btn, "click", function( event ) {
+//    handler.handleClick( event );//使用闭包保存handler.handleClick的环境
+//} );
+//3
+//EventUtil.addHandler( btn, "click", bind( handler.handleClick, handler ) );
+//4 ECMAScript5原生bind方法
+EventUtil.addHandler( btn, "click", handler.handleClick.bind(handler));
+//==>curry
+function curry( fn ) {
+    //数组slice函数
+    var slice = Array.prototype.slice;//[].prototype.slice; undefined
+    //截取参入的函数参数
+    var args = slice.call( arguments, 1 );
+    console.dir( args );
+    return function() {
+        var innerArgs = slice.call( arguments );// slice.call( arguments, 0 );//默认值为0 可不写
+        var finalArgs = args.concat( innerArgs );//TODO:innerArgs.concat( args );这样发生什么
+        console.dir( finalArgs );
+        return fn.apply( null, finalArgs );
+    }    
+}
+//函数绑定 + 柯里化
+//传入额外的参数
+function curryBind( fn, context ) {
+    var slice = Array.prototype.slice;
+    var args = slice.call( arguments, 2 );//第三方参数下标从2开始
+    return function() { //实际调用的函数的引用
+        var innerArgs = slice.call( arguments );
+        var finalArgs = args.concat( innerArgs );
+        return fn.apply( context, finalArgs );
+    }
+}
+function add( x, y ) {
+    return x + y;
+}
+var curriedAdd = curry( add, 5);
+alert( add( 3, 5 ) );
+alert( curriedAdd( 3 ) );
+//函数节流
+var processor = {
+    timeoutId: null,
+    //实际进行处理的函数
+    performProcessing: function() {
+        //实际执行的代码
+    },
+    //初始化处理调用的方法
+    process: function() {
+        clearTimeout( this.timeoutId );
+        var that = this;
+        this.timeoutId = setTimeout( function() {
+            that.performProcessing();
+        }, 100 );
+    }
+};
+//尝试开始执行
+processor.process();
+//throttle简化版
+function throttle( method, context ) {
+    clearTimeout( method.tId );
+    method.tId = setTimeout( function() {
+        method.call( context );
+    }, 100);
+}
+//函数节流测试
+function _m() {
+    console.log( (new Date).getTime() );
+}
+throttle( _m );
+</script>
+</body>
+</html>

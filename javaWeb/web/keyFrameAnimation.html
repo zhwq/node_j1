@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>关键帧动画bug</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        * {
+            magrin: 0px;
+            padding: 0px;
+        }
+
+        .ceshiCSS3 {
+            background-color: #ff0000;
+            width: 160px;
+            height: 160px;
+            -webkit-animation-name: baoguo;
+            -webkit-animation-timing-function: ease-in;
+            -webkit-animation-iteration-count: 1;
+            -webkit-animation-direction: normal;
+            -webkit-transform: rotate(45deg);
+        }
+
+        @-webkit-keyframes baoguo {
+    0% {
+		-webkit-transform:translate(0px,0px) rotate(45deg) scale(1.00,1.00);
+
+    }
+    100% {
+        -webkit-transform:translate(0px,0px) rotate(0deg) scale(1.00,1.00);
+    }
+}
+    </style>
+</head>
+
+<body>
+
+<div class="ceshiCSS3">1</div>
+<div class="ceshiCSS3">2</div>
+<div class="ceshiCSS3">3</div>
+<div class="ceshiCSS3">4</div>
+
+<script type="text/javascript">
+    function playAnimation() {
+        var ceshiCss3 = document.getElementsByTagName("div");
+        for (var i = 0; i < ceshiCss3.length; i++) {
+            if (ceshiCss3[i].className != "ceshiCSS3") continue;
+            ceshiCss3[i].onclick = function () {
+                this.style['-webkit-animation-duration'] = 0.2 + "s";
+                this.style['-webkit-transform'] = "rotate(0deg)";
+            }
+        }
+    }
+    window.addEventListener("load", playAnimation, false);
+</script>
+</body>
+
+</html>

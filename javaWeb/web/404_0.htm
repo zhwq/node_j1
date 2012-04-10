@@ -1,0 +1,81 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<title>404 - 页面不存在</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		.bg {
+			overflow:hidden;
+			position:relative;
+			display: inline-block;
+			background: url("cdn/images/404.jpg") no-repeat transparent;
+			width: 537px;
+			height: 252px;
+			text-align:center;
+			vertical-align:middle;
+			left: 30%;
+			top: 200px;/*使用js定位*/
+		}
+		.msg {
+			overflow:hidden;
+			position:absolute;
+			display:inline-block;
+			left:90px;
+			top:48px;
+			/*width:100%;*/
+			height:32px;
+			line-height:32px;
+		}
+	</style>
+</head>
+
+<body>
+<!-- 
+<div>
+	<div align="center"><h1>您访问的页面不存在.</h1><br>
+		<img src="../images/error.jpg"/>
+	</div>
+</div>
+ -->
+ <div class="bg" id="container">
+ 	<span class="msg">您访问的页面不存在.</span>
+ </div>
+ <script>
+ function $id( id ) {
+ 	if ( 'querySelector' in document ) {
+ 		return document.querySelector( id );
+ 	} else {
+ 		return document.getElementById( id );
+ 	}
+ }
+ function winWH() {
+	var ret = { w:0, h:0 },
+		win = window,
+		doc = win.document,
+		docEl = doc.documentElement;
+	/*		
+	if( 'innerWidth' in win ) {
+		ret.w = win.innerWidth;
+		ret.h = win.innerHeight;
+	} else {
+		if( docEl && 'clientWidth' in docEl ) {
+			ret.w = docEl.clientWidth;
+			ret.h = docEl.clientHeight;
+		}else {
+			ret.w = doc.offsetWidth;
+			ret.h = doc.offsetHeight;
+		}
+	}
+	*/
+	ret.w = ( 'innerWidth' in win )?win.innerWidth:( docEl && 'clientWidth' in docEl)?docEl.clientWidth:doc.offsetWidth;
+	ret.h = ( 'innerHeight' in win )?win.innerHeight:( docEl && 'clientHeight' in docEl)?docEl.clientHeight:doc.offsetHeight;
+	return ret;
+
+};
+ </script>
+</body>
+</html>

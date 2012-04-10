@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>数据解析-json</title>
+    <meta charset="utf-8"/>
+    <style>
+        #con {
+            overflow: hidden;
+            clear:both;
+            display: block;
+            width:172px;
+            height: auto;
+            font-size: 12px;
+            font-family: "\u5b8b\u4f53";/*宋体*/
+            color: black;
+            border: 1px solid black;
+        }
+        #con > .title {
+            overflow: hidden;
+            display: block;
+            width: 100%;
+            height: 19px;
+            line-height: 19px;
+            background-color: #6b91c2;
+            border-bottom: 1px solid #839098;
+            /*padding-left: 3px;*/
+        }
+        #con > ol {
+            height: auto;
+            display: block;
+            overflow: hidden;
+        }
+        #con > ol,#con > ol > li {
+            font-size: 100%;
+            list-style-type: none;
+            margin:0;
+            padding: 0;
+        }
+        #con > ol > li {
+            height: 26px;
+            line-height: 26px;
+            width: 100%;
+            cursor: pointer;
+            padding-left: 3px;
+        }
+        #con > ol > li.odd {
+            background-color: #d8eaff;
+        }
+        #con > ol > li.even {
+            background-color: #e7f2ff;
+        }
+        #con > .more {
+            text-align: right;
+            padding-right: 6px;
+        }
+    </style>
+</head>
+<body>
+<label for="select">下拉选择</label>
+<select id="select">
+    <option value="val">text</option>
+</select>
+<script>    
+var book = {
+                title: "Professional JavaScript",
+                author: [
+                        "Nicholas C. Zakas",
+                        "不存在的第二项"
+                ],
+                edition: 3,
+                year: 2011
+            };
+//EcmaScript5.js支持
+/**
+ @param {Object} value
+ @param {Function} [replacer]
+ @param {Number|String} [space]
+ */
+//JSON.stringify = function(value,replacer,space) {};
+var jsonText = JSON.stringify( book );
+//数组项 键值 过滤
+var jsonTextFilter = JSON.stringify( book, [ "title", "edition" ]);
+//函数项 键值 过滤
+var jsonTextFnFilter = JSON.stringify( book, function( key, value ) {
+    //console.log( key );//?存在空字符串
+    if ( "author" === key ) {//如果是作者，将数组值转换成，分割的字符串
+        return value.join( "," );
+    } else if ( "edition" === key ) {//不序列化该项值
+        return undefined;
+    } else { //默认返回，不可漏掉
+        return value;
+    }
+} );
+//缩进 4 max 10
+var jsonTextIndent = JSON.stringify( book, null, 4 );
+var jsonTextIndent2 = JSON.stringify( book, null, "----" );
+//alert( jsonText );
+//alert( jsonTextFilter );
+//alert( jsonTextFnFilter );
+//alert( jsonTextIndent );
+//alert( jsonTextIndent2 );
+</script>
+<div id="con">
+    <div class="title">标题</div><!--/标题-->
+    <ol>
+        <li class="odd">奇数行</li>
+        <li class="even">偶数行</li>
+        <li class="odd">奇数行</li>
+        <li class="even">偶数行</li>
+    </ol><!--/迭代数据-->
+    <div class="more">更多</div><!--/更多-->
+</div><!--/容器-->
+</body>
+</html>

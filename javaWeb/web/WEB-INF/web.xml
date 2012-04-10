@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns="http://java.sun.com/xml/ns/javaee"
+           xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+		  http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+           version="2.5">
+
+    <context-param>
+        <param-name>contextParam</param-name>
+        <param-value>zhng,zhwq,yh</param-value>
+    </context-param>
+    <servlet>
+        <servlet-name>requestHeader</servlet-name>
+        <servlet-class>org.web.servlet.RequestHeader</servlet-class>
+        <!--/servlet scope params-->
+        <init-param>
+            <param-name>servletParam</param-name>
+            <param-value>servletParamVal</param-value>
+        </init-param>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>requestHeader</servlet-name>
+        <url-pattern>/requestHeader</url-pattern>
+    </servlet-mapping>
+</web-app>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>template</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+    function ImageLoop( imageId, fps, frameUrls ) {
+        this.imageId = imageId;
+        this.frameInterval = 1000/fps;
+        //this.frames = new Array( frameUrls.length );
+        this.frames = [];
+        this.frames.length = frameUrls.length;
+
+        this.image = null;          //the <img> element, looked up by id
+        this.loaded = false;        //whether all frames have loaded
+        this.loadedFrames = 0;      //how many frames have loaded
+        this.startOnLoad = false;   //start animating when done loading?
+        this.frameNumber = -1;      //what frame is currently displayed
+        this.timer = null;          //the return value of setInterval
+
+        // initialize the frames[] and preload the images;
+        for ( var i = 0; i < frameUrls.length; i++ ) {
+            //var _frame = this.frames[ i ];
+            this.frames[ i ] = new Image;
+            //register the load event so we know when the frame is loaded
+            this.frames[ i ].onload = countLoadedFrames;
+            this.frames[ i ].src = frameUrls[ i ];
+        }
+
+        //
+        var loop = this;    //current context
+        function countLoadedFrames() {
+            loop.loadedFrames++;
+            if ( loop.loadedFrames == loop.frames.length ) {
+                loop.loaded = true;
+                if ( loop.startOnLoad ) loop.start();
+            }
+        }
+
+        this._displayNextFrame = function() {
+            loop.frameNumber = ( loop.frameNumber +1 ) % loop.frames.length;//loop display
+            loop.image.src = loop.frames[ loop.frameNumber ].src;
+        }
+    }
+
+    ImageLoop.prototype.start = function() {
+        if ( this.timer != null ) {// already started
+            return;
+        }
+        if ( this.loaded ) {
+            this.startOnLoad = true;
+        } else {
+            if ( !this.image ) {
+                this.image = document.getElementById( this.imageId );
+            }
+            this._displayNextFrame();
+            this.timer = setInterval( this._displayNextFrame, this.frameInterval );
+        }
+    }
+    ImageLoop.prototype.stop = function() {
+        if ( this.timer ) {
+            clearInterval( this.timer );
+            this.timer = null;
+        }
+    }
+    //cookie
+
+</script>
+</body>
+</html>

@@ -1,0 +1,25 @@
+1.请解释一下DOCTYPE的作用，有DOCTYPE和没有DOCTYPE有什么区别？
+
+2.请写出以下css样式的简写形式：
+
+background-color: #333333; background-image:url(XXX.png); bockground-position: left top;
+
+padding:10px 0px 10px 0px;
+
+border-width:2px; border-stype:solid ; border-color:#cc33dd;
+
+3.请说说你对web标准的理解？
+
+4.写一个三栏的布局，要求中间栏最先加载？
+
+5.有一个div宽500px,高400px,怎么让它垂直水平居中？
+
+6.请说说你对web性能优化的理解？
+
+7.请说说web性能优化中js的作用？
+
+8.请用javascript写出B继承A的方法？
+
+9.请谈谈你对闭包的理解，写出一个简单的例子？
+
+10.怎么设置和获得cookie?

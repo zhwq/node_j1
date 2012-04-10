@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>template</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<script>
+    //原生js来表示的ajax过程
+    var xhr = new XMLHttpRequest;
+    xhr.onreadystatechange = function() {
+        //轮询状态码
+        while (xhr.readyState < 4 ) {
+            //loading
+        }
+        if ( xhr.readyState == 4 ) {//返回
+            if ( xhr.status == 200 ) {//成功
+                //callback
+            }
+
+        }
+    }
+    xhr.open("get","url", true);
+    xhr.send(null);
+</script>
+</body>
+</html>
