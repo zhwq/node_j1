@@ -61,7 +61,7 @@ function xhr() {
 	} catch ( e ) {
 		for ( var i=0, len=msxml_proid.length; i<len; i++ ) {
 			try {
-				xhr = new ActiveXObject( msxml_progid[ i ] );
+				xhr = new ActiveXObject( msxml_proid[ i ] );
 				break;//ÍË³öÑ­»·
 			} catch ( e2 ) {
 				//ignore
