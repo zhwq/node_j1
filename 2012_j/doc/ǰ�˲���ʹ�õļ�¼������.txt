@@ -57,4 +57,8 @@ frame1.html
 		</script>
 	</body>
 </html>
-5.
+5.JSON格式数据错误,多一个分隔符,常见于在调用artDialog弹出时传参错误
+var json = {
+  "name":"xx",//此处,多余	
+};
+6.图标整体转动的效果
