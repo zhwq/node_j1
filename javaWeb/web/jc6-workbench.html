@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>jc6 workbench</title>
+    <meta charset="utf-8"/>
+    <!--/reset.css-->
+    <style>
+            /* CSS Document */
+        body, div, dl, dt, dd, ul, ol, li, form, fieldset, legend, input, button, textarea, p, th, td {
+            margin:0;
+            padding:0;
+            font-family:Arial,"宋体";
+        }
+        fieldset, img {
+            border:0
+        }
+        :focus {
+            outline:0
+        }
+        address, caption, cite, code, dfn, th, var, optgroup {
+            font-style:normal;
+            font-weight:normal
+        }
+        abbr, acronym {
+            border:0;
+            font-variant:normal
+        }
+        input, button, textarea, select, optgroup, option {
+            font-family:inherit;
+            font-size:inherit;
+            font-style:inherit;
+            font-weight:inherit
+        }
+        code, kbd, samp, tt {
+            font-size:100%
+        }
+        input, button, textarea, select {
+            *font-size:100%;
+            resize: none;
+        }
+        textarea:focus { outline: none; }
+        body {
+            font-size:12px;
+            line-height:1.5;
+        }
+        ol, ul {
+            list-style:none
+        }
+        table {
+            border-collapse:collapse;
+            border-spacing:0
+        }
+        caption, th {
+            text-align:left
+        }
+            /*sup, sub {
+                font-size:100%;
+                vertical-align:baseline
+            }*/
+        :link, :visited, ins {
+            text-decoration:none
+        }
+        blockquote, q {
+            quotes:none
+        }
+        blockquote:before, blockquote:after, q:before, q:after {
+            content:'';
+            content:none
+        }
+    </style>
+    <!--/workbench.css-->
+    <style>
+    * {margin:0 auto;padding:0;}
+    body{
+        font-family: "宋体", Arial Helvetica, sans-serif;
+        font-size: 12px;
+    }
+    html{
+        scrollbar-arrow-color: #ffffff; /*三角箭头的颜色*/
+        scrollbar-face-color: #e3f1fd; /*立体滚动条的颜色*/
+        scrollbar-3dlight-color: #ffffff; /*立体滚动条亮边的颜色*/
+        scrollbar-highlight-color: #ffffff; /*滚动条空白部分的颜色*/
+        scrollbar-shadow-color: #ffffff; /*立体滚动条阴影的颜色*/
+        scrollbar-darkshadow-color: #ffffff; /*立体滚动条强阴影的颜色*/
+        scrollbar-track-color: #ffffff; /*立体滚动条背景颜色*/
+        scrollbar-base-color:#ffffff; /*滚动条的基本颜色*/
+    }
+    .area1 .more{ float:right; font-weight:500;font-size:12px; text-decoration:none;color:#333333; padding-right:12px;}
+
+        /*------limj modify 2011-09-02----*/
+    .area1{
+        width:100%;
+        float:left;
+        border:1px solid #c3daf9;
+    }
+
+        /*------limj modify 2011-09-02 更改背景图片----*/
+    .area1 .area_tit{
+        font-family: "宋体", Arial Helvetica, sans-serif;
+        font-size: 14px;
+        color: #2F4268;
+        line-height:28px;
+        clear:both;
+        background:url(images/ui-workbench-tit-bg.png) repeat-x;
+        text-indent:12px;
+        border-bottom:1px solid #c3daf9;
+    }
+        /*------limj add 2011-09-06 新增工作台标签页样式----*/
+    .ui-workbench-tab{
+        margin-top:5px;
+        margin-left:12px;
+        font-family: "宋体", Arial Helvetica, sans-serif;
+        font-size:12px;
+        clear:both;
+        height:27px;
+        /*border-bottom:1px solid #cdcdcd;*/
+        position: relative;
+    }
+
+    .ui-workbench-tab dt{
+        text-decoration:none;
+        width:75px;
+        height:28px;
+        line-height:26px;
+        margin-right:5px;
+        float:left;
+        text-align:center;
+        cursor:pointer;
+        display:inline-block;
+        position: relative;
+        margin-top: -1px;
+    }
+
+    .ui-workbench-tab dt span a{
+        color:#000000;
+    }
+
+    .ui-workbench-tab .ui-workbench-tab-active{
+        border:1px solid #cdcdcd;
+        border-bottom: 1px solid #ffffff;
+        font-weight:bold;
+        background-color: #ffffff;
+    }
+
+    .ui-workbench-tab .ui-workbench-tab-normal{
+        border:1px solid #cdcdcd;
+        background-color:#E4E4E4;
+    }
+        /*------end----*/
+
+        /*.area1 .new{ padding:6px 12px; height:110px; background:#FFF;}
+   .area1 .new li{ font-size:12px; height:24px; line-height:24px; list-style-position:inside;list-style:none; margin-left:10px;  }
+   .area1 .new li a{ color:#000; text-decoration:none;}
+   .area1 .new li a:hover{color:#900; text-decoration:underline;}
+   .area1 .new li span{ float:right; color:#999;}*/
+
+    .widget-header strong{
+        font-size:14px;
+        font-weight:700;
+    }
+
+        /*------limj modify 2011-09-02 内容区距顶间距为10px----*/
+    .widget-content {
+        /* 	margin:10px 12px 5px 12px;  */
+        height:230px;
+        padding:2px;      /* 修改图片栏目中iframe的高度和宽度 */
+        padding-top:8px;
+    }
+    .widget-content-min{
+        height:196px;
+    }
+        /*------limj modify 2011-09-02 距顶间距为10px----*/
+    .widget {
+        margin-top:10px;
+        height:253px;    /* 因工作台栏目高度显示太小，将200改为250 */
+    }
+
+        /*------limj modify 2011-09-02 清除宽度和最小高度----*/
+    .widget-place {
+        margin: 0px 10px;
+        padding: 0;
+        /*float: left;*/
+        list-style: none;
+    }
+
+        /* limj 2011-09-01 更改与上下左右的边框距离*/
+    .templateTB {
+        width:100%;
+        text-align:center;
+        table-layout:fixed
+    }
+    .templateTB .head{height:15px;text-align:center;}
+
+        /* limj 2011-09-01 更改表头高度、字体颜色、字体不加粗、下边框设置为虚线*/
+    .templateTB .head th {
+        height:15px;
+        text-align:left;
+        color:#333333;
+        line-height:15px;
+        border-bottom:1px dashed #e3e3e1;
+    }
+        /* limj 2011-09-06 文字居左*/
+    .templateTB tr {
+        width:100%;
+        height:20px;
+        line-height:20px;
+        text-align:left;
+    }
+        /* limj 2011-09-01：更改清除下边框虚线 2011-09-28：清除文字折行*/
+    .templateTB td{
+        padding:0 1px;
+        word-break:break-all;
+    }
+    .templateTB td div{
+        width:100%;
+        white-space:nowrap;
+        overflow:hidden;
+        -o-text-overflow: ellipsis;    /**//* for Opera */
+        text-overflow:ellipsis;
+    }
+
+    .widget-editbox {height: 0px;}
+
+        /*********yanghl 2011-05-18 add 在a标签前加入方块标记*********/
+    .widget-content li{border-bottom:1px dashed #e3e3e1;}
+
+        /***********limj 2011-09-01 更改与上下左右的边框距离************/
+    .widget-content a{
+        background:url(images/black_li.png) no-repeat -6px center;
+        padding-left:10px;
+        color: #333333;
+    }
+    a:hover {
+        text-decoration: underline;
+    }
+    .widget-content span {
+        float: right;
+        color: #999999;
+        margin-right: 5px;
+    }
+    .widget-menu {
+        float:right;
+        text-align: right;
+        padding-right:12px;
+        *margin-top: -30px;/** 在ie7下的兼容性问题的处理 -- 黄卉  2011-11-8**/
+    }
+    .widget-menu a {
+        margin: 0 0 0 0.5em;
+        color: #333333;
+        font-size: 12px;
+    }
+
+        /*
+        .page{ text-align:center; margin-top:1em;}
+        .page a{color:#666; text-decoration:none;}
+        .page a:hover{ color:#900; text-decoration: underline;}
+        .bottom{ clear:both; font-size:12px; color:#000; }
+        .bottom a{ color:#167d18;  text-decoration:none;}
+        .bottom a:hover{ text-decoration:underline;}
+        */
+
+        /*原port.css*/
+        /*
+        .aui_content{width: 100%;}
+        .sourceList li{height:25px;border-bottom: 1px dashed;margin-right: 20px;padding-top: 4px;}
+        .sourceList .infoNo{margin-left: 10px;}
+        .sp_floatR{display:inline; float: right;}
+        .sortUp a{}
+        .sortUp img{cursor: pointer;background:url("../images/portsettingicon.png") no-repeat scroll -23px -50px transparent;height:12px;margin:3px 1px 0 1px;width:12px;}
+        .sortDown img{cursor: pointer;background:url("../images/portsettingicon.png") no-repeat scroll -23px -36px transparent;height:12px;margin:3px 1px 0 1px;width:12px;}
+        .del img{cursor: pointer;background:url("../images/portsettingicon.png") no-repeat scroll 0px 0px transparent;height:14px;margin:3px 1px 0 1px;width:14px;}
+        #partTable td{line-height: 25px;}
+        #sourceList label{float: left;white-space: nowrap;margin-right: 5px;}
+        #sourceList label:hover,#customModuleUl li:hover{background-color: #BFDEFF;}
+        .pLtd{text-align: right;width: 100px;}
+        .close {background: url(../images/port/close.png);}
+        .widget-editlink,.widget-closelink {display:inline-block;width:15px;height:15px;margin: 0 5px;}
+        .widget-closelink{background: url(../images/port/close.png);margin: 0 5px;}
+        .widget-editlink,.widget-editlink:hover{background: url(../images/port/set.png);}
+        .widget-closelink:hover,.widget-editlink:hover {background-position: 0 -15px;}
+        .end_rank{border-top: 1px dashed #CEDAF4;margin-bottom: 10px;}
+
+        .temp .left{float:left;padding-left:12px;}
+        .temp .right{float:right;padding-right:12px;}
+        */
+
+        /**
+        .widget-placeholder {color: #000;margin: 1em;background-color: #ebebeb;}
+        .widget-placeholder {
+            border: #000 dashed 1px;
+        }
+        .widget-menu {
+        }
+        .widget-editbox {}
+        */
+    .ui-workbench-port-set-div {
+        width: 975px;
+    }
+    .ui-workbench-port-column-div {
+        background-color: #F5FAFE;
+        height: 125px;
+        width: 100%;
+        overflow: auto;
+    }
+    .ui-workbench-port-column {
+        background:url(images/port-column-bg.png) repeat-x;
+        border: 1px solid #CFCFCF;
+        color: #333333;
+        line-height:38px;
+        height: 38px;
+        width: 146px;
+        margin-left: 10px;
+        margin-top: 8px;
+        float: left;
+    }
+    .ui-workbench-port-column:hover {
+        background:url(images/port-column-bg-hover.png) repeat-x;
+        border: 1px solid #FF9B06;
+    }
+    .ui-workbench-port-column-fold {
+        background:url(images/port-column-fold.png) repeat;
+        width: 100%;
+        height:15px;    /* 修改滑动图片的width，让其居中平铺 */
+        background-position:center center;
+
+    }
+    .ui-workbench-port-column-expand {
+        background:url(images/port-column-expand.png) repeat;
+        width: 100%;
+        height:15px;     /* 修改滑动图片的width，让其居中平铺 */
+        background-position:center center;
+    }
+    .ui-workbench-add-column-btn {
+        background:url(images/ui-workbench-add-btn.png) no-repeat;
+        line-height:38px;
+        height: 38px;
+        width: 25px;
+        margin-left: 10px;
+        margin-top: 14px;
+        float: left;
+        cursor:hand;
+    }
+    .ui-workbench-port-column-name {
+        float: left;
+        padding-left: 6px;
+        width: 100px;
+        text-overflow:ellipsis;
+        white-space:nowrap;
+        overflow:hidden;
+    }
+    .ui-workbench-port-column-name a {
+        color: #000000;
+        cursor: hand;
+    }
+    .ui-workbench-port-column-option {
+        float: right;
+        text-align: center;
+        margin-right: 6px;
+    }
+    .ui-workbench-port-layout {
+        float: left;
+        margin-left: 30px;
+        height: 78px;
+        width: 105px;
+        background:url(images/ui-workbench-layout.png) repeat-x;
+        border: 1px solid #CFCFCF;
+        text-align: center;
+    }
+    .ui-workbench-port-layout-select, .ui-workbench-port-layout:hover {
+        float: left;
+        margin-left: 30px;
+        height: 78px;
+        width: 105px;
+        text-align: center;
+        background:url(images/ui-workbench-layout-hover.png) repeat-x;
+        border: 1px solid #FF9B06;
+    }
+    .ui-workbench-port-layout-title {
+        width:105px;
+        height:25px;
+        margin-left:30px;
+        padding-top:10px;
+    }
+        /*------limj add 2011-09-14 工作台设置标签页样式----*/
+    .ui-workbench-set-tab{
+        margin-top:5px;
+        font-family: "宋体", Arial Helvetica, sans-serif;
+        font-size:12px;
+        clear:both;
+        height:27px;
+        border-bottom:1px solid #cdcdcd;
+    }
+
+    .ui-workbench-set-tab dt{
+        text-decoration:none;
+        width:75px;
+        height:26px;
+        line-height:26px;
+        margin-right:5px;/*选项卡之间的距离*/
+        float:left;/*选项卡水平排列*/
+        text-align:center;/*文本居中显示-待定*/
+        cursor:pointer;/*手型-可点击*/
+    }
+
+    .ui-workbench-set-tab .ui-workbench-set-tab-active{
+        border-top:1px solid #cdcdcd;
+        border-right:1px solid #cdcdcd;
+        border-left:1px solid #cdcdcd;
+        font-weight:600;
+        border-bottom:1px solid #ffffff;
+    }
+
+    .ui-workbench-set-tab .ui-workbench-set-tab-normal{
+        border-top:1px solid #cdcdcd;
+        border-right:1px solid #cdcdcd;
+        border-left:1px solid #cdcdcd;
+        font-weight:600;
+        background:url(images/ui-workbench-tit-bg.png) repeat-x;
+    }
+        /*------end----*/
+
+
+    .ui-workbench-knowledge-classification-div-info {
+        margin-left: 10px;
+        margin-right: 12px;
+    }
+    .ui-workbench-knowledge-classification-div-info a{
+        background:none;
+    }
+    .ui-workbench-knowledge-classification-div-info  table tr td{
+        width:100%;;
+    }
+
+    .ui-workbench-knowledge-classification-div-info img {
+        text-align: right;
+        heitht:25px;
+        width:25px;
+    }
+    .ui-workbench-knowledge-classification-div-info div.moreinfo{
+        float: left;
+        width: 100%;
+    }
+    .ui-workbench-knowledge-classification-div-info div.title {
+        width: 80%;
+        float: left;
+    }
+    .ui-workbench-knowledge-classification-div-info span.spana {
+        font-size: 14px;
+    }
+    .ui-workbench-knowledge-classification-div-info span.small {
+        font-size: 12px;
+        color: #999999;
+        clear:both;
+        float:none;
+    }
+
+    .ui-workbench-knowledge-classification-div-info div.info {
+        margin-top: 9px;
+        width: 80%;
+    }
+
+    .ui-workbench-knowledge-classification-div-line {
+        clear:both;
+        border: solid 1px #e7e7e7;
+        margin-top: 10px;
+        margin-bottom: 12px;
+        margin-left: 5px;
+        margin-right: 5px;
+    }
+
+    .ui-workbench-knowledge-div-noline {
+        clear:both;
+        border: dashed 1px #ccc;
+        margin-left: 5px;
+        margin-bottom: 10px;
+        margin-top: 20px;
+        margin-right: 5px;
+    }
+    .ui-workbench-knowledge-classification-div-noline-none {
+        clear:both;
+    }
+        /* 门户设置时添加的栏目的标题部分的样式 */
+    .Move{
+        font-family: "宋体", Arial Helvetica, sans-serif;
+        font-size: 14px;
+        color: #2F4268;
+        line-height:28px;
+        clear:both;
+        background:url(images/ui-workbench-tit-bg.png) repeat-x;
+        text-indent:12px;
+        border-bottom:1px solid #c3daf9;
+        font-weight:bold;
+    }
+    .moveBorder{
+        border:1px solid #c3daf9;
+        width:100%;
+        height:250px;
+    }
+
+    </style>
+    <!--/portalSet.css-->
+    <style>
+        .ui-port-headdiv {
+            width:980px;
+            height:230px;
+            margin-top:0px;
+        }
+        .ui-port-imgdiv {
+            width:980px;
+            height:230px;
+            overflow:hidden;
+            float:left;
+            z-index:997;
+        }
+        .ui-port-imgdiv ul li{
+            float: left;
+        }
+        .ui-port-moveleft {
+            margin-left:6px;
+            cursor: hand;
+            float: left;
+            margin-top: 95px;
+            z-index: 998;
+            width: 980px;
+            position: absolute;
+            display: none;
+        }
+        .ui-port-moveright {
+            margin-left: 935px;
+            cursor: hand;
+            float: left;
+            margin-top: 95px;
+            z-index: 998;
+            width: 980px;
+            position: absolute;
+            display: none;
+        }
+        .ui-workbench-left{
+            float:left;
+            width:24px;/*25*/
+            height:27px;
+            background:url(images/workbench-left.jpg) no-repeat transparent;
+            /*border-right: 1px solid #cdcdcd;*/
+            cursor:pointer;
+            display:inline-block;
+        }
+        .ui-workbench-right{
+            float:right;
+            width:24px;/*26*/
+            height:27px;
+            background:url(images/workbench-right.jpg) no-repeat transparent;
+            /*border-left: 1px solid #cdcdcd;*/
+            cursor:pointer;
+            display:inline-block;
+        }
+    </style>
+    <!--/work-show.jsp-->
+    <style>
+        <style type="text/css">
+        .ui-workbench-tab{
+            position:relative;
+            top:0px;
+            width:1000px;
+        }
+        .ui-workbench-main{
+            height:33px;
+            width:100%;
+            border-bottom:1px solid #cdcdcd;
+            position: relative;
+        }
+        .ui-workbench-top{
+            position:relative;
+            overflow:hidden;
+            height:33px;
+            float:left;
+        }
+            /*
+               .ui-workbench-tab {
+                   border-bottom: 0;
+               }
+               .ui-workbench-tab .ui-workbench-tab-active {
+                   margin-top: 1px;
+                   border-bottom:1px solid white;
+               }
+               .ui-workbench-tab .ui-workbench-tab-normal {
+                   height: 27px;
+               }*/
+        .ui-workbench-picture{
+            width:48px;
+            float:right;
+            height:26px;
+            margin-top:5px;
+        }
+        .ui-state-li{
+            margin-top:10px;
+        }
+
+        .container1-13{
+            width:25%;
+            float:left;
+            height:auto;
+            margin-right:10px;
+            margin-left:10px;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        .container2-13{
+            width:72%;
+            float:left;
+            height:auto;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        .container1-31{
+            width:72%;
+            float:left;
+            height:auto;
+            margin-right:10px;
+            margin-left:10px;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        .container2-31{
+            width:25%;
+            float:left;
+            height:auto;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        .container1-121{
+            width:25%;
+            float:left;
+            height:auto;
+            margin-right:10px;
+            margin-left:10px;
+            border:1px solid #ffffff;
+            padding-bottom:30px;
+        }
+
+        .container2-121{
+            width:25%;
+            float:left;
+            height:auto;
+            margin-right:0px;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        .container3-121{
+            display:none;
+            width:46%;
+            float:left;
+            height:auto;
+            margin-right:10px;
+            border:1px solid white;
+            padding-bottom:30px;
+        }
+
+        ul li{
+            list-style-type:none;
+        }
+
+        .moveBorder{
+            border:1px #C3DAF9 solid;
+            width:98%;
+            height:200px;
+        }
+
+        .Move{
+            border-bottom:1px #C3DAF9 solid;
+            background-color:#EBF5FD;
+            width:100%;
+            height:25px;
+            padding-top:7px;
+            cursor:move;
+        }
+
+        ul li span{
+            font-weight:bold;
+            font-size:18px;
+            maigin-top:6px;
+            color:#2F4268;
+        }
+
+        .moveBorder{
+            margin-top:6px;
+        }
+        .widget-header{
+            cursor:move;
+            height:28px;
+        }
+        #main{
+            overflow:hidden;
+        }
+    </style>
+    <!--/单独测试文件-->
+    <style>
+       #single .ui-workbench-tab{
+            margin-top:5px;
+            margin-left:12px;
+            font-family: "宋体", Arial Helvetica, sans-serif;
+            font-size:12px;
+            clear:both;
+            height:27px;
+            position: relative;
+        }
+
+       #single .ui-workbench-tab dt{
+            text-decoration:none;
+            width:75px;
+            height:27px;
+            line-height:26px;
+            margin-right:5px;
+            float:left;
+            text-align:center;
+            cursor:pointer;
+            display:inline-block;
+            position: relative;
+            margin-top: -1px;
+        }
+
+       #single .ui-workbench-tab dt span a{
+            color:#000000;
+        }
+
+       #single .ui-workbench-tab .ui-workbench-tab-active{
+            border:1px solid #cdcdcd;
+            border-bottom: 1px solid #ffffff;
+            font-weight:bold;
+            background-color: #ffffff;
+        }
+
+       #single .ui-workbench-tab .ui-workbench-tab-normal{
+            border:1px solid #cdcdcd;
+            background-color:#E4E4E4;
+        }
+       #single .ui-workbench-main{
+            height:32px;
+            width:100%;
+            border-bottom:1px solid #cdcdcd;
+            position: relative;
+        }
+       #single .ui-workbench-top{
+            position:relative;
+            overflow:hidden;
+            height:33px;
+            float:left;
+        }
+    </style>
+</head>
+<body>
+<div id="single" style="WIDTH: 100%; CLEAR: both; OVERFLOW: hidden" id="mainDiv"><div id="container1" class="ui-sortable container1-121"><div id="part-402898af33f36f4d0133f39ae4bd0014" class="widget movable area1 more" url="../workflow/flow-ins-task!unTaskAll.action" style=""><div class="widget-header area_tit" title=""><strong>办理事项</strong> <span id="402898af33f36f4d0133f39ae4bd0014" class="spanDiv"></span><span class="widget-menu"><a style="DISPLAY: block" id="sss-part-402898af33f36f4d0133f39ae4bd0014" title="" href="../workflow/flow-ins-task!unTaskAll.action" target="_self">更多</a></span></div><div style="DISPLAY: none" class="widget-editbox"></div><div class="ui-workbench-main"><div style="width: 263px; " class="ui-workbench-top"><div id="skanTab-sss-part-402898af33f36f4d0133f39ae4bd0014" class="ui-workbench-tab"><dt class="ui-workbench-tab-active"><span class="state" href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e" url="../workflow/flow-ins-task!unTaskAll.action" content="content-tab-402898af33f36f4d0133f39ae4bd0014" columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a href="javascript:void(0)">我的待办</a></span></dt><dt class="ui-workbench-tab-normal"><span class="state" href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a" url="../workflow/flow-ins-task!edTaskAll.action" content="content-tab-402898af33f36f4d0133f39ae4bd0014" columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a href="javascript:void(0)">我的已办</a></span></dt></div></div><div class="ui-workbench-picture"><span style="display: none; " class="ui-workbench-left"></span><span style="display: none; " class="ui-workbench-right"></span></div></div><div style="overflow: hidden; " id="content-tab-402898af33f36f4d0133f39ae4bd0014" class="widget-content" href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"><table class="templateTB" id="tableId">
+    <tbody><tr class="head">
+        <th style="padding-left:10px;">标题</th>
+        <th style="width:18%;">类型</th>
+        <th style="width:13%;">提交人</th>
+        <th style="width:80px;text-align:center;">提交时间</th>
+    </tr>
+    </tbody></table>
+</div></div><div id="part-402881f3368b83ed01368becaa3d0024" class="widget movable area1 more"><div class="widget-header area_tit" title=""><strong>工作台文字</strong> <span id="402881f3368b83ed01368becaa3d0024" class="spanDiv"></span><span class="widget-menu"><a id="sss-part-402881f3368b83ed01368becaa3d0024" href="undefined" title="" class="" target="_self" style="display:none">更多</a></span></div><div class="widget-editbox" style="display: none; "></div><div class="ui-workbench-main"><div class="ui-workbench-top" style="width: 263px; "><div class="ui-workbench-tab" id="skanTab-sss-part-402881f3368b83ed01368becaa3d0024"><dt class="ui-workbench-tab-active"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../controller/controller.action?id=402881f3368b83ed01368bebe64e0022" columnid="sss-part-402881f3368b83ed01368becaa3d0024"><a href="javascript:void(0)">工作台文字1</a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../controller/controller.action?id=402881f3368b83ed01368bec516d0023" columnid="sss-part-402881f3368b83ed01368becaa3d0024"><a href="javascript:void(0)">工作台文字2</a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../controller/controller.action?id=402881f1368b8d4b01368bd9677f0018" columnid="sss-part-402881f3368b83ed01368becaa3d0024"><a href="javascript:void(0)">国内新闻</a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../common/pictureShow.html"><a href="javascript:void(0)">工作台新图片</a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../common/weather.html"><a href="javascript:void(0)">产品工作台1 </a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402881f3368b83ed01368becaa3d0024" class="state" href="../common/pictureShow.html"><a href="javascript:void(0)">产品工作台2</a></span></dt></div></div><div class="ui-workbench-picture"><span class="ui-workbench-left" style="display: none; "></span><span class="ui-workbench-right" style="display: block; "></span></div></div><div id="content-tab-402881f3368b83ed01368becaa3d0024" class="widget-content" href="../controller/controller.action?id=402881f3368b83ed01368bebe64e0022" style="overflow: hidden; "><table class="templateTB">
+    <!--<tr class='head'style="width:100%;">
+         <th style="padding-left:10px;width:auto;overflow:hidden;"></th>
+         <th style="overflow:hidden;"></th>
+     </tr>-->
+    <tbody><tr class="content" style="height: 20px; line-height: 20px; ">
+        <td style="padding-left:10px;" class="atd"><div><a href="/jc6/portal/info-pub!infoPubView.action?infoPubId=402881f336a00f650136a02ecb250008" target="_blank" style="overflow:hidden;" title="好长的文字">好长的文字</a></div></td>
+        <td style="overflow:hidden;width:70px;"><div style="text-align:right;">2012-04-11</div></td>
+    </tr>
+    <tr class="content" style="height: 20px; line-height: 20px; ">
+        <td style="padding-left:10px;" class="atd"><div><a href="/jc6/portal/info-pub!infoPubView.action?infoPubId=402881f336963966013696a36724000c" target="_blank" style="overflow:hidden;" title="新闻不出来">新闻不出来</a></div></td>
+        <td style="overflow:hidden;width:70px;"><div style="text-align:right;">2012-04-09</div></td>
+    </tr>
+    <tr class="content" style="height: 20px; line-height: 20px; ">
+        <td style="padding-left:10px;" class="atd"><div><a href="/jc6/portal/info-pub!infoPubView.action?infoPubId=402881f3368749140136875012900012" target="_blank" style="overflow:hidden;" title="我的新闻">我的新闻</a></div></td>
+        <td style="overflow:hidden;width:70px;"><div style="text-align:right;">2012-04-06</div></td>
+    </tr>
+    </tbody></table></div></div></div><div style="DISPLAY: block" id="container3" class="container3-121 ui-sortable"><div id="part-402898cb369a192201369a32fc720009" class="widget movable area1 more" style=""><div class="widget-header area_tit" title=""><strong>_图片视频bug</strong> <span id="402898cb369a192201369a32fc720009" class="spanDiv"></span><span class="widget-menu"><a id="sss-part-402898cb369a192201369a32fc720009" href="undefined" title="" class="" target="_self" style="display:none">更多</a></span></div><div class="widget-editbox" style="display: none; "></div><div class="ui-workbench-main"><div class="ui-workbench-top" style="width: 528px; "><div class="ui-workbench-tab" id="skanTab-sss-part-402898cb369a192201369a32fc720009"><dt class="ui-workbench-tab-active"><span content="content-tab-402898cb369a192201369a32fc720009" class="state" href="../common/pictureShow.html" columnid="sss-part-402898cb369a192201369a32fc720009"><a href="javascript:void(0)">_图片</a></span></dt><dt class="ui-workbench-tab-normal"><span content="content-tab-402898cb369a192201369a32fc720009" class="state" href="../common/videoShow.html" columnid="sss-part-402898cb369a192201369a32fc720009"><a href="javascript:void(0)">_视频</a></span></dt></div></div><div class="ui-workbench-picture"><span class="ui-workbench-left" style="display: none; "></span><span class="ui-workbench-right" style="display: none; "></span></div></div><div id="content-tab-402898cb369a192201369a32fc720009" class="widget-content widget-content-min" href="../common/pictureShow.html" style="overflow: hidden; ">
+
+
+    <title>工作台--新闻图片</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+
+
+    <iframe src="../portalwb/portalwb-wb!pictureShow.action" width="100%" height="93%" style="margin: 0" scrolling="no" frameborder="no" border="0" marginwidth="0" marginheight="0" allowtransparency="yes"></iframe>
+
+</div></div><div id="part-402898af33f36f4d0133f39c6a060018" class="widget movable area1" style=""><div class="widget-header area_tit" title=""><strong>天气预报</strong><span id="402898af33f36f4d0133f39c6a060018" class="spanDiv"></span><span class="widget-menu"></span></div><div style="DISPLAY: none" class="widget-editbox"></div><div style="overflow: hidden; " class="widget-content" href="../common/weather.html">
+
+
+    <title>工作台--天气预报</title>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+
+
+    <div style="width:100%;position:relative;height:162px;">
+        <div style="width:100%;position:absolute;height:215px;background:#fff; z-index:100; filter:alpha(opacity=0); moz-opacity:0; opacity:0;"></div>
+        <iframe src="http://www.thinkpage.cn/weather/weather.aspx?uid=&amp;c=CHXX0008&amp;l=zh-CHS&amp;p=CMA&amp;a=1&amp;u=C&amp;s=6&amp;m=0&amp;x=1&amp;d=2&amp;fc=&amp;bgc=&amp;bc=&amp;ti=1&amp;in=1&amp;li=2&amp;ct=iframe" frameborder="0" scrolling="no" width="100%" height="210" style="padding-top:10px;" allowtransparency="true"></iframe>
+
+        <!--<iframe name="weather_inc" src="http://tianqi.xixik.com/cframe/2" style="margin-top:30px;" width="100%" height="70" frameborder="0" marginwidth="0" marginheight="0" scrolling="no"></iframe>
+        -->
+    </div>
+
+</div></div></div><div style="margin-right: 0px; " id="container2" class="ui-sortable container2-121"><div id="part-402898af33f36f4d0133f3913147000d" class="widget movable area1 more" url="../workflow/flow-ins-task!noRead.action?flag=0"><div class="widget-header area_tit" title=""><strong>阅办事项</strong> <span id="402898af33f36f4d0133f3913147000d" class="spanDiv"></span><span class="widget-menu"><a style="DISPLAY: block" id="sss-part-402898af33f36f4d0133f3913147000d" title="" href="../workflow/flow-ins-task!noRead.action?flag=0" target="_self">更多</a></span></div><div style="DISPLAY: none" class="widget-editbox"></div><div class="ui-workbench-main"><div style="width: 263px; " class="ui-workbench-top"><div id="skanTab-sss-part-402898af33f36f4d0133f3913147000d" class="ui-workbench-tab"><dt class="ui-workbench-tab-active"><span class="state" href="../controller/controller.action?id=402898af33f36f4d0133f38f59e5000b" url="../workflow/flow-ins-task!noRead.action?flag=0" content="content-tab-402898af33f36f4d0133f3913147000d" columnid="sss-part-402898af33f36f4d0133f3913147000d"><a href="javascript:void(0)">我的待阅</a></span></dt><dt class="ui-workbench-tab-normal"><span class="state" href="../controller/controller.action?id=402898af33f36f4d0133f38ff69d000c" url="../workflow/flow-ins-task!isRead.action?flag=1" content="content-tab-402898af33f36f4d0133f3913147000d" columnid="sss-part-402898af33f36f4d0133f3913147000d"><a href="javascript:void(0)">我的已阅</a></span></dt></div></div><div class="ui-workbench-picture"><span style="display: none; " class="ui-workbench-left"></span><span style="display: none; " class="ui-workbench-right"></span></div></div><div style="overflow: hidden; " id="content-tab-402898af33f36f4d0133f3913147000d" class="widget-content" href="../controller/controller.action?id=402898af33f36f4d0133f38f59e5000b"><table class="templateTB" id="tableId">
+    <tbody><tr class="head">
+        <th style="padding-left:10px;">标题</th>
+        <th style="width:18%;">类型</th>
+        <th style="width:13%;">交阅人</th>
+        <th style="width:80px;text-align:center;">提交时间</th>
+    </tr>
+    </tbody></table>
+</div></div></div></div>
+<!--/单独测试文件-->
+<div class="widget movable area1 more" id="single2">
+    <div class="ui-workbench-main">
+        <div class="ui-workbench-top" style="width: 420px;">
+            <div class="ui-workbench-tab" style="width: 1000px;">
+                <dt class="ui-workbench-tab-active"><!-- style="margin-top: -1px;"-->
+                    选1
+                </dt>
+                <dt class="ui-workbench-tab-normal">
+                    选2
+                </dt>
+                <dt class="ui-workbench-tab-active"><!-- style="margin-top: -1px;"-->
+                    选1
+                </dt>
+                <dt class="ui-workbench-tab-normal">
+                    选2
+                </dt>
+                <dt class="ui-workbench-tab-active"><!-- style="margin-top: -1px;"-->
+                    选1
+                </dt>
+                <dt class="ui-workbench-tab-normal">
+                    选2
+                </dt>
+                <dt class="ui-workbench-tab-active"><!-- style="margin-top: -1px;"-->
+                    选1
+                </dt>
+                <dt class="ui-workbench-tab-normal">
+                    选2
+                </dt>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+</html>

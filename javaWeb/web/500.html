@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>500</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family:Arial,"宋体";
+            font-size:12px;
+            list-style: none;
+        }
+        body {
+            text-align: center;
+            padding: 10px;
+            overflow: hidden;
+        }
+        .errorBg{
+            background: url("cdn/images/error_bg.png") no-repeat transparent;
+            width: 373px;
+            height: 171px;
+            display: inline-block; /*设定为block chromium下不能左右居中*/
+            margin: auto 0;
+            text-align: left;
+            vertical-align: middle;
+            overflow: hidden;
+            padding: 120px 0 0 206px;
+        }
+        .errorBg > .infoTitle,.errorBg > .infoDetail{
+            display: block;
+            text-align: left;
+            overflow: hidden;
+        }
+        .infoTitle {
+            font-size: 1.65em;
+            font-weight: bold;
+            height: 20px;
+            line-height: 18px;
+        }
+        .infoDetail {
+            margin: 20px 0 0 3px;
+        }
+    </style>
+</head>
+<body>
+<div class="errorBg" style="text-align: left;">
+    <span class="infoTitle">系统出现错误</span>
+    <span class="infoDetail">错误500：服务器错误</span>
+</div>
+</body>
+</html>

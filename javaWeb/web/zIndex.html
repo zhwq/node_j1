@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>定位-层高</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+
+        body {
+            font-size: 12px;
+            font-family: "宋体";
+            overflow: hidden;
+        }
+
+        .pageCenter {
+            margin: 300px auto 0;
+        }
+
+        #container {
+            width: 200px;
+            height: 160px;
+            background-color: gray;
+            padding: 6px 6px 0;
+            border-bottom: 1px solid gray;
+            border: 1px solid black;
+            /*overflow: hidden;*/
+            z-index: 10;
+        }
+
+        .item {
+            width: 30px;
+            height: 159px;
+            display: inline-block;
+            border: 1px solid black;
+            float: left;
+            margin: 0 3px;
+            z-index: 11;
+        }
+
+        .currentItem {
+            background-color: white;
+            border-bottom: 0;
+            margin-top: 1px;
+        }
+        * {margin:0 auto;padding:0;}
+        body{
+            font-family: "宋体", Arial Helvetica, sans-serif;
+            font-size: 12px;
+        }
+        .ui-workbench-tab{
+            position:relative;
+            top:0px;
+            width:1000px;
+        }
+        .ui-workbench-main{
+            height:33px;
+            width:100%;
+            border: 1px solid #cdcdcd;
+        }
+        .ui-workbench-top{
+            position:relative;
+            overflow:hidden;
+            height:33px;
+            float:left;
+        }
+        .ui-workbench-picture{
+            width:48px;
+            float:right;
+            height:26px;
+            margin-top:5px;
+        }
+            /*------limj add 2011-09-06 新增工作台标签页样式----*/
+        .ui-workbench-tab{
+            margin-top:5px;
+            margin-left:12px;
+            font-family: "宋体", Arial Helvetica, sans-serif;
+            font-size:12px;
+            clear:both;
+            height:27px;
+            /*border-bottom:1px solid #cdcdcd;*/
+        }
+
+        .ui-workbench-tab dt{
+            text-decoration:none;
+            width:75px;
+            height:26px;
+            line-height:26px;
+            margin-top: 1px;
+            margin-right:5px;/*选项卡之间的距离*/
+            float:left;/*选项卡水平排列*/
+            text-align:center;/*文本居中显示-待定*/
+            cursor:pointer;/*手型-可点击*/
+        }
+
+        .ui-workbench-tab dt span a{
+            color:#000000;
+        }
+
+        .ui-workbench-tab .ui-workbench-tab-active{
+            border-top:1px solid #cdcdcd;
+            border-right:1px solid #cdcdcd;
+            border-left:1px solid #cdcdcd;
+            font-weight:600;
+            /*border-bottom:1px solid #ffffff;*/
+            background: url( "cdn/images/active.png") no-repeat transparent;
+            margin-bottom: -1px;
+        }
+
+        .ui-workbench-tab .ui-workbench-tab-normal{
+            border-top:1px solid #cdcdcd;
+            border-right:1px solid #cdcdcd;
+            border-left:1px solid #cdcdcd;
+            border-bottom: 0;
+            /*background-color:#E4E4E4;*/
+            background: url( "cdn/images/normal.png") no-repeat transparent;
+        }
+            /*------end----*/
+    </style>
+</head>
+<body>
+<!--<div id="container" class="pageCenter">-->
+    <!--<span class="item currentItem">&nbsp;</span>-->
+    <!--<span class="item">&nbsp;</span>-->
+<!--</div>-->
+<div class="ui-workbench-main">
+    <div style="width: 263px; " class="ui-workbench-top">
+        <div id="skanTab-sss-part-402898af33f36f4d0133f39ae4bd0014" class="ui-workbench-tab">
+            <dt class="ui-workbench-tab-active"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"
+                                                      url="../workflow/flow-ins-task!unTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的待办</a></span></dt>
+            <dt class="ui-workbench-tab-normal"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a"
+                                                      url="../workflow/flow-ins-task!edTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的已办</a></span></dt>
+            <dt class="ui-workbench-tab-active"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"
+                                                      url="../workflow/flow-ins-task!unTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的待办</a></span></dt>
+            <dt class="ui-workbench-tab-normal"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a"
+                                                      url="../workflow/flow-ins-task!edTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的已办</a></span></dt>
+            <dt class="ui-workbench-tab-active"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"
+                                                      url="../workflow/flow-ins-task!unTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的待办</a></span></dt>
+            <dt class="ui-workbench-tab-normal"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a"
+                                                      url="../workflow/flow-ins-task!edTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的已办</a></span></dt>
+            <dt class="ui-workbench-tab-active"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"
+                                                      url="../workflow/flow-ins-task!unTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的待办</a></span></dt>
+            <dt class="ui-workbench-tab-normal"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a"
+                                                      url="../workflow/flow-ins-task!edTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的已办</a></span></dt>
+            <dt class="ui-workbench-tab-active"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f39a56ab000e"
+                                                      url="../workflow/flow-ins-task!unTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的待办</a></span></dt>
+            <dt class="ui-workbench-tab-normal"><span class="state"
+                                                      href="../controller/controller.action?id=402898af33f36f4d0133f38eaf51000a"
+                                                      url="../workflow/flow-ins-task!edTaskAll.action"
+                                                      content="content-tab-402898af33f36f4d0133f39ae4bd0014"
+                                                      columnid="sss-part-402898af33f36f4d0133f39ae4bd0014"><a
+                    href="javascript:void(0)">我的已办</a></span></dt>
+        </div>
+    </div>
+    <div class="ui-workbench-picture"><span style="display: none; " class="ui-workbench-left"></span><span
+            style="display: none; " class="ui-workbench-right"></span></div>
+</div>
+</body>
+</html>
