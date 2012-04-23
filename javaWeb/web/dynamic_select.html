@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>动态修改select的option</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<select id="select">
+    <option value="val1">text#1</option>
+    <option value="val2">text#2</option>
+    <option value="val3">text#3</option>
+</select>
+<input type="button" value="添加" id="addBtn"/>
+<script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+<script>
+    function $id( id ) {
+        //return document.querySelector( id );
+        return document.getElementById( id );
+    }
+    var select = $id( "select" );
+    var addBtn = $id( "addBtn" );
+    addBtn.onclick = function() {
+        //var option = '<option value="val4">text#4</option>';
+        //#1
+        var optionElem = document.createElement( "option" );
+        var optionText = document.createTextNode( "text#4" );
+        optionElem.setAttribute( "value", "val4" );
+        optionElem.appendChild( optionText );
+        select.appendChild( optionElem );
+        //#2简便方法
+        var optionElem2 = new Option();
+        optionElem2.setAttribute( "value", "val#5" );
+        var optionText2 = document.createTextNode( "text#5" );
+        optionElem2.appendChild( optionText2 );
+        select.add( optionElem2, null ); //兼容问题
+        //#3 jquery
+        if ( '$' in window ) {
+            var $option = $('<option value="val6">text#6</option>');
+            $(select).append( $option );
+        }
+        addBtn.onclick = null;
+    };
+</script>
+</body>
+</html>

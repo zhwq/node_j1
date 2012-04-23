@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>
+        标签嵌套（http://evolt.org/node/9953；http://www.nangongruiyang.com/index.php/html/the-nested-html-tags.html）</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            /*font-size: 12px;*/
+        }
+
+        #wzm {
+            line-height: 30px;
+            font-size: 1.25em;
+            padding: 20px;
+            text-align: justify;
+        }
+    </style>
+</head>
+<body>
+<div id="wzm">
+    <p><a title="嵌套规则.jpg" href="http://www.nangongruiyang.com/index.php/attachment/1493/" target="_blank"></a>块级元素和内嵌元素的区别：
+    </p>
+
+    <p>· 块级元素 一般用来搭建网站架构、布局、承载内容……像这些大体力活都属于块级元素的，它包括以下这些标签：</p>
+
+    <p>div、ul、li、dl、dt、dd、h1~h6、p、address……</p>
+
+    <p><!--more--></p>
+
+    <p>· 内嵌元素 一般用在网站内容之中的某些细节或部位，用以“强调、区分样式、上标、下标、锚点”等等，下面这些标签都属于内嵌元素：</p>
+
+    <p>a、span、strong、sub、sup、img……</p>
+
+    <p>&nbsp;</p>
+
+    <p>· 块元素 和 内嵌元素 是可以互相转换的，转换的代码如下：</p>
+
+    <p>display: block; /* 转成块元素 */</p>
+
+    <p>display: inline; /* 转成内嵌元素 */</p>
+
+    <p>· 块元素 和 内嵌元素 对于 CSS 的调用规则是不一样的（这篇文章讨论的是标签嵌套，所以对这个知识点不展开说明）。</p>
+
+    <p>&nbsp;</p>
+
+    <p>简单认识了块元素和内嵌元素以后，下面就可以罗列 XHTML 标签的嵌套规则了：</p>
+
+    <p>1. 块元素可以包含内联元素或某些块元素，但内联元素却不能包含块元素，它只能包含其它的内联元素：</p>
+
+    <p>&lt;div&gt;&lt;h1&gt;&lt;/h1&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt; —— 对<br>
+        &lt;a href=”#”&gt;&lt;span&gt;&lt;/span&gt;&lt;/a&gt; —— 对<br>
+        &lt;span&gt;&lt;div&gt;&lt;/div&gt;&lt;/span&gt; —— 错</p>
+
+    <p>2. 块级元素不能放在&lt;p&gt;里面：</p>
+
+    <p>&lt;p&gt;&lt;ol&gt;&lt;li&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt; —— 错</p>
+
+    <p>&lt;p&gt;&lt;div&gt;&lt;/div&gt;&lt;/p&gt; —— 错</p>
+
+    <p>3. 有几个特殊的块级元素只能包含内嵌元素，不能再包含块级元素，这几个特殊的标签是：</p>
+
+    <p>h1、h2、h3、h4、h5、h6、p、dt。</p>
+
+    <p>4. li 内可以包含 div 标签 —— 这一条其实不必单独列出来的，但是网上许多人对此有些疑惑，就在这里略加说明：</p>
+
+    <p>li 和 div 标签都是装载内容的容器，地位平等，没有级别之分（例如：h1、h2 这样森严的等级制度^_^），要知道，li 标签连它的父级 ul 或者是 ol 都可以容纳的，为什么有人会觉得 li 偏偏容纳不下一个 div
+        呢？别把 li 看得那么小气嘛，别看 li 长得挺瘦小，其实 li 的胸襟很大滴……</p>
+
+    <p>5. 块级元素与块级元素并列、内嵌元素与内嵌元素并列：</p>
+
+    <p>&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;p&gt;&lt;/p&gt;&lt;/div&gt; —— 对<br>
+        &lt;div&gt;&lt;a href=”#”&gt;&lt;/a&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt; —— 对</p>
+
+    <p>&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt; —— 错</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p>&lt;a&gt;标签不能包含其他&lt;a&gt;标签</p>
+
+    <p>&lt;pre&gt;标签不能包含&lt;img&gt;,&lt;object&gt;,&lt;big&gt;,&lt;samll&gt;,&lt;sub&gt;和&lt;sup&gt;标签</p>
+
+    <p>&lt;button&gt;标签不能包含&lt;input&gt;,&lt;select&gt;,&lt;textarea&gt;,&lt;label&gt;,&lt;button&gt;,&lt;form&gt;,&lt;fieldset&gt;,&lt;iframe&gt;和&lt;isindex&gt;标签</p>
+
+    <p>&lt;label&gt;标签不能包含其他&lt;label&gt;标签</p>
+
+    <p>&lt;form&gt;标签不能包含其他&lt;form&gt;标签</p>
+
+    <p>&nbsp;</p>
+
+    <p>&nbsp;</p>
+
+    <p><a title="嵌套规则.jpg" href="http://www.nangongruiyang.com/index.php/attachment/1493/" target="_blank"><img
+            src="http://www.nangongruiyang.com/usr/uploads/2011/08/2346022663.jpg" alt="嵌套规则.jpg"></a></p>
+    <br><span style="color:#f1f1f1;">转载请注明：南宫瑞扬 http://www.nangongruiyang.com</span>
+</div>
+</body>
+</html>

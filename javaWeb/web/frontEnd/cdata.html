@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CDATA Confusion(http://www.flightlab.com/~joe/sgml/cdata.html)</title>
+    <meta name="Creator" content="Cost 2.1a0">
+    <style type="text/css">
+        #sc_drag_area_protector div{
+            border-radius: 0px 0px;
+            margin:0;
+            /*max-width:100%;*/
+            min-width: 1px;
+
+        }
+
+        #sc_drag_area {
+            height:100px;
+            left:150px;
+            position: absolute;
+            top:100px;
+            width:250px;
+            z-index: 9999;
+        }
+        #sc_drag_container {
+            border: 1px solid #0000FF;
+            cursor: move ;
+            height: 100% ;
+            margin: 0;
+            overflow: hidden;
+            padding: 0;
+            position: relative ;
+            width: 100%;
+            z-index:9997;
+        }
+        #sc_drag_area_protector {
+            border-radius: 0px 0px;
+            display: block;
+            height:100%;
+            left:0;
+            top:0;
+            position: absolute;
+            width:100%;
+            z-index:8500;
+            margin: 0;
+
+            min-width: 1px;
+            overflow: hidden;
+        }
+        #sc_drag_size {
+            background-color: rgba(44, 44, 44, 0.5);
+            color:#ffffff;
+            font-family: arial,san-serif;
+            font-weight:bold;
+            font-size:12px;
+            height:18px;
+            min-width:65px !important;
+            left:12px;
+            line-height:18px;
+            position:absolute;
+            padding-left:4px;
+            padding-right:4px;
+            text-align:center;
+            top: -18px;
+            z-index:9998;
+        }
+        #sc_drag_cancel, #sc_drag_crop {
+            background-color: rgba(0, 0, 0, 0.5);
+            cursor:pointer;
+            color:#ffffff;
+            font-size:12px;
+            font-family: arial,san-serif;
+            font-weight:bold;
+            height:22px;
+            line-height:22px;
+            position:absolute ;
+            z-index:9998
+        }
+        #sc_drag_crop {
+            bottom:-25px;
+            text-align: center;
+            right:10px;
+            min-width: 30px !important;
+            padding: 0 10px;
+        }
+        #sc_drag_cancel {
+            bottom:-25px;
+            text-align: center;
+            right:70px;
+            min-width: 30px !important;
+            padding: 0 10px;
+        }
+        #sc_drag_shadow_top, #sc_drag_shadow_bottom, #sc_drag_shadow_left, #sc_drag_shadow_right {
+            background-color: #000000;
+            opacity: 0.5;
+            position: absolute;
+            z-index:7000;
+            border: 0;
+        }
+        #sc_drag_shadow_top {
+            left: 0;
+            top: 0;
+        }
+        #sc_drag_shadow_bottom {
+            bottom: 0;
+            right: 0;
+        }
+        #sc_drag_shadow_left {
+            bottom: 0;
+            left: 0;
+        }
+        #sc_drag_shadow_right {
+            right: 0;
+            top: 0;
+        }
+        #sc_drag_north_east, #sc_drag_north_west, #sc_drag_south_east, #sc_drag_south_west  {
+            border:1px solid #FFFFFF;
+            background-color: #0000FF;
+            height: 5px;
+            position: absolute;
+            width: 5px;
+            z-index:9998;
+        }
+        #sc_drag_north_east {
+            cursor: ne-resize ;
+            right: -4px ;
+            top: -3px;
+        }
+        #sc_drag_north_west {
+            cursor: nw-resize ;
+            left: -3px ;
+            top: -3px;
+        }
+        #sc_drag_south_east {
+            bottom: -4px;
+            cursor: se-resize ;
+            right: -4px ;
+        }
+        #sc_drag_south_west {
+            bottom: -4px;
+            cursor: sw-resize ;
+            left: -3px ;
+        }
+
+        .sc_tip_save_status {
+            position :fixed;
+            border-radius: 4px 4px;
+            height: 30px;
+            line-height: 30px;
+            text-indent: 1em;
+            width: 200px;
+            background: #fff1a8;
+            color: #000000;
+            top:5px;
+            left:45%;
+            font-size: 12px;
+        }
+
+        .sc_tip_save_status a{
+            text-decoration: underline;
+            color: #2A5DB0;
+        }
+    </style>
+</head>
+<body screen_capture_injected="true">
+<h1>CDATA Confusion</h1>
+
+<p>Joe English<br><i>Last updated: Tue Sep 16 10:31:20 PDT 1997</i></p>
+<hr>
+<ul>
+    <li><a href="#SECT1">1 Introduction</a>
+    </li>
+    <li><a href="#SECT2">2 Attribute declared values</a>
+    </li>
+    <li><a href="#SECT3">3 Internal entity declarations</a>
+    </li>
+    <li><a href="#SECT4">4 External entity declarations</a>
+    </li>
+    <li><a href="#SECT5">5 Marked sections</a>
+    </li>
+    <li><a href="#SECT6">6 Element declarations</a>
+    </li>
+</ul>
+<hr>
+<h2><a name="SECT1">1 Introduction</a></h2>
+
+<p>The keyword <samp>CDATA</samp> has (by my count)
+    at least five different meanings in SGML.
+    This tends to cause a great deal of confusion.
+    <samp>CDATA</samp> is commonly misunderstood to mean
+    ``no markup is recognized''
+    or ``verbatim text'', but this is not always the case.
+
+</p>
+
+<h2><a name="SECT2">2 Attribute declared values</a></h2>
+
+<p>Attributes may have <samp>CDATA</samp> as their <em>declared value</em>.
+    For example (from the HTML 2.0 DTD):
+
+</p><pre>&lt;!ATTLIST IMG
+        ...
+        ALT CDATA #IMPLIED
+	...
+&gt;
+</pre>
+<p>This means that the attribute value may contain
+    arbitrary character data (as opposed to an <samp>ID</samp>, a <samp>NAME</samp>
+    or <samp>NAMES</samp>, a <samp>NUMBER</samp>, <samp>NUMBERS</samp>, et cetera.)
+    <samp>CDATA</samp> attributes are not folded to upper case,
+    and are not tokenized like other attribute types.
+</p>
+
+<p>Note that attribute value literals are
+    always parsed as <em>replaceable character data</em>,
+    regardless of the attribute's declared value.
+    This means that references (<samp>&amp;xxx;</samp>, <samp>&amp;#yyy;</samp>)
+    are recognized and replaced in attribute specifications,
+    <em>even for <samp>CDATA</samp> attributes</em>.
+</p>
+
+<p>For example, this HTML fragment:
+</p><pre>    &lt;IMG SRC="eqn1.gif" ALT = "A &amp;lt; B"&gt;
+</pre>
+will be displayed as
+<pre>    A &lt; B
+</pre>
+in a text-mode browser or with image loading turned off
+(assuming the browser is working properly, of course).
+
+<h2><a name="SECT3">3 Internal entity declarations</a></h2>
+
+<p>The second most common source of confusion is in entity declarations:
+
+</p><pre>&lt;!ENTITY amp CDATA "&amp;#38;"	-- ampersand -- &gt;
+</pre>
+<p>Here, the <samp>CDATA</samp> keyword signals that the entity is
+    a <em>character data entity</em> (as opposed to a text entity,
+    or an <samp>SDATA</samp> or <samp>PI</samp> data entity.)
+</p>
+
+<p>In this case, no markup is recognized in the
+    replacement text <em>when the entity is referenced</em>.
+    Note however that character references (<samp>&amp;#nnn;</samp>)
+    and parameter entity references (<samp>%nnn;</samp>)
+    <em>are</em> recognized in parameter literals,
+    so some references are expanded <em>when the entity is declared</em>.
+</p>
+
+<p>For example,
+
+</p><pre>&lt;!ENTITY foo       "BAR"  &gt;
+&lt;!ENTITY e1        "&amp;foo;"&gt;
+&lt;!ENTITY e2  CDATA "&amp;foo;"&gt;
+&lt;!ENTITY e3        "&amp;#38;foo;"  -- &amp;#38; = ampersand or ERO delimiter --&gt;
+&lt;!ENTITY e4  CDATA "&amp;#38;foo;" &gt;
+</pre>
+will be replaced as follows:
+<pre>foo: BAR
+e1: BAR
+e2: &amp;foo;
+e3: BAR
+e4: &amp;foo;
+</pre>
+<p>The entities <samp>e1</samp> through <samp>e4</samp> all have the same replacement text,
+    namely <samp>&amp;foo;</samp>.
+    The difference is that when <samp>e1</samp> and <samp>e3</samp> are referenced,
+    the parser treats the replacement text as if it had
+    appeared in the document directly, so <samp>&amp;foo;</samp>
+    is itself parsed as an entity reference.
+    On the other hand, since <samp>e2</samp> and <samp>e4</samp> are
+    data entities, the parser inserts the replacement text literally.
+
+</p>
+
+<h2><a name="SECT4">4 External entity declarations</a></h2>
+
+<p>External entities may be declared as <samp>CDATA</samp>,
+    with an associated <em>data content notation</em>:
+
+</p><pre>&lt;!NOTATION some-notation SYSTEM&gt;
+&lt;!ENTITY foo1 SYSTEM "foo.sgml"&gt;
+&lt;!ENTITY foo2 SYSTEM "foo.sgml" CDATA some-notation&gt;
+</pre>
+<p>Here, <samp>CDATA</samp> means much the same thing as it does
+    for internal entities: the entity's replacement text
+    is to be treated as literal character data,
+    and the parser does not scan for markup.
+</p>
+
+<p>(In fact, ESIS-producing parsers such as SGMLS don't
+    even examine the content of external data entities at all, and
+    simply report the reference.)
+</p>
+
+<p>External entities may also be declared
+    as <samp>SDATA</samp>, <samp>NDATA</samp>, or <samp>SUBDOC</samp>.
+
+</p>
+
+<h2><a name="SECT5">5 Marked sections</a></h2>
+
+<p><samp>CDATA</samp> may appear a <em>status keyword</em> in a marked
+    section declaration:
+</p><pre>&lt;![ CDATA [  blah, blah, blah. ]]&gt;
+</pre>
+<p>The only markup that is recognized in <samp>CDATA</samp> marked
+    sections is an MSC (]]&gt;) delimiter, which closes
+    the marked section.
+    <samp>CDATA</samp> marked sections are the preferred method for
+    entering ``verbatim text'' in an SGML document.
+</p>
+
+<p>Other marked section status keywords are
+</p>
+<dl>
+    <dt>RCDATA</dt>
+    <dd>Replaceable character data -- recognize references,
+        but not tags or other markup.
+    </dd>
+    <dt>IGNORE</dt>
+    <dd>Skip the marked section entirely.</dd>
+    <dt>INCLUDE</dt>
+    <dd>The opposite of <samp>IGNORE</samp>; useful for making ``conditional text''.</dd>
+    <dt>TEMP</dt>
+    <dd>The same as <samp>INCLUDE</samp>, only different.</dd>
+</dl>
+
+<h2><a name="SECT6">6 Element declarations</a></h2>
+
+<p>Elements may have a declared content of <samp>CDATA</samp>.
+</p>
+
+<p>Don't use this feature if you're designing a DTD.
+    It's evil. In fact, you're better off forgetting about
+    <samp>CDATA</samp> and <samp>RCDATA</samp> declared content altogether;
+    SGML is much less confusing if you ignore them.
+</p>
+
+<p>In case you want to know the whole story,
+    there are five choices for an element's content definition:
+</p>
+<ol>
+    <li>A <em>model group</em>;</li>
+    <li><samp>ANY</samp>;</li>
+    <li><samp>EMPTY</samp>;</li>
+    <li><samp>CDATA</samp>;</li>
+    <li><samp>RCDATA</samp>;</li>
+</ol>
+<p>A model group is the normal case, as in:
+</p><pre>&lt;!ELEMENT letter - - (recipient, salutation, body, closing, (attach|cc)* &gt;
+</pre>
+<p>The other keywords may be used instead of a model group:
+
+</p><pre>&lt;!ELEMENT badnews1	- - CDATA 	&gt;
+&lt;!ELEMENT badnews2	- - RCDATA 	&gt;
+&lt;!ELEMENT stuff		- - ANY		&gt;
+&lt;!ELEMENT nothing	- O EMPTY	&gt;
+</pre>
+<p><samp>CDATA</samp> declared content means that, when the start-tag
+    for that element is seen, the parser switches to a
+    delimiter recognition mode in which no markup is recognized
+    except for a TAGC ("&lt;/") delimiter-in-context.
+    <samp>RCDATA</samp> declared content is similar, except that
+    general entity references and character references are
+    recognized and replaced.
+    In both cases, as soon as the parser encounters a TAGC
+    followed by a name start character, the element ends
+    and the delimiter recognition mode changes back.
+    Note that a TAGC delimiter-in-context always terminates elements
+    with <samp>CDATA</samp> and <samp>RCDATA</samp> declared content,
+    <em>even if it does not begin a valid end-tag for that element</em>.
+</p>
+
+<p><samp>EMPTY</samp> means that the element may not have
+    any content (or an end-tag).
+</p>
+
+<p><samp>ANY</samp> means that the element may contain any subelements
+    or character data, in any order.
+    Exclusion exceptions apply, however, and subelements
+    must be declared in the DTD.
+</p>
+
+<p>Another source of confusion is the distinction between
+    <samp>CDATA</samp> and <samp>RCDATA</samp> <em>declared content</em>
+    and the <samp>#PCDATA</samp> <em>content token</em>:
+
+</p><pre>&lt;!ELEMENT badnews1 - -  CDATA &gt;
+&lt;!ELEMENT phrase   - -	(#PCDATA) &gt;
+&lt;!-- The following means that an OOPS element must contain a
+     single subelement with generic identifier "CDATA":
+--&gt;
+&lt;!ELEMENT oops	   - - (CDATA) &gt;
+&lt;!-- And the following is illegal:
+--&gt;
+&lt;!ELEMENT oops2    - - #PCDATA &gt;
+</pre>
+<p>Notice that the <samp>CDATA</samp>, <samp>RCDATA</samp>, <samp>EMPTY</samp>,
+    and <samp>ANY</samp> keywords do not (and cannot) appear inside a parenthesized
+    model group, and they are not prefixed with an RNI (#) delimiter like
+    <samp>#PCDATA</samp> is.
+</p>
+
+<p><i>[[ (Thanks to Arjun Ray and Marcy Thompson for feedback and
+    clarification.) ]]</i></p></body>
+</html>

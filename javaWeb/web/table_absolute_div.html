@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>表格tr旁边放置绝对定位div</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-align: center;
+            font-family: "宋体" Arial sans-serif;
+            font-size: 12px;
+        }
+        table {
+            width: 100%;
+            min-height: 100px;
+            border: 0;
+        }
+        tr {
+            border: 1px solid red;
+        }
+        tr,td {
+            border-collapse: collapse;
+        }
+        tr {
+            height: 45px;
+        }
+        /*tr:nth-child(2n+1) {
+            background-color: gray;
+        }
+        tr:nth-child(2n) {
+            background-color: #adff2f;
+        }*/
+        tr {
+            background-color: #adff2f;
+        }
+        tr.odd {
+            background-color: gray;            
+        }
+    </style>
+</head>
+<body>
+<table>
+    <tbody>
+        <tr class="odd">
+            <td>1第一列</td>
+            <td>1第二列</td>
+            <td>1第三列
+                <input type="button" value="测试insertAfter" id="jqInsertAfter"/>
+            </td>
+            <div style="width:100px;height:60px;position: absolute;background-color: pink;left:380px;top:96px;z-index: 9;">
+            </div>
+        </tr>
+
+        <tr>
+            <td>2第一列</td>
+            <td>2第二列</td>
+            <td>2第三列</td>
+        </tr>
+        <tr class="odd">
+            <td>3第一列</td>
+            <td>3第二列</td>
+            <td>3第三列</td>
+        </tr>
+        <tr>
+            <td>4第一列</td>
+            <td>4第二列</td>
+            <td>4第三列</td>
+        </tr>
+    </tbody>
+</table>
+<script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+<script>
+
+</script>
+<!--<table>
+    <tbody>
+    <tr class="odd">
+        <td>1第一列</td>
+        <td>1第二列</td>
+        <td>1第三列 <div style="width:100px;height:60px;position: absolute;background-color: pink;left:380px;top:96px;z-index: 9;">
+        </div></td>
+
+    </tr>
+
+    <tr>
+        <td>2第一列</td>
+        <td>2第二列</td>
+        <td>2第三列</td>
+    </tr>
+    <tr class="odd">
+        <td>3第一列</td>
+        <td>3第二列</td>
+        <td>3第三列</td>
+    </tr>
+    <tr>
+        <td>4第一列</td>
+        <td>4第二列</td>
+        <td>4第三列</td>
+    </tr>
+    </tbody>
+</table>-->
+</body>
+</html>

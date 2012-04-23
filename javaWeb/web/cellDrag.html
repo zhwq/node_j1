@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>单元格拖拽</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            text-align: center;
+        }
+
+        body {
+            font-family: "宋体" Arial sans-serif;
+            font-size: 12px;
+            padding: 10px;
+        }
+
+        table {
+            border: 1px solid #fffeee;
+            width: 100%;
+            height: 300px;
+        }
+
+        tr, td {
+            border-collapse: collapse;
+        }
+
+        tr:nth-child(2n) {
+            background-color: #efefef;
+        }
+
+        tr:nth-child(2n+1) {
+            background-color: #fefefe;
+        }
+
+        td:nth-child(1), tr:nth-child(1) {
+            background-color: gray;
+        }
+
+        td {
+            -webkit-user-select: none;
+            /* -webkit-tap-highlight-color: rgba(0,0,0,0);*/
+            -webkit-touch-callout: none;
+        }
+
+        .bgRed {
+            background-color: red;
+        }
+    </style>
+</head>
+<body>
+<table id="table">
+    <tr>
+        <td>（1,1）</td>
+        <td>（1,2）</td>
+        <td>（1,3）</td>
+        <td>（1,4）</td>
+        <td>（1,5）</td>
+        <td>（1,6）</td>
+    </tr>
+    <tr>
+        <td>（2,1）</td>
+        <td>（2,2）</td>
+        <td>（2,3）</td>
+        <td>（2,4）</td>
+        <td>（2,5）</td>
+        <td>（2,6）</td>
+    </tr>
+    <tr>
+        <td>（3,1）</td>
+        <td>（3,2）</td>
+        <td>（3,3）</td>
+        <td>（3,4）</td>
+        <td>（3,5）</td>
+        <td>（3,6）</td>
+    </tr>
+    <tr>
+        <td>（4,1）</td>
+        <td>（4,2）</td>
+        <td>（4,3）</td>
+        <td>（4,4）</td>
+        <td>（4,5）</td>
+        <td>（4,6）</td>
+    </tr>
+</table>
+<input type="button" value="合并" id="mergeTds"/>
+<script src="cdn/js/jquery-1.7.1.js"></script>
+<script>
+    $("td").bind("mousedown", function () {
+        $(this).toggleClass("bgRed");
+    });
+    $("table").bind("mousemove", function (event) {
+        if (event.which === 1) {
+            var $target = $(event.target);
+            if ($target.is("td")) {
+                $target.addClass("bgRed");
+            }
+        }
+    });
+    var $table = $("#table");
+    var $mergeTds = $("#mergeTds");
+    $mergeTds.bind("click", function () {
+        //选中第一个
+        var $allTd = $table.find(".bgRed");
+        var $firstTd = $allTd.filter(":first");
+        var _size = $allTd.size();
+        if ( _size > 1) {
+            //遍历获取总格子数
+            var rowspan = 0, colspan = 0;
+            $allTd.each(function () {
+                var $this = $(this);
+                //如果是第一个格子的同级节点
+
+            });
+            //遍历获取一行的格子数
+            //只横向合并#1
+//        var $sibblings = $firstTd.siblings(".bgRed");
+//        var _size = $sibblings.size() + 1;
+//        $firstTd.removeClass("bgRed").attr( "colspan", _size );
+//        $sibblings.remove();
+            var colspan = $firstTd.siblings(".bgRed").size() + 1;
+            var rowspan = _size / colspan;
+            $firstTd.removeClass("bgRed").attr("rowspan", rowspan).attr("colspan", colspan);
+            $allTd.not(":first").remove();
+        }
+    });
+</script>
+<script>
+/*http://stackoverflow.com/questions/9109247/add-colspan-and-rowspan-on-table-on-the-fly*/
+function prepare() {
+    var row = 0;
+    $('table tr').each(function () {
+        var tr = $(this);
+        var curCol = 0;
+        var caught = $(this).data('caught');
+        $('td', this).each(function (index) {
+            while (caught && caught[curCol])
+                curCol++;
+
+            var colspan = $(this).attr('colspan') || 1;
+            var rowspan = $(this).attr('rowspan');
+
+            $(this).attr('start', curCol);
+            $(this).attr('end', curCol + colspan - 1);
+            $(this).attr('startrow', row);
+            $(this).attr('endrow', row + rowspan - 1);
+
+
+            var next_tr = tr.next();
+            for (var i = 0; i < rowspan - 1; i++) {
+                var curCaught = next_tr.data('caught') || [];
+                for (var j = curCol; j < curCol + colspan; j++)
+                    curCaught[j] = true;
+                next_tr.data('caught', curCaught);
+                next_tr = next_tr.next();
+            }
+
+            curCol += colspan;
+        });
+        row++;
+    })
+}
+function getBoundingRectangle(tds) {
+    var minCol = tds.min(function () {
+        return $(this).attr('start');
+    });
+    var maxCol = tds.max(function () {
+        return $(this).attr('end');
+    });
+
+    var minrow = tds.min(function () {
+        return $(this).attr('startrow');
+    });
+    var maxrow = tds.max(function () {
+        return $(this).attr('endrow');
+    });
+
+    var rec = $('td').filter(function () {
+        var startRow = $(this).attr('startrow');
+        var startCol = $(this).attr('start');
+
+        var endRow = $(this).attr('endrow');
+        var endCol = $(this).attr('end');
+
+        return (startRow >= minrow && startRow <= maxrow && startCol >= minCol && startCol <= maxCol) ||
+                (endRow >= minrow && endRow <= maxrow && endCol >= minCol && endCol <= maxCol);
+    });
+
+    if (rec.length == tds.length) {
+        debugger;
+        var first = rec.filter('[start=' + minCol + '][startrow=' + minrow + ']')
+        rec.not(first).remove();
+        first.attr('colspan', maxCol - minCol + 1);
+        first.attr('rowspan', maxrow - minrow + 1);
+
+        return rec;
+    }
+    else return getBoundingRectangle(rec);
+}
+$.fn.max = function (func) {
+    var arr = this.map(func).toArray();
+
+    return Math.max.apply(Math, arr);
+
+};
+
+$.fn.min = function (func) {
+    var arr = this.map(func).toArray();
+
+    return Math.min.apply(Math, arr);
+
+};
+</script>
+</body>
+</html>

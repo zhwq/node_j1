@@ -1,0 +1,984 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title></title>
+<script type="text/javascript" src="js/jquery-1.3.2.js"></script>
+<script type="text/javascript" src="js/jquery.event.drag-1.5.js"></script>
+<script type="text/javascript">
+$(document).ready(
+        function () {
+			
+			    /*可编辑的类似于excel功能的jQuery开发的表格
+
+				，功能上还有很多的缺陷，望网上的各位牛人大
+				
+				哥们。帮小弟优化一下。并完善其功能，现在可以
+				
+				实现添加或附加行列，删除行和列。简单的合
+				
+				并行或列。现在想将其添加到右键功能上。另外
+				
+				可以像excel那样拖拉选择单元格。还有合并行
+				
+				和列也只能实现简单的行和列的合并。不能交叉
+				
+				合并的。目前的问题还有在 IE低版本上还存在
+				
+				着合并时只将单元格删除没有添加colspan这个
+				
+				属性，不知道是什么情况。
+				
+				本人:笨熊熊 QQ:26732421
+				期待高手指点!
+				
+				*/
+			
+			
+			   //可拖动层
+			   
+				$('#PropertiesList').bind('drag',function( event ){
+					$( this ).css({
+						top: event.offsetY,
+						left: event.offsetX
+						});
+					});
+
+				//可拖动层结束
+			   
+				createTable();
+			
+			   //初始化
+			
+                PageLoad();
+				//生成编号
+				generateID();
+				
+				//插入行
+				insertRow();
+				
+				//删除行
+				deleteRows();
+				
+				//设置属性列表
+				setCellProperties();
+				
+				//保存设置
+				saveSetting();
+				
+				//合并列
+				mergeCols();
+				
+				//取消合并列
+				cancel_colMerge();
+				
+				//插入列
+				addCol();
+				
+				//删除列
+				deleteCol();
+				
+				//附加行
+				appendRow();
+				
+				//附加列
+				appendCoumn();
+        }
+);
+
+//文档加载完成时执行
+function PageLoad() {
+        //表格背景交替换色  //选择时不包含行标列标
+        $("#zebraTable").find("tr").each(
+                function(i){
+                        if(((i+1) % 2) == 1) {
+                                $(this).find("td:not(.colrowTitle)").addClass("trBg");
+                        }
+                        $(this).hover(
+                                function() {
+									    
+                                        $(this).find("td:not(.colrowTitle)").addClass("trHover");
+										//$(this).addClass("trHover");
+                                },
+                                function() {
+                                        $(this).find("td:not(.colrowTitle)").removeClass("trHover");
+										//$(this).removeClass("trHover");
+                                }
+                        )
+                }                 
+        );
+        //单元格可编辑
+        $("#zebraTable").find("td:not(.colrowTitle)").click( //click为单击时可编辑，dblclick为双击时可编辑
+                function() {
+					   $("#0").html($(this).attr("id"));
+					   
+					   	//初始化属性列表
+				        initPropertiesList($(this).attr("id"));
+
+                        if($(this).text() != "") {
+							    
+                                $(this).html("<input type='text' name='editInput' id='editInput' value='" + $(this).text() + "' />");
+                                $(this).find("input").focus();
+                                $(this).find("input").select();
+                                $(this).find("input").blur(
+                                        function() {
+                                                $(this).parent("td").html($(this).val());
+												
+                                        }
+                                );
+                        }
+                }
+        );
+}
+
+//动态生成十行十列的表格开始
+function createTable(){
+	var row=10;
+	var col=10;
+	$("body").append('<table border="0" cellpadding="0" cellspacing="1" bgcolor="#B3D9FF" id="zebraTable">'); //添加一个id为zebraTable的表格
+	for(i=0;i<row;i++){
+		$("#zebraTable").append("<tr></tr>");
+		
+		for(j=0;j<col;j++){
+			if(i==0){//如果是第一行 只有列才有ABCD的变化
+			     if(j==0){
+					 //$("#zebraTable>tbody>tr:eq("+i+")").append('<td class="colrowTitle" name="'+j+'" id="'+j+'">&nbsp;'+j+'</td>');
+					 $("#zebraTable>tbody>tr:eq("+i+")").append('<td class="colrowTitle">&nbsp;'+j+'</td>');
+				  }else{					  
+					 $("#zebraTable>tbody>tr:eq("+i+")").append('<td class="colrowTitle">&nbsp;'+j+'</td>');
+				  }				 
+			
+			}else{
+				//其它行的第一列
+				if(0==j){
+					$("#zebraTable>tbody>tr:eq("+i+")").append('<td class="colrowTitle" name="'+i+'" id="'+i+'">&nbsp;'+i+'</td>');
+				}else{
+					$("#zebraTable>tbody>tr:eq("+i+")").append('<td bgcolor="#FFFFFF" class="trBg" name="'+j+i+'" id="'+j+i+'">&nbsp;</td>');
+				}
+					
+				
+			}
+		}
+	}
+	
+}
+//动态生成十行十列的表格结束
+
+//给列生成编号
+function generateID(){
+	var $rows=$("#zebraTable>tbody>tr");
+	var $cols=$("#zebraTable>tbody>tr:first>td");
+	for(row=0;row<$rows.length;row++){
+		for(col=0;col<$cols.length;col++){
+			if(row==0){//如果是第一行 只有列才有ABCD的变化
+			     if(col==0){
+					 
+					 //alert($("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").length);
+					 $("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").attr({name:col,id:col});
+					
+				  }else{					  
+					$("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").attr({"name":generateColNum(col),"id":generateColNum(col)});
+					$("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").html(""+generateColNum(col));
+				  }				 
+			
+			}else{
+				//其它行的第一列
+				if(0==col){
+					$("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").attr({name:row,id:row});
+					$("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").html(row); //行标号
+					
+				}else{
+					$("#zebraTable>tbody>tr:eq("+row+")>td:eq("+col+")").attr({name:generateColNum(col)+row,id:generateColNum(col)+row});
+					
+				}
+					
+				
+			}
+		}
+	}
+}
+
+function generateColNum(colNum){ //列不能为零的数
+	//取得表格列数 逢26进1 最大值是zz即675列 z*26+z
+	var colBaseNum1=new Array(["0"],["A"],["B"],["C"],["D"],["E"],["F"],["G"],["H"],["I"],["J"],["K"],["L"],["M"],["N"],["O"],["P"],["Q"],["R"],["S"],["T"],["U"],["V"],["W"],["X"],["Y"],["Z"]);
+
+
+	
+    
+		str=jinZhiConvert(colNum);
+		//alert(str);
+		strArr=str.split("-"); //如果尾数是0就给它加一个一
+		if(strArr.length>1){
+		   
+			//把它拼起来
+			var pin="";
+			
+			//只限两位的长度
+			for(i=0;i<strArr.length;i++){
+				pin=pin+colBaseNum1[strArr[i]]
+			}
+			//pin=colBaseNum1[strArr[0]]+colBaseNum1[strArr[1]];
+			
+			//alert(pin);
+			return pin;
+		}else{
+			//长度不大于一 等于一的情况
+			//alert(colBaseNum1[strArr[0]]);
+			return  colBaseNum1[strArr[0]];
+		}
+
+	
+    
+
+	
+	//拼接字符串是一位还是两位
+    
+	
+
+	
+
+	
+	
+}
+
+//递归求某进制数开始
+function jinZhiConvert(number){
+/*	if(number>0){
+		jinZhiConvert(Math.floor(number/26));
+		alert(number%26);
+	}*/  //这种递归方法不太好取值
+	//寻求另外一种方法
+	i=0;
+	result="";
+	while(number>0){
+		//得到余数
+		modNumber = number%27;   //应该是逢0-26代表0、A、B……--Z进一
+		//alert("modNumber="+modNumber);
+		if(result==""){
+			result=modNumber+"";
+		}else{
+			result=modNumber+"-"+result;
+		}
+		
+		//alert("result="+result);
+		i++;
+		number=Math.floor(number/27);
+		//alert("number="+number);
+	}
+	//返回一个字符数组
+	return result;
+	
+}
+//递归求某进制数结束
+
+//------------------------插入行开始---------------------------
+function insertRow(){
+	$("#btn_rowInsert").click(
+							  	function(){
+										
+										if($("#Cell_ID").val()==""){
+											alert("请选择插入点");
+											return false;
+										}
+										//找到行列，确定当前行
+										var cell=$("#Cell_ID").val();
+										//表格有多少列可以确定
+										var $cols=$("#zebraTable>tbody>tr:first>td"); //确定列数
+										
+										html="<tr>"
+										for(i=0;i<$cols.length;i++){
+											if(i==0){
+												html=html+"<td class='colrowTitle'>&nbsp;</td>";
+											}else{
+												html=html+"<td bgcolor='#FFFFFF' class='trBg'>&nbsp;</td>";
+											}
+										}
+										html=html+"</tr>"
+									
+										//得到行列值
+										var r=cell.match(/\d+$/);
+										
+										$("#zebraTable>tbody>tr:eq("+r+")").before(html);
+									
+										
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+											
+									
+								}
+							  
+							  
+							  );
+}
+//----------------------插入行结束--------------------------
+
+//----------------------附加行开始---------------------------
+function appendRow(){
+	$("#appendRow").click(
+						  	function(){
+									   var $cols=$("#zebraTable>tbody>tr:first>td"); //确定列数
+										
+										html="<tr>"
+										for(i=0;i<$cols.length;i++){
+											if(i==0){
+												html=html+"<td class='colrowTitle'>&nbsp;</td>";
+											}else{
+												html=html+"<td bgcolor='#FFFFFF' class='trBg'>&nbsp;</td>";
+											}
+										}
+										html=html+"</tr>"
+									
+										//得到行列值
+										
+										
+										$("#zebraTable>tbody>tr:last").after(html);
+									
+										
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+							}
+						  
+						  );
+}
+//----------------------附加行结束---------------------------
+
+//----------------------删除行开始---------------------------
+function deleteRows(){
+	$("#btn_rowDelete").click(
+							  
+							  function(){
+								  
+								  	if($("#Cell_ID").val()==""){
+											alert("请选择要删除的行");
+											return false;
+										}
+								  cell=$("#Cell_ID").val();
+								  var r=cell.match(/\d+$/);
+								  if($("#zebraTable>tbody>tr").length>2){ //还有表头呢2行
+									  	
+										
+										//alert(r);
+										//选择第r行的tr //只能在尾部添加
+										$("#zebraTable>tbody>tr:eq("+r+")").remove();
+								  }else{
+									  alert("就剩一行啦！还删！");
+									  										
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+										
+									  return false;
+								  }
+								  
+										
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+								  
+							  }
+							  
+							  
+							  
+							  
+							  );
+	
+}
+
+
+//--------------删除行结束------------------
+
+//-------------添加列开始-------------------
+function addCol(){
+	//得到列的位置
+	$("#btn_colInsert").click(
+							  function(){
+							  	//alert("添加列");
+							  	  if($("#Cell_ID").val()==""){
+											alert("请选择要插入的列");
+											return false;
+										}
+								
+								  var cell=$("#Cell_ID").val();
+								  //得到所在列的位置
+								  //得到当前号
+								 var r=cell.match(/\d+$/);
+								 //得到单元格在该行的位置
+								
+								 var colpos=$("#zebraTable>tbody>tr:eq("+r+")>td").index($("td[id="+cell+"]")); //得到列的位置 注意是从0开始的
+								 
+								 //得到tr是多少行，然后在每一行的相应位置添加一个td
+								 var totalRowNumber=$("#zebraTable>tbody>tr").length;
+								 //循环添加TD
+								 for(i=0;i<totalRowNumber;++i){
+									 if(i==0){
+										 $("#zebraTable>tbody>tr:eq("+i+")>td:eq("+colpos+")").before("<td class='colrowTitle'>&nbsp;</td>");
+									 }else{
+									 		$("#zebraTable>tbody>tr:eq("+i+")>td:eq("+colpos+")").before("<td  class='trBg' bgcolor='#FFFFFF'>&nbsp;</td>");
+									 }
+								 }
+								 
+								 	
+									
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+								 
+								 
+								 
+							  }
+							  
+							  );
+	
+	
+	
+	
+}
+//-------------添加列结束--------------------
+
+//----------------附加列开始---------------------
+function appendCoumn(){
+	$("#appendCol").click(
+						  	function(){
+							 					 
+								 //得到tr是多少行，然后在每一行的相应位置添加一个td
+								 var totalRowNumber=$("#zebraTable>tbody>tr").length;
+								 //循环添加TD
+								 for(i=0;i<totalRowNumber;++i){
+									 if(i==0){
+										 $("#zebraTable>tbody>tr:eq("+i+")>td:last").after("<td class='colrowTitle'>&nbsp;</td>");
+									 }else{
+									 	 $("#zebraTable>tbody>tr:eq("+i+")>td:last").after("<td  class='trBg' bgcolor='#FFFFFF'>&nbsp;</td>");
+									 }
+								 }
+								 
+								 	
+									
+									    //--------------添加行添加加列必须的-----------------------
+										//重新初始化格
+										PageLoad();
+										//重新排一下编号
+										generateID();
+										//--------------添加行添加加列必须的-----------------------
+								 
+	
+								
+							
+							}
+						  
+						  );
+}
+//----------------附加列结束---------------------
+
+
+//--------------删除列开始---------
+function deleteCol(){
+		$("#btn_colDelete").click(
+							  function(){
+							  	//alert("添加列");
+							  	  if($("#Cell_ID").val()==""){
+											alert("请选择要删除的列");
+											return false;
+										}
+								  
+								  //表的列数
+								  var totalColNum=$("#zebraTable>tbody>tr:eq(0)>td");
+								  if(totalColNum.length>2){
+									  								  
+								  		var cell=$("#Cell_ID").val();
+								  		//得到所在列的位置
+								  		//得到当前号
+								 		var r=cell.match(/\d+$/);
+								 		//得到单元格在该行的位置
+								
+									 	var colpos=$("#zebraTable>tbody>tr:eq("+r+")>td").index($("td[id="+cell+"]")); //得到列的位置 注意是从0开始的
+								 
+								 
+									 
+										 //得到tr是多少行，然后在每一行的相应位置添加一个td
+											 var totalRowNumber=$("#zebraTable>tbody>tr").length;
+											 //循环添加TD
+											 for(i=0;i<totalRowNumber;++i){
+												 
+													 $("#zebraTable>tbody>tr:eq("+i+")>td:eq("+colpos+")").remove();
+												
+											 }
+										 
+											
+											
+												//--------------添加行添加加列必须的-----------------------
+												//重新初始化格
+												PageLoad();
+												//重新排一下编号
+												generateID();
+											//--------------添加行添加加列必须的-----------------------
+
+									  
+								  }else{
+									  
+											alert("就剩一列啦，别删啦！");
+																						
+													//--------------添加行添加加列必须的-----------------------
+													//重新初始化格
+													PageLoad();
+													//重新排一下编号
+													generateID();
+												//--------------添加行添加加列必须的-----------------------
+											return false;
+								  }
+								 
+		
+								
+								 
+								 
+							  }
+							  
+							  );
+
+}
+//----------------删除列结束-------------
+
+//初始化propertiesList  相应的单元进行初始化处理点
+function initPropertiesList(cell){
+	
+	//alert(cell);
+	$("#Cell_ID").val(cell);
+	
+	
+	$("#propertiesListTable :input[type!=button]not('#Cell_ID')").each(
+														
+												function(){
+																
+																
+																
+																
+																//alert($(this).attr("id"));
+																var PropertiesNames="";
+																PropertiesNames=$(this).attr("id"); //属性名
+																
+																if(typeof($("#"+cell).attr(PropertiesNames))!="undefined"){
+																	//alert("把值设置一下"); //把单元格的相应值放到属性列表中去，
+																	//$(this).attr(PropertiesNames,$("#"+cell).attr(PropertiesNames));
+																	$(this).val($("#"+cell).attr(PropertiesNames));
+																}else{
+																	//没定义的，设置为空
+																	if($(this).attr("type")=="text" && $(this).val()!=cell){
+																		$(this).val("");
+																	}
+																	
+																}
+																
+																
+																//if($("#"+cell).attr(PropertiesNames)){
+//																	$(this).attr(PropertiesNames,$("#"+cell).attr(""+PropertiesNames)); //将选中单元格的内容加到属性列表中去
+//																}
+																
+															}
+														
+														
+														);
+
+   
+	
+}
+
+//结束propertiesList
+//设置单元格的属性开始
+function setCellProperties(){
+	$("#propertiesListTable :input[type!=button]").each(
+														
+														function(){
+															
+															$(this).bind("change",function(){
+																				  		if($("#Cell_ID").val()==""){
+																							//内容为空不做任何处理
+																							return false;
+																						}
+																						//
+																						var cell = $("#Cell_ID").val();
+																						
+																						$("#"+cell).attr($(this).attr("id"),$(this).val());
+																				  		
+																				  
+																				  });
+															
+														}
+														
+																 
+														);
+}
+//设置单元格属性结束
+
+
+
+//保存设置
+function saveSetting(){
+	$("#saveSet").click(
+         function(){
+			var str="<html>"+$("html").html()+"</html>";
+	//alert(str);
+			return str;	 
+			 
+		}
+	);
+}
+//保存设置结束
+
+
+//合并列开始 横向
+function mergeCols(){
+	//位置 合并多少行。规定正数向左合并 负数向右合并
+	$("#btn_colMerge").click(
+							 	function(){
+									
+									//合并列要确定几个因素
+									//所选单元格
+									//合
+									var Cell_ID=$("#Cell_ID").val();
+									if(Cell_ID==""){alert("请选择要合并的目标！");$("#t_ColMerge").val("");$("#t_ColMerge").focus();return false;}
+									//向左或向右移的位移
+									var mergeNumber=$("#t_ColMerge").val(); //合并行合并列
+									if(mergeNumber=="" || mergeNumber==0){alert("请输入要合并的数值！");$("#t_ColMerge").val("");$("#t_ColMerge").focus();return false;}
+									
+									if(isNaN(mergeNumber)){alert("请输入正确的数值");$("#t_ColMerge").val("");$("#t_ColMerge").focus();return false;}
+									
+									//得到当前单元格所在行的td的位置
+									   
+								  		//得到所在列的位置
+								  		//得到当前号
+								 		var r=Cell_ID.match(/\d+$/);
+										
+										
+										//当前位置
+										var colpos=$("#zebraTable>tbody>tr:eq("+r+")>td").index($("td[id="+Cell_ID+"]")); //得到列的位置 注意是从0开始的
+										
+										mergeNumber=parseInt(mergeNumber);
+										//判断是向左还是向右
+										//------------------------------向左合并开始--------------
+										if(mergeNumber<0){
+											//向左 要取成正数
+											
+											mergeNumber=Math.abs(mergeNumber); //最好起一个别的名字，要不得用return false
+											//当前位置减去位移量或合并的目标位置
+											distance = colpos-mergeNumber;
+											
+											
+											
+											if(distance<=0){
+												alert("左移超出范围");
+												$("#t_rowMerge").val("");
+												$("#t_rowMerge").focus();
+												return false;
+											}
+											//如果没超出范围
+											//
+											var colspan=0;
+											//计算跨列值
+											
+											
+											for(i=colpos;i>=distance;--i){
+												//在firefox中取一个表格的colspan的属性如果不存在这个属性默认是（$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").attr("colspan")）的值为undifine 而在ie中取这个属性的值则被认为是1
+												var attrcolspan=$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").attr("colspan");
+												if(attrcolspan==null || attrcolspan=='undefined'){
+													//解决firefox把它当成undefined
+													attrcolspan=1;
+												}
+												colspan=parseInt(colspan)+parseInt(attrcolspan);
+												
+											}
+											
+											//移除相应单元格											
+											for(i=colpos;i>distance;--i){
+												
+												$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").remove();
+											}
+											
+											$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+distance+")").attr("colspan",colspan);
+											$("#Cell_ID").val($("#zebraTable>tbody>tr:eq("+r+")>td:eq("+distance+")").attr("id"));
+											
+											$("#t_ColMerge").val("");
+											
+			                                return false; //结束合并
+
+										}
+										
+										//----------------------向左移动结束--------------------------------------
+										//----------------------向右合并开始--------------------------------------
+										if(mergeNumber>0){
+											
+									     //向右
+										    //最大列编号从零开始
+										 	maxcol=$("#zebraTable>tbody>tr:eq("+r+")>td").index($("#zebraTable>tbody>tr:eq("+r+")>td:last"));
+											//alert("最大列数"+maxcol);
+											//当前位置+移动=目标位置
+											distance = colpos+mergeNumber;
+											
+											//alert(distance);
+											if(distance>maxcol){
+												alert("向右合并超出范围");
+												$("#t_rowMerge").val("");
+												$("#t_rowMerge").focus();
+												return false;
+											}
+											
+											colspan=0;
+											//计算跨列值
+											for(i=colpos;i<=distance;++i){
+												var attrcolspan=$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").attr("colspan");
+												if(attrcolspan==null || attrcolspan=='undefined'){
+													//解决firefox把它当成undefined
+													attrcolspan=1;
+												}
+												colspan=colspan+parseInt(attrcolspan);
+												
+											}
+											
+											//移除相应单元格
+											//保留当前移除剩余
+											
+											//alert(distance);
+											//alert(colpos);
+											for(i=distance;i>colpos;--i){ //应该从后往前删，加不找不到啦！
+												//alert($("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").attr("id"));
+												$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+i+")").remove();
+											}
+											//alert("tt");
+											$("#zebraTable>tbody>tr:eq("+r+")>td:eq("+colpos+")").attr("colspan",colspan);
+											$("#Cell_ID").val($("#zebraTable>tbody>tr:eq("+r+")>td:eq("+colpos+")").attr("id"));
+											
+											$("#t_ColMerge").val("");
+											
+			                                return false; //结束合并
+											
+										 
+										}
+										
+
+								}
+							 
+							 );
+	
+}
+
+////合并列开始 横向 结束
+
+//-------------------------取消列合并开始------------------------
+function cancel_colMerge(){
+	$("#btn_cancel__merge").click(
+								  function(){
+										var Cell_ID=$("#Cell_ID").val();
+										if(Cell_ID==""){alert("请选择要合并的目标！");return false;}
+										//取得前单无格的的colspan的值
+										var colspanNumber = $("#"+Cell_ID).attr("colspan");
+										if(colspanNumber==null || colspanNumber=='undefined'){colspanNumber=1;} //默认为1
+										//alert(colspanNumber);
+										//colspanNumber>1情况
+										//把当前的colspan清为1 在它的后面添加td
+										if(colspanNumber>1){
+											$("#"+Cell_ID).attr("colspan",1); //当前的清成1
+											var html="";
+											for(i=0;i<colspanNumber-1;i++){
+												html=html+"<td bgcolor='#FFFFFF' class='trBg'>&nbsp;</td>";
+											}
+											$("#"+Cell_ID).after(html);
+										}
+										
+										
+										//调整行列编号开始
+													//重新初始化格
+													PageLoad();
+													//重新排一下编号
+													generateID();
+										//调整行列编号结束
+										
+								   }
+								  );
+}
+//-------------------------取消列合并结束------------------------
+</script>
+
+
+
+<link href="css/main.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+<!--
+.coolscrollbar {			scrollbar-arrow-color:yellow;		
+			scrollbar-base-color:lightsalmon;
+}
+.formelementWidth {	width: 154px;
+}
+-->
+</style>
+</head>
+<body>
+
+<div id="PropertiesList" style="width:357px; height:295px; overflow-x:hidden; overflow-y:auto; background:#CCC; position:absolute; float:left; left: 40px; top: 283px; cursor: move;"> <span class="coolscrollbar">
+  <table width="350" border="0" cellpadding="0" cellspacing="0" style="font-size:12px;color: #036;" id="propertiesListTable">
+    <tr>
+      <td align="center">选择对象</td>
+      <td align="center"><select name="select" id="select">
+        <option>Thead</option>
+        <option>Tbody</option>
+        <option>Ttable</option>
+        <option>Tr</option>
+        <option>Td</option>
+        <option>Caption(标题)</option>
+        <option>Cell</option>
+        <option>tbody</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td height="0.5px" colspan="2" align="center"><hr width="90%" align="center" />
+        &nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">名称：</td>
+      <td align="center">值</td>
+    </tr>
+    <tr>
+      <td align="center">ID</td>
+      <td align="center"><label>
+        <input name="Cell_ID" type="text" id="Cell_ID" readonly="readonly" />
+      </label></td>
+    </tr>
+    <tr>
+      <td align="center">插入行</td>
+      <td align="center"><input type="button" name="btn_rowInsert" id="btn_rowInsert" value="插入行" />
+      <input type="button" name="btn_rowDelete" id="btn_rowDelete" value="删除行" />
+      <input type="button" name="appendRow" id="appendRow" value="附加行" /></td>
+    </tr>
+    <tr>
+      <td align="center">插入列</td>
+      <td align="center"><input type="button" name="btn_colInsert" id="btn_colInsert" value="插入列" />
+      <input type="button" name="btn_colDelete" id="btn_colDelete" value="删除列" />
+      <input type="button" name="appendCol" id="appendCol" value="附加列" /></td>
+    </tr>
+    <tr>
+      <td align="center">列合并</td>
+      <td align="center"><input name="t_ColMerge" type="text" class="charuhebing" id="t_ColMerge" />
+      <input type="button" id="btn_colMerge" value="列合并"/></td>
+    </tr>
+    <tr>
+      <td align="center">取消行合并</td>
+      <td align="center"><input type="button" name="btn_cancel__merge" id="btn_cancel__merge" value="取消列合并" /></td>
+    </tr>
+    <tr>
+      <td align="center">行合并</td>
+      <td align="center"><input name="t_RowMerge" type="text" class="charuhebing" id="t_RowMerge" />
+      <input type="button" name="btn_RowMerge" id="btn_RowMerge" value="合并列" /></td>
+    </tr>
+    <tr>
+      <td align="center">取消列合并</td>
+      <td align="center"><input type="button" name="concel_col_merge" id="concel_col_merge" value="取消列合并" /></td>
+    </tr>
+    <tr>
+      <td align="center">PropertyName</td>
+      <td align="center"><input type="text" name="PropertyName" id="PropertyName" /></td>
+    </tr>
+    <tr>
+      <td align="center">PropertyText</td>
+      <td align="center"><input type="text" name="PropertyText" id="PropertyText" /></td>
+    </tr>
+    <tr>
+      <td align="center">ProperyType</td>
+      <td align="center"><select name="ProperyType" class="formelementWidth" id="ProperyType">
+      </select></td>
+    </tr>
+    <tr>
+      <td align="center">Editable</td>
+      <td align="center"><select name="Editable" class="formelementWidth" id="Editable">
+        <option value="yes">yes</option>
+        <option value="no">no</option>
+      </select></td>
+    </tr>
+    <tr>
+      <td align="center">InputType</td>
+      <td align="center"><select name="InputType" class="formelementWidth" id="InputType">
+      </select></td>
+    </tr>
+    <tr>
+      <td align="center">SourceType</td>
+      <td align="center"><select name="SourceType" class="formelementWidth" id="SourceType">
+      </select></td>
+    </tr>
+    <tr>
+      <td align="center">SourceValue</td>
+      <td align="center"><input type="text" name="SourceValue" id="SourceValue" /></td>
+    </tr>
+    <tr>
+      <td align="center">RegularExpression</td>
+      <td align="center"><input type="text" name="RegularExpression" id="RegularExpression" /></td>
+    </tr>
+    <tr>
+      <td align="center">Expression</td>
+      <td align="center"><input type="text" name="Expression" id="Expression" /></td>
+    </tr>
+    <tr>
+      <td align="center">initValue</td>
+      <td align="center"><input type="text" name="initValue" id="initValue" /></td>
+    </tr>
+    <tr>
+      <td align="center">SpecialCol</td>
+      <td align="center"><input type="text" name="SpecialCol" id="SpecialCol" /></td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center">&nbsp;</td>
+      <td align="center">&nbsp;</td>
+    </tr>
+    <tr>
+      <td align="center"><input name="saveSet" type="button" id="saveSet" value="保存设置" /></td>
+      <td align="center"><input type="button" name="Concel" id="Concel" value="取消设置" /></td>
+    </tr>
+  </table>
+  
+</span></div>
+</body>
+</html>

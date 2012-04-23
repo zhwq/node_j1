@@ -1,0 +1,48 @@
+@charset "utf-8";
+* {
+        margin: 0px;
+        padding: 0px;
+}
+.trBg {
+        background-color: #ECF5FF;
+}
+.trHover {
+        background-color: #62B0FF;
+        color: #FFFFFF;
+}
+body {
+        margin: 20px;
+        font-family: Arial, "";
+        font-size: 12px;
+        line-height: 20px;
+        color: #333333;
+}
+#zebraTable td {
+        padding: 2px;
+        width: 100px;
+}
+#zebraTable td input {
+        border: 1px dashed #CCCCCC;
+        width: 95%;
+}
+.colrowTitle{
+	background-color: #d6d6d6;
+	border-top-width: 0.2px;
+	border-right-width: 0.2px;
+	border-bottom-width: 0.2px;
+	border-left-width: 0.2px;
+	border-top-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-left-style: solid;
+	font-size: 12px;
+	color: #000;
+	font-weight: bold;
+	text-align: center;
+}
+.charuhebing {
+	width: 106px;
+}
+.concel {
+	width: 75px;
+}

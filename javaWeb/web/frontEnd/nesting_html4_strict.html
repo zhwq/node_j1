@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en-US">
+<head>
+    <title>
+        Allowed nesting of elements in HTML 4 Strict (and XHTML 1.0 Strict)
+    </title>
+    <meta name="description" content="A quick reference to the syntax rules of the Strict
+versions of HTML 4.01 and XHTML 1.0.">
+
+    <link rel="Stylesheet" href="basic.css">
+    <style type="text/css"><!--
+    .legend {
+        font-size: 80%;
+        font-family: Verdana, Arial, Helvetica, sans-serif;
+        margin-left: 20%;
+        border: inset #0f0 0.1ex;
+        padding: 0.3ex
+    }
+
+    .legend h2 {
+        margin-bottom: 0;
+        font-size: 100%;
+    }
+
+    --></style>
+    <style type="text/css"></style>
+</head>
+
+<body screen_capture_injected="true">
+
+<h1>
+    Allowed nesting of elements in HTML&nbsp;4 Strict (and XHTML&nbsp;1.0 Strict)
+</h1>
+
+<div class="legend">
+    <h2>Legend</h2>
+    <ul>
+        <li>An uppercase word stands for the corresponding element.
+            (Note that by
+            <a href="http://www.w3.org/TR/xhtml1/" title="XHTML 1.0: The Extensible HyperText Markup Language">XHTML</a>
+            rules, element names must be written in
+            lower case, e.g. <code>&lt;html&gt;</code>, not
+            <code>&lt;HTML&gt;</code>.)
+        </li>
+        <li>A lowercase word is a term which
+            describes a collection of HTML elements.
+        </li>
+        <li>Each entry is followed by a list of elements which
+            may appear within the elements specified by the entry.
+            If there is no such list, no nested elements are allowed.
+            This means that only text (#PCDATA, see next item) is allowed inside
+            the element; but if the note <i>(empty)</i> is given, it means that
+            no content whatsoever is allowed.
+            However, for <strong>flow</strong>, <strong>inline</strong>,
+            <strong>block</strong>,
+            <strong>OBJECT</strong>, and <strong>BODY</strong>
+            the allowed contents are described separately under the main entries for them.
+        </li>
+        <li><a href="http://www.webreference.com/dlab/books/html/3-5.html#3-5-2-2">#PCDATA</a> means "parsed character
+            data", which is plain text
+            (without HTML tags,
+            but "<a href="../HTML3.2/3.10.html#esc">escape sequences</a>"
+            such as <code>&amp;auml;</code> and
+            <nobr><code>&amp;#228;</code></nobr>
+            are allowed)
+        </li>
+        <li><a href="http://www.w3.org/TR/html4/types.html#type-cdata">CDATA</a> means "character data", which is plain
+            text where even
+            "escape sequences" aren't interpreted;
+            for a much better explanation, see the article
+            <cite><a href="http://www.flightlab.com/~joe/sgml/cdata.html">CDATA Confusion</a></cite>
+            by <a href="http://www.flightlab.com/~joe/">Joe&nbsp;English</a>
+        </li>
+        <li><i>excluding</i> ... means that the element must not contain
+            any of the listed elements, directly or indirectly.
+        </li>
+    </ul>
+</div>
+
+<p>
+    HTML
+</p>
+<ul>
+<li>
+    <a name="head">HEAD</a>
+    <ul>
+        <li>
+            TITLE <i>(required)</i>
+        </li>
+        <li>
+            SCRIPT, STYLE
+            <ul>
+                <li>
+                    CDATA
+                </li>
+            </ul>
+        </li>
+        <li>
+            BASE, META, LINK <i>(empty)</i>
+        </li>
+        <li><a href="#object">OBJECT</a> <i>(see content model below)</i>
+        </li>
+    </ul>
+</li>
+<li>
+    <a name="body">BODY</a>
+    <ul>
+        <li> INS, DEL <i>(<a href="http://www.w3.org/TR/REC-html40/struct/text.html#edef-del">special rules</a>
+            apply)</i>
+            <ul>
+                <li><strong><a name="flow">flow</a></strong>
+                    <ul>
+                        <li> block
+                        </li>
+                        <li> inline
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </li>
+        <li>
+            SCRIPT
+            <ul>
+                <li>
+                    CDATA
+                </li>
+            </ul>
+        </li>
+        <li>
+            <strong>block</strong>
+            <ul>
+                <li>
+                    P, H1, H2, H3, H4, H5, H6
+                    <ul>
+                        <li><strong>inline</strong>
+                            <ul>
+                                <li>
+                                    #PCDATA
+                                </li>
+                                <li>
+                                    TT, I, B, BIG, SMALL,
+                                    EM, STRONG, DFN, CODE, SAMP, KBD, VAR, CITE, ABBR, ACRONYM,
+                                    SUB, SUP, Q, SPAN, BDO
+                                    <ul>
+                                        <li>
+                                            inline
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    A
+                                    <ul>
+                                        <li>
+                                            inline <i>excluding an enclosed A element</i>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li><a name="object">OBJECT</a>
+                                    <ul>
+                                        <li>PARAM <i>(empty)</i>
+                                        </li>
+                                        <li>flow
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    IMG, BR <i>(empty)</i>
+                                </li>
+                                <li>
+                                    SCRIPT
+                                    <ul>
+                                        <li>
+                                            CDATA
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    MAP
+                                    <ul>
+                                        <li>
+                                            AREA <i>(empty)</i>
+                                        </li>
+                                        <li> block
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    INPUT <i>(empty)</i>
+                                </li>
+                                <li>
+                                    SELECT
+                                    <ul>
+                                        <li>OPTGROUP
+                                            <ul>
+                                                <li>
+                                                    OPTION
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li>
+                                            OPTION
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    TEXTAREA
+                                </li>
+                                <li>LABEL
+                                    <ul>
+                                        <li>LABEL <i>excluding enclosed LABEL</i></li>
+                                    </ul>
+                                </li>
+                                <li>BUTTON
+                                    <ul>
+                                        <li>flow <i>excluding A, INPUT, SELECT, TEXTAREA, LABEL, BUTTON,
+                                            FORM, FIELDSET</i></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    UL, OL
+                    <ul>
+                        <li>
+                            LI
+                            <ul>
+                                <li>
+                                    flow
+                                </li>
+                            </ul>
+
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    DL
+                    <ul>
+                        <li>
+                            DT
+                            <ul>
+                                <li>
+                                    inline
+                                </li>
+                            </ul>
+                        </li>
+                        <li>
+                            DD
+                            <ul>
+                                <li>
+                                    flow
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    PRE
+                    <ul>
+                        <li>
+                            inline <i>excluding
+                            IMG, OBJECT, BIG, SMALL, SUB, SUP</i>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    DIV
+                    <ul>
+                        <li>
+                            flow
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    BLOCKQUOTE
+                    <ul>
+                        <li> block
+                        </li>
+                        <li> SCRIPT
+                            <ul>
+                                <li> CDATA
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    NOSCRIPT
+                    <ul>
+                        <li>
+                            flow
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    FORM
+                    <ul>
+                        <li>
+                            block <i>excluding an enclosed FORM</i>
+                        </li>
+                        <li> SCRIPT
+                            <ul>
+                                <li> CDATA
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    HR <i>(empty)</i>
+                </li>
+                <li>
+                    TABLE
+                    <ul>
+                        <li>
+                            CAPTION
+                            <ul>
+                                <li>
+                                    inline
+                                </li>
+                            </ul>
+                        </li>
+                        <li> COLGROUP
+                            <ul>
+                                <li> COL <i>(empty)</i></li>
+                            </ul>
+                        </li>
+                        <li> COL <i>(empty)</i>
+                        </li>
+                        <li> THEAD, TBODY, TBODY
+                            <ul>
+                                <li>
+                                    TR
+                                    <ul>
+                                        <li>
+                                            TH, TD
+                                            <ul>
+                                                <li> flow
+                                                </li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    ADDRESS
+                    <ul>
+                        <li> inline
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    FIELDSET
+                    <ul>
+                        <li>#PCDATA
+                        </li>
+                        <li>
+                            inline
+                        </li>
+                        <li>flow
+                        </li>
+                        <li>LEGEND
+                            <ul>
+                                <li>inline
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+        </li>
+    </ul>
+</li>
+</ul>
+
+<hr title="Information about this document">
+
+<p>The information here is based on the
+    DTDs, basically the
+    <a href="http://www.w3.org/TR/1999/REC-html401-19991224/sgml/dtd.html">Strict DTD</a>,
+    in the
+    <a href="http://www.w3.org/TR/1999/REC-html401-19991224/">1999-12-24 version</a>
+    of the
+    <cite><a href="http://www.w3.org/TR/html401">HTML 4.01 Specification</a></cite>.</p>
+
+<p><a name="xhtml">Note that</a>
+    <a href="http://www.w3.org/TR/xhtml1/"
+       title="XHTML 1.0: The Extensible HyperText Markup Language">XHTML&nbsp;1.0</a> is, as its subtitle says,
+    "A Reformulation of HTML 4 in XML 1.0", so the nesting rules
+    are the same as in HTML 4.01. However, there are the following
+    differences that affect the nesting rules:
+</p>
+<ul>
+    <li>The content
+        of <code>script</code> and <code>style</code> elements is
+        CDATA in HTML&nbsp;4 but #PCDATA in XHTML.
+    </li>
+    <li>In XHTML, a <code>table</code> element may have a <code>tr</code>
+        element as its direct constituent. In HTML 4.01, that's not
+        allowed, but note that since the start and end tags of a <code>tbody</code>
+        element are omissible in HTML 4.01, this is not a big difference.
+        However, note that when a <code>table</code> element directly contains
+        a <code>tr</code> element, an intervening <code>tbody</code> element
+        is implied by HTML 4.01 rules but not
+        by XHTML rules, and this matters e.g. when you have a style sheet
+        which uses <code>tbody</code> as a selector.
+    </li>
+</ul>
+<p>Moreover, some of the
+    restrictions on nesting are <em>expressed</em> differently;
+    due to metalanguage differences, some limitations are described in prose
+    only in the XHTML specification, and this implies that a
+    <a href="http://www.htmlhelp.com/faq/html/all.html#error-check">validator</a> will not catch such violations of the
+    limitations
+    when validating against XHTML DOCTYPE but will catch them when an
+    HTML DOCTYPE is used.
+    See section
+    <cite><a href="http://www.w3.org/TR/xhtml1/#diffs">Differences with HTML&nbsp;4</a></cite>
+    in the <cite>XHTML&nbsp;1.0 Specification</cite>.</p>
+
+<p><a title="ISO 8601, the date and time representation standard" href="../iso8601.html">
+    Date</a> of last update: 2001-04-06
+</p>
+
+<p>Interested in related documents? See
+    <a href="../www.html">a list of documents about WWW</a>
+    written or recommended by me.</p>
+
+<p>Specifically, this document has a sister:
+    <cite><a href="nesting.html">Allowed nesting of elements in HTML 4 (and XHTML 1.0)</a></cite>,
+    which describes the rules for the Transitional and Frameset versions.</p>
+
+<address>
+    <a href="../">Jukka Korpela</a>.
+</address>
+
+
+</body>
+</html>
