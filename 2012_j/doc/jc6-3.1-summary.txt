@@ -1,0 +1,62 @@
+----------------------------------------
+浏览器的显示差异:
+1,form表单控件(主要体现)
+/1.1,文本框(text)
+1.2,文本域(textarea可拉伸)
+/1.3,单选(radio)
+/1.4,复选(checkbox)
+/1.5,下拉(select)
+1.6,文件(file)
+	1.6.1,在不同浏览器下实现视觉差异最大
+	1.6.2,由于安全性,在非IE下获取的file的值不严格和被上传的文件相同,参考(签章管理签章预览实现)
+2,浏览器的默认行为
+	2.1,alt+点击a标签,在firefox下会触发下载资源
+	2.2,:text失去焦点时,在某些版本firefox(12)下会给添加box-shadow
+3,doctype(需要特别注意)
+	3.1,doctype需要放置在文件的第一行
+	3.2,由于系统兼容ipad下的脚本eddyScroll需要获取到滑动容器节点的clientHeight,
+	在多数添加滚动条不成功的场景中,大多由于clientHeight的取值和预想的不对
+	(具体可查看eddyScroll.js中方法_scrollbar)
+4,文本是否可选中(具体可查看我的日记中的挂历部分的控制)
+5,(fx 允许脚本关闭浏览器窗口)ff,about:config,dom.allow_scripts_to_close_windows,true
+----------------------------------------
+浏览器的兼容基础
+1,不允许在页面中出现id值一样的元素(在有动态更新html结构中常见)
+2,document.all
+IE下document.all获取到的是页面中节点的结合,然后可通过id或者name值获取到对应的节点对象
+在公文模块中的实现常见
+使用document.getElementById("idVal");或者$("#idVal")这种方式实现
+3,请注意缓存在当前上下文种常用的节点对象,此时改节点的js变量和html结构dom树中的节点是有双向联系的
+在公文模块中,常见多余重复的获取过程,爬树可是很累,消耗很大的
+4,日期的获取年份(new Date).getFullYear();(getYear方法已废弃,在w3c浏览器中获取的值为当前年-1900)
+5,给节点赋予的css属性,比如width，需要携带单位(常用的为px),否则,在某些浏览器上的解析会不正常的,
+在js/util/common.js中的提供的某些公用控件中就有此问题
+6,属性的获取
+有两种方式,1>.name,2>getAttribute("name")
+注意,.属性名的方式获取属性值时,需要该属性是原生,浏览器自带的,自定义的属性值在获取时是取不到的
+(比如,1.2流程中的传阅选择时li.name就获取不到)
+7,字数限制(onpropertychange方法只是在IE上工作正常)，替代的可使用onkeyup事件(可参考费用,日记模板等的实现)
+8,注意原生js的属性和方法,jQuery对象的方法(很多错误由此来)
+9,事件：
+9.1事件
+IE下的事件event是放置在顶级对象window下的
+w3c事件中,需要在函数调用中显示传入
+9.2事件对象,event.srcElement;event.target;
+9.3三种事件绑定方式
+9.3.1 onclick="fnName(this)"
+9.3.2 document.getElementById("idVal").onclick = fn;
+9.3.3 事件监听
+10,slideToggle的回调（日记批示）
+-------------------------------------
+ipad滑动:
+1,doctype(需要特别注意)
+	1.1,doctype需要放置在文件的第一行
+	2.2,由于系统兼容ipad下的脚本eddyScroll需要获取到滑动容器节点的clientHeight,
+	在多数添加滚动条不成功的场景中,大多由于clientHeight的取值和预想的不对
+	(具体可查看eddyScroll.js中方法_scrollbar)
+2,frameset ... frame
+frameset下的frame及子iframe的滚动js中配置的useTransform:false(不能使用true的配置,会绝对定位 从而错位：ios4及以下)
+3,设定scrollerWrapper的父节点为position:absolute;在2中，可省略设定top,left值(变更定位参考节点)
+4,调用树控件的文本域都readOnly，在ipad上不触发键盘
+
+
