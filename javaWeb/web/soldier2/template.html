@@ -1,0 +1,67 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>模板模板</title>
+    <meta content="text/html;charset=utf-8" http-equiv="Content-Type"/>
+    <link type="text/css" rel="stylesheet" href="template.css"/>
+    <style type="text/css">
+        /*
+            1，注释方式
+            2, 多个样式之间的不能有";"
+        */
+        * {
+            padding: 0;
+            margin: 0;
+            font-size: 12px;
+            font-family: "宋体",Arial;
+        }
+        #dd {
+            /*background-color: blue;*/
+            width: 600px
+        }
+        .ddClass {
+            background-color: #000000;
+            width: 600px
+        }
+        .ddClass2 {
+            background-color: #2251A8;
+            width: 600px
+        }
+        body > div {
+            background-color: #808080;
+            height: 200px;
+        } ;
+        div {
+            background-color: red;
+            height: 100px;
+            width: 800px
+        }
+    </style>
+    <!--<link type="text/css" rel="stylesheet" href="template.css"/>-->
+    <!--
+        3，rel="stylesheet" 不能少 否则无效
+    -->
+</head>
+<body>
+<form action="xx" onsubmit="return false"></form>
+<div id="dd" style="width: 400px" class="ddClass ddClass2"><!--background-color: green-->
+    <span class="s">没有定义高度，按照内容的高度来</span>
+</div>
+<img src="1122a.jpg" style="width: 484px;height: 484px;" id="img"/>
+<script type="text/javascript">
+//onerror="noFind(this);"
+function noFind( o ) {
+    console.log("错误");
+    o.onerror = null;  //规避循环造成溢出
+    o.src = "1122.jpg";
+}
+var img = document.getElementById("img");
+img.onerror = function() {
+   img.onerror = null;   //规避循环造成溢出
+    console.log("错误");
+   img.src = "1122.jpg";
+}
+</script>
+</body>
+</html>

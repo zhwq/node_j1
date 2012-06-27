@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>选中、取消</title>
+    <meta charset="utf-8"/>
+    <script src="js/jquery-1.5.2.js"></script>
+</head>
+<body>
+<input type="checkbox" name="all" id="all" onclick="check(this);" value="all"/>
+<input type="checkbox" name="indexed" id="indexed402899a737c996030137c9fd01a00025"
+       value="402899a737c996030137c9fd01a00025" onclick="check(this);" data-xname="公交732"/>
+<input type="checkbox" name="indexed" id="indexed402899a737c996030137c9fcca3c0024"
+       value="402899a737c996030137c9fcca3c0024" onclick="check(this);" data-xname="公交755"/>
+<input type="checkbox" name="indexed" id="indexed402899a737c996030137c9fd36c10026"
+       value="402899a737c996030137c9fd36c10026" onclick="check(this);" data-xname="公交405"/>
+<script>
+    var _subIds = [];
+    var _subNames = [];
+    function check( obj ) {
+        var $obj = $( obj );
+        var _val = $obj.val();
+        if ( _val !== "all" ) {//单个选择
+          var _id = $obj.attr("id");
+          _id = _id.substring(7);
+          var _name = $obj.attr("data-xname");
+          if ( $obj.is( ":checked" ) ) { //选中 添加
+            _subIds[ _subIds.length ] = _id;
+            _subNames[ _subNames.length ] = _name;
+          } else { //取消选中 删除
+            var _index = _subIds.indexOf( _id );
+            if ( _index === -1 ) return;
+            _subIds.splice( _index, 1);
+            _subNames.splice( _index, 1);
+          }
+        } else { //全选 单独处理
+          if ( $obj.is( ":checked" ) ) {//全选
+              //重置
+              _subIds = [];
+              _subNames = [];
+              console.log( "全选" );
+              var _checkboxs = document.getElementsByName("indexed");
+              var i,len;
+              for ( i=0, len= _checkboxs.length; i < len; i++ ) {
+                  var $checkbox = $(_checkboxs[ i ]);
+                  var _id = $checkbox.attr("id");
+                  _id = _id.substring(7);
+                  var _name = $checkbox.attr("data-xname");
+                  _subIds[ _subIds.length ] = _id;
+                  _subNames[ _subNames.length ] = _name;
+              }
+          } else {//全取消
+            console.log( "全取消" );
+            _subIds = [];
+            _subNames = [];
+          }
+        }
+        console.log( _subIds );
+        console.log( _subNames );
+    }
+</script>
+</body>
+</html>

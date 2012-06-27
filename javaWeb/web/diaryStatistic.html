@@ -1,0 +1,47 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+    <title>日记阅读情况统计</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            text-align: left;
+        }
+        body {
+            font-family: "\5B8B\4F53",Arial, san-serif;      /*宋体*/
+            font-size: 12px;
+        }
+        body>div:nth-child(1) {
+            margin-top: 120px;
+        }
+        .ui-custom-diary-stat {
+            overflow: hidden;
+            margin: 0 auto;
+            width: 750px; /*min-width: 750px;*/
+            line-height: 40px;
+            border: 1px solid #CCCCCC;
+            border-left: 0;
+            border-right: 0;
+            background-color: #ffefd5;
+            height: 300px;
+        }
+        .ui-custom-diary-stat td.progress {
+            width: 450px;background-color: red;
+        }
+    </style>
+</head>
+<body>
+    <div class="ui-custom-diary-stat">
+        <table cellspacing="0" style="width: 100%;border: 0;">
+            <tbody>
+                <tr>
+                    <td>产品中心</td>
+                    <td class="progress"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

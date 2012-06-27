@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>我的日记（左边）</title>
+    <meta charset="utf-8"/>
+    <link type="text/css" rel="stylesheet"
+          href="css/ui-common-diary.css"/>
+    <link type="text/css" rel="stylesheet"
+          href="css/ui-custom-affair-diary.css"/>
+    <script src="js/jquery-1.5.2.js"></script>
+    <script src="diary/jCal.js"></script>
+    <script src="diary/jquery.animate.clip.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#calOne').jCal({
+                day:new Date(),
+                days:1,
+                showMonths:1,
+                monthSelect:true,
+                dCheck:function (day) {
+                    var curDate = new Date;
+                    if ( day.getFullYear() === curDate.getFullYear() ) {
+                        return (day.getDate() != curDate.getDate());
+                    } else {
+                        return true;
+                    }
+                },
+                callback:function (day, days) {
+                    // if calling the function on already selected day(s)
+                    console.log("初始化回调方法" + day );
+                    if ( typeof $(this._target).data('day') == 'object' &&
+                            $(this._target).data('day').getTime() == day.getTime() &&
+                            $(this._target).data('days') == days ) {
+                        $('#calOneResult').append('<div style="clear:both; font-size:7pt;">' + days + ' days starting ' +
+                                ( day.getMonth() + 1 ) + '/' + day.getDate() + '/' + day.getFullYear() + ' RECLICKED</div>');
+                    } else {
+                        $('#calOneResult').append('<div style="clear:both; font-size:7pt;">' + days + ' days starting ' +
+                                ( day.getMonth() + 1 ) + '/' + day.getDate() + '/' + day.getFullYear() + '</div>');
+                    }
+                    return true;
+                }
+            });
+            $('.jCalMo .day, .jCalMo .pday, .jCalMo .aday, .jCalMo .overDay, .jCalMo .invday, .jCalMo .selectedDay ').addClass('nomarl');
+            var $con = $("#calOne");
+            var $jCal = $con.find("div.jCalMo");
+            $con.css("height",$jCal.height());
+            $("#info_close").click(function(){
+                $("#fontDiv1").hide();
+            });
+            /**added by huanghui@2012-4-24  end**/
+            /*禁止选中每个格子(配合ui-custom-affaie-diary.css中.jCalMo规则使用)
+             *@zhng,2031-5-14
+             *
+             */
+            if ('ActiveXObject' in window ) {
+                $jCal.find("div").bind("selectstart",function(){return false;});//不能选中
+            }
+        });
+
+        /**
+         * outerInterface()改成outerInterface(year,month)
+         * 便于传数据 ，当切换月份和年的时候，得到相应的日记样式
+         * modify by huanghui@2012-4-5
+         */
+        function outerInterface(year,month){
+            todayDiary();
+            var unwriteStr = '${unwriteStr}';
+            var unwriteArr = unwriteStr.split(",");
+            unwrite(unwriteArr);
+            today();
+            var unwriteId = '${id}';
+            var diaryDate = '${diaryDate}';
+            if(unwriteId != ""&&diaryDate != ""){
+                toWriteDiary(diaryDate,unwriteId);
+            }
+        }
+        function searchDiary(){
+            var searchBeginDate = $("#searchBeginDate").val();
+            var searchEndDate = $("#searchEndDate").val();
+            if(searchBeginDate > searchEndDate){
+                stateBox("alert","结束时间不能早于开始时间");
+                return;
+            }
+            var diaryContent = $("#diaryContent").val();
+            if(diaryContent == '请输入关键字...'){
+                diaryContent = "";
+            }
+            diaryContent = encodeURIComponent(diaryContent);
+//            window.parent.diaryRight.location = "${ctx}/affair/diary!search.action?searchBeginDate="+searchBeginDate+"&searchEndDate="+searchEndDate+"&diaryContent="+diaryContent;
+        }
+        //点击日期改变样式
+        function today(){
+            $(".invday").click(function(){
+                var day = $(this).text();
+                var month = parseInt($("#monthName").val())+1;
+                if(month<10){
+                    month = "0"+month;
+                }
+                if(day<10){
+                    day = "0"+day;
+                }
+                var diaryDate = $(".monthYear").text()+"-"+month+"-"+day;
+                $(".day").removeClass("selectedDay");
+                $(".unwriteDay").removeClass("selectedUnwriteDay");
+                $(".invday").addClass("selectedCurDay");
+//                window.parent.diaryRight.location = "${ctx}/affair/diary!writeDiaryRight.action?diaryDate="+diaryDate;
+            });
+            $(".day").click(function(){
+                console.log( "今天" );
+                console.log( this );
+                var day = $(this).text();
+                var month = parseInt($("#monthName").val())+1;
+                if(month<10){
+                    month = "0"+month;
+                }
+                if(day<10){
+                    day = "0"+day;
+                }
+                var diaryDate = $(".monthYear").text()+"-"+month+"-"+day;
+                $(".invday").removeClass("selectedCurDay");
+                $(".unwriteDay").removeClass("selectedUnwriteDay");
+                /**
+                 *@3.1bug#1027,zhng-6-15
+                 *切换年月后,在日子为当前日时,日历选中状态错误
+                 *(比如,今天6月15,日子是15,在其他月份时,15日的选中状态更新错误)
+                 */
+                $(this).addClass('selectedDay').siblings(".day").removeClass("selectedDay");
+//                window.parent.diaryRight.location = "${ctx}/affair/diary!writeDiaryRight.action?diaryDate="+diaryDate;
+            });
+            $(".unwriteDay").click(function(e){
+                if ($(this).is(".unwriteDay")) {
+                    $(".day").removeClass("selectedDay");
+                    $(".invday").removeClass("selectedCurDay");
+                    $(this).addClass("selectedUnwriteDay");
+                }
+            });
+        }
+        function toWriteDiary(diaryDate,unwriteId){//跳转到补写日记页面
+//            //added by huanghui@2012-4-5 补记日记时日历样式进行相应的交互id="c1d_4_4_2012"
+//            var arr = diaryDate.split("-");
+//            if(arr[1].charAt()=='0'){
+//                arr[1] = arr[1].substring(1,arr[1].length);
+//            }
+//            if(arr[2].charAt()=='0'){
+//                arr[2] = arr[2].substring(1,arr[2].lenght);
+//            }
+//            var monthName = $("#monthName").val();
+//            var str = "c1d_"+arr[1]+"_"+arr[2]+"_"+arr[0];
+//            $(".day").removeClass('selectedDay');
+//            $(".invday").removeClass('selectedCurDay');
+//            $(".unwriteDay").removeClass('selectedUnwriteDay');
+//            if ($("#"+str).is(".unwriteDay")) {
+//                $("#"+str).addClass('selectedUnwriteDay');
+//            }else{
+//                $("#"+str).addClass('selectedDay');
+//            }
+//            //added end
+//            window.parent.diaryRight.location = "${ctx}/affair/diary!writeDiaryRight.action?diaryDate="+diaryDate+"&unwriteId="+unwriteId;
+        }
+        $(function(){
+//            $(".ui-custom-affair-info-left").eddyScroll({
+//                repair:20
+//            });
+            $("#diaryContent").focus(function(){
+                var diaryContent = $(this).val();
+                if(diaryContent == '请输入关键字...'){
+                    document.getElementById("diaryContent").value="";
+                    $(this).attr("style","width:200px");
+                }
+            });
+        });
+    </script>
+</head>
+
+<body>
+<div class="ui-custom-affair-info-left">
+    <div class="fontDiv2" id="calOne">
+
+    </div>
+    <div class="fontDiv3">
+        <form method="post" id="form1" name="form1">
+            <table width = "95%">
+                <tr>
+                    <td class="td1">
+                        自定义查询
+
+                    </td>
+                </tr>
+                <tr height="27px;">
+                    <td width = "100%">
+                        <input type="text" id="searchBeginDate" name="searchBeginDate"
+                               class="input_text_100 JHWdate" required="true"
+                        readonly msg="开始日期" />-
+                        <input type="text" id="searchEndDate" name="searchEndDate"
+                               class="input_text_100 JHWdate" required="true"
+                        readonly msg="结束日期"/>
+
+                    </td>
+                </tr>
+                <tr height="40px;">
+                    <td width = "100%">
+                        <input type="text" id="diaryContent" name="diaryContent" value="请输入关键字..."
+                               style="width:210px;color:gray;"/>
+                    </td>
+                </tr>
+                <tr height="30px;">
+                    <td>
+                        <input type="button" id="search" name="search" value="查询" class="buttonPro"
+                               data-width="standard" onclick = "searchDiary()"/>
+                    </td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</div>
+</body>
+</html>

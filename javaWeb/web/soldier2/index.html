@@ -1,0 +1,689 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="zh-CN">
+<head>
+<title>consortium</title>
+<meta charset="utf-8"/>
+<link rel="stylesheet" href="ui/css/css.css"/><!--/基础-->
+<link rel="stylesheet" href="ui/skin-min.css"/> <!--/插件-->
+<link rel="stylesheet" href="ui/css/columnlist.css"/><!--/列表-->
+<link rel="stylesheet" href="ui/css/form.css"/><!--/表单、分页-->
+</head>
+<body>
+<div class="z_task">
+<div class="global_header">
+    <div class="header clearfix">
+        <div class="logo">
+            <a href="/">创业联盟img</a>
+        </div>
+        <ul class="list">
+            <li class="current_page">
+                <a href="">首页</a>
+            </li>
+            <li>
+                <a href="">入口2</a>
+            </li>
+            <li>
+                <a href="" >入口3</a>
+            </li>
+            <li>
+                <a href="javascript:;" onclick="register();">注册登录</a>
+            </li>
+        </ul>
+        <!--/.lisit-->
+        <div class="right">
+            <ul class="user">
+                <li class="xds" id="xbs">
+                    <a href="" class="xcs xas">
+                        <img class="user_ico" src="ui/images/user.jpg" alt="@zhng"/>
+                        <span class="user_info">@zhng</span>
+                    </a>
+                </li>
+                <li class="xds">
+                    <a class="xcs xxr" href="/zhng">我的主页</a>
+                </li>
+                <li class="xds">
+                    <a class="xcs xur" href="/logout">退出</a>
+                </li>
+            </ul>
+        </div>
+        <!--/登录账号信息-->
+        <div class="search">
+            <input type="text" class="field" name="s" id="s" placeholder="Search"/>
+        </div>
+        <!--/.search-->
+    </div>
+</div>
+<!--/.global_header顶部导航-->
+<div class="z_main clearfix">
+<div style="display: none;"></div>
+<!--/图片轮播新闻-->
+<div class="content">
+<div id="leftBar"></div>
+<!--/此时为空-->
+<div id="rightBar">
+    <div class="sep20"></div>
+    <!--/.间隔-->
+    <div class="box">
+        <div class="cell">
+            <span class="fade">xxx热门</span>
+        </div>
+        <!--/简介-->
+        <div class="cell">
+            <div class="item_hot_topic_user">
+                <a href="/member/">
+                    <img src="http://cdn.v2ex.com/avatar/5caf/41d6/1304_mini.png?m=1335092471"/>
+                </a>
+            </div>
+            <div class="item_hot_topic_title">
+                <a href="/t/34084">如何如何如何2如何如何如何2如何如何如何2
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--/一条记录-->
+        <div class="inner">
+            <div class="item_hot_topic_user">
+                <a href="/member/">
+                    <img src="http://cdn.v2ex.com/avatar/5caf/41d6/1304_mini.png?m=1335092471"/>
+                </a>
+            </div>
+            <div class="item_hot_topic_title">
+                <a href="/t/34084">如何如何如何2
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--/最后一条记录.inner-->
+    </div>
+    <!--/.内容盒子-->
+
+    <!--2版-->
+    <div class="sep20"></div>
+    <!--/.间隔-->
+    <div class="box">
+        <div class="cell">
+            <span class="fade">xxx热门</span>
+        </div>
+        <!--/简介-->
+        <div class="cell">
+            <div class="item_hot_topic_user">
+                <a href="/member/">
+                    <img src="http://cdn.v2ex.com/avatar/5caf/41d6/1304_mini.png?m=1335092471"/>
+                </a>
+            </div>
+            <div class="item_hot_topic_title">
+                <a href="/t/34084">如何如何如何2如何如何如何2如何如何如何2
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--/一条记录-->
+        <div class="inner">
+            <div class="item_hot_topic_user">
+                <a href="/member/">
+                    <img src="http://cdn.v2ex.com/avatar/5caf/41d6/1304_mini.png?m=1335092471"/>
+                </a>
+            </div>
+            <div class="item_hot_topic_title">
+                <a href="/t/34084">如何如何如何2
+                </a>
+            </div>
+            <div class="clear"></div>
+        </div>
+        <!--/最后一条记录.inner-->
+    </div>
+    <!--/.内容盒子-->
+</div>
+<!--/右版-->
+<div id="main">
+    <!--/.内容盒子-->
+    <!--(2)第2种 论坛模式-->
+    <div class="sep20"></div>
+    <div class="box">
+        <div id="slides" class="banner">
+            <div class="slides_container">
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-1.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-2.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-3.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-4.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-5.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-6.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+                <div class="slide">
+                    <a href="##" title="title" target="_blank">
+                        <img src="ui/images/slide/slide-7.jpg" width="670" height="270" alt="Slide 1"/>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div><!--/图片轮播-->
+
+    <div class="sep20"></div>
+    <div class="box">
+        <div class="sep10"></div>
+        <div class="v2_header">
+            <div class="z">
+                <a href="./" class="v2_index" title="首页">&nbsp;</a><!--如何去除文字-->
+                <em>››</em>
+                <a href="">到哪里去</a>
+            </div>
+        </div>
+        <div class="v2_nav">
+            <ul class="game_grid">
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <div class="gg_1">
+                        <a href="#"><img
+                                src="ui/images/header.jpg" class="wiggle"></a>
+                    </div>
+                    <div class="gg_2">
+                        <h2>
+                            <a href="#">虚空</a>
+                        </h2>
+                        <h3>7论8叼</h3>
+                        <div class="gg_4">
+                            <a href="##" class="pngFix"></a>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <!--/大图导航-->
+        <div class="v2-tab">
+            <ul>
+                <li id="tab1" class="">
+                    <span>热门主题</span>
+                </li>
+                <li id="tab2" class="current">
+                    <span>最新回复</span>
+                </li>
+                <li id="tab3" class="">
+                    <span>社区新帖</span>
+                </li>
+            </ul>
+        </div>
+        <!--/选项卡-->
+        <div class="v2-dpost" id="top1" style="display: display; ">
+            <ul>
+                <li>
+                <div class="v2-davt">
+                    <a href="#" target="_blank">
+                        <img src="ui/images/01_avatar_small.jpg">
+                    </a>
+                </div>
+                <div class="v2-dtxt">
+                    <h1><cite>16457</cite>
+                        <a href="##" target="_blank">（1）Android应用高端职业班-课程下载</a>
+                        <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785a');"/>
+                    </h1>
+                    <p><a href="###" target="_blank">课程发布</a>
+                        <span class="pipe">•</span>
+                        <a href="##" target="_blank">Arron.</a>
+                        <em>(2011-09-14)</em>
+                    </p>
+                </div>
+                <div id="category_2785a" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                    所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                    以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li>
+                    <div class="v2-davt">
+                        <a href="#" target="_blank">
+                            <img src="ui/images/01_avatar_small.jpg">
+                        </a>
+                    </div>
+                    <div class="v2-dtxt">
+                        <h1><cite>16457</cite>
+                            <a href="##" target="_blank">Android应用高端职业班-课程下载</a>
+                            <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785b');"/>
+                        </h1>
+                        <p><a href="###" target="_blank">课程发布</a>
+                            <span class="pipe">•</span>
+                            <a href="##" target="_blank">Arron.</a>
+                            <em>(2011-09-14)</em>
+                        </p>
+                    </div>
+                    <div id="category_2785b" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                        所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                        以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li class="more-data-con">
+                    <a href="javascript:;" id="xx" class="more-data">更多</a>
+                </li><!--/滑动ajax更多，此处做点击胡奥去更多处理
+                        点击，激活时，文字变更为加载中...
+                        加载变更为 更多
+                -->
+            </ul>
+        </div><!--/.对应第一个选项卡-->
+        <div class="v2-dpost" id="top2" style="display: none; ">
+            <ul>
+                <li>
+                    <div class="v2-davt">
+                        <a href="#" target="_blank">
+                            <img src="ui/images/01_avatar_small.jpg">
+                        </a>
+                    </div>
+                    <div class="v2-dtxt">
+                        <h1><cite>16457</cite>
+                            <a href="##" target="_blank">（2）Android应用高端职业班-课程下载</a>
+                            <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785a1');"/>
+                        </h1>
+                        <p><a href="###" target="_blank">课程发布</a>
+                            <span class="pipe">•</span>
+                            <a href="##" target="_blank">Arron.</a>
+                            <em>(2011-09-14)</em>
+                        </p>
+                    </div>
+                    <div id="category_2785a1" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                        所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                        以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li>
+                    <div class="v2-davt">
+                        <a href="#" target="_blank">
+                            <img src="ui/images/01_avatar_small.jpg">
+                        </a>
+                    </div>
+                    <div class="v2-dtxt">
+                        <h1><cite>16457</cite>
+                            <a href="##" target="_blank">Android应用高端职业班-课程下载</a>
+                            <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785b1');"/>
+                        </h1>
+                        <p><a href="###" target="_blank">课程发布</a>
+                            <span class="pipe">•</span>
+                            <a href="##" target="_blank">Arron.</a>
+                            <em>(2011-09-14)</em>
+                        </p>
+                    </div>
+                    <div id="category_2785b1" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                        所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                        以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li class="more-data-con">
+                    <a href="javascript:;" id="xx2" class="more-data">更多</a>
+                </li><!--/滑动ajax更多，此处做点击胡奥去更多处理
+                        点击，激活时，文字变更为加载中...
+                        加载变更为 更多
+                -->
+            </ul>
+        </div><!--/.对应第2个选项卡-->
+        <div class="v2-dpost" id="top3" style="display: none; ">
+            <ul>
+                <li>
+                    <div class="v2-davt">
+                        <a href="#" target="_blank">
+                            <img src="ui/images/01_avatar_small.jpg">
+                        </a>
+                    </div>
+                    <div class="v2-dtxt">
+                        <h1><cite>16457</cite>
+                            <a href="##" target="_blank">（3）Android应用高端职业班-课程下载</a>
+                            <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785a2');"/>
+                        </h1>
+                        <p><a href="###" target="_blank">课程发布</a>
+                            <span class="pipe">•</span>
+                            <a href="##" target="_blank">Arron.</a>
+                            <em>(2011-09-14)</em>
+                        </p>
+                    </div>
+                    <div id="category_2785a2" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                        所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                        以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li>
+                    <div class="v2-davt">
+                        <a href="#" target="_blank">
+                            <img src="ui/images/01_avatar_small.jpg">
+                        </a>
+                    </div>
+                    <div class="v2-dtxt">
+                        <h1><cite>16457</cite>
+                            <a href="##" target="_blank">Android应用高端职业班-课程下载</a>
+                            <img src="ui/images/v2-collapsed_no.gif" title="关闭/展开预览" alt="关闭/展开预览" onclick="toggle_collapse(this,'category_2785b2');"/>
+                        </h1>
+                        <p><a href="###" target="_blank">课程发布</a>
+                            <span class="pipe">•</span>
+                            <a href="##" target="_blank">Arron.</a>
+                            <em>(2011-09-14)</em>
+                        </p>
+                    </div>
+                    <div id="category_2785b2" style=" display:none;" class="v2-rmtxt">本课程的所有视频都会压制成exe文件，有很多童鞋的杀毒软件会报毒，纯属误报。
+                        所有的学员在报名后都会收到我们快递的加密狗，请注意关注论坛中我们发快递的情况。
+                        以下当中的更新是按照天为单位更新的，一次更新里面有N个exe文件，一个exe文件一般为20分钟，跟课程目录当中所说的内容是完全一样的， ...</div>
+                </li>
+                <li class="more-data-con">
+                    <a href="javascript:;" id="xx3" class="more-data">更多</a>
+                </li><!--/滑动ajax更多，此处做点击胡奥去更多处理
+                        点击，激活时，文字变更为加载中...
+                        加载变更为 更多
+                -->
+            </ul>
+        </div><!--/.对应第3个选项卡-->
+    </div>
+    <div class="inner"></div><!--/最后一个-->
+
+    <div class="sep20"></div>
+    <div class="box">
+        <div class="v2_header">列表2</div>
+        <div>
+            <table cellspacing="0" border="0" width="100%" class="data">
+                <tbody><tr>
+                    <td width="110" class="h">时间</td>
+                    <td width="80" class="h">类型</td>
+                    <td width="60" class="h">数额</td>
+                    <td width="60" class="h">余额</td>
+                    <td width="auto" class="h" style="border-right: none;">描述</td>
+                </tr>
+                <tr>
+                    <td class="d"><small class="gray">2012-05-06 22:39:52 PM</small></td>
+                    <td class="d">初始资本</td>
+                    <td class="d" style="text-align: right;"><span class="positive"><strong>2000.0</strong></span></td>
+                    <td class="d" style="text-align: right;">2000.0</td>
+                    <td class="d" style="border-right: none;"><span class="gray">获得初始资本 2000 铜币</span></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="inner"></div>
+    </div>
+
+    <!--columnlist-->
+    <div class="sep20"></div>
+    <div class="box" style="text-align: left;">
+        <div class="sep10"></div>
+        <div class="toolbar ui-toolbarTop">
+            <input type="button" class="buttonPro" value="添加"/>
+            //分页，导入相关资源即可
+        </div>
+        <div id="head" class="webfx-columnlist-head">
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                    <tr>
+                        <td style="width: 5%;">
+                            <input type="checkbox"/>
+                        </td>
+                        <td style="width: 5%;">
+                            序号
+                        </td>
+                        <td style="width: 30%;">
+                            字段
+                        </td>
+                        <td style="width: 30%;">
+                            字段
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div id="body" class="webfx-columnlist-body">
+            <table cellspacing="0" cellpadding="0" width="100%">
+                <tbody>
+                <tr>
+                    <td style="width: 5%;">
+                        <input type="checkbox"/>
+                    </td>
+                    <td style="width: 5%;">
+                        序号
+                    </td>
+                    <td style="width: 30%;">
+                        字段
+                    </td>
+                    <td style="width: 30%;">
+                        字段
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="toolbar ui-toolbarBottom">
+            <input type="button" class="buttonPro" value="添加"/>
+        </div>
+        <div class="sep10"></div>
+    </div>
+    <div class="inner"></div><!--/底部-->
+
+</div>
+</div>
+</div>
+<!--/.z_main内容-->
+</div>
+<div class="modal-dialog" style="display: none;" id="relogin">
+    <div class="title" draggable="true">
+        <span class="text">用户登录:</span>
+        <span class="close"></span>
+    </div>
+    <div class="content">
+        <div class="item">
+            <label for="name">姓名:</label>
+            <input type="text" id="name"/>
+        </div>
+        <div class="item">
+            <label for="sexGroup">性别:</label>
+            <input type="radio" name="sexGroup" id="sexGroup"/>男
+            <input type="radio" name="sexGroup"/>女
+        </div>
+        <div class="item">
+            <label for="phone">电话号码:</label>
+            <input type="text" id="phone"/>
+        </div>
+        <div class="item">
+            <label for="qq">QQ:</label>
+            <input type="text" id="qq"/>
+        </div>
+        <div class="item">
+            <label for="email">邮箱:</label>
+            <input type="text" id="email"/>
+        </div>
+        <div class="item">
+            <label for="card">身份:</label>
+            <input type="text" id="card"/>
+        </div>
+        <div class="item">
+            <label for="school">毕业院校:</label>
+            <input type="text" id="school"/>
+        </div>
+    </div>
+    <div class="button">
+        <input type="button" value="注册" class="buttonActive" data-width="standard"/>
+    </div>
+</div>
+<script>
+    function $id( id ) {
+        return document.getElementById( id );
+    }
+    function toggle_collapse(o, categoryId){
+        var category = $id( categoryId );
+        var _d = category.style.display;
+        if ( _d === "none" ) {
+            category.style.display = "block";
+            o.setAttribute("src","ui/images/v2-collapsed_yes.gif");
+        } else {
+            category.style.display = "none";
+            o.setAttribute("src","ui/images/v2-collapsed_no.gif");
+        }
+    }
+</script>
+<script src="ui/js/jquery-1.7.1.js"></script>
+<script src="ui/js/jquery.plugin.js"></script>
+<script src="ui/js/artDialog3.0.5/artDialog.js"></script>
+<script>
+//==>登录，注册浮动显示隐藏
+var _fdialog = false;
+$(function(){
+    var $dialog = $("#relogin");
+    $dialog.mouseover( function(){
+        _fdialog = false;
+    }).mouseout(function(){
+                _fdialog = true;
+            });
+    $(document).bind("click", function() {
+        if ( _fdialog ) {
+            $dialog.css("display", "none");
+            _fdialog = false;
+        } else {
+//            _fdialog = true;
+        }
+    });
+});
+//<==登录，注册浮动显示隐藏
+$(function(){
+    //v2-tab
+    $("div.v2-tab").bind("click", function( event ){
+        var target = event.target;
+        while ( target.nodeType === 3 ) target = target.parent;
+        var $target = $(target);
+        if ( $target.is("span")) {
+            $target = $target.parent();
+        }
+        if ( $target.is("li")) {
+            if ( $target.is(".current") ) return;
+            var _toId = $target.attr("id");
+            var _currentId = $target.siblings(".current").attr("id");
+            //将隐藏
+            _currentId = "#top" + _currentId.substr( _currentId.length-1,1);
+            //将显示
+            _toId = "#top" + _toId.substr( _toId.length-1,1);
+            $(_currentId).css("display","none");
+            $target.attr("class","current").siblings().removeClass();
+
+            $(_toId).css("display","block");
+        }
+    });
+    //图片轮播
+    $('#slides').slides({
+        preload: true,
+        preloadImage: "ui/images/loadingAnimation.gif",/*'ui/images/slide/loading.gif',*/
+        play: 5000,
+        pause: 1000,
+        hoverPause: true,
+        generateNextPrev: false,
+        generatePagination: false
+    });
+});
+//注册，登录
+//在冒泡阶段处理事件，阻止进一步冒到document上
+function register(){
+    var $dialog = $("#relogin");
+    var $w = $(window);
+    $dialog.css({
+        "display": "block",
+        "left": parseFloat($w.width())/3 + "px",
+        "top": "180px"
+    });
+    _fdialog = true;/*更新标识*/
+    var event = window.event || arguments.callee.caller.arguments[0];
+    event.stopPropagation();
+    return false;
+}
+//登录 html5拖动
+//滑动加载
+$(window).bind("scroll",function() {
+    //offsetHeight
+    //scrollHeight
+   if ( false ) {
+       //滑动到底，加载数据
+       //如果有，则加载
+       //如果无，则statebox 没有更多的信息;
+       alert("滑动到底，加载数据");
+   }
+});
+</script>
+</body>
+</html>

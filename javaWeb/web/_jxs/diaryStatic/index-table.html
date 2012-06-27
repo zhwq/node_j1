@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>日记阅读情况统计table</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {padding: 0; margin: 0;}
+        body {
+            font-family: "宋体";
+            font-size: 12px;
+        }
+        .ui-custom-diary-static {
+            margin: 0 auto;
+            text-align: center;
+            width: 750px;
+            /*height: 300px;*/
+        }
+        .ui-custom-diary-static div {
+            height: 40px;
+            line-height: 40px;
+        }
+        .ui-custom-diary-static  .left-item {
+            overflow: hidden;
+            min-width: 289px;
+            float: left;
+            text-align: left;
+            padding-left: 11px;
+            background-color: #ffe4c4;
+        }
+        .ui-custom-diary-static .pl-one {
+            padding-left: 25px;
+        }
+        .ui-custom-diary-static .rigth-item {
+            overflow: hidden;
+            float: right;
+            width: 450px;
+            text-align: left;
+            background-color: #b0e0e6;
+        }
+    </style>
+</head>
+<body>
+<table class="ui-custom-diary-static">
+    <!--/第一级-->
+    <tbody>
+        <tr>
+            <td><div class="left-item"> 产品中心</div></td>
+            <td>&nbsp;</td>
+        </tr>
+    </tbody>
+    <tbody>
+        <tr>
+            <td><div class="left-item pl-one">御姐</div></td>
+            <td> <div class="rigth-item">统计的进度条3/10</div></td>
+        </tr>
+        <tr>
+            <td><div class="left-item pl-one">萝莉</div></td>
+            <td> <div class="rigth-item">统计的进度条3/10</div></td>
+        </tr>
+    </tbody>
+    <!--/第二级别-->
+    <tbody>
+    <tr>
+        <td><div class="left-item"> 产品中心</div></td>
+        <td>&nbsp;</td>
+    </tr>
+    </tbody>
+    <tbody>
+    <tr>
+        <td><div class="left-item pl-25">御姐</div></td>
+        <td> <div class="rigth-item">统计的进度条3/10</div></td>
+    </tr>
+    <tr>
+        <td><div class="left-item pl-25">萝莉</div></td>
+        <td> <div class="rigth-item">统计的进度条3/10</div></td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>

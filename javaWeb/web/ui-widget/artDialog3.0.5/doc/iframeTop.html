@@ -1,0 +1,66 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>artDialog v3 demo</title>
+<style>
+html, body {
+	height:100%;
+	margin:0;
+	padding:0;
+	font-family:'Microsoft Yahei', Tahoma, Arial!important; font-family:'宋体', Tahoma, Arial;
+}
+#about { margin:20px; }
+#demo {
+	height:90%;
+}
+#demo iframe {
+	width:100%;
+	height:100%;
+	border:none 0;
+}
+#demo .tips { height:2em; text-indent:2em; line-height:2em; color:#FFF; background:#030; font-weight:bold; }
+</style>
+</head>
+
+<body>
+<div id="about">
+    <p>artDialog除了dialog方法外还扩展了一些常用的前后端交互方法，如alert、confirm、prompt、tips消息，还对复杂的框架页面与ajax提供了特别支持。这部分功能实现的代码都是独立的，如果你不需要可以在artDialog.js底部的源码移除这部分代码。</p>
+    <p>
+    当前页面是复杂的多层iframe套嵌页面。对话框可以自由穿越框架进行展示，开发者几乎无需考虑层级关系即可进行跨框架操作DOM。<a href="iframeMain.html" target="_blank">关闭框架查看</a><br />
+    这里只要子框架引入了artDialog文件，上层框架页面的artDIalog.js可以层层自动注入。</p>
+    <p>artDialog如果要支持框架集（frameset）穿越的话，需要用iframe页面套住frameset：<a href="iframe_frameset.html" target="_blank">见这里</a></p>
+    <div class="btns">
+      <button id="open">在子窗口弹出对话框</button>
+      <button id="move">移动位置</button>
+      <button id="close">关闭</button>
+      <input disabled id="testInput" title="testInput" type="text" />
+    </div>
+</div>
+<div id="demo">
+  <div class="tips">这是一个框架页面：</div>
+  <iframe id="iframeT" src="iframeParent.html"></iframe>
+</div>
+<script type="text/javascript">
+var test;
+document.getElementById('open').onclick = function(){
+	var iframeWindow = document.getElementById('iframeT').contentWindow;
+	test = art.dialog({
+		window: iframeWindow,
+		lock: true,
+		content: '人品极度不稳定的时刻到了！'
+	});
+}
+document.getElementById('move').onclick = function(){
+	if (test.position) test.position('center', 'top');
+		else
+	alert('对话框已经被关闭或者还没有打开');
+}
+document.getElementById('close').onclick = function(){
+	if (test.close) test.close();
+		else
+	alert('对话框已经被关闭或者还没有打开');
+}
+</script>
+</body>
+</html>

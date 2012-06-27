@@ -1,0 +1,91 @@
+.jCal .left {
+    background:url(../images/dairy/ui-custom-affair-calendar-month-left.png) center center no-repeat;
+    width:19px;
+    height:30px;
+    vertical-align:middle;
+    cursor:pointer;
+    text-align:right;
+    float:left;
+}
+/* right month navigation button - no need to change */
+.jCal .right {
+    background:url(../images/dairy/ui-custom-affair-calendar-month-right.png) center center no-repeat;
+    width:18px;
+    height:30px;
+    vertical-align:middle;
+    cursor:pointer;
+    float:right;
+}
+/* top month display block - i.e. January */
+.jCal .month, .jCal .monthSelect, .jCal .monthName, .jCal .monthYear {
+    line-height:26px;
+    height:30px;
+    text-align:center;
+    vertical-align:bottom;
+    font-family:Tahoma;
+    font-size:16px;
+    color:white;
+    cursor:pointer;
+    float:left;
+    background:url(../images/dairy/ui-custom-affair-calendar-month-middle.png) repeat-x;
+}
+/* day of week header specific style */
+.jCalMo .dow {
+    width:32px;
+    text-align:center;
+    line-height:27px;
+    height:24px;
+    background:url(../images/dairy/ui-custom-affair-calendar-th.png);
+    border-bottom:0px;
+    float:left;
+}
+/* blacked-out calendar day specific style */
+.jCalMo .pday, .jCalMo .aday, .jCalMo .day, .jCalMo .invday {
+    background-image:url(../images/dairy/ui-custom-affair-calendar-allState-defalut.png);
+}
+.jCalMo .invday {
+    color:#808080;
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-100.png);*/
+    background-position:-31px 0;
+}
+/* selectable calendar day specific style */
+.jCalMo .day {
+    cursor:pointer;
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-1.png);*/
+    background-position:0 0;
+}
+.jCalMo .schedule{
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-12.png);*/
+    background-position:0 -62px;
+}
+.jCalMo .invdaySchedule{
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-21.png);*/
+    background-position:-31px -62px;
+}
+/* selected day */
+.jCalMo .selectedDay {
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-8.png);*/
+    background-position:0 -31px;
+}
+.jCalMo .selectedCurDay{
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-10.png);*/
+    background-position:-31px -31px;
+}
+.jCalMo .selectedScheduleDay{
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-23.png);*/
+    background-position:0 -93px;
+}
+.jCalMo .selectedInvScheduleDay{
+    /*background:url(images/ui-custom/dairy/ui-custom-affair-state-22.png);*/
+    background-position:-31px -93px;
+}
+.jCalMo .unwriteDay{
+    background-position:0px -124px;
+}
+.jCalMo .selectedUnwriteDay{
+    background-position:0px -155px;
+}
+.jCalMo .hasDiaryDay{
+    color:#003399;
+    font-weight: bold;
+}

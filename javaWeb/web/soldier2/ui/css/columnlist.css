@@ -1,0 +1,103 @@
+.webfx-columnlist {
+	overflow: hidden;
+	display: block;
+	font-size:12px;
+	font-family:'宋体',Arial, sans-serif;
+	height:auto;
+	margin-left: 0;
+	scrollbar-face-color:#C4D4EB;
+	scrollbar-hightlight-color:red;
+	scrollbar-shadow-color:#ffffff;                                  
+	scrollbar-3dlight-color:#3499E0;
+	scrollbar-arrow-color:#ffffff;
+	scrollbar-track-color:#C0DAF3;
+	scrollbar-darkshadow-color:#2C9AEB;
+	background: url(../images/table_th_bg.jpg) repeat-x;
+}
+.webfx-columnlist_tl {
+	border: 1px #DDDFED solid;
+	border-color: threedshadow threedhighlight threedhighlight threedshadow;
+	overflow: hidden;
+	display: block;
+	-moz-user-select: none;
+	-moz-user-focus: normal;
+	-moz-user-input: enabled;
+	font-size:12px;
+	font-family:'宋体', Arial, sans-serif;
+	height:288px;
+	margin-left: 0;
+	position:relative;	
+}
+
+.webfx-columnlist td {
+	font: menu;
+	padding: 1px;
+	white-space: nowrap;
+}
+.webfx-columnlist_tl td {
+	font: menu;
+	white-space: nowrap;
+}
+
+.webfx-columnlist-head {
+	overflow: hidden;
+	height:23px;
+	line-height:23px;
+}
+
+.webfx-columnlist-head table {
+}
+
+.webfx-columnlist-head td {
+    overflow:hidden;
+    table-layout:fixed;
+    background: url(../images/table_th_bg.jpg) repeat-x;
+	border-left:2px solid #CFDEEF;
+	height:23px;
+    line-height:23px;
+	color:#333333;
+	font-size:1.2em;
+	text-indent:10px;
+    text-overflow: ellipsis;
+}
+
+
+.webfx-columnlist-head td img {
+	width: 8px;
+	height: 7px;
+	margin: 0 5px 0 5px;
+}
+
+.webfx-columnlist-body {
+	overflow: auto;
+}
+.width_200{width: 200px;}
+
+.webfx-columnlist-body table {
+	table-layout: fixed;
+}
+
+.webfx-columnlist-body td {
+	
+	border-top:1px solid #CFDEEF;
+	overflow:      hidden;
+	text-overflow: ellipsis;
+	font-family:'宋体', Arial, sans-serif;
+	white-space:no-wrap;
+	font-size:12px;
+	color:#333333;
+	text-indent:10px;
+	height:23px;
+	border-left:1px solid #CFDEEF;
+	
+}	
+.webfx-columnlist-body  td img{ margin-right:5px}
+.webfx-columnlist-body tr.selected td {background:#F9EAC8}
+.webfx-columnlist-body tr.odd td {background:#ffffff}
+.webfx-columnlist-body tr.even td {background:#EAF0F8}
+.webfx-columnlist-move-header {position: absolute;top: 0;font: menu;padding: 2px;background: threedshadow;height: 1em;filter: Alpha(Opacity=50);-moz-opacity: .5;opacity:.5;-moz-user-select: none;height:22px}
+.webfx-columnlist-active-header {border-color: threedface !important}
+.webfx-columnlist-separator-header {overflow: hidden;position: absolute;top: 0px;left: 10px;font: menu;height: 1em;width: 1px;background: blue;padding: 3px 0}
+#head td{font-size:1em}
+#head td .lastTd{border-right:1px solid #C9DBF2}
+#headetd .lastTd{border-right:1px solid #C9DBF2}

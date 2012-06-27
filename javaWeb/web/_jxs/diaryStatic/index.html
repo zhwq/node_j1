@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>日记阅读情况统计</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {padding: 0; margin: 0;}
+        body {
+            font-family: "宋体";
+            font-size: 12px;
+        }
+        ul,li {
+            list-style-type: none;
+        }
+        .ui-custom-diary-static {
+            margin: 0 auto;
+            text-align: center;
+            min-width: 750px;
+        }
+        .ui-custom-diary-static li {
+            overflow: hidden;
+            line-height: 40px;
+            vertical-align: middle;
+            border-bottom: 1px solid #CCCCCC;
+            text-align: left;
+        }
+        .ui-custom-diary-static li > .left-item {
+            float: left;
+            padding-left: 11px;
+        }
+        .ui-custom-diary-static li > .rigth-item {
+            float: right;
+            width: 450px;
+            background-color: #b0e0e6;
+        }
+        .ui-custom-diary-static .ui-custom-diary-plus,.ui-custom-diary-static .ui-custom-diary-minute {
+            display: inline-block;
+            background-image: url("ui-custom-diary-plus-minute.png");
+            background-repeat: no-repeat;
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            vertical-align: middle;
+        }
+        .ui-custom-diary-static .ui-custom-diary-minute {
+            background-position: left top;
+        }
+        .ui-custom-diary-static .ui-custom-diary-plus {
+            background-position: -18px 0;
+        }
+    </style>
+    <script src="jquery-1.5.2.js"></script>
+</head>
+<body>
+<ul class="ui-custom-diary-static">
+<li>
+    <div class="left-item"><span id="s1" class="ui-custom-diary-minute"></span>产品中心</div>
+    <div class="rigth-item">统计的进度条3/10</div>
+</li>
+<li>
+  <ul>
+      <li>
+          <div class="left-item" style="margin-left: 20px;">
+              <span id="s11" class="ui-custom-diary-minute"></span>剑客
+          </div>
+          <div class="rigth-item">统计的进度条3/10</div>
+      </li>
+      <li>
+          <ul>
+              <li>
+                  <div class="left-item"  style="margin-left: 35px;"> 产品中心</div>
+                  <div class="rigth-item">统计的进度条3/10</div>
+              </li>
+              <li>
+                  <div class="left-item"  style="margin-left: 35px;">
+                      御姐说
+                  </div>
+                  <div class="rigth-item">统计的进度条3/10</div>
+              </li>
+              <li>
+                  <div class="left-item" style="margin-left: 35px;">
+                      剑客
+                  </div>
+                  <div class="rigth-item">统计的进度条3/10</div>
+              </li>
+          </ul>
+      </li>
+  </ul>
+</li>
+
+</ul>
+<script>
+    //上级收起时，子孙级是否都需要收起
+   $("#s1,#s11").click( function(){
+      var $that = $(this);          //ie7下多余的空间
+      $that.parents("li").next("li")/*.find(">ul")*/.slideToggle( function() {
+          if ( $(this).is(":hidden") ) {
+              $that.attr("class","ui-custom-diary-plus");
+          } else {
+              $that.attr("class","ui-custom-diary-minute");
+          }
+      });
+      return false;
+   });
+</script>
+</body>
+</html>

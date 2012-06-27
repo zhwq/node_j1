@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>open3.0.5</title>
+    <meta charset="utf-8"/>
+    <script>
+        var CTX = "/jw";
+    </script>
+    <script src="jquery-1.5.2.js"></script>
+    <script src="../artDialog3.0.5/artDialog.js"></script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+    var $btn = $("#btn");
+    $btn.click(function(){
+        art.dialog.open("child.html",
+                {"title":"我是标题"}
+        )
+    });
+</script>
+</body>
+</html>

@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>artDialog v3 demo</title>
+<script type="text/javascript" src="../artDialog.js"></script>
+
+<script>
+art(function($){
+
+	var getText = function(elems) {
+		var ret = "", elem;
+
+		for ( var i = 0; elems[i]; i++ ) {
+			elem = elems[i];
+			if ( elem.nodeType === 3 || elem.nodeType === 4 ) {
+				ret += elem.nodeValue;
+			} else if ( elem.nodeType !== 8 ) {
+				ret += getText( elem.childNodes );
+			};
+		};
+
+		return ret;
+	};
+
+	$(document).live('click', function(){
+		if ($(this).hasClass('runCode')) {
+			
+			var id = this.name,
+				elem = $('#' + id),
+				code = getText(elem);
+			
+			//eval(code);
+			with (window) eval (code);
+		};
+	});
+	
+	
+});
+</script>
+
+<!--代码高亮-->
+<link rel="stylesheet" href="highlight/styles/magula.css">
+<script src="highlight/highlight.pack.js"></script>
+<script src="highlight/languages/javascript.js"></script>
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+</script>
+<style>
+html,body { height:100%; font-family:'Microsoft Yahei', Tahoma, Arial!important; font-family:'宋体', Tahoma, Arial; background:#FFF; }
+#demo { margin:20px; }
+</style>
+</head>
+
+<body>
+<div id="demo">
+		<h3>警告消息</h3>
+		<div id="demoCode01">
+<pre><code class="javascript">art.dialog.alert('警察叔叔会请你喝茶！');</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="btn1" title="btn1" name="demoCode01">运行&raquo;</button></p>
+		<h3>确认消息</h3>
+        <div></div>
+		<div id="demoCode02">
+<pre><code class="javascript">art.dialog.confirm('你确认删除操作？', function(topWin){
+	var input = document.getElementById('demoInput02');
+    if (input) input.parentNode.removeChild(input);
+}, function(){
+	alert('你取消了操作');
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="btn2" title="btn2" name="demoCode02">运行&raquo;</button><button disabled id="demoInput02" title="demoInput02">点运行按钮删掉我</button></p>
+		<h3>提问消息</h3>
+        <p>特别说明：回调函数第一个参数为输入的值，第二个为顶级页面window对象</p>
+		<div id="demoCode03">
+<pre><code class="javascript">art.dialog.prompt('你的名字是什么？', function(data, topWin){
+	// data 代表输入数据;
+	var input = document.getElementById('demoInput03'),
+		topVal = topWin.document.getElementById('testInput');
+	if (input) input.value = data;
+	if (topVal) topVal.value = data;
+}, '我是糖饼');</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" id="btn3" title="btn3" name="demoCode03">运行&raquo;</button><input disabled id="demoInput03" title="demoInput03" type="text" /></p>
+		<h3>Iframe消息</h3>
+        <p>特别说明：回调函数第一个参数为iframe消息window对象</p>
+        <p>这里创建的iframe页面里可以使用这两个专用方法：<br />
+          关闭对话框：art.dialog.close()<br />
+          获取来源页面的window： art.dialog.parent<br />
+          <br />
+          同域下能够自适应iframe大小，但chrome 浏览器本地运行会认为跨域而无法适应大小</p>
+		<div id="demoCode04">
+<pre><code class="javascript">art.dialog.open('iframe.html', {
+	title: '我是iframe消息',
+    yesFn: function(iframeWin, topWin){
+        // iframeWin: 对话框iframe内容的window对象
+        // topWin: 对话框所在位置的window对象
+        var form = iframeWin.document.getElementById('googleForm'),
+            tips = iframeWin.document.getElementById('tips'),
+            txt = iframeWin.document.getElementById('googleText'),
+            val = document.getElementById('demoInput04'),
+            topVal = topWin.document.getElementById('testInput');
+            
+        if (val) val.value = '关键字：' + txt.value;
+        if (topVal) topVal.value = '关键字：' + txt.value;
+           
+        if (txt.value === '') {
+            txt.focus();
+            tips.innerHTML = '此项必须填写!';
+            return false;
+        };
+        
+        form.submit();
+    },
+    closeFn: function(){
+        alert('close');
+    }
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" id="btn4" title="btn4" name="demoCode04">运行&raquo;</button><input disabled id="demoInput04" title="demoInput04" type="text" /><span id="demoSpan04" style="color:#F00;"></span></p>
+		<h3>Ajax HTML</h3>
+<p>特别说明：第三个参数为ajax缓存开关，默认为true。由于浏览器限制，ajax需要在服务端运行才能正确运行本例子。</p>
+		<div id="demoCode05">
+<pre><code class="javascript">art.dialog.load('ajaxContent.html', {
+	title: '远程载入HTML片段',
+	yesFn: function(topWin){
+    	alert('hello world');
+    },
+	closeFn: function(){
+    	alert('close')
+    }
+}, true);</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="btn5" title="btn5" name="demoCode05">运行&raquo;</button></p>
+		<h3>Ajax JSON</h3>
+		<p>特别说明：这里是用JSON数据+模板引擎拼接HTML代码，推荐此代替常规的iframe</p>
+		<div id="demoCode06">
+<pre><code class="javascript">art.dialog.load('json.txt', {
+	title: '使用JSON拼接模板',
+    tmpl: '\
+    &lt;% if (code === 0) { %&gt;\
+        &lt;p&gt;当前用户：&lt;a href=&quot;&lt;%=web%&gt;&quot; title=&quot;&lt;%=web%&gt;&quot;&gt;&lt;%=me%&gt;&lt;/a&gt;&lt;/p&gt;\
+        &lt;p&gt;\
+            所有用户：\
+            &lt;% for (i = 0; i &lt; users.length; i++) { %&gt;\
+                &lt;%=i + 1%&gt;.&lt;%=users[i]%&gt;&nbsp;\
+            &lt;% } %&gt;\
+        &lt;/p&gt;\
+    &lt;% } else { %&gt;\
+    	&lt;p&gt;哦，服务器出错了，错误代码：&lt;%=code%&gt;&lt;p&gt;\
+    &lt;% } %&gt;\
+    '
+}, true);</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" id="btn6" title="btn6" name="demoCode06">运行&raquo;</button></p>
+		<h3>提示消息</h3>
+		<div id="demoCode07">
+<pre><code class="javascript">art.dialog.tips('提交成功！', 1);</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="btn7" title="btn7" name="demoCode07">运行&raquo;</button></p>
+		<h3>传统的dialog方法穿越框架</h3>
+		<div id="demoCode08">
+<pre><code class="javascript">art.dialog({
+	content: '我是新来的对话框，请多多关照！',
+    window: 'top'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="btn8" title="btn8" name="demoCode08">运行&raquo;</button></p>
+</div>
+</body>
+</html>

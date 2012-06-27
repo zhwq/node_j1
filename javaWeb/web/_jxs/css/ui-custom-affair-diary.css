@@ -1,0 +1,260 @@
+/********************日记中日历控件********************************/
+/* default dimensions and justification for each month including title */
+.jCal {
+	/* each day width + border-left + border-right */
+	width:224px;
+	height:30px;
+	line-height:30px;
+	text-align:center;
+	vertical-align:middle;
+}
+/* default dimensions and justification for each month not including title */
+.jCalMo {
+	width:224px;		/* each day width + border-left + border-right */
+	float:left;
+	overflow:visible;
+	/*height:100%;*/
+	padding-right:2px;
+	padding-left:10px;
+	white-space:nowrap;
+	/*禁止选中每个格子(配合jCal.js兼容IE9下)@zhng-2012-5-14*/
+	-webkit-tap-highlight-color: rgba(0,0,0,0);
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+.jCalMo .dow{
+	border-bottom:1px solid #9198a8;
+}
+/* month name per calendar style - includes left/right padding and alignment */
+.jCal .monthName {
+	padding-left:2px;
+	padding-right:2px; 
+	text-align:right;
+}
+/* year per calendar style - includes left/right padding and alignment */
+.jCal .monthYear {
+	float:right;
+	padding-left:2px;
+	padding-right:2px;
+	text-align:left;
+}
+.jCal .month{cursor:default;}
+.jCal .month>span{cursor:pointer;}
+/* hilight style for new month combobox pulldown for hover */
+.jCal .monthSelect {
+	background:#F6F6F6;/**选择颜色，需要微调*/
+	color:#000000;
+	text-align:center;
+}
+/* do not edit - this enables the new month combobox selector */
+.jCal .monthSelector {
+	position:absolute;
+  -webkit-box-shadow: 0px 0px 4px 0px #393939; /* Saf3-4, iOS 4.0.2 - 4.2, Android 2.3+ */
+     -moz-box-shadow: 0px 0px 4px 0px #393939; /* FF3.5 - 3.6 */
+          box-shadow: 0px 0px 4px 0px #393939; /* Opera 10.5, IE9, FF4+, Chrome 6+, iOS 5 */
+}
+/* do not edit - this enables the new month combobox selector "shadow" for capturing auto-hide */
+.jCal .monthSelectorShadow {
+	position:absolute;
+	background:#808080;
+	padding:0px;
+}
+/* this is the hover for the new month or year hover in the new combobox selection */
+.jCal .monthSelectHover {/***选择颜色，需要微调***/
+	background:#069;
+	color:#FFF;
+}
+/* day block dimensions and style - for all day blocks */
+.jCalMo .day, .jCalMo .pday, .jCalMo .aday, .jCalMo .overDay, .jCalMo .invday, .jCalMo .selectedDay {
+	width:30px;
+	font-family:Tahoma;
+	font-size:8pt;
+	border-right:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	border-left:1px solid #EEE;
+	text-align:center;
+	cursor:default;
+	float:left;
+}
+.jCalMo .nomarl{
+	color:#666666;
+}
+/* actual calendar day default style */
+.jCalMo .day, .jCalMo .invday {
+	height:31px;
+	text-align:center;
+	vertical-align:middle;
+	line-height:32px;
+	cursor:pointer;
+}
+/* previous and subsequent months calendar day specific style */
+.jCalMo .pday, .jCalMo .aday {
+	height:31px;
+	line-height:32px;
+	color:#CCC;
+	text-align:center;
+	vertical-align:middle;
+	/**background:url(images/ui-custom/dairy/ui-custom-affair-state-31.png);*/
+	background-image:url(../images/dairy/ui-custom-affair-calednar-state.png);
+	background-position:-31px 0;
+}
+/* mouseover hilighted selectable day */
+.jCalMo .overDay {
+	/*background:url(images/ui-custom/dairy/ui-custom-affair-state-5.png);*/
+	background-image:url(../images/dairy/ui-custom-affair-calednar-state.png);
+	background-position:0 0;
+}
+/* no need to change - this is for carousel opacity */
+.jCalMask, .jCalMove {
+	position:absolute;
+	overflow:hidden;
+}
+/*************************日记中日历控件完毕**********************/
+/* 日记——单人.png*/
+/*添加关注*/
+span.add_ico{
+	background:url("../images/dairy/ui-custome-diary-addAttention.png");
+	width:12px;height:16px;
+	display:inline-block;
+	vertical-align:middle;
+}
+.ui-custom-dairy-single .topInfo .personnalInfo { padding-top:10px;}
+.ui-custom-dairy-single .infoSpan1 {font-weight:bold; color:#000;}
+/*Table*/
+.diaryInfo{vertical-align: top;overflow-x: hidden; overflow-y: auto;}
+.diaryInfo .diaryInfoTR {border-bottom:1px solid #dddddd;}
+.diaryInfo .diaryInfoTRShow {background-color:#FFFFCA}
+.diaryInfo .diaryInfoTR .td1{vertical-align:top;padding-top:15px;padding-left: 6px;}
+.diaryInfo .diaryInfoTR table {width:100%;margin:9px 0;}
+.ui-custom-dairy-single .diaryInfo table tr {height:24px;line-height:24px;}
+/*
+.diaryInfo span.diaryInfoSpan1 {color:#003399;font-weight:bold;}
+.diaryInfo span.diaryInfoSpan2 {color:#000000;font-weight:bold;}
+*/
+.diaryInfo span.noRead{
+	background:url(../images/dairy/ui-custom-diary-single-noRead.png) no-repeat;
+	padding:0 5px;
+	text-align:center;
+	margin-left:8px;
+	margin-right:5px;
+	background-position:center center;
+	cursor:default;
+}
+
+.diaryInfo span.readEd{
+	background:url(../images/dairy/ui-custom-diary-single-Readed.png) no-repeat;
+	padding:0 5px;
+	text-align:center;
+	margin-left:8px;
+	margin-right:5px;
+	background-position:center center;
+	cursor:default;
+}
+.diaryInfo .diaryInfoSpan5 {font-weight:bold;}
+.diaryInfo .diaryInfoSpan2 {color:#999999;margin-right:13px;}
+.diaryInfo .diaryInfoSpan3 {float:right;margin-right:20px;}
+.diaryInfo .diaryInfoSpan4 {float:right;margin-right:10px;}
+/*分享日志*/
+.ui-custom-diary-share {padding:30px 15px;width:420px;}
+.ui-custom-diary-share textarea {width:415px;;height:100px;}
+.ui-custom-diary-share .shareStyle {margin-top:30px;margin-left:10px;}
+.ui-custom-diary-share .shareTableDiv {margin-top:10px;margin-left:10px;}
+/*写日记右*/
+.ui-custom-affair-info-right {
+	padding-top:10px;
+	width: expression(document.body.clientWidth < 804? "804px": "100%" );/*最小宽度设置*/
+	width:100%;
+}
+.ui-custom-affair-info-right .captionDiv{
+	padding-top:10px;
+	height:35px;
+	line-height:35px;
+	border-bottom:1px solid #cfcfcf;
+	background-color: #ffffff;
+	background-image: -webkit-gradient(linear, left top, left bottom, from(#ffffff), to(#eeeeee)); /* Saf4+, Chrome */
+	background-image: -webkit-linear-gradient(top, #ffffff, #eeeeee); /* Chrome 10+, Saf5.1+ */
+	background-image:    -moz-linear-gradient(top, #ffffff, #eeeeee); /* FF3.6 */
+	background-image:     -ms-linear-gradient(top, #ffffff, #eeeeee); /* IE10 */
+	background-image:      -o-linear-gradient(top, #ffffff, #eeeeee); /* Opera 11.10+ */
+	background-image:         linear-gradient(top, #ffffff, #eeeeee);
+ filter: progid:DXImageTransform.Microsoft.gradient(startColorStr='#ffffff', EndColorStr='#eeeeee'); /* IE6–IE9 */
+}
+.ui-custom-affair-info-right .captionDiv .td1 {padding-left:6px;width:10%;}
+.ui-custom-affair-info-right .captionDiv .td2 {padding-right:10px; width:25%;}
+.ui-custom-affair-info-right .dateDiv{margin:0px 10px;}
+.ui-custom-affair-info-right .line{border-top:1px solid #dadada;border-bottom:1px solid #f2f2f2;}
+.ui-custom-affair-info-right .dateDiv .table1{margin-bottom:17px;;height:65px;}
+.ui-custom-affair-info-right .dateDiv .table1 .spanStyle1 {color:#b3b3b3; font-weight:bold;}
+.ui-custom-affair-info-right .dateDiv ul li{float:right;margin-right:8px;}
+.ui-custom-affair-info-right .dateDiv ._li1{float:left;color:#999999;}
+.ui-custom-affair-info-right .fontDiv1{margin:10px 20px;}
+.ui-custom-affair-info-right .fontDiv1 .left{float:left;}
+.ui-custom-affair-info-right .fontDiv1 .right{float:right;color:#999999;}
+.ui-custom-affair-info-right .line2{border:1px solid #f2f2f2;margin:0px 10px;}
+.ui-custom-affair-info-right .table3{padding:10px 10px;}
+.ui-custom-affair-info-right .line1{border-bottom:1px solid #f2f2f2;}
+.ui-custom-affair-info-right .table3 .spanStyle2 {color:#999999;float:right;*margin-top:-26px;}/*IE7下，float:right无效，需要加该样式*/
+.ui-custom-affair-info-right .table3 .td1{text-align:right;font-size:14px;vertical-align:top;padding:12px 0px;}
+.ui-custom-affair-info-right .table3 .td2{padding-left:3px;padding-right:30px;padding-top:8px;padding-bottom:6px;}
+.ui-custom-affair-info-right .line4{margin:10px 10px;border-top:1px solid #f2f2f2;}
+/*我的日记列表*/
+/*看日记右*/
+.ui-custom-affair-info-right .table2{clear:both;margin-right:10px;margin-left:10px;margin-top:-20px;}
+.ui-custom-affair-info-right .table2 .td1{text-align:right;padding:12px 0px;font-size:14px;font-weight:bold;vertical-align:top;}
+.ui-custom-affair-info-right .table2 .td2{padding-left:14px;font-size:14px;padding-top:12px;padding-bottom:12px;}
+.ui-custom-affair-info-right .table2 tr{border-bottom:1px solid #f2f2f2;}
+.ui-custom-affair-info-right .readRecord{margin:0px 10px;}
+.ui-custom-affair-info-right .title{margin-top:16px;font-size:14px;font-weight:bold;}
+.ui-custom-affair-info-right .line3{border-top:1px solid #cccccc;margin-top:6px;margin-bottom:10px;}
+.ui-custom-affair-info-right .readRecord .td1{padding:0px 14px;}
+.ui-custom-affair-info-right .readRecord .td1 div {border:1px solid #cccccc;}
+.ui-custom-affair-info-right .readRecord .td2{padding-top:6px;padding-bottom:6px;text-align:center;}
+.ui-custom-affair-info-right .leaderpishi{margin:0px 10px;}
+.ui-custom-affair-info-right .leaderpishi .td1{width:50px;padding-left:10px;padding-right:10px;}
+.ui-custom-affair-info-right .leaderpishi .td6{width:40px;font-weight:bold;padding-top:17px;}
+.ui-custom-affair-info-right .leaderpishi .td3{padding-top:17px;padding-left:6px;}
+.ui-custom-affair-info-right .leaderpishi .td4{padding-top:0px;color:#999999;}
+.ui-custom-affair-info-right .leaderpishi .td5{padding:11px 0px;}
+.ui-custom-affair-info-right .pishi{margin-left:10px;margin-right:10px;margin-bottom:15px;}
+.ui-custom-affair-info-right .pishi .td1{width:50px;padding:0px 10px;vertical-align:top;}
+.ui-custom-affair-info-right .pishi .td2{padding-bottom:6px;}
+/*补日记左*/
+.ui-custom-affair-info-left .fontDiv1{margin:10px 12px 10px 10px;height:30px;border:1px solid #e1db66;background-color:#ffffd7;line-height:30px;}
+.ui-custom-affair-info-left .fontDiv1 span.warn {
+	background:url(../images/dairy/ui-custom-diary-warning.png) no-repeat;
+	text-align:center;
+	background-position:center center;
+	padding:0 10px;
+}
+.ui-custom-affair-info-left .fontDiv1 span.info_close {
+	background:url(../images/dairy/ui-custom-diary-r_x_close.gif) no-repeat;
+	text-align:center;
+	background-position:center center;
+	padding:0 0 0 10px;
+}
+.ui-custom-affair-info-left .fontDiv1 span.bu_dairy_tip_close{
+	background:url("../images/dairy/ui-custom-dairy-close.png") no-repeat scroll transparent;
+	width:13px;height:13px;display:block;
+}
+.ui-custom-affair-info-left .fontDiv3{margin-top:12px;margin-bottom:10px;margin-left:10px;}
+.ui-custom-affair-info-left .fontDiv3 table .td1{font-weight:bold;font-size:14px;padding-left:4px;padding-bottom:12px;}
+.ui-custom-affair-info-left .fontDiv3 table .td2{font-size:12px;padding-left:4px;}
+.ui-custom-affair-info-left input[type="text"], input[type="password"]{height: 21px;}
+.ui-custom-affair-info-left .fontDiv4{margin:0px 10px;}
+.ui-custom-affair-info-left .fontDiv4 .left{font-size:14px;font-weight:bold;float:left;margin-bottom:6px;}
+.ui-custom-affair-info-left .fontDiv4 .right{float:right;padding-right:7px;margin-bottom:6px;}
+.ui-custom-affair-info-left .line{clear:both;border-top:1px solid #cccccc;margin:0px 10px;width:220px;}
+.ui-custom-affair-info-left .fontDiv5{margin-left:10px;margin-right:10px;margin-top:8px;}
+.ui-custom-affair-info-left .fontDiv5 table tr{height:20px;}
+ /*关注.png左*/
+.ui-custom-affair-attention{line-height:18px;width:100%;}
+table.ui-custom-affair-attention,table.ui-custom-affair-attention td{border-collapse:collapse;}
+.ui-custom-affair-attention tr:hover{background-color:#eee;}
+.ui-custom-affair-attention td{font-size:12px;}
+.ui-custom-affair-attention td img{border:1px solid #ccc;margin:6px 7px;}
+.ui-custom-affair-attention td span.un_d_ico{background:url("../images/dairy/ui-custom-dairy-undairy-ico.png");width:9px;height:9px;display:inline-block;margin-right:3px;vertical-align:middle;}
+.ui-custom-affair-attention td label{color:#999;}

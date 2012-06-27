@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>qy</title>
+    <meta charset="utf-8"/>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: "\u5B8B\u4F53", sans-serif;    /*宋体*/
+            font-size: 12px;
+        }
+        #con {
+            width: 980px;
+            padding: 0 11px 0 9px;
+            margin: 0 auto;
+        }
+        #header {
+            overflow: hidden;
+            position: relative;
+            width: 960px;
+            height: 96px;
+            background:url( "images/navbg1.jpg") no-repeat;
+        }
+        #header .logo {
+            position: absolute;
+            width: 155px;
+            height: 52px;
+            background:url( "images/logo.gif") no-repeat;
+            top: 26px;
+            left: 44px;
+        }
+        #main {
+            overflow: hidden;
+            display: block;
+            margin-top: 10px;
+            width: 960px;
+        }
+        #left {
+            float: left;
+            width: 750px;
+            height: auto;
+        }
+        #left .item .img-view {
+            overflow: hidden;
+            float: left;
+            border: 3px solid #ACE683;
+            width: 364px;
+            height: 217px;
+        }
+        #left .item .img-view img {
+            width: 100%;
+            height: 100%;
+        }
+        #left .tab-item {
+            float: left;
+            margin-left: 8px;
+            border: 1px solid  #ACE683;
+            width: 369px;
+            height: 222px;
+        }
+        #left .tab-item .title {
+            display: inline-block;
+            width: 369px;
+            height: 27px;
+            line-height: 27px;
+            background: url( "images/titbg1.png") no-repeat 0 -35px;
+        }
+        #left .tab-item .title>dt{
+            float:left;
+            margin-right:5px;
+            font-size:12px;
+        }
+
+        #left .tab-item .content {
+
+        }
+        #right {
+            float: right;
+            width: 200px;
+            height: auto;
+        }
+        #right .item {
+            width: 194px;
+            height: 261px;
+            border: 3px solid #ACE683;
+        }
+        #right .logbefor {
+            position: relative;
+            background: url("images/logbefor_bk.jpg") no-repeat;
+            width: 177px;
+            height: 244px;
+            margin: 0 auto;
+            padding: 17px 0 0 23px;
+        }
+        #right .logbefor .user-login {
+            display: block;
+            background: url( "images/logbefor.jpg") no-repeat;
+            width: 152px;
+            height: 41px;
+        }
+        #right .logbefor .user-form {
+            overflow: hidden;
+            position: absolute;
+            top: 72px;
+        }
+        .ui-custom-form-2d {
+            clear:both;
+            display:block;
+        }
+        .ui-custom-form-2d> dt {
+            float:left;
+            width:48px;
+            text-align:right;
+            margin-right:3px;
+        }
+        .ui-custom-form-2d> dt,.ui-custom-form-2d>dd {
+            height:27px;
+            line-height:27px;
+            overflow:hidden;
+        }
+        .ui-custom-form-2d input {
+            width: 99px;
+            height: 21px;
+        }
+        .login-button {
+            position: absolute;
+            display: inline-block;
+            background: url("images/btn_login.gif") no-repeat;
+            width: 67px;
+            height: 33px;
+            top: 136px;
+            left: 110px;
+        }
+        #right .logbefor .user-sign {
+            overflow: hidden;
+            position: absolute;
+            top: 190px;
+        }
+        /*明星风采*/
+        #left .item .star-title {
+            background: url( "images/titbg2.jpg") no-repeat;
+            width: 750px;
+            height: 29px;
+            line-height: 32px;
+            padding-left: 23px;
+        }
+        #left .star-img {
+            float: left;
+            padding: 15px 0 30px 30px;
+            list-style: none;
+            text-align: center;
+        }
+        #left .star-img li {   /*这个样式还有问题，没有调*/
+            list-style: none;
+            float: left;
+            width: 150px;
+            height: 120px;
+            text-align: center;
+            margin: 10px;
+        }
+        /*信息公告*/
+        #right .infobar {
+            margin-top: 10px;
+            border: 1px solid #ACE683;
+            height: 296px;
+            width: 198px;
+        }
+        #right .infobar .title {
+            background: url( "images/titbg1.png") no-repeat 0 -100px;
+            width: 186px;
+            height: 30px;
+            line-height: 32px;
+            padding-left: 12px;
+            color: #ACE683;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+        ol,li {
+            list-style-type: none;
+        }
+        #right .infobar .content {
+            padding: 5px;
+        }
+        #right .infobar .content .hire {
+            font-weight: bold;
+            height: 21px;
+            line-height: 21px;
+        }
+        #right .infobar .content .ques {
+            font-weight: normal;
+            height: 21px;
+            line-height: 21px;
+        }
+        #right .infobar .content .button {
+            padding: 6px;
+            text-align: center;
+        }
+        #right .infobar .content .button img {
+            cursor: pointer;
+        }
+        #right .infobar .content .split div{
+            height: 0;
+            border: 1px dashed gray;
+            font-weight: normal;
+            margin: 3px 0;
+        }
+        #foot {
+            position: fixed;
+            bottom: 0;
+            background: url( "images/footbk.jpg") repeat-x;
+            width: 980px;
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <div id="con">
+        <div id="header">
+            <div class="logo"></div>
+        </div>
+        <div id="main">
+            <div id="left">
+                <img src="images/top_tit.gif"/>
+                <div class="item" style="margin-top: 10px">
+                    <div class="img-view">
+                        <img src="images/imgview_2.jpg"/>
+                    </div>
+                </div>
+                <div class="tab-item">
+                    <div class="title">
+                        <dt class="active">正在进行</dt>
+                        <dt class="normal">XX动态</dt>
+                    </div>
+                    <div class="content"></div>
+                </div>
+                <div style="clear: both;margin-top: 10px;"></div>
+                <div class="item">
+                    <div class="star-title">公益明星</div>
+                    <ul class="star-img">
+                        <li>
+                            <div>
+                                <img src="images/stars/46154672.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/44601738.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/45434695.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/46154667.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/46155287.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/46154670.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/46154671.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                        <li>
+                            <div>
+                                <img src="images/stars/46154669.png"/>
+                                <label>①基金入驻蜡像馆</label>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div> 
+            <div id="right">
+                <div class="logbefor">
+                    <div class="user-login"></div>
+                    <div class="user-form">
+                        <dl class="ui-custom-form-2d">
+                            <dt>
+                                QQ号码:
+                            </dt>
+                            <dd>
+                                <input type="text"/>
+                            </dd>
+                            <dt>
+                                QQ密码:
+                            </dt>
+                            <dd>
+                                <input type="text"/>
+                            </dd>
+                        </dl>
+                    </div>
+                    <div class="login-button"></div>
+                    <p class="user-sign">
+                        世界的改变不是少数人做了很多，而是每个人都做了一点点。
+                        伸出手，让我们我把爱传递。
+                    </p>
+                </div>
+                <div class="infobar">
+                    <div class="title">信息公告</div>
+                    <ol class="content">
+                        <li class="hire">[招聘]真爱梦想招5名员工</li>
+                        <li class="hire">[招聘]真爱梦想招5名员工</li>
+                        <li class="split"><div></div></li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="ques">[招问]真爱梦想招5名员工</li>
+                        <li class="split"><div></div></li>
+                        <li class="button">
+                            <img src="images/btn1.gif"/>
+                            <img src="images/btn2.gif"/>
+                            <img src="images/btn3.gif"/>
+                        </li>
+                    </ol>
+                </div> <!--/信息公告-->
+            </div>
+        </div>
+        <div id="foot">(c)2012-6-13</div>
+    </div>
+
+</body>
+</html>

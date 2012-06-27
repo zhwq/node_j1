@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>滤镜预览</title>
+    <meta charset="utf-8"/>
+    <script src="../js/jquery-1.5.2.js"></script>
+    <script>
+        /*******浏览器类别版本 开始**********/
+        /**
+         * @主要来源:http://www.cnblogs.com/leadzen/archive/2008/09/06/1285764.html
+         * @整理人:张文钦
+         * @时间:2011-10-20
+         * 使用说明（现在系统主要需要兼容ie7-9,火狐,opera）:
+         * if(btv.ie){
+         //此时，该浏览器是ie内核浏览器,btv.ie表示当前当前版本值:{7.0,8.0,9.0}
+         }else if(btv.ff){
+         //此时,该浏览器是火狐浏览器
+         }else if(btv.safari){
+         //此时，该浏览器是苹果浏览器
+         }else if(btv.chrome){
+         //此时，该浏览器是谷歌浏览器
+         }else if(btv.opera){
+         //此时，该浏览器是opera浏览器
+         }
+         */
+        function btv(){
+            var btv = {};
+            var ua = navigator.userAgent.toLowerCase();
+            var temp = null;
+            (temp = ua.match(/msie ([\d.]+)/))? btv.ie = temp[1]:
+                    (temp = ua.match(/firefox\/([\d.]+)/))?btv.ff = temp[1]:
+                            (temp = ua.match(/chrome\/([\d.]+)/))?btv.chrome = temp[1]:
+                                    (temp = ua.match(/version\/([\d.]+).*safari/))?btv.safari  = temp[1]:
+                                            (temp = ua.match(/opera\/([\d.]+)/))?btv.opera  = temp[1]:-1;
+            return btv;
+        };
+    </script>
+</head>
+<body>
+<input type="file" id="inputFile" />
+<div id="resText">
+    
+</div>
+<script>
+var $resText = $( "#resText" );
+var $file = $( "#inputFile" );
+$file.bind( "change", function(){
+    $resText.text( $file.val() );
+});
+</script>
+<script>
+    function Person() {
+        this.name1 = "xxaa";
+    }
+    var friend = new Person();
+
+    //重写原型
+    Person.prototype = {
+        constructor: Person,
+        name: "Ni",
+        age: 25,
+        job: "Sfotware engineer",
+        sayName: function() {
+            console.log( this.name );
+        }
+    }
+    //Uncaught TypeError: Object #<Person> has no method 'sayName'
+//    friend.sayName();
+    console.log( friend.__proto__ );
+    console.log( friend.name1 );
+    //未未未
+    var f2 = new Person();
+    f2.sayName();
+</script>
+</body>
+</html>

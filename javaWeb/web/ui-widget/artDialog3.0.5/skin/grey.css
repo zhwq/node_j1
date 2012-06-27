@@ -1,0 +1,70 @@
+/* artDialog default.css
+ * Date: 2010-10-13
+ */
+
+.aui_grey .aui_td_title, .aui_grey .aui_td_buttons button { font:14px 'Microsoft Yahei', Arial; }
+.aui_grey .aui_content_table { min-width:9em; background:#FFF; }
+.aui_grey .aui_dialog, .aui_grey .aui_content_table { border:0px solid #dddddd!important; }
+.aui_grey .aui_left_top, .aui_grey .aui_right_top, .aui_grey .aui_left_bottom, .aui_grey .aui_right_bottom { width:4px; height:4px; }
+.aui_grey .aui_border { background:#000; _filter:alpha(opacity=20); opacity:0.2; }
+html>body .aui_grey .aui_border,
+html>body .aui_grey .art_move .aui_border{ background:url(grey/30.png)\9; }
+.aui_grey .art_focus .aui_border { _filter:alpha(opacity=20); opacity:0.2; }
+html>body .aui_grey .aui_border { background:url(grey/20.png)\9; }
+.aui_grey .art_move .aui_border { _filter:alpha(opacity=20); opacity:0.2; }
+.aui_grey .art_focus .aui_content_table, .aui_grey .aui_title_wrap, .aui_grey .aui_close:hover { -moz-box-shadow: 0 1px 3px rgba(0, 0, 0, 0.7); -webkit-box-shadow: 0 0 3px rgba(0, 0, 0, 0.7); box-shadow: 0 0 3px rgba(0, 0, 0, 0.7); }
+/*add by GaoC ����jc6�¶Ի�����ʽ*/
+.aui_grey .aui_content_wrap { border:0px!important;}
+/***/
+.aui_grey .art_focus .aui_bottom { -moz-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); -webkit-box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); box-shadow: 0 5px 5px rgba(0, 0, 0, 0.2); }
+.aui_grey .art_move .aui_bottom { -moz-box-shadow:none; -webkit-box-shadow:none; box-shadow:none; }
+.aui_grey .aui_title_wrap { position:relative; height:100%; }
+.aui_grey .aui_title { height:30px; line-height:30px; padding:0 30px 0 10px; background-color:#3A6EA5; font-weight:700; color:#EBEBEB; border-style:solid; border-width:0px; border-color:#dddddd #dddddd #dddddd #dddddd; text-shadow:0 1px 0 #000; }
+/*add by GaoC ����jc6�¶Ի�����ʽ*/
+.aui_grey .aui_title { font-size:14px;height:30px; line-height:30px; padding:0 30px 0 12px; background-color:#3A6EA5; font-weight:700; color:#666666; border-style:solid; border-width:0px; border-color:#dddddd #dddddd #dddddd #dddddd; text-shadow:0 0px 0 #000; }
+.aui_grey .aui_title { background-image:url(grey/dialog_bg-grey.png)};
+/***/
+.aui_grey .art_move .aui_title { color:#FFF; }
+.aui_grey .art_focus .aui_title { background-color:#214FA3; }
+.aui_grey .aui_close { padding:0; top:6px; right:6px; width:13px; height:13px; line-height:13px; text-align:center; color:#FFF!important; text-decoration:none; border:0px solid #dddddd; }
+/*.aui_grey .art_focus .aui_close { border:1px solid #214FA3; }*/
+.aui_grey .aui_close:hover, .aui_grey .aui_close:active, .aui_grey .aui_close:focus { text-decoration:none; background-color:#771C35; border:0px solid #dddddd; }
+.aui_grey .aui_close:active { -moz-box-shadow: none; -webkit-box-shadow: none; box-shadow: none; }
+/*add by GaoC ����jc6�¶Ի�����ʽ*/
+.aui_grey .aui_close, .aui_grey .aui_close:focus { font-size:1px; padding:0; right:0px; top:0px; height:30px; width:32px; border:0px solid #dddddd; background-color:transparent; background-image:url(grey/close.png)}
+.aui_grey .aui_close:hover { background-image:url(grey/dialog_close.png); }
+/***/
+.aui_grey .aui_content { color:#666; }
+.aui_grey .art_focus .aui_content { color:#000; }
+.aui_grey .aui_loading_tip { color:#808080; }
+
+/**********2011-09-23 limj 更新artDialog自带按钮样式************/
+.aui_grey .aui_buttons_wrap { height:40px;background-color:#F6F6F6; border-top:1px solid #dddddd; border-bottom:1px solid #CCC; -moz-box-shadow: inset 0 -2px 2px rgba(204, 204, 204, 0.3); -webkit-box-shadow: inset 0 -2px 2px rgba(204, 204, 204, 0.3); box-shadow: inset 0 -2px 2px rgba(204, 204, 204, 0.3); }
+
+.aui_grey .aui_buttons_wrap .aui_button_active { 
+	width:68px;
+	background-image:url(grey/aui_button_active.png);
+	height:24px;
+	border:0px;
+	font-size:12px;
+	color:#ffffff;
+	margin-top:7px;
+}
+.aui_grey .aui_buttons_wrap .aui_button_pro { 
+	width:68px;
+	background-image:url(grey/aui_button_pro.png);
+	height:24px;
+	border:0px;
+	font-size:12px;
+	margin-top:7px;
+	margin-left:2px;
+}
+/**********2011-09-23 limj 更新artDialog自带按钮样式 end***********/
+
+* html .aui_ie6_select_mask { left:-1px!important; top:-1px!important; }
+
+.aui_grey .aui_icon { width:48px; height:48px; margin:10px 0 10px 10px; background-image:url(aero/icons_grey.png); background-repeat:no-repeat; }
+.aui_grey .art_alert { background-position:0 -96px; }
+.aui_grey .art_succeed { background-position:0 0;}
+.aui_grey .art_error { background-position:0 -48px; }
+.aui_grey .art_confirm { margin-right:10px; width:48px; height:48px; background-position:0 -144px; }

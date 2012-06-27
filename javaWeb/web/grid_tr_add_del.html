@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>grid 添加 删除行</title>
+    <meta charset="utf-8"/>
+    <style type="text/css">
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        body {
+            font-family: "宋体" Arial san-serif;
+        }
+        .grid-tr-add,.grid-tr-del{
+            background-image: url("cdn/images/grid_tr_add_del.png");
+            background-repeat: no-repeat;
+            display: inline-block;
+            width: 16px;
+            height: 16px;
+            cursor: pointer;
+        }
+        .grid-tr-add {
+            background-position: -10px -5px;
+        }
+        .grid-tr-del {
+            background-position: -38px -5px;
+        }
+        #con {
+            margin: 60px;
+            width: 44px;
+            height: 14px;
+            line-height: 14px;
+            padding: 5px 12px 3px 10px;
+            background-color: pink;
+            text-align: center;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+<div id="con">
+    <span class="grid-tr-add"></span>
+    <span class="grid-tr-del"></span>
+</div>
+<script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+<script>
+    $( "#con" ).bind( "click", function( event ){
+        var $target = $( event.target ),
+            className;
+        if ( $target.is( "span" ) ) {
+            className = $target.attr("class");
+            alert(className)
+        }
+    });
+</script>
+</body>
+</html>
