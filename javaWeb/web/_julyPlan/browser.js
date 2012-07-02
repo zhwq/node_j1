@@ -22,29 +22,30 @@ jui.fn.isIE = function() {
  * @return boolean
  */
 jui.fn.isChrome = function() {
-    return window.chrome && !!(navigator.userAgent.match(/chrome\/([\d.]+)/i));
+    return window.chrome && /chrome\/([\d.]+)/i.test( navigator.userAgent ) ;
 }
 /**
  * 判断，是否firefox浏览器
  * @return boolean
  */
 jui.fn.isFx = function() {
-    return !!(navigator.userAgent.match(/firefox\/([\d.]+)/i));
+    return /firefox\/([\d.]+)/i.test( navigator.userAgent );
 }
 /**
  * 判断，是否safari浏览器
  * @return boolean
  */
 jui.fn.isSafari = function() {
-    return !!(navigator.userAgent.match(/version\/([\d.]+).*safari/i));
+    return /version\/([\d.]+).*safari/i.test( navigator.userAgent );
 }
 /**
  * 判断，是否opera浏览器
  * @return boolean
  */
 jui.fn.isOpera = function() {
-    return !!(navigator.userAgent.match(/opera\/([\d.]+)/i));
+    return /opera\/([\d.]+)/i.test( navigator.userAgent );
 }
+
 //chrome多行文本  在本地才可编辑
 //test vs match
 /*
