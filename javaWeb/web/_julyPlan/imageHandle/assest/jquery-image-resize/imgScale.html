@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片缩放</title>
+    <meta charset="utf-8"/>
+    <script src="../../../jsLib/jquery-1.5.2.js"></script>
+    <script src="jquery.ae.image.resize.js"></script>
+</head>
+<body>
+<img src="../../images/b.jpg" id="imgA"/>
+<script>
+var $img = $("#imgA");
+//$img.aeImageResize({ "width": 300, "height": 400});
+function _absDemission( imgObj ) {
+//    if ( imgObj && imgObj.nodeName && imgObj.nodeName === "IMG" ) {
+        var ret = {};
+        ret.w = imgObj.getAttribute("w");
+        ret.h = imgObj.getAttribute("h");
+        if ( ret.w && ret.h ) return ret;
+        if ( 'naturalWidth' in /*(new Image)*/ imgObj ) {
+            ret.w = imgObj.naturalWidth;
+            ret.h = imgObj.naturalHeight;
+        } else {
+            var img = new Image;
+            imgObj.src = imgObj.src;
+            ret.w = img.width;
+            ret.h = img.height;
+        }
+        imgObj.setAttribute("w", ret.w);
+        imgObj.setAttribute("h", ret.h);
+        return ret;
+//    }
+}
+function imgScale( img, destWidth, destHeight ) {
+    //var destWidth,destHeight;//目标宽、高
+    var naturalWidth,naturalHeight;//原始宽高
+    var iWidth,iHeigth;//实际赋予宽高
+    var naturalRatio;// = naturalWidth/natrualHeight;//原始比例
+    var destRatio;// = destWidth/destHeight;//目标比例
+    var wh;//真实尺寸
+    if ( !destWidth && !destHeight ) {
+        return img;
+    }
+    if ( destWidth && destHeight ) {
+        destRatio = destHeight/destHeight;
+    }
+    //真实的高度
+    wh = _absDemission( img );
+    naturalWidth = wh.w;
+    naturalHeight = wh.h;
+    naturalRatio = naturalWidth/naturalHeight;
+
+    //如果目标宽、高缺1,则使用下面方法计算目标比例
+    if ( !destRatio ) {
+        if ( destHeight ) {
+            destRatio = naturalRatio +1;
+        } else {
+            destRatio = naturalRatio -1;
+        }
+    }
+    //如果目标宽、高比实际宽高小,则根据比例重新计算目标宽高
+    if ( ( destHeight &&  naturalHeight > destHeight )
+            || ( destWidth &&  naturalWidth > destWidth ) ) {
+        if ( naturalRatio > destRatio ) {
+            destHeight = naturalHeight * destWidth/naturalWidth;
+        } else {
+            destWidth = naturalWidth * destHeight/naturalHeight;
+        }
+    }
+    img.width = destWidth;
+    img.height = destHeight;
+}
+//触发
+//complete
+var img = document.images[0];
+img.onload = function(){
+    img.onload = null;
+    imgScale( img, 500,300);
+}
+//1.图片缩放
+//1.1图片缩放 按deltaWidth/deltaHeight = width/height;给定一次变化的单位量
+//2.定制容器的尺寸,设定宽高
+//3.待显示图片,等比缩放,填充容器
+//4.定制图片播放切换方式
+//5.自动、手动控制图片显示
+</script>
+</body>
+</html>

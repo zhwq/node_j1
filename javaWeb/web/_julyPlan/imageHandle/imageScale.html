@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>image等比缩放</title>
+    <meta charset="utf-8"/>
+    <style>
+        body {
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<img src="images/a.jpg" id="imgA"/>
+<script>
+function $id( id ) {
+    //querySelector css查询 ;IE7,IE8不支持
+    return /*document.querySelector( "#" + id ) ||*/ document.getElementById( id );
+}
+//获取Image对象的真实尺寸
+function getImgRealSize( imgObj ) {
+    if ( imgObj && imgObj.nodeName && imgObj.nodeName === "IMG" ) {
+        var ret = {};
+        ret.w = imgObj.getAttribute("w");
+        ret.h = imgObj.getAttribute("h");
+        if ( ret.w && ret.h ) return ret;
+        if ( 'naturalWidth' in /*(new Image)*/ imgObj ) {
+            ret.w = imgObj.naturalWidth;
+            ret.h = imgObj.naturalHeight;
+        } else {
+            var img = new Image;
+            imgObj.src = imgObj.src;
+            ret.w = img.width;
+            ret.h = img.height;
+        }
+        imgObj.setAttribute("w", ret.w);
+        imgObj.setAttribute("h", ret.h);
+        return ret;
+    }
+}
+var img = $id( "imgA" );
+
+</script>
+</body>
+</html>

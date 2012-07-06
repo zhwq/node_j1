@@ -1,0 +1,20 @@
+1,Image;canvas;
+2,图片的上传，预览，裁剪，压缩，等比缩放，旋转，懒加载，图片库，轮播
+http://www.zhangxinxu.com/wordpress/2010/01/%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC%E6%95%88%E6%9E%9C%E7%9A%84%E4%B8%80%E4%BA%9B%E7%A0%94%E7%A9%B6%E3%80%81jquery%E6%8F%92%E4%BB%B6%E5%8F%8A%E5%AE%9E%E4%BE%8B/
+http://weberpan.diandian.com/?tag=%E5%9B%BE%E7%89%87%E6%97%8B%E8%BD%AC
+http://www.cnblogs.com/cloudgamer/archive/2010/08/16/ImageTrans.html
+http://www.cnblogs.com/cancer_xu/archive/2011/02/13/1953149.html
+http://hi.baidu.com/mataofq/item/c50b97cc6b0e7a3845941673
+http://www.fy24h.com/category/jQuery.aspx
+http://ynial.iteye.com/blog/401558
+http://odyniec.net/projects/imgareaselect/
+https://developer.mozilla.org/en/DOM/HTMLImageElement
+http://www.w3.org/TR/html4/struct/objects.html
+http://www.javascriptkit.com/dhtmltutors/domattribute.shtml
+http://www.w3.org/TR/html5/the-img-element.html#htmlimageelement
+
+>>msdn ie filter matrix: http://msdn.microsoft.com/zh-cn/library/ms533014(v=vs.85).aspx
+>>rotate: http://ck-2036.iteye.com/blog/1288239
+http://www.frontif.com/2012/04/转ie下利用matrix滤镜实现绕中心点旋转/
+http://www.iteye.com/topic/743923
+http://discover.news.163.com/special/00014INC/discoverer.html

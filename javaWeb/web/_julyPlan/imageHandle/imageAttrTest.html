@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>image标签测试</title>
+    <meta charset="utf-8"/>
+    <style>
+        body {
+            margin: 0 auto;
+            text-align: center;
+        }
+        img {
+            /*clip to original使用Dx,Dy时不使用auto expand；clip to original*/
+            filter:progid:DXImageTransform.Microsoft.Matrix(sizingMethod='clip to original');
+        }
+    </style>
+</head>
+<body>
+<img src="images/a.jpg" id="imgA"/>   <!--width="410" height="538"-->
+<!--
+<img src="images/b.jpg" id="imgB"/>
+<img src="images/c.jpg" id="imgC"/>&lt;!&ndash; hidden="hidden"&ndash;&gt;
+-->
+<script>
+function $id( id ) {
+    //querySelector css查询 ;IE7,IE8不支持
+    return /*document.querySelector( "#" + id ) ||*/ document.getElementById( id );
+}
+//获取Image对象的真实尺寸
+function getImgRealSize( imgObj ) {
+    if ( imgObj && imgObj.nodeName && imgObj.nodeName === "IMG" ) {
+        var ret = {};
+        ret.w = imgObj.getAttribute("w");
+        ret.h = imgObj.getAttribute("h");
+        if ( ret.w && ret.h ) return ret;
+        if ( 'naturalWidth' in /*(new Image)*/ imgObj ) {
+            ret.w = imgObj.naturalWidth;
+            ret.h = imgObj.naturalHeight;
+        } else {
+            var img = new Image;
+            imgObj.src = imgObj.src;
+            ret.w = img.width;
+            ret.h = img.height;
+        }
+        imgObj.setAttribute("w", ret.w);
+        imgObj.setAttribute("h", ret.h);
+        return ret;
+    }
+}
+var img = $id( "imgA" );
+
+img.onload = function(){
+    img.onload = null;
+    var wh = getImgRealSize( img );
+    console.log( "宽：" + wh.w );
+    console.log( "高：" + wh.h );
+    var angle = 0;
+    setInterval( function(){
+        angle += 3;
+        rotate( img,angle);
+    },500);
+}
+
+// UA.core为浏览器核心,取值为trident,webkit,gecko,presto或undefined
+// UA.ie为ie浏览器版本号,取值5,6,7,8,9...
+// 如何判断浏览器本文不再描述,可以参考https://github.com/kissyteam/kissy/blob/master/src/ua/base.js
+// 或者也可采用其他特征来区分浏览器
+//http://ck-2036.iteye.com/blog/1288239
+/*var rotate = (function() {
+    switch (UA.core) {
+        case 'trident' :
+            return UA.ie < 9 ? return function(dom, angle) {
+            var rad = angle * (Math.PI / 180),
+                    filter = dom.filters.item('DXImageTransform.Microsoft.Matrix');
+            filter.Dx = (1 - Math.cos(Math.PI / 4 + rad) / Math.cos(Math.PI / 4)) * 0.5 * (dom.offsetWidth - 1);
+            filter.Dy = (1 - Math.sin(Math.PI / 4 + rad) / Math.cos(Math.PI / 4)) * 0.5 * (dom.offsetHeight - 1);
+            filter.M11 = Math.cos(rad);
+            filter.M12 = -1 * Math.sin(rad);
+            filter.M21 = Math.sin(rad);
+            filter.M22 = filter.M11;
+            filter.Enabled = true;
+        } : return function(dom, angle) {
+            dom.style.msTransform = 'rotate(' + angle + 'deg)';
+        };
+        case 'webkit' :
+            return function(dom, angle) {
+                dom.style.webkitTransform = 'rotate(' + angle + 'deg)';
+            };
+        case 'gecko' :
+            return function(dom, angle) {
+                dom.style.MozTransform = 'rotate(' + angle + 'deg)';
+            };
+        case 'presto' :
+            return function(dom, angle) {
+                dom.style.OTransform = 'rotate(' + angle + 'deg)';
+            };
+        default:
+            return function(dom, angle) {
+                dom.style.transform = 'rotate(' + angle + 'deg)';
+            };
+    }
+})();*/
+var isIE = function() {
+    var isIE = "ActiveXObject" in window;
+    if ( arguments.length === 0 ) {
+        return isIE;
+    } else {//7,8,9
+        return isIE && parseInt(arguments[0]) === ((navigator.userAgent.match(/msie ([\d.]+)/i))[1])>>0;
+    }
+};
+// 使用方法:
+/**
+ * 跨浏览器绕中心旋转
+ * @param dom HTMLElement
+ * @param angle 旋转的角度(顺时针方向)
+rotate(dom, angle);
+ */
+function rotate(dom, angle) {
+    var rad = angle * (Math.PI / 180);
+    if (isIE(7) || isIE(8) ) {
+        filter = dom.filters.item('DXImageTransform.Microsoft.Matrix');
+        //Dx，Dy不合auto expand同时使用,此时绕中心点旋转
+        filter.Dx = (1 - Math.cos(Math.PI / 4 + rad) / Math.cos(Math.PI / 4)) * 0.5 * (dom.offsetWidth - 1);
+        filter.Dy = (1 - Math.sin(Math.PI / 4 + rad) / Math.cos(Math.PI / 4)) * 0.5 * (dom.offsetHeight - 1);
+//        var wh = getImgRealSize( dom );
+//        var _w = wh.w;
+//        var _h = wh.h;
+//        filter.Dx=-_w/2*Math.cos(rad)+_h/2*Math.sin( rad )+_w/2;
+//        filter.Dy=-_w/2*Math.sin(rad)-_h/2*Math.cos( rad)+_h/2;
+        filter.M11 = Math.cos(rad);
+        filter.M12 = -1 * Math.sin(rad);
+        filter.M21 = Math.sin(rad);
+        filter.M22 = filter.M11;
+        filter.Enabled = true;
+       // filter.SizingMethod = "auto expand";
+    }
+    //IE9+
+    dom.style.msTransform = 'rotate(' + angle + 'deg)';
+    //webkit
+    dom.style.webkitTransform = 'rotate(' + angle + 'deg)';
+    //gecko
+    dom.style.MozTransform = 'rotate(' + angle + 'deg)';
+    // presto
+    dom.style.OTransform = 'rotate(' + angle + 'deg)';
+    //w3c
+    dom.style.transform = 'rotate(' + angle + 'deg)';
+};
+</script>
+</body>
+</html>
