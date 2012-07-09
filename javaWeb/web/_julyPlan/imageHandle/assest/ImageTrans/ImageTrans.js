@@ -5,348 +5,348 @@
  * Date: 2010-8-15
  */
 
-//ÈÝÆ÷¶ÔÏó
+//å®¹å™¨å¯¹è±¡
 var ImageTrans = function(container, options){
-	this._initialize( container, options );
-	this._initMode();
-	if ( this._support ) {
-		this._initContainer();
-		this._init();
-	} else {//Ä£Ê½²»Ö§³Ö
-		this.onError("not support");
-	}
+    this._initialize( container, options );
+    this._initMode();
+    if ( this._support ) {
+        this._initContainer();
+        this._init();
+    } else {//æ¨¡å¼ä¸æ”¯æŒ
+        this.onError("not support");
+    }
 };
 ImageTrans.prototype = {
-  //³õÊ¼»¯³ÌÐò
-  _initialize: function(container, options) {
-	var container = this._container = $$(container);
-	this._clientWidth = container.clientWidth;//±ä»»ÇøÓò¿í¶È
-	this._clientHeight = container.clientHeight;//±ä»»ÇøÓò¸ß¶È
-	this._img = new Image();//Í¼Æ¬¶ÔÏó
-	this._style = {};//±¸·ÝÑùÊ½
-	this._x = this._y = 1;//Ë®Æ½/´¹Ö±±ä»»²ÎÊý
-	this._radian = 0;//Ðý×ª±ä»»²ÎÊý
-	this._support = false;//ÊÇ·ñÖ§³Ö±ä»»
-	this._init = this._load = this._show = this._dispose = $$.emptyFunction;
-	
-	var opt = this._setOptions(options);
-	
-	this._zoom = opt.zoom;
-	
-	this.onPreLoad = opt.onPreLoad;
-	this.onLoad = opt.onLoad;
-	this.onError = opt.onError;
-	
-	this._LOAD = $$F.bind( function(){
-		this.onLoad(); this._load(); this.reset();
-		this._img.style.visibility = "visible";
-	}, this );
-	
-	$$CE.fireEvent( this, "init" );
-  },
-  //ÉèÖÃÄ¬ÈÏÊôÐÔ
-  _setOptions: function(options) {
-    this.options = {//Ä¬ÈÏÖµ
-		mode:		"css3|filter|canvas",
-		zoom:		.1,//Ëõ·Å±ÈÂÊ
-		onPreLoad:	function(){},//Í¼Æ¬¼ÓÔØÇ°Ö´ÐÐ
-		onLoad:		function(){},//Í¼Æ¬¼ÓÔØºóÖ´ÐÐ
-		onError:	function(err){}//³ö´íÊ±Ö´ÐÐ
-    };
-    return $$.extend(this.options, options || {});
-  },
-  //Ä£Ê½ÉèÖÃ
-  _initMode: function() {
-	var modes = ImageTrans.modes;
-	this._support = $$A.some( this.options.mode.toLowerCase().split("|"), function(mode){
-		mode = modes[ mode ];
-		if ( mode && mode.support ) {
-			mode.init && (this._init = mode.init);//³õÊ¼»¯Ö´ÐÐ³ÌÐò
-			mode.load && (this._load = mode.load);//¼ÓÔØÍ¼Æ¬Ö´ÐÐ³ÌÐò
-			mode.show && (this._show = mode.show);//±ä»»ÏÔÊ¾³ÌÐò
-			mode.dispose && (this._dispose = mode.dispose);//Ïú»Ù³ÌÐò
-			//À©Õ¹±ä»»·½·¨
-			$$A.forEach( ImageTrans.transforms, function(transform, name){
-				this[ name ] = function(){
-					transform.apply( this, [].slice.call(arguments) );
-					this._show();
-				}
-			}, this );
-			return true;
-		}
-	}, this );
-  },
-  //³õÊ¼»¯ÈÝÆ÷¶ÔÏó
-  _initContainer: function() {
-	var container = this._container, style = container.style, position = $$D.getStyle( container, "position" );
-	this._style = { "position": style.position, "overflow": style.overflow };//±¸·ÝÑùÊ½
-	if ( position != "relative" && position != "absolute" ) { style.position = "relative"; }
-	style.overflow = "hidden";
-	$$CE.fireEvent( this, "initContainer" );
-  },
-  //¼ÓÔØÍ¼Æ¬
-  load: function(src) {
-	if ( this._support ) {
-		var img = this._img, oThis = this;
-		img.onload || ( img.onload = this._LOAD );
-		img.onerror || ( img.onerror = function(){ oThis.onError("err image"); } );
-		img.style.visibility = "hidden";
-		this.onPreLoad();
-		img.src = src;
-	}
-  },
-  //ÖØÖÃ
-  reset: function() {
-	if ( this._support ) {
-		this._x = this._y = 1; this._radian = 0;
-		this._show();
-	}
-  },
-  //Ïú»Ù³ÌÐò
-  dispose: function() {
-	if ( this._support ) {
-		this._dispose();
-		$$CE.fireEvent( this, "dispose" );
-		$$D.setStyle( this._container, this._style );//»Ö¸´ÑùÊ½
-		this._container = this._img = this._img.onload = this._img.onerror = this._LOAD = null;
-	}
-  }
+    //åˆå§‹åŒ–ç¨‹åº
+    _initialize: function(container, options) {
+        var container = this._container = $$(container);
+        this._clientWidth = container.clientWidth;//å˜æ¢åŒºåŸŸå®½åº¦
+        this._clientHeight = container.clientHeight;//å˜æ¢åŒºåŸŸé«˜åº¦
+        this._img = new Image();//å›¾ç‰‡å¯¹è±¡
+        this._style = {};//å¤‡ä»½æ ·å¼
+        this._x = this._y = 1;//æ°´å¹³/åž‚ç›´å˜æ¢å‚æ•°
+        this._radian = 0;//æ—‹è½¬å˜æ¢å‚æ•°
+        this._support = false;//æ˜¯å¦æ”¯æŒå˜æ¢
+        this._init = this._load = this._show = this._dispose = $$.emptyFunction;
+
+        var opt = this._setOptions(options);
+
+        this._zoom = opt.zoom;
+
+        this.onPreLoad = opt.onPreLoad;
+        this.onLoad = opt.onLoad;
+        this.onError = opt.onError;
+
+        this._LOAD = $$F.bind( function(){
+            this.onLoad(); this._load(); this.reset();
+            this._img.style.visibility = "visible";
+        }, this );
+
+        $$CE.fireEvent( this, "init" );
+    },
+    //è®¾ç½®é»˜è®¤å±žæ€§
+    _setOptions: function(options) {
+        this.options = {//é»˜è®¤å€¼
+            mode:		"css3|filter|canvas",
+            zoom:		.1,//ç¼©æ”¾æ¯”çŽ‡
+            onPreLoad:	function(){},//å›¾ç‰‡åŠ è½½å‰æ‰§è¡Œ
+            onLoad:		function(){},//å›¾ç‰‡åŠ è½½åŽæ‰§è¡Œ
+            onError:	function(err){}//å‡ºé”™æ—¶æ‰§è¡Œ
+        };
+        return $$.extend(this.options, options || {});
+    },
+    //æ¨¡å¼è®¾ç½®
+    _initMode: function() {
+        var modes = ImageTrans.modes;
+        this._support = $$A.some( this.options.mode.toLowerCase().split("|"), function(mode){
+            mode = modes[ mode ];
+            if ( mode && mode.support ) {
+                mode.init && (this._init = mode.init);//åˆå§‹åŒ–æ‰§è¡Œç¨‹åº
+                mode.load && (this._load = mode.load);//åŠ è½½å›¾ç‰‡æ‰§è¡Œç¨‹åº
+                mode.show && (this._show = mode.show);//å˜æ¢æ˜¾ç¤ºç¨‹åº
+                mode.dispose && (this._dispose = mode.dispose);//é”€æ¯ç¨‹åº
+                //æ‰©å±•å˜æ¢æ–¹æ³•
+                $$A.forEach( ImageTrans.transforms, function(transform, name){
+                    this[ name ] = function(){
+                        transform.apply( this, [].slice.call(arguments) );
+                        this._show();
+                    }
+                }, this );
+                return true;
+            }
+        }, this );
+    },
+    //åˆå§‹åŒ–å®¹å™¨å¯¹è±¡
+    _initContainer: function() {
+        var container = this._container, style = container.style, position = $$D.getStyle( container, "position" );
+        this._style = { "position": style.position, "overflow": style.overflow };//å¤‡ä»½æ ·å¼
+        if ( position != "relative" && position != "absolute" ) { style.position = "relative"; }
+        style.overflow = "hidden";
+        $$CE.fireEvent( this, "initContainer" );
+    },
+    //åŠ è½½å›¾ç‰‡
+    load: function(src) {
+        if ( this._support ) {
+            var img = this._img, oThis = this;
+            img.onload || ( img.onload = this._LOAD );
+            img.onerror || ( img.onerror = function(){ oThis.onError("err image"); } );
+            img.style.visibility = "hidden";
+            this.onPreLoad();
+            img.src = src;
+        }
+    },
+    //é‡ç½®
+    reset: function() {
+        if ( this._support ) {
+            this._x = this._y = 1; this._radian = 0;
+            this._show();
+        }
+    },
+    //é”€æ¯ç¨‹åº
+    dispose: function() {
+        if ( this._support ) {
+            this._dispose();
+            $$CE.fireEvent( this, "dispose" );
+            $$D.setStyle( this._container, this._style );//æ¢å¤æ ·å¼
+            this._container = this._img = this._img.onload = this._img.onerror = this._LOAD = null;
+        }
+    }
 };
-//±ä»»Ä£Ê½
+//å˜æ¢æ¨¡å¼
 ImageTrans.modes = function(){
-	var css3Transform;//ccs3±ä»»ÑùÊ½
-	//³õÊ¼»¯Í¼Æ¬¶ÔÏóº¯Êý
-	function initImg(img, container) {
-		$$D.setStyle( img, {
-			position: "absolute",
-			border: 0, padding: 0, margin: 0, width: "auto", height: "auto",//ÖØÖÃÑùÊ½
-			visibility: "hidden"//¼ÓÔØÇ°Òþ²Ø
-		});
-		container.appendChild( img );
-	}
-	//»ñÈ¡±ä»»²ÎÊýº¯Êý
-	function getMatrix(radian, x, y) {
-		var Cos = Math.cos(radian), Sin = Math.sin(radian);
-		return {
-			M11: Cos * x, M12:-Sin * y,
-			M21: Sin * x, M22: Cos * y
-		};
-	}
-	return {
-		css3: {//css3ÉèÖÃ
-			support: function(){
-				var style = document.createElement("div").style;
-				return $$A.some(
-					[ "transform", "MozTransform", "webkitTransform", "OTransform" ],
-					function(css){ if ( css in style ) {
-						css3Transform = css; return true;
-					}});
-			}(),
-			init: function() { initImg( this._img, this._container ); },
-			load: function(){
-				var img = this._img;
-				$$D.setStyle( img, {//¾ÓÖÐ
-					top: ( this._clientHeight - img.height ) / 2 + "px",
-					left: ( this._clientWidth - img.width ) / 2 + "px",
-					visibility: "visible"
-				});
-			},
-			show: function() {
-				var matrix = getMatrix( this._radian, this._y, this._x );
-				//ÉèÖÃ±äÐÎÑùÊ½
-				this._img.style[ css3Transform ] = "matrix("
-					+ matrix.M11.toFixed(16) + "," + matrix.M21.toFixed(16) + ","
-					+ matrix.M12.toFixed(16) + "," + matrix.M22.toFixed(16) + ", 0, 0)";
-			},
-			dispose: function(){ this._container.removeChild(this._img); }
-		},
-		filter: {//ÂË¾µÉèÖÃ
-			support: function(){ return "filters" in document.createElement("div"); }(),
-			init: function() {
-				initImg( this._img, this._container );
-				//ÉèÖÃÂË¾µ
-				this._img.style.filter = "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand')";
-			},
-			load: function(){
-				this._img.onload = null;//·ÀÖ¹ieÖØ¸´¼ÓÔØgifµÄbug
-				this._img.style.visibility = "visible";
-			},
-			show: function() {
-				var img = this._img;
-				//ÉèÖÃÂË¾µ
-				$$.extend(
-					img.filters.item("DXImageTransform.Microsoft.Matrix"),
-					getMatrix( this._radian, this._y, this._x )
-				);
-				//±£³Ö¾ÓÖÐ
-				img.style.top = ( this._clientHeight - img.offsetHeight ) / 2 + "px";
-				img.style.left = ( this._clientWidth - img.offsetWidth ) / 2 + "px";
-			},
-			dispose: function(){ this._container.removeChild(this._img); }
-		},
-		canvas: {//canvasÉèÖÃ
-			support: function(){ return "getContext" in document.createElement('canvas'); }(),
-			init: function() {
-				var canvas = this._canvas = document.createElement('canvas'),
-					context = this._context = canvas.getContext('2d');
-				//ÑùÊ½ÉèÖÃ
-				$$D.setStyle( canvas, { position: "absolute", left: 0, top: 0 } );
-				canvas.width = this._clientWidth; canvas.height = this._clientHeight;
-				this._container.appendChild(canvas);
-			},
-			show: function(){
-				var img = this._img, context = this._context,
-					clientWidth = this._clientWidth, clientHeight = this._clientHeight;
-				//canvas±ä»»
-				context.save();
-				context.clearRect( 0, 0, clientWidth, clientHeight );//Çå¿ÕÄÚÈÝ
-				context.translate( clientWidth / 2 , clientHeight / 2 );//ÖÐÐÄ×ø±ê
-				context.rotate( this._radian );//Ðý×ª
-				context.scale( this._y, this._x );//Ëõ·Å
-				context.drawImage( img, -img.width / 2, -img.height / 2 );//¾ÓÖÐ»­Í¼
-				context.restore();
-			},
-			dispose: function(){
-				this._container.removeChild( this._canvas );
-				this._canvas = this._context = null;
-			}
-		}
-	};
+    var css3Transform;//ccs3å˜æ¢æ ·å¼
+    //åˆå§‹åŒ–å›¾ç‰‡å¯¹è±¡å‡½æ•°
+    function initImg(img, container) {
+        $$D.setStyle( img, {
+            position: "absolute",
+            border: 0, padding: 0, margin: 0, width: "auto", height: "auto",//é‡ç½®æ ·å¼
+            visibility: "hidden"//åŠ è½½å‰éšè—
+        });
+        container.appendChild( img );
+    }
+    //èŽ·å–å˜æ¢å‚æ•°å‡½æ•°
+    function getMatrix(radian, x, y) {
+        var Cos = Math.cos(radian), Sin = Math.sin(radian);
+        return {
+            M11: Cos * x, M12:-Sin * y,
+            M21: Sin * x, M22: Cos * y
+        };
+    }
+    return {
+        css3: {//css3è®¾ç½®
+            support: function(){
+                var style = document.createElement("div").style;
+                return $$A.some(
+                    [ "transform", "MozTransform", "webkitTransform", "OTransform" ],
+                    function(css){ if ( css in style ) {
+                        css3Transform = css; return true;
+                    }});
+            }(),
+            init: function() { initImg( this._img, this._container ); },
+            load: function(){
+                var img = this._img;
+                $$D.setStyle( img, {//å±…ä¸­
+                    top: ( this._clientHeight - img.height ) / 2 + "px",
+                    left: ( this._clientWidth - img.width ) / 2 + "px",
+                    visibility: "visible"
+                });
+            },
+            show: function() {
+                var matrix = getMatrix( this._radian, this._y, this._x );
+                //è®¾ç½®å˜å½¢æ ·å¼
+                this._img.style[ css3Transform ] = "matrix("
+                    + matrix.M11.toFixed(16) + "," + matrix.M21.toFixed(16) + ","
+                    + matrix.M12.toFixed(16) + "," + matrix.M22.toFixed(16) + ", 0, 0)";
+            },
+            dispose: function(){ this._container.removeChild(this._img); }
+        },
+        filter: {//æ»¤é•œè®¾ç½®
+            support: function(){ return "filters" in document.createElement("div"); }(),
+            init: function() {
+                initImg( this._img, this._container );
+                //è®¾ç½®æ»¤é•œ
+                this._img.style.filter = "progid:DXImageTransform.Microsoft.Matrix(SizingMethod='auto expand')";
+            },
+            load: function(){
+                this._img.onload = null;//é˜²æ­¢ieé‡å¤åŠ è½½gifçš„bug
+                this._img.style.visibility = "visible";
+            },
+            show: function() {
+                var img = this._img;
+                //è®¾ç½®æ»¤é•œ
+                $$.extend(
+                    img.filters.item("DXImageTransform.Microsoft.Matrix"),
+                    getMatrix( this._radian, this._y, this._x )
+                );
+                //ä¿æŒå±…ä¸­
+                img.style.top = ( this._clientHeight - img.offsetHeight ) / 2 + "px";
+                img.style.left = ( this._clientWidth - img.offsetWidth ) / 2 + "px";
+            },
+            dispose: function(){ this._container.removeChild(this._img); }
+        },
+        canvas: {//canvasè®¾ç½®
+            support: function(){ return "getContext" in document.createElement('canvas'); }(),
+            init: function() {
+                var canvas = this._canvas = document.createElement('canvas'),
+                    context = this._context = canvas.getContext('2d');
+                //æ ·å¼è®¾ç½®
+                $$D.setStyle( canvas, { position: "absolute", left: 0, top: 0 } );
+                canvas.width = this._clientWidth; canvas.height = this._clientHeight;
+                this._container.appendChild(canvas);
+            },
+            show: function(){
+                var img = this._img, context = this._context,
+                    clientWidth = this._clientWidth, clientHeight = this._clientHeight;
+                //canvaså˜æ¢
+                context.save();
+                context.clearRect( 0, 0, clientWidth, clientHeight );//æ¸…ç©ºå†…å®¹
+                context.translate( clientWidth / 2 , clientHeight / 2 );//ä¸­å¿ƒåæ ‡
+                context.rotate( this._radian );//æ—‹è½¬
+                context.scale( this._y, this._x );//ç¼©æ”¾
+                context.drawImage( img, -img.width / 2, -img.height / 2 );//å±…ä¸­ç”»å›¾
+                context.restore();
+            },
+            dispose: function(){
+                this._container.removeChild( this._canvas );
+                this._canvas = this._context = null;
+            }
+        }
+    };
 }();
-//±ä»»·½·¨
+//å˜æ¢æ–¹æ³•
 ImageTrans.transforms = {
-  //´¹Ö±·­×ª
-  vertical: function() {
-	this._radian = Math.PI - this._radian; this._y *= -1;
-  },
-  //Ë®Æ½·­×ª
-  horizontal: function() {
-	this._radian = Math.PI - this._radian; this._x *= -1;
-  },
-  //¸ù¾Ý»¡¶ÈÐý×ª
-  rotate: function(radian) { this._radian = radian; },
-  //Ïò×ó×ª90¶È
-  left: function() { this._radian -= Math.PI/2; },
-  //ÏòÓÒ×ª90¶È
-  right: function() { this._radian += Math.PI/2; },
-  //¸ù¾Ý½Ç¶ÈÐý×ª
-  rotatebydegress: function(degress) { this._radian = degress * Math.PI/180; },
-  //Ëõ·Å
-  scale: function () {
-	function getZoom(scale, zoom) {
-		return	scale > 0 && scale >-zoom ? zoom :
-				scale < 0 && scale < zoom ?-zoom : 0;
-	}
-	return function(zoom) { if( zoom ){
-		var hZoom = getZoom( this._y, zoom ), vZoom = getZoom( this._x, zoom );
-		if ( hZoom && vZoom ) {
-			this._y += hZoom; this._x += vZoom;
-		}
-	}}
-  }(),
-  //·Å´ó
-  zoomin: function() { this.scale( Math.abs(this._zoom) ); },
-  //ËõÐ¡
-  zoomout: function() { this.scale( -Math.abs(this._zoom) ); }
+    //åž‚ç›´ç¿»è½¬
+    vertical: function() {
+        this._radian = Math.PI - this._radian; this._y *= -1;
+    },
+    //æ°´å¹³ç¿»è½¬
+    horizontal: function() {
+        this._radian = Math.PI - this._radian; this._x *= -1;
+    },
+    //æ ¹æ®å¼§åº¦æ—‹è½¬
+    rotate: function(radian) { this._radian = radian; },
+    //å‘å·¦è½¬90åº¦
+    left: function() { this._radian -= Math.PI/2; },
+    //å‘å³è½¬90åº¦
+    right: function() { this._radian += Math.PI/2; },
+    //æ ¹æ®è§’åº¦æ—‹è½¬
+    rotatebydegress: function(degress) { this._radian = degress * Math.PI/180; },
+    //ç¼©æ”¾
+    scale: function () {
+        function getZoom(scale, zoom) {
+            return	scale > 0 && scale >-zoom ? zoom :
+                scale < 0 && scale < zoom ?-zoom : 0;
+        }
+        return function(zoom) { if( zoom ){
+            var hZoom = getZoom( this._y, zoom ), vZoom = getZoom( this._x, zoom );
+            if ( hZoom && vZoom ) {
+                this._y += hZoom; this._x += vZoom;
+            }
+        }}
+    }(),
+    //æ”¾å¤§
+    zoomin: function() { this.scale( Math.abs(this._zoom) ); },
+    //ç¼©å°
+    zoomout: function() { this.scale( -Math.abs(this._zoom) ); }
 };
 
 
-//ÍÏ¶¯Ðý×ªÀ©Õ¹
+//æ‹–åŠ¨æ—‹è½¬æ‰©å±•
 ImageTrans.prototype._initialize = (function(){
-	var init = ImageTrans.prototype._initialize,
-		methods = {
-			"init": function(){
-				this._mrX = this._mrY = this._mrRadian = 0;
-				this._mrSTART = $$F.bind( start, this );
-				this._mrMOVE = $$F.bind( move, this );
-				this._mrSTOP = $$F.bind( stop, this );
-			},
-			"initContainer": function(){
-				$$E.addEvent( this._container, "mousedown", this._mrSTART );
-			},
-			"dispose": function(){
-				$$E.removeEvent( this._container, "mousedown", this._mrSTART );
-				this._mrSTOP();
-				this._mrSTART = this._mrMOVE = this._mrSTOP = null;
-			}
-		};
-	//¿ªÊ¼º¯Êý
-	function start(e){
-		var rect = $$D.clientRect( this._container );
-		this._mrX = rect.left + this._clientWidth / 2;
-		this._mrY = rect.top + this._clientHeight / 2;
-		this._mrRadian = Math.atan2( e.clientY - this._mrY, e.clientX - this._mrX ) - this._radian;
-		$$E.addEvent( document, "mousemove", this._mrMOVE );
-		$$E.addEvent( document, "mouseup", this._mrSTOP );
-		if ( $$B.ie ) {
-			var container = this._container;
-			$$E.addEvent( container, "losecapture", this._mrSTOP );
-			container.setCapture();
-		} else {
-			$$E.addEvent( window, "blur", this._mrSTOP );
-			e.preventDefault();
-		}
-	};
-	//ÍÏ¶¯º¯Êý
-	function move(e){
-		this.rotate( Math.atan2( e.clientY - this._mrY, e.clientX - this._mrX ) - this._mrRadian );
-		window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
-	};
-	//Í£Ö¹º¯Êý
-	function stop(){
-		$$E.removeEvent( document, "mousemove", this._mrMOVE );
-		$$E.removeEvent( document, "mouseup", this._mrSTOP );
-		if ( $$B.ie ) {
-			var container = this._container;
-			$$E.removeEvent( container, "losecapture", this._mrSTOP );
-			container.releaseCapture();
-		} else {
-			$$E.removeEvent( window, "blur", this._mrSTOP );
-		};
-	};
-	return function(){
-		var options = arguments[1];
-		if ( !options || options.mouseRotate !== false ) {
-			//À©Õ¹¹³×Ó
-			$$A.forEach( methods, function( method, name ){
-				$$CE.addEvent( this, name, method );
-			}, this );
-		}
-		init.apply( this, arguments );
-	}
+    var init = ImageTrans.prototype._initialize,
+        methods = {
+            "init": function(){
+                this._mrX = this._mrY = this._mrRadian = 0;
+                this._mrSTART = $$F.bind( start, this );
+                this._mrMOVE = $$F.bind( move, this );
+                this._mrSTOP = $$F.bind( stop, this );
+            },
+            "initContainer": function(){
+                $$E.addEvent( this._container, "mousedown", this._mrSTART );
+            },
+            "dispose": function(){
+                $$E.removeEvent( this._container, "mousedown", this._mrSTART );
+                this._mrSTOP();
+                this._mrSTART = this._mrMOVE = this._mrSTOP = null;
+            }
+        };
+    //å¼€å§‹å‡½æ•°
+    function start(e){
+        var rect = $$D.clientRect( this._container );
+        this._mrX = rect.left + this._clientWidth / 2;
+        this._mrY = rect.top + this._clientHeight / 2;
+        this._mrRadian = Math.atan2( e.clientY - this._mrY, e.clientX - this._mrX ) - this._radian;
+        $$E.addEvent( document, "mousemove", this._mrMOVE );
+        $$E.addEvent( document, "mouseup", this._mrSTOP );
+        if ( $$B.ie ) {
+            var container = this._container;
+            $$E.addEvent( container, "losecapture", this._mrSTOP );
+            container.setCapture();
+        } else {
+            $$E.addEvent( window, "blur", this._mrSTOP );
+            e.preventDefault();
+        }
+    };
+    //æ‹–åŠ¨å‡½æ•°
+    function move(e){
+        this.rotate( Math.atan2( e.clientY - this._mrY, e.clientX - this._mrX ) - this._mrRadian );
+        window.getSelection ? window.getSelection().removeAllRanges() : document.selection.empty();
+    };
+    //åœæ­¢å‡½æ•°
+    function stop(){
+        $$E.removeEvent( document, "mousemove", this._mrMOVE );
+        $$E.removeEvent( document, "mouseup", this._mrSTOP );
+        if ( $$B.ie ) {
+            var container = this._container;
+            $$E.removeEvent( container, "losecapture", this._mrSTOP );
+            container.releaseCapture();
+        } else {
+            $$E.removeEvent( window, "blur", this._mrSTOP );
+        };
+    };
+    return function(){
+        var options = arguments[1];
+        if ( !options || options.mouseRotate !== false ) {
+            //æ‰©å±•é’©å­
+            $$A.forEach( methods, function( method, name ){
+                $$CE.addEvent( this, name, method );
+            }, this );
+        }
+        init.apply( this, arguments );
+    }
 })();
 
-//¹öÂÖËõ·ÅÀ©Õ¹
+//æ»šè½®ç¼©æ”¾æ‰©å±•
 ImageTrans.prototype._initialize = (function(){
-	var init = ImageTrans.prototype._initialize,
-		mousewheel = $$B.firefox ? "DOMMouseScroll" : "mousewheel",
-		methods = {
-			"init": function(){
-				this._mzZoom = $$F.bind( zoom, this );
-			},
-			"initContainer": function(){
-				$$E.addEvent( this._container, mousewheel, this._mzZoom );
-			},
-			"dispose": function(){
-				$$E.removeEvent( this._container, mousewheel, this._mzZoom );
-				this._mzZoom = null;
-			}
-		};
-	//Ëõ·Åº¯Êý
-	function zoom(e){
-		this.scale((
-			e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3
-		) * Math.abs(this._zoom) );
-		e.preventDefault();
-	};
-	return function(){
-		var options = arguments[1];
-		if ( !options || options.mouseZoom !== false ) {
-			//À©Õ¹¹³×Ó
-			$$A.forEach( methods, function( method, name ){
-				$$CE.addEvent( this, name, method );
-			}, this );
-		}
-		init.apply( this, arguments );
-	}
+    var init = ImageTrans.prototype._initialize,
+        mousewheel = $$B.firefox ? "DOMMouseScroll" : "mousewheel",
+        methods = {
+            "init": function(){
+                this._mzZoom = $$F.bind( zoom, this );
+            },
+            "initContainer": function(){
+                $$E.addEvent( this._container, mousewheel, this._mzZoom );
+            },
+            "dispose": function(){
+                $$E.removeEvent( this._container, mousewheel, this._mzZoom );
+                this._mzZoom = null;
+            }
+        };
+    //ç¼©æ”¾å‡½æ•°
+    function zoom(e){
+        this.scale((
+            e.wheelDelta ? e.wheelDelta / (-120) : (e.detail || 0) / 3
+            ) * Math.abs(this._zoom) );
+        e.preventDefault();
+    };
+    return function(){
+        var options = arguments[1];
+        if ( !options || options.mouseZoom !== false ) {
+            //æ‰©å±•é’©å­
+            $$A.forEach( methods, function( method, name ){
+                $$CE.addEvent( this, name, method );
+            }, this );
+        }
+        init.apply( this, arguments );
+    }
 })();
