@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>图片轮播</title>
+  <meta charset="utf-8"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: "\u5B8B\u4F53", sans-serif; /*宋体*/
+      font-size: 12px;
+      text-align: center;/*仅供测试*/
+    }
+    .slide-container {
+      margin: 30px auto;
+    }
+    /*-----------------------------*/
+    .slide-container {
+      overflow: hidden;
+      display: block;
+      /*position: relative;*/
+    }
+    .slide-container .slide-controller {
+      overflow: hidden;
+      display: block;
+      position: relative;
+      height: 350px;/*子节点绝对定位,需要手动设定高度支撑*/
+      width: 876px;/*2*438*/
+      /*height: 根据内容定高vs限定高度缩放图片*/
+    }
+    .slide-container .slide-controller .slide {
+      overflow: hidden;
+      position: absolute; /*方案1*/
+      left: 438px;
+      top: 0;
+      display: block;/*初始都为none;*/
+      /* opacity: 1;  不透明*/
+      z-index: 1;
+    }
+  </style>
+  <script src="../assest/blockSlide/js/jquery-1.7.2.js"></script>
+
+</head>
+<body>
+  <div class="slide-container">
+    <div class="slide-controller">
+      <div class="slide" style="z-index: 0;display: none;">
+        <img src="images/1.png" width="438" height="350"/>
+      </div><!--/.slide[可选]幻灯片(帧)-->
+      <div class="slide">
+        <img src="images/2.png" width="438" height="350"/>
+      </div>
+      <div class="slide">
+        <img src="images/3.png" width="438" height="350"/>
+      </div>
+      <div class="slide">
+        <img src="images/4.png" width="438" height="350"/>
+      </div>
+    </div><!--/.slide-controller-->
+  </div><!--/.slide-container-->
+<script>
+  $(function(){
+    var $slideContainer = $("div.slide-container");
+    setInterval( function(){
+      var $slides = $slideContainer.find("div.slide");
+      var $current = $slides.not( ":hidden" );//hidden只对display和visibility有用;2.$current.is(":last")为假
+      var $target = ($target = $current.next() ).size() != 0 ?$target : $slides.eq(0);
+      var _showOpt = {
+        "z-index": 1,
+        "display": "block"
+      };
+      var _hiddenOpt = {
+        "z-index": 0,
+        "display": "none"
+      };
+      $current.css( _hiddenOpt );
+      $target.css( _showOpt );
+      //？动画效果 过渡//定位关系做动画效果//别的
+    }, 2400 ) ;
+  });
+  /**
+   * 1.8a1,siblings 有错
+    */
+</script>
+</body>
+</html>
