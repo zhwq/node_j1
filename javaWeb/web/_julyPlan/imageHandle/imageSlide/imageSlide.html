@@ -36,7 +36,7 @@
       left: 438px;
       top: 0;
       display: block;/*初始都为none;*/
-      /* opacity: 1;  不透明*/
+      opacity: 1;  /*不透明*/
       z-index: 1;
     }
   </style>
@@ -63,6 +63,7 @@
 <script>
   $(function(){
     var $slideContainer = $("div.slide-container");
+    var $slideController = $slideContainer.find(">div.slide-controller");
     setInterval( function(){
       var $slides = $slideContainer.find("div.slide");
       var $current = $slides.not( ":hidden" );//hidden只对display和visibility有用;2.$current.is(":last")为假
@@ -75,13 +76,21 @@
         "z-index": 0,
         "display": "none"
       };
-      $current.css( _hiddenOpt );
-      $target.css( _showOpt );
+//      $slideController.animate( {opacity:0},1000,function(){
+//        $slideController.css({opacity:1});
+//        $current.css( _hiddenOpt );
+//        $target.css( _showOpt );
+//      });
+      $slideController.fadeOut(1000,function(){
+        $slideController.fadeIn();
+        $current.css( _hiddenOpt );
+        $target.css( _showOpt );
+      });
       //？动画效果 过渡//定位关系做动画效果//别的
     }, 2400 ) ;
   });
   /**
-   * 1.8a1,siblings 有错
+   * 1.8a1,siblings 有错?
     */
 </script>
 </body>

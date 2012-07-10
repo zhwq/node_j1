@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>数据类型检测</title>
+  <meta charset="utf-8"/>
+  <script src="../version/version.js"></script>
+  <script src="dataType.js"></script>
+</head>
+<body>
+<script>
+    console.group("datatype");
+    var a = undefined;
+    console.log( jui.isUndefined( a ));
+    a = null;
+    console.log( jui.isNull( a ));
+    a = "| a b|";
+    console.log( a + "-->" + jui.isNotEmpty( a ) );
+    a = "|ab|";
+    console.log( a + "-->" + jui.isNotEmpty( a ) );
+    a = 123.45;
+    console.log( a + "-->" + jui.isNum( a ) );
+    console.log( 0 + "-->" + jui.isNum( 0 ) );
+    a = 100;
+    console.log( a + "-->" + jui.isInteger( a ) );
+    console.log( 0 + "-->" + jui.isInteger(0 ) );
+    a = +100;
+    console.log( a + "-->" + jui.isInteger( a ) );
+    console.log( 0 + "-->" + jui.isInteger(0 ) );
+    a = -100;
+    console.log( a + "-->" + jui.isInteger( a ) );
+    console.log( 0 + "-->" + jui.isInteger(0 ) );
+    a = -0.1;
+    console.log( a + "-->" + jui.isDecimal( a ) );
+    console.log( 0 + "-->" + jui.isDecimal( 0 ) );
+    a = .1;
+    console.log( a + "-->" + jui.isDecimal( a ) );
+    console.log( 0 + "-->" + jui.isDecimal( 0 ) );
+    console.groupEnd();
+</script>
+</body>
+</html>

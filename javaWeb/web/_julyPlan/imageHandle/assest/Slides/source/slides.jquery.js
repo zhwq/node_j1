@@ -131,7 +131,7 @@
 
                     // fade animation  淡出效果
                     if (effect === 'fade') {
-                        // fade animation with crossfade
+                        // fade animation with crossfade 效果不明显
                         if (option.crossfade) {
                             // put hidden next above current
                             control.children(':eq('+ next +')', elem).css({
@@ -199,7 +199,7 @@
                             });
                         }
                         // slide animation
-                    } else { //滑动幻灯动画
+                    } else { //滑动幻灯动画#2
                         // move next slide to right of previous
                         control.children(':eq('+ next +')').css({
                             left: position,
@@ -231,6 +231,8 @@
                             // if fixed height
                         } else {
                             // animate control
+                            //动画过程：动画控制,幻灯容器定义左移一个幻灯的宽度-//左右移动、正值-负值
+                            //动画回调: 重置+显示控制
                             control.animate({
                                 left: direction
                             },option.slideSpeed, option.slideEasing, function(){
@@ -251,6 +253,7 @@
                                 });
                                 // end of animation
                                 option.animationComplete(next + 1);
+                                //动画完成
                                 active = false;
                             });
                         }
@@ -548,9 +551,9 @@
         play: 0, // number, Autoplay slideshow, a positive number will set to true and be the time between slide animation in milliseconds
         pause: 0, // number, Pause slideshow on click of next/prev or pagination. A positive number will set to true and be the time of pause in milliseconds
         hoverPause: false, // 布尔型 设置成ture 鼠标悬浮时会暂停动画
-        autoHeight: false, // 布尔型 设置成ture将自适应高度
+        autoHeight: false, // 布尔型 设置成ture将自适应高度,此时容器div.slide_container的高度根据图片的变化,div.slide_control的高度自动
         autoHeightSpeed: 350, // number, Set auto height animation time in milliseconds
-        bigTarget: false, // 布尔型 设置成true后点击一张图片将链接到下一张图片
+        bigTarget: false, // 布尔型 设置成true后点击一张图片将链接到下一张图片 注意img父节点a标签的点击事件
         animationStart: function(){}, // 动画执行开始前调用的方法
         animationComplete: function(){}, // 动画执行完毕后的回调方法
         slidesLoaded: function() {} // 当幻灯片都加载好后调用的方法

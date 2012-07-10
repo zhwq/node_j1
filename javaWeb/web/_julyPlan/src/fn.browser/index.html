@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>浏览器判别</title>
+  <meta charset="utf-8"/>
+  <script src="../version/version.js"></script>
+  <script src="browser.js"></script>
+</head>
+<body>
+<div id="result"></div>
+<script>
+    (function(){
+        var _result = document.getElementById( "result" );
+        var isIE = jui.isIE();
+        var isIE7 = jui.isIE("7");
+        var isIE8 = jui.isIE("8");
+        var isIE9 = jui.isIE("9");
+        var isFx = jui.isFx();
+        var isSafari = jui.isSafari();
+        var isChrome = jui.isChrome();
+        var isOpera = jui.isOpera();
+        if ( isIE ) {
+            if ( isIE7 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE7</h2>";
+            }  else if ( isIE8 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE8</h2>";
+            }  else if ( isIE9 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE9</h2>";
+            }
+        } else if ( isChrome ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 谷歌浏览器</h2>";
+        } else if ( isSafari ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 苹果浏览器</h2>";
+        } else if ( isFx ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 火狐浏览器</h2>";
+        } else if ( isOpera ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: opera浏览器</h2>";
+        }
+    })();
+</script>
+</body>
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>图片等比缩放</title>
+    <meta charset="utf-8"/>
+</head>
+<body>
+<input type="button" value="+" id="plus"/>
+<input type="button" value="-" id="minus"/>
+<img src="images/img1.jpg" width="510" height="630" id="img"/>
+<script>
+    function AutoResizeImage(maxWidth, maxHeight, objImg) {
+        var img = new Image();
+        img.src = objImg.src;
+        var hRatio;
+        var wRatio;
+        var Ratio = 1;
+        var w = img.width;
+        var h = img.height;
+        wRatio = maxWidth / w;
+        hRatio = maxHeight / h;
+        if (maxWidth == 0 && maxHeight == 0) {
+            Ratio = 1;
+        } else if (maxWidth == 0) {//
+            if (hRatio < 1) Ratio = hRatio;
+        } else if (maxHeight == 0) {
+            if (wRatio < 1) Ratio = wRatio;
+        } else if (wRatio < 1 || hRatio < 1) {  //显示尺寸 < 实际尺寸
+            Ratio = (wRatio <= hRatio ? wRatio : hRatio);
+        }
+        if (Ratio < 1) {
+            w = w * Ratio;
+            h = h * Ratio;
+        }
+        objImg.height = h;
+        objImg.width = w;
+    }
+</script>
+<script>
+function scaleImage( imgObj, iw, ih ) {
+    var image = new Image();
+    image.src = imgObj.src;
+
+    var w = image.width;
+    var h = image.height;
+
+    if ( w <= 0 && h <= 0) return;
+
+    var wRatio = iw/w;
+    var hRatio = ih/h;
+
+    if ( wRatio < hRatio ) {
+        if ( w > iw ) {
+            imgObj.width = iw;
+            imgObj.height = h * wRatio;
+        } else {
+            imgObj.width = w;
+            imgObj.height = h;
+        }
+    } else {
+        if ( h > ih ) {
+            imgObj.height = ih;
+            imgObj.width = w * hRatio;
+        } else {
+            imgObj.width = w;
+            imgObj.height = h;
+        }
+    }
+};
+//需要等待图片加载好之后
+window.onload = function() {
+    scaleImage( document.images[0],300,200);
+    setTimeout(function(){
+        scaleImage( document.images[0],400,600);
+    },5000);
+}
+var plus = document.getElementById( "plus" );
+var minus = document.getElementById( "minus" );
+minus.onclick = function(){
+    scaleImage( document.images[0],300,200);
+}
+plus.onclick = function(){
+    scaleImage( document.images[0],400,600);
+}
+</script>
+</body>
+</html>

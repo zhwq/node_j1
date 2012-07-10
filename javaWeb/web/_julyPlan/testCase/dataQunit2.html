@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>使用qunit测试fn.type</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../testLib/qunit/qunit-jh.css"/>
+    <script src="../src/version/version.js"></script>
+    <script src="../src/fn.type/type.js"></script>
+    <script src="../testLib/qunit/qunit.js"></script>
+</head>
+<body>
+<!--/qunit测试输出容器-->
+<div class="qunit-wrap">
+    <h1 id="qunit-header">使用qunit测试fn.type</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+</div>
+<script>
+    /*var json = [
+        [undefined, 'isUndefined', true],
+        [null, 'isUndefined', false]
+    ];
+    test( "fn.type",function(){
+        for ( var i=0,len=json.length; i<len; i++ ) {
+            var item = json[ i ];
+            switch( item[1]){
+                case 'isUndefined':    //classloader?
+                    equal( ui.isUndefined( item[0]), item[2] );
+                    break;
+            }
+        }
+    });*/
+    var json = [
+        //ui.isUndefined
+        [undefined, ui.isUndefined, true],
+        [null, ui.isUndefined, false],
+        ["", ui.isUndefined, false],
+        [" ", ui.isUndefined, false],
+        [true, ui.isUndefined, false],
+        [false, ui.isUndefined, false],
+        [0, ui.isUndefined, false],
+        ["abc", ui.isUndefined, false],
+        [123.1, ui.isUndefined, false],
+        [function(){}, ui.isUndefined, false]
+    ];
+    test( "fn.type",function(){
+        for ( var i=0,len=json.length; i<len; i++ ) {
+            var item = json[ i ];
+            equal( item[1]( item[0]), item[2] );
+        }
+    });
+</script>
+</body>
+</html>

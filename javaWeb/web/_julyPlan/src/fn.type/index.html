@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>类别判断</title>
+  <meta charset="utf-8"/>
+  <script src="../version/version.js"></script>
+  <script src="type.js"></script>
+</head>
+<body>
+<div id="result"></div>
+<script>
+	//浏览器判别
+    (function(){
+        var _result = document.getElementById( "result" );
+        var isIE = ui.isIE();
+        var isIE7 = ui.isIE("7");
+        var isIE8 = ui.isIE("8");
+        var isIE9 = ui.isIE("9");
+        var isFx = ui.isFx();
+        var isSafari = ui.isSafari();
+        var isChrome = ui.isChrome();
+        var isOpera = ui.isOpera();
+        if ( isIE ) {
+            if ( isIE7 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE7</h2>";
+            }  else if ( isIE8 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE8</h2>";
+            }  else if ( isIE9 ) {
+                _result.innerHTML = "<h2>你当前使用的浏览器是: IE9</h2>";
+            }
+        } else if ( isChrome ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 谷歌浏览器</h2>";
+        } else if ( isSafari ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 苹果浏览器</h2>";
+        } else if ( isFx ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: 火狐浏览器</h2>";
+        } else if ( isOpera ) {
+            _result.innerHTML = "<h2>你当前使用的浏览器是: opera浏览器</h2>";
+        }
+    })();
+	console.group("datatype");
+    var a = undefined;
+    console.log( ui.isUndefined( a ));
+    a = null;
+    console.log( ui.isNull( a ));
+    a = "| a b|";
+    console.log( a + "-->" + ui.isNotEmpty( a ) );
+    a = "|ab|";
+    console.log( a + "-->" + ui.isNotEmpty( a ) );
+    a = 123.45;
+    console.log( a + "-->" + ui.isNum( a ) );
+    console.log( 0 + "-->" + ui.isNum( 0 ) );
+    a = 100;
+    console.log( a + "-->" + ui.isInteger( a ) );
+    console.log( 0 + "-->" + ui.isInteger(0 ) );
+    a = +100;
+    console.log( a + "-->" + ui.isInteger( a ) );
+    console.log( 0 + "-->" + ui.isInteger(0 ) );
+    a = -100;
+    console.log( a + "-->" + ui.isInteger( a ) );
+    console.log( 0 + "-->" + ui.isInteger(0 ) );
+    a = -0.1;
+    console.log( a + "-->" + ui.isDecimal( a ) );
+    console.log( 0 + "-->" + ui.isDecimal( 0 ) );
+    a = .1;
+    console.log( a + "-->" + ui.isDecimal( a ) );
+    console.log( 0 + "-->" + ui.isDecimal( 0 ) );
+    console.groupEnd();
+	console.group("dataformat");
+    //IP
+    var ip1 = "192.168.25.39";
+    var ip2 = "220.181.111.86";//baidu.com
+    var ip3 = "203.208.46.146";//g.cn
+    var ip11 = "a.b.c.d";
+    console.group( "dataFormat-ip" );
+    console.log( ip1 + "-->" + ui.isIp( ip1 ));
+    console.log( ip2 + "-->" + ui.isIp( ip2 ));
+    console.log( ip3 + "-->" + ui.isIp( ip3 ));
+    console.log( ip11 + "-->" + ui.isIp( ip11 ));
+    console.groupEnd();
+    //URL
+    var url1 = "http://wh-zhangwq.whjh.com:8081/jw/_julyPlan/src/fn.dataFormat/";
+    var url2 = "http://192.168.25.39";
+    var url3 = "http://jcs.jh0101.com/jc6/adm/login!intro.action";
+    var url4 = "http://www.baidu.com";
+    var url5 = "www.baidu.com";
+    console.group( "dataFormat-url" );
+    console.log( url1 + "-->" + ui.isUrl( url1 ));
+    console.log( url2 + "-->" + ui.isUrl( url2 ));
+    console.log( url3 + "-->" + ui.isUrl( url3 ));
+    console.log( url4 + "-->" + ui.isUrl( url4 ));
+    console.log( url5 + "-->" + ui.isUrl( url5 ));
+    console.groupEnd();
+    //DATATIME
+    var dt1 = "2012-07-03";
+    var dt11 = "2012-7-3";
+    var dt2 = "2012/07/03";
+    var dt21 = "2012/7/3";
+    var dt3 = "2012.07.03";
+    var dt31 = "2012.7.3";
+    var dt4 = "2012.7-1";
+    console.group( "dataFormat-datatime" );
+    console.log( dt1 + "-->" + ui.isDateTime( dt1 ));
+    console.log( dt11 + "-->" + ui.isDateTime( dt11 ));
+    console.log( dt2 + "-->" + ui.isDateTime( dt2 ));
+    console.log( dt21 + "-->" + ui.isDateTime( dt21 ));
+    console.log( dt3 + "-->" + ui.isDateTime( dt3 ));
+    console.log( dt31 + "-->" + ui.isDateTime( dt31 ));
+    console.log( dt4 + "-->" + ui.isDateTime( dt4 ));
+    console.groupEnd();
+    //EMAIL
+    var e1 = "zhngjob#163.com";
+    var e2 = "zhngjob12363625@163.com";
+    var e3 = "123545687@qq.com";
+    console.group( "dataFormat-email" );
+    console.log( e1 + "-->" + ui.isEmail( e1 ));
+    console.log( e2 + "-->" + ui.isEmail( e2 ));
+    console.log( e3 + "-->" + ui.isEmail( e3 ));
+    console.groupEnd();
+    //座机
+    var t1 = "027-56987411";
+    var t2 = "0751-6985231";
+    var t3 = "027-56987411-693";
+    var t4 = "0751-6932584-4569";
+    console.group( "dataFormat-tel" );
+    console.log( t1 + "-->" + ui.isTel( t1 ));
+    console.log( t2 + "-->" + ui.isTel( t2 ));
+    console.log( t3 + "-->" + ui.isTel( t3 ));
+    console.log( t4 + "-->" + ui.isTel( t4 ));
+    console.groupEnd();
+    //手机号
+    var p1 = "13136366666";
+    var p2 = "13265421236";
+    var p3 = "15321256325";
+    var p4 = "18654563254";
+    console.group( "dataFormat-phone" );
+    console.log( p1 + "-->" + ui.isPhone( p1 ));
+    console.log( p2 + "-->" + ui.isPhone( p2 ));
+    console.log( p3 + "-->" + ui.isPhone( p3 ));
+    console.log( p4 + "-->" + ui.isPhone( p4 ));
+    console.groupEnd();
+    //邮编
+    var z1 = "430072";
+    console.group( "dataFormat-zipcode" );
+    console.log( z1 + "-->" + ui.isZipcode( z1 ));
+    console.groupEnd();
+    //身份证
+    var i1 = "34150119850424149X";
+    var i2 = "341501198608248995";
+    var i3 = "341501197408171247";
+    console.group( "dataFormat-idcard" );
+    console.log( i1 + "-->" + ui.isIdCard( i1 ));
+    console.log( i2 + "-->" + ui.isIdCard( i2 ));
+    console.log( i3 + "-->" + ui.isIdCard( i3 ));
+    console.groupEnd();
+    console.groupEnd();
+</script>
+</body>
+</html>

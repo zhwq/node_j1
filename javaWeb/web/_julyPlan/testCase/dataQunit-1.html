@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>使用qunit测试fn.type</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../testLib/qunit/qunit-jh.css"/>
+    <script src="../src/version/version.js"></script>
+    <script src="../src/fn.type/type.js"></script>
+    <script src="../testLib/qunit/qunit.js"></script>
+</head>
+<body>
+<!--/qunit测试输出容器-->
+<div class="qunit-wrap2">
+    <h1 id="qunit-header">使用qunit测试fn.type</h1>
+
+    <h2 id="qunit-banner"></h2>
+
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+</div>
+<script>
+    var json = [undefined,null,true,false,""," ",0];//6
+    var varFn = function(){};
+    function fnName(){}
+    json[ json.length ] = varFn;//7
+    json[ json.length ] = fnName;//8
+
+    json[ json.length ] = "true";//9
+    json[ json.length ] = "false";//10
+    json[ json.length ] = 108.08;//11
+    json[ json.length ] = +108.08;//12
+    json[ json.length ] = -108.08;//13
+    json[ json.length ] = 0.08;//14
+    json[ json.length ] = -0.108;//15
+    json[ json.length ] = .08;//16
+    json[ json.length ] = +0.08;//17
+    json[ json.length ] = -0.08;//18
+    json[ json.length ] = "192.168.25.39";//19
+    json[ json.length ] = "27.17.16.18";//20
+    json[ json.length ] = "http://localhost";
+    json[ json.length ] = "http://localhost/";
+    json[ json.length ] = "http://localhost:8080";
+    json[ json.length ] = "http://localhost:8080/";
+    json[ json.length ] = "http://wh-zhangwq.whjh.com:8081/jw/_julyPlan/testCase/dataQunit.html";
+    json[ json.length ] = "www.baidu.com";
+    json[ json.length ] = "http://url.cn/3UcRPu";
+    json[ json.length ] = "http://jing.fm/?e1lWVB5CGgMB";
+
+    json[ json.length ] = "2012-7-4";
+    json[ json.length ] = "2012-07-04";
+    json[ json.length ] = "2012-07-4";
+
+    json[ json.length ] = "2012/07/04";
+    json[ json.length ] = "2012.07.04";
+
+    json[ json.length ] = "2012/07-04";
+    json[ json.length ] = "2012/07.04";
+    json[ json.length ] = "2012-07/04";
+    json[ json.length ] = "2012-07.04";
+    json[ json.length ] = "2012.07/04";
+    json[ json.length ] = "2012.07-04";
+
+    json[ json.length ] = "773845721@qq.com";
+    json[ json.length ] = "zhangwen77@qq.com";
+    json[ json.length ] = "zhngjob@163.com";
+
+    json[ json.length ] = "027-81921696";
+    json[ json.length ] = "0751-6935842";
+    json[ json.length ] = "027-81921696-123";
+    json[ json.length ] = "0751-6935842-6395";
+
+    json[ json.length ] = "+8613136362563";
+    json[ json.length ] = "13236524235";
+    json[ json.length ] = "131456789012";
+
+    json[ json.length ] = "4367123";
+    json[ json.length ] = "430072";
+    json[ json.length ] = "abcdef";
+
+    json[ json.length ] = "21120219900320256X";
+    json[ json.length ] = "211202199003202569";
+    json[ json.length ] = "652422371015132";
+    json[ json.length ] = "652422371015132652422371015132 ";
+
+    module("模块-测试fn.type");
+    test("fn.type", function () {
+//        expect( 4 * json.length );
+        //isFn
+        equal(ui.isFn( json[0]),false);
+        equal(ui.isFn( json[1]),false);
+        equal(ui.isFn( json[2]),false);
+        equal(ui.isFn( json[3]),false);
+        equal(ui.isFn( json[4]),false);
+        equal(ui.isFn( json[5]),false);
+        equal(ui.isFn( json[6]),false);
+        equal(ui.isFn( json[7]),true);
+        equal(ui.isFn( json[8]),true);
+        //isUndefined
+        equal(ui.isUndefined( json[0]),true);
+        equal(ui.isUndefined( json[1]),false);
+        equal(ui.isUndefined( json[2]),false);
+        equal(ui.isUndefined( json[3]),false);
+        equal(ui.isUndefined( json[4]),false);
+        equal(ui.isUndefined( json[5]),false);
+        equal(ui.isUndefined( json[6]),false);
+        equal(ui.isUndefined( json[7]),false);
+        equal(ui.isUndefined( json[8]),false);
+        //isNull
+        equal(ui.isNull( json[0]),false);
+        equal(ui.isNull( json[1]),true);
+        equal(ui.isNull( json[2]),false);
+        equal(ui.isNull( json[3]),false);
+        equal(ui.isNull( json[4]),false);
+        equal(ui.isNull( json[5]),false);
+        equal(ui.isNull( json[6]),false);
+        equal(ui.isNull( json[7]),false);
+        equal(ui.isNull( json[8]),false);
+        //isNotEmpty
+        equal(ui.isNotEmpty( json[0]),true);//undefined
+        equal(ui.isNotEmpty( json[1]),true);//null
+        equal(ui.isNotEmpty( json[2]),true);//true
+        equal(ui.isNotEmpty( json[3]),true);//false
+        equal(ui.isNotEmpty( json[4]),false);//""
+        equal(ui.isNotEmpty( json[5]),false);//" "
+        equal(ui.isNotEmpty( json[6]),true);//0
+        equal(ui.isNotEmpty( json[7]),false);//function
+        equal(ui.isNotEmpty( json[8]),false);//function
+    });
+</script>
+</body>
+</html>

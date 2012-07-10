@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>使用qunit测试fn.type</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../testLib/qunit/qunit-jh.css"/>
+    <script src="../src/version/version.js"></script>
+    <script src="../src/fn.type/type.js"></script>
+    <script src="../testLib/qunit/qunit.js"></script>
+</head>
+<body>
+<!--/qunit测试输出容器-->
+<div class="qunit-wrap">
+    <h1 id="qunit-header">使用qunit测试fn.type</h1>
+
+    <h2 id="qunit-banner"></h2>
+
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+</div>
+<script>
+    var varFn = function(){};
+    function fnName(){}
+    var comm = [undefined,null,true,false,"true","false",""," ",0];//9
+    var fn = [varFn, fnName ];
+    var integer = [1,10,-1,-10,01,0x10];
+    var decimal = [108.08,+108.08,-108.08,0.08,-0.108,.08,+0.08,-0.08];//8
+    var ip = ["192.168.25.39","27.17.16.18"];//2
+    var url = [
+        "http://localhost",
+        "http://localhost/",
+        "http://localhost:8080",
+        "http://localhost:8080/",
+        "http://wh-zhangwq.whjh.com:8081/jw/_julyPlan/testCase/dataQunit.html",
+        "www.baidu.com",
+        "http://url.cn/3UcRPu",
+        "http://jing.fm/?e1lWVB5CGgMB"
+    ];//8
+    var date = [
+        "2012-7-4",
+        "2012-07-04",
+        "2012-07-4",
+
+        "2012/07/04",
+        "2012.07.04",
+
+        "2012/07-04",
+        "2012/07.04",
+        "2012-07/04",
+        "2012-07.04",
+        "2012.07/04",
+        "2012.07-04"
+    ];//11
+    var email = [
+        "773845721@qq.com",
+        "zhangwen77@qq.com",
+        "zhngjob@163.com"
+    ]; //3
+    var tel = [
+        "027-81921696",
+        "0751-6935842",
+        "027-81921696-123",
+        "0751-6935842-6395"
+    ];//4
+    var phone = [
+        "+8613136362563",
+        "13236524235",
+        "131456789012"
+    ]; //3
+    var zipcode = [
+        "4367123",
+        "430072",
+        "abcdef"
+    ]; //3
+    var idcard = [
+        "21120219900320256X",
+        "211202199003202569",
+        "652422371015132",
+        "652422371015132652422371015132 "
+    ]; //4
+
+    module("模块-测试fn.type");
+    test("fn.type", function () {
+        //isFn
+        equal(ui.isFn( comm[0]),false);
+        equal(ui.isFn( comm[1]),false);
+        equal(ui.isFn( comm[2]),false);
+        equal(ui.isFn( comm[3]),false);
+        equal(ui.isFn( comm[4]),false);
+        equal(ui.isFn( comm[5]),false);
+        equal(ui.isFn( comm[6]),false);
+        equal(ui.isFn( comm[7]),false);
+        equal(ui.isFn( comm[8]),false);
+
+        equal(ui.isFn( fn[0]),true);
+        equal(ui.isFn( fn[1]),true);
+        //isUndefined
+        equal(ui.isUndefined( comm[0]),true);
+        equal(ui.isUndefined( comm[1]),false);
+        equal(ui.isUndefined( comm[2]),false);
+        equal(ui.isUndefined( comm[3]),false);
+        equal(ui.isUndefined( comm[4]),false);
+        equal(ui.isUndefined( comm[5]),false);
+        equal(ui.isUndefined( comm[6]),false);
+        equal(ui.isUndefined( comm[7]),false);
+        equal(ui.isUndefined( comm[8]),false);
+        //isNull
+        equal(ui.isNull( comm[0]),false);
+        equal(ui.isNull( comm[1]),true);
+        equal(ui.isNull( comm[2]),false);
+        equal(ui.isNull( comm[3]),false);
+        equal(ui.isNull( comm[4]),false);
+        equal(ui.isNull( comm[5]),false);
+        equal(ui.isNull( comm[6]),false);
+        equal(ui.isNull( comm[7]),false);
+        equal(ui.isNull( comm[8]),false);
+        //isNotEmpty
+        equal(ui.isNotEmpty( comm[0]),true);//undefined
+        equal(ui.isNotEmpty( comm[1]),true);//null
+        equal(ui.isNotEmpty( comm[2]),true);//true
+        equal(ui.isNotEmpty( comm[3]),true);//false
+        equal(ui.isNotEmpty( comm[4]),true);//"true"
+        equal(ui.isNotEmpty( comm[5]),true);//"false"
+        equal(ui.isNotEmpty( comm[6]),false);//""
+        equal(ui.isNotEmpty( comm[7]),false);//" "
+        equal(ui.isNotEmpty( comm[8]),true);//0
+        //isNum
+        equal(ui.isNum( comm[0]),false);//undefined
+        equal(ui.isNum( comm[1]),false);//null
+        equal(ui.isNum( comm[2]),false);//true
+        equal(ui.isNum( comm[3]),false);//false
+        equal(ui.isNum( comm[4]),false);//"true"
+        equal(ui.isNum( comm[5]),false);//"false"
+        equal(ui.isNum( comm[6]),false);//""
+        equal(ui.isNum( comm[7]),false);//" "
+        equal(ui.isNum( comm[8]),true);//0
+        for ( var i=0,len=decimal.length; i<len;i++) {//浮点数
+            equal(ui.isNum( decimal[i]),true);
+        }
+        for ( var i=0,len=integer.length; i<len;i++) {//整数
+            equal(ui.isNum( integer[i]),true);
+        }
+        //isInteger
+        equal(ui.isInteger( comm[0]),false);//undefined
+        equal(ui.isInteger( comm[1]),false);//null
+        equal(ui.isInteger( comm[2]),false);//true
+        equal(ui.isInteger( comm[3]),false);//false
+        equal(ui.isInteger( comm[4]),false);//"true"
+        equal(ui.isInteger( comm[5]),false);//"false"
+        equal(ui.isInteger( comm[6]),false);//""
+        equal(ui.isInteger( comm[7]),false);//" "
+        equal(ui.isInteger( comm[8]),true);//0
+        for ( var i=0,len=decimal.length; i<len;i++) {
+            equal(ui.isInteger( decimal[i]),false);
+        }
+        for ( var i=0,len=integer.length; i<len;i++) {
+            equal(ui.isInteger( integer[i]),true);
+        }
+        //isDecimal
+        equal(ui.isDecimal( comm[0]),false);//undefined
+        equal(ui.isDecimal( comm[1]),false);//null
+        equal(ui.isDecimal( comm[2]),false);//true
+        equal(ui.isDecimal( comm[3]),false);//false
+        equal(ui.isDecimal( comm[4]),false);//"true"
+        equal(ui.isDecimal( comm[5]),false);//"false"
+        equal(ui.isDecimal( comm[6]),false);//""
+        equal(ui.isDecimal( comm[7]),false);//" "
+        equal(ui.isDecimal( comm[8]),true);//0
+        for ( var i=0,len=decimal.length; i<len;i++) {
+            equal(ui.isDecimal( decimal[i]),true);
+        }
+        for ( var i=0,len=integer.length; i<len;i++) {
+            equal(ui.isDecimal( integer[i]),false);
+        }
+        //isIp
+        equal(ui.isIp( comm[0]),false);//undefined
+        equal(ui.isIp( comm[1]),false);//null
+        equal(ui.isIp( comm[2]),false);//true
+        equal(ui.isIp( comm[3]),false);//false
+        equal(ui.isIp( comm[4]),false);//"true"
+        equal(ui.isIp( comm[5]),false);//"false"
+        equal(ui.isIp( comm[6]),false);//""
+        equal(ui.isIp( comm[7]),false);//" "
+        equal(ui.isIp( comm[8]),false);
+        equal(ui.isIp( ip[0]),true);
+        equal(ui.isIp( ip[1]),true);
+        //isUrl
+        equal(ui.isUrl( comm[0]),false);//undefined
+        equal(ui.isUrl( comm[1]),false);//null
+        equal(ui.isUrl( comm[2]),false);//true
+        equal(ui.isUrl( comm[3]),false);//false
+        equal(ui.isUrl( comm[4]),false);//"true"
+        equal(ui.isUrl( comm[5]),false);//"false"
+        equal(ui.isUrl( comm[6]),false);//""
+        equal(ui.isUrl( comm[7]),false);//" "
+        equal(ui.isUrl( comm[8]),false);
+        for ( var i=0,len=url.length; i<len;i++) {
+            equal(ui.isUrl( url[i]),true);
+        }
+        //isDateTime
+        equal(ui.isDateTime( comm[0]),false);//undefined
+        equal(ui.isDateTime( comm[1]),false);//null
+        equal(ui.isDateTime( comm[2]),false);//true
+        equal(ui.isDateTime( comm[3]),false);//false
+        equal(ui.isDateTime( comm[4]),false);//"true"
+        equal(ui.isDateTime( comm[5]),false);//"false"
+        equal(ui.isDateTime( comm[6]),false);//""
+        equal(ui.isDateTime( comm[7]),false);//" "
+        equal(ui.isDateTime( comm[8]),false);
+
+        equal(ui.isDateTime( date[0]),true);
+        equal(ui.isDateTime( date[1]),true);
+        equal(ui.isDateTime( date[2]),true);
+        equal(ui.isDateTime( date[3]),true);
+        equal(ui.isDateTime( date[4]),true);
+        equal(ui.isDateTime( date[5]),false);
+        equal(ui.isDateTime( date[6]),false);
+        equal(ui.isDateTime( date[7]),false);
+        equal(ui.isDateTime( date[8]),false);
+        equal(ui.isDateTime( date[9]),false);
+        equal(ui.isDateTime( date[10]),false);
+        //isEmail
+        equal(ui.isEmail( comm[0]),false);//undefined
+        equal(ui.isEmail( comm[1]),false);//null
+        equal(ui.isEmail( comm[2]),false);//true
+        equal(ui.isEmail( comm[3]),false);//false
+        equal(ui.isEmail( comm[4]),false);//"true"
+        equal(ui.isEmail( comm[5]),false);//"false"
+        equal(ui.isEmail( comm[6]),false);//""
+        equal(ui.isEmail( comm[7]),false);//" "
+        equal(ui.isEmail( comm[8]),false);
+
+        equal(ui.isEmail( email[0]),true);
+        equal(ui.isEmail( email[1]),true);
+        equal(ui.isEmail( email[2]),true);
+
+        //isTel
+        equal(ui.isTel( comm[0]),false);//undefined
+        equal(ui.isTel( comm[1]),false);//null
+        equal(ui.isTel( comm[2]),false);//true
+        equal(ui.isTel( comm[3]),false);//false
+        equal(ui.isTel( comm[4]),false);//"true"
+        equal(ui.isTel( comm[5]),false);//"false"
+        equal(ui.isTel( comm[6]),false);//""
+        equal(ui.isTel( comm[7]),false);//" "
+        equal(ui.isTel( comm[8]),false);
+        for( var i=0,len=tel.length; i<len; i++) {
+            equal(ui.isTel( tel[i]),true);
+        }
+        //isPhone
+        equal(ui.isPhone( comm[0]),false);//undefined
+        equal(ui.isPhone( comm[1]),false);//null
+        equal(ui.isPhone( comm[2]),false);//true
+        equal(ui.isPhone( comm[3]),false);//false
+        equal(ui.isPhone( comm[4]),false);//"true"
+        equal(ui.isPhone( comm[5]),false);//"false"
+        equal(ui.isPhone( comm[6]),false);//""
+        equal(ui.isPhone( comm[7]),false);//" "
+        equal(ui.isPhone( comm[8]),false);
+
+        equal(ui.isPhone( phone[0]),true);
+        equal(ui.isPhone( phone[1]),true);
+        equal(ui.isPhone( phone[2]),false);
+        //isZipcode
+        equal(ui.isZipcode( comm[0]),false);//undefined
+        equal(ui.isZipcode( comm[1]),false);//null
+        equal(ui.isZipcode( comm[2]),false);//true
+        equal(ui.isZipcode( comm[3]),false);//false
+        equal(ui.isZipcode( comm[4]),false);//"true"
+        equal(ui.isZipcode( comm[5]),false);//"false"
+        equal(ui.isZipcode( comm[6]),false);//""
+        equal(ui.isZipcode( comm[7]),false);//" "
+        equal(ui.isZipcode( comm[8]),false);
+
+        equal(ui.isZipcode( zipcode[0]),false);
+        equal(ui.isZipcode( zipcode[1]),true);
+        equal(ui.isZipcode( zipcode[2]),false);
+
+        //isIdCard
+        equal(ui.isIdCard( comm[0]),false);//undefined
+        equal(ui.isIdCard( comm[1]),false);//null
+        equal(ui.isIdCard( comm[2]),false);//true
+        equal(ui.isIdCard( comm[3]),false);//false
+        equal(ui.isIdCard( comm[4]),false);//"true"
+        equal(ui.isIdCard( comm[5]),false);//"false"
+        equal(ui.isIdCard( comm[6]),false);//""
+        equal(ui.isIdCard( comm[7]),false);//" "
+        equal(ui.isIdCard( comm[8]),false);
+
+        equal(ui.isIdCard( idcard[0]),true);
+        equal(ui.isIdCard( idcard[1]),false);
+        equal(ui.isIdCard( idcard[2]),true);
+        equal(ui.isIdCard( idcard[3]),false);
+    });
+</script>
+</body>
+</html>

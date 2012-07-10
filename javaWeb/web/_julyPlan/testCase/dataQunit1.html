@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>使用qunit测试fn.type</title>
+    <meta charset="utf-8"/>
+    <link rel="stylesheet" href="../testLib/qunit/qunit.css"/>
+    <script src="../src/version/version.js"></script>
+    <script src="../src/fn.type/type.js"></script>
+    <script src="../testLib/qunit/qunit.js"></script>
+</head>
+<body>
+    <!--/qunit测试输出容器-->
+    <h1 id="qunit-header">使用qunit测试fn.type</h1>
+    <h2 id="qunit-banner"></h2>
+    <div id="qunit-testrunner-toolbar"></div>
+    <h2 id="qunit-userAgent"></h2>
+    <ol id="qunit-tests"></ol>
+    <div id="qunit-fixture">test markup, will be hidden</div>
+<script>
+    module("Module fn.type.isFn函数");
+    test("fn.type.isFn", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        var varFn = function(){};
+        function fnName(){};
+        equal( ui.isFn( aUndefined), false, "未定义不是函数");
+        equal( ui.isFn( aNull), false, "null不是函数");
+        equal( ui.isFn( aEmpty), false, "空值不是函数");
+        equal( ui.isFn( aBlank), false, "空白字符"+ aBlank + "不是函数");
+        equal( ui.isFn( aNum), false,  aNum + "不是函数");
+        equal( ui.isFn( varFn), true, "var+function关键字定义函数：" + varFn);
+        equal( ui.isFn( fnName), true, "function关键字定义函数：" + fnName);
+    });
+    module("Module fn.type.isUndefind未定义");
+    test("fn.type.isUndefind", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        equal( ui.isUndefined( aUndefined), true, "未定义");
+        equal( ui.isUndefined( aNull), false, "null不是undefined");
+        equal( ui.isUndefined( aEmpty), false, "空值不是undefined");
+        equal( ui.isUndefined( aBlank), false, "空白字符"+ aBlank + "不是undefined");
+        equal( ui.isUndefined( aNum), false,  aNum + "不是undefined");
+    });
+    module("Module fn.type.isNull空");
+    test("fn.type.isNull", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        equal( ui.isNull( aUndefined), false, "未定义不是Null");
+        equal( ui.isNull( aNull), true, "null是Null");
+        equal( ui.isNull( aEmpty), false, "空值不是Null");
+        equal( ui.isNull( aBlank), false, "空白字符"+ aBlank + "不是Null");
+        equal( ui.isNull( aNum), false,  aNum + "不是Null");
+    });
+    module("Module fn.type.isNotEmpty空白符");
+    test("fn.type.isNotEmpty", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        equal( ui.isNotEmpty( aUndefined), true, "未定义不是isNotEmpty");
+        equal( ui.isNotEmpty( aNull), true, "null不是isNotEmpty");
+        equal( ui.isNotEmpty( aEmpty), false, "空值不是isNotEmpty");
+        equal( ui.isNotEmpty( aBlank), false, "空白字符"+ aBlank + "为空");
+        equal( ui.isNotEmpty( aNum), true,  aNum + "不是isNotEmpty");
+    });
+    module("Module fn.type.isNum数字");
+    test("fn.type.isNum", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        var integer1 = 108;
+        var integer2 = +108;
+        var integer3 = -108;
+        var zero = 0;
+        var decimal1 = 1.08;
+        var decimal2 = +1.08;
+        var decimal3 = -1.08;
+        var decimal4 = .1;
+        var decimal5 = -.1;
+        equal( ui.isNum( aUndefined), false, "未定义不是isNum");
+        equal( ui.isNum( aNull), false, "null不是isNum");
+        equal( ui.isNum( aEmpty), false, "空值不是isNum");
+        equal( ui.isNum( aBlank), false, "空白字符"+ aBlank + "不是isNum");
+        equal( ui.isNum( aNum), true,  aNum + "是isNum");
+        equal( ui.isNum( integer1), true,  integer1 + "是isNum");
+        equal( ui.isNum( integer2), true,  integer2 + "是isNum");
+        equal( ui.isNum( integer3), true,  integer3 + "是isNum");
+        equal( ui.isNum( zero), true,  zero + "是isNum");
+        equal( ui.isNum( decimal1), true,  decimal1 + "是isNum");
+        equal( ui.isNum( decimal2), true,  decimal2 + "是isNum");
+        equal( ui.isNum( decimal3), true,  decimal3 + "是isNum");
+        equal( ui.isNum( decimal4), true,  decimal4 + "是isNum");
+        equal( ui.isNum( decimal5), true,  decimal5 + "是isNum");
+    });
+    module("Module fn.type.isInteger整数");
+    test("fn.type.isInteger", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        var integer1 = 108;
+        var integer2 = +108;
+        var integer3 = -108;
+        var zero = 0;
+        var decimal1 = 1.08;
+        var decimal2 = +1.08;
+        var decimal3 = -1.08;
+        var decimal4 = .1;
+        var decimal5 = -.1;
+        equal( ui.isInteger( aUndefined), false, "未定义不是isInteger");
+        equal( ui.isInteger( aNull), false, "null不是isInteger");
+        equal( ui.isInteger( aEmpty), false, "空值不是isInteger");
+        equal( ui.isInteger( aBlank), false, "空白字符"+ aBlank + "不是isInteger");
+        equal( ui.isInteger( aNum), false,  aNum + "不是isInteger");
+        equal( ui.isInteger( integer1), true,  integer1 + "是isInteger");
+        equal( ui.isInteger( integer2), true,  integer2 + "是isInteger");
+        equal( ui.isInteger( integer3), true,  integer3 + "是isInteger");
+        equal( ui.isInteger( zero), true,  zero + "是isInteger");
+        equal( ui.isInteger( decimal1), false,  decimal1 + "不是isInteger");
+        equal( ui.isInteger( decimal2), false,  decimal2 + "不是isInteger");
+        equal( ui.isInteger( decimal3), false,  decimal3 + "不是isInteger");
+        equal( ui.isInteger( decimal4), false,  decimal4 + "不是isInteger");
+        equal( ui.isInteger( decimal5), false,  decimal5 + "不是isInteger");
+    });
+    module("Module fn.type.isDecimal浮点数");
+    test("fn.type.isDecimal", function() {
+        var aUndefined;
+        var aNull = null;
+        var aEmpty = "";
+        var aBlank = " ";
+        var aNum = 123.3;
+        var integer1 = 108;
+        var integer2 = +108;
+        var integer3 = -108;
+        var zero = 0;
+        var decimal1 = 1.08;
+        var decimal2 = +1.08;
+        var decimal3 = -1.08;
+        var decimal4 = .1;
+        var decimal5 = -.1;
+        equal( ui.isDecimal( aUndefined), false, "未定义不是isDecimal");
+        equal( ui.isDecimal( aNull), false, "null不是isDecimal");
+        equal( ui.isDecimal( aEmpty), false, "空值不是isDecimal");
+        equal( ui.isDecimal( aBlank), false, "空白字符"+ aBlank + "不是isDecimal");
+        equal( ui.isDecimal( integer1), false,  integer1 + "不是isDecimal");
+        equal( ui.isDecimal( integer2), false,  integer2 + "不是isDecimal");
+        equal( ui.isDecimal( integer3), false,  integer3 + "不是isDecimal");
+        equal( ui.isDecimal( zero), true,  zero + "是isDecimal");
+        equal( ui.isDecimal( aNum), true,  aNum + "是isDecimal");
+        equal( ui.isDecimal( decimal1), true,  decimal1 + "是isDecimal");
+        equal( ui.isDecimal( decimal2), true,  decimal2 + "是isDecimal");
+        equal( ui.isDecimal( decimal3), true,  decimal3 + "是isDecimal");
+        equal( ui.isDecimal( decimal4), true,  decimal4 + "是isDecimal");
+        equal( ui.isDecimal( decimal5), true,  decimal5 + "是isDecimal");
+    });
+    module("Module fn.type.isIp");
+    test( "fn.isIp", function(){
+        var ip1 = "192.168.25.39";
+        var ip2 = "27.17.16.18";
+        equal( ui.isIp( ip1), true, ip1 + "是正确的ip格式");
+        equal( ui.isIp( ip2), true, ip2 + "是正确的ip格式");
+    });
+    module("Module fn.type.isUrl链接");
+    test( "fn.isUrl", function(){
+        var url1 = "http://localhost";
+        var url2 = "http://localhost/";
+        var url3 = "http://localhost:8080";
+        var url4 = "http://localhost:8080/";
+        var url5 = "http://wh-zhangwq.whjh.com:8081/jw/_julyPlan/testCase/dataQunit.html";
+        var url6 = "www.baidu.com";
+        var url7 = "http://url.cn/3UcRPu";
+        var url8 = "http://jing.fm/?e1lWVB5CGgMB";
+        equal( ui.isUrl( url1 ), true, url1 + "是正确的url");
+        equal( ui.isUrl( url2 ), true, url2 + "是正确的url");
+        equal( ui.isUrl( url3 ), true, url3 + "是正确的url");
+        equal( ui.isUrl( url4 ), true, url4 + "是正确的url");
+        equal( ui.isUrl( url5 ), true, url5 + "是正确的url");
+        equal( ui.isUrl( url6 ), true, url6 + "是正确的url");
+        equal( ui.isUrl( url7 ), true, url7 + "是正确的url");
+        equal( ui.isUrl( url8 ), true, url8 + "是正确的url");
+    });
+    module("Module fn.type.isDateTime年月日格式");
+    test( "fn.isDateTime", function(){
+        var d1 = "2012-7-4";
+        var d2 = "2012-07-04";
+        var d3 = "2012-07-4";
+
+        var d4 = "2012/07/04";
+        var d5 = "2012.07.04";
+
+        var d6 = "2012/07-04";
+        var d7 = "2012/07.04";
+        var d8 = "2012-07/04";
+        var d9 = "2012-07.04";
+        var d10 = "2012.07/04";
+        var d11 = "2012.07-04";
+
+        equal( ui.isDateTime( d1 ), true, d1 + "是正确的isDateTime");
+        equal( ui.isDateTime( d2 ), true, d2 + "是正确的isDateTime");
+        equal( ui.isDateTime( d3 ), true, d3 + "是正确的isDateTime");
+        equal( ui.isDateTime( d4 ), true, d4 + "是正确的isDateTime");
+        equal( ui.isDateTime( d5 ), true, d5 + "是正确的isDateTime");
+        equal( ui.isDateTime( d6 ), false, d6 + "不是正确的isDateTime");
+        equal( ui.isDateTime( d7 ), false, d7 + "不是正确的isDateTime");
+        equal( ui.isDateTime( d8 ), false, d8 + "不是正确的isDateTime");
+        equal( ui.isDateTime( d9 ), false, d9 + "不是正确的isDateTime");
+        equal( ui.isDateTime( d10 ), false, d10 + "不是正确的isDateTime");
+        equal( ui.isDateTime( d11 ), false, d11 + "不是正确的isDateTime");
+    });
+    module("Module fn.type.isEmail邮箱地址");
+    test( "fn.isEmail", function(){
+        var e1 = "773845721@qq.com";
+        var e2 = "zhangwen77@qq.com";
+        var e3 = "zhngjob@163.com";
+
+        equal( ui.isEmail( e1 ), true, e1 + "是正确的isEmail");
+        equal( ui.isEmail( e2 ), true,e2 + "是正确的isEmail");
+        equal( ui.isEmail( e3 ), true, e3 + "是正确的isEmail");
+    });
+    module("Module fn.type.isTel电话号码");
+    test( "fn.isTel", function(){
+        var t1 = "027-81921696";
+        var t2 = "0751-6935842";
+        var t3 = "027-81921696-123";
+        var t4 = "0751-6935842-6395";
+
+        equal( ui.isTel( t1 ), true, t1 + "是正确的电话号码");
+        equal( ui.isTel( t2 ), true, t2 + "是正确的电话号码");
+        equal( ui.isTel( t3 ), true,t3 + "是正确的电话号码-分机号");
+        equal( ui.isTel( t4 ), true, t4 + "是正确的电话号码-分机号");
+    });
+    module("Module fn.type.isPhone手机号码");
+    test( "fn.isPhone", function(){
+        var e1 = "+8613136362563";
+        var e2 = "13236524235";
+        var e3 = "131456789012";
+
+        equal( ui.isPhone( e1 ), true, e1 + "是正确的isPhone");
+        equal( ui.isPhone( e2 ), true,e2 + "是正确的isPhone");
+        equal( ui.isPhone( e3 ), false, e3 + "不是正确的isPhone,字符过多");
+    });
+    module("Module fn.type.isZipcode邮政编码");
+    test( "fn.isZipcode", function(){
+        var e1 = "4367123";
+        var e2 = "430072";
+        var e3 = "abcdef";
+
+        equal( ui.isZipcode( e1 ), false, e1 + "不是正确的isZipcode，字符过多");
+        equal( ui.isZipcode( e2 ), true,e2 + "是正确的isZipcode");
+        equal( ui.isZipcode( e3 ), false, e3 + "不是正确的isZipcode,要求纯数字");
+    });
+    module("Module fn.type.isIdCard身份证号码");
+    test( "fn.isIdCard", function(){
+        var e1 = "21120219900320256X";
+        var e2 = "211202199003202569";
+        var e3 = "652422371015132";
+        var e4 = "652422371015132652422371015132 ";
+
+        equal( ui.isIdCard( e1 ), true, e1 + "是正确的isIdCard");
+        equal( ui.isIdCard( e2 ), false,e2 + "不是正确的isIdCard，校验码不对");
+        equal( ui.isIdCard( e3 ), true, e3 + "是正确的isIdCard，15位身份证号码");
+        equal( ui.isIdCard( e4 ), false,e4 + "不是正确的isIdCard，长度不对");
+    });
+</script>
+</body>
+</html>
