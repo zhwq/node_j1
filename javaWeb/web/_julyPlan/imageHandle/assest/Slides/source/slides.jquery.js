@@ -31,6 +31,7 @@
                 control = $('.slides_control',elem),
                 //图片轮播图片父节点div.slide
                 total = control.children().size(),
+                //由css控制显示,此时control元素在显示时是叠在一起的,获取到的值是最大值
                 width = control.children().outerWidth(),
                 height = control.children().outerHeight(),
                 //?
@@ -39,10 +40,10 @@
                 paginationEffect = option.effect.indexOf(',') < 0 ? effect : option.effect.replace(' ', '').split(',')[1],
                 next = 0,
                 prev = 0,
-                number = 0,
+                number = 0,//生成点播记号用
                 current = 0,//重置默认配置为0,从1开始current+1
-                loaded,
-                active,
+                loaded,  //资源就绪
+                active,  //锁,值为false值时才能开启一次动画
                 clicked,
                 position,
                 direction,
@@ -336,12 +337,11 @@
                 zIndex: 0,
                 display: 'none'
             });
-
             // set css for control div
             control.css({
                 position: 'relative',
                 // size of control 3 x slide width
-                width: (width * 3),
+                width: (width * 3), //TODO:?3
                 // set height to slide height
                 height: height,
                 // center control to slide
@@ -517,7 +517,7 @@
             if (option.play) {
                 // set interval设置
                 playInterval = setInterval(function() {
-                    animate('next', effect);
+//                    animate('next', effect);
                 }, option.play);
                 // store interval id存储interal值(data vs )
                 elem.data('interval',playInterval);

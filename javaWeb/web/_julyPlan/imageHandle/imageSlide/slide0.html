@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>图片播放</title>
+  <meta charset="utf-8"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: "\u5B8B\u4F53", sans-serif; /*宋体*/
+      font-size: 12px;
+      text-align: center;
+    }
+
+    .slide-container {
+      overflow: hidden;
+      display: block;
+    }
+    .slide-controller {
+      overflow: hidden;
+      position: relative;
+    }
+    .slide-pagination {
+      overflow: hidden;
+      position: absolute;
+      display: block;
+      background-color: pink;
+      width: 150px;
+      height: 20px;
+    }
+  </style>
+  <script src="../../jsLib/jquery-1.7.2.js"></script>
+  <script src="js/slide.js"></script>
+</head>
+<body>
+  <div id="slides">
+    <div class="slide-container" style="overflow: hidden;position: relative;display: block;width: 438px;height: 350px;">
+      <ul class="slide-pagination" style="z-index: 6;left: 270px;top: 310px;"></ul><!--/点播控制入口-->
+      <div class="slide-controller" style="position: relative;width: 1750px;height: 1400px;left: -438px;top:-350px;">
+        <a href="javascript:;" style="position: absolute;left: 438px;display: block;z-index: 5;top: 350px;">
+          <img src="images/1.png"/>
+        </a>
+        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;top: 350px;">
+          <img src="images/2.png"/>
+        </a>
+        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;top: 350px;">
+          <img src="images/3.png"/>
+        </a>
+        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;top: 350px;">
+          <img src="images/4.png"/>
+        </a>
+      </div>
+    </div>
+  </div>
+<script>
+(function($){
+  $.fn.slide = function( option ) {
+    //加载默认配置和用户自定义配置
+    option = $.extend( {}, $.fn.slides.option, option );
+    return this.each(function(){
+      var $elem = $(this);
+      //将控件容器下的的幻灯片节点使用div.slide-control包裹
+      $('.' + option.container, $elem).children().wrapAll('<div class="slide-control"/>');
+    });
+  };
+  //默认配置
+  $.fn.slide.option = {
+    width:0, //数字 控件的宽
+    height:0,//数字 控件的高
+    container: 'slide-container',//字符串 控件容器class值
+//    preload: false, //  布尔型;控制预加载slideshow下的img的图片；
+//    preloadImage: '/img/loading.gif', // 字符串;设定预加载时的加载中标识...(默认值:/img/loading.gif)
+    pagination: true,//手动选择显示的幻灯图片
+    paginationClass: 'pagination', // 手动选择入口的容器节点class值
+    currentClass: 'current', // 字符串(当前显示动画节点的class值)
+    animateSpeed: 350,  //动画时间
+    start: 1, // 数字 第一帧
+    effect: "slide",//动画效果 暂时只做slide切换
+    slideDir: "h",//字符串 slide切换方向 可选值("h"水平,"v"垂直) 默认为“h”
+    play: 0, // 数字, 自动播放, 设定为>0的数字将开启自动播放,数值为播放的间隔(表述不准确)
+    pause: 0, // 数字, 控制手动播放时停止播放. 定为>0的数字将开启停止播放功能,数值为停止的间隙(表述不准确)
+    hoverPause: false, // 布尔型 设置成ture 鼠标悬浮时会暂停动画
+    bigTarget: false, // 布尔型 设置成true后点击一张图片将链接到下一张图片 注意img父节点a标签的点击事件
+    animationStart: function(){}, // 动画执行开始前调用的方法
+    animationComplete: function(){}, // 动画执行完毕后的回调方法
+    slidesLoaded: function() {} // 当幻灯片都加载好后调用的方法
+  }
+})(jQuery);
+</script>
+</body>
+</html>

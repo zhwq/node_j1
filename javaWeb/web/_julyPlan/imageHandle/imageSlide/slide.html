@@ -30,58 +30,66 @@
       width: 150px;
       height: 20px;
     }
+
+      /*
+        Pagination
+      */
+
+    .pagination {
+      /*margin:26px auto 0;*/
+      width:auto;/*100px*/
+    }
+
+    .pagination li {
+      float:left;
+      margin:0 1px;
+      list-style:none;
+    }
+
+    .pagination li a {
+      display:block;
+      width:12px;
+      height:0;
+      padding-top:12px;
+      background-image:url(images/pagination.png);
+      background-position:0 0;
+      float:left;
+      overflow:hidden;
+    }
+
+    .pagination li.current a {
+      background-position:0 -12px;
+    }
   </style>
   <script src="../../jsLib/jquery-1.7.2.js"></script>
-  <script>
-    /**
-     * 图片轮播控件
-     * 1. 控件尺寸自定义
-     * 2. 使用悬浮1-2-3方式定制点播(默认放置在右下角)
-     * 3. 最多6张
-     */
-    $(function(){
-      var current = 0;
-      var $slideHost = $( "div.slide-controller" );
-      var left = 438;
-      var slideSize = 4;
-      setInterval(function(){
-        var $currentSlide = $slideHost.children(":eq("+current+")");
-        $slideHost.animate({left:-2*left+"px"},350,function(){
-          $slideHost.css({left:-left+"px"});
-          var $targetSlide;
-          if ( current == slideSize -1 ) {
-            $targetSlide = $slideHost.children(":eq(0)");
-            current = 0;
-          } else {
-            $targetSlide = $currentSlide.next();
-            current = $targetSlide.index();
-          }
-          $currentSlide.css({
-            left: left + "px",
-            display: "none",
-            zIndex: 0
-          });
-          $targetSlide.css({
-            left: left + "px",
-            display: "block",
-            zIndex: 5
-          });
-        });
-      },2000);
-    });
-  </script>
 </head>
 <body>
   <div id="slides">
-    <div class="slide-container" style="overflow: hidden;position: relative;display: block;width: 438px;height: 350px;">
-      <ul class="slide-pagination" style="z-index: 6;left: 270px;top: 310px;"></ul><!--/点播控制入口-->
-      <div class="slide-controller" style="position: relative;width: 1750px;height: 350px;left: -438px;">
-        <a href="javascript:;" style="position: absolute;left: 438px;display: block;z-index: 5;"><img src="images/1.png"/></a>
-        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;"><img src="images/2.png"/></a>
-        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;"><img src="images/3.png"/></a>
-        <a href="javascript:;" style="position: absolute;left: 438px;display: none;z-index: 0;"><img src="images/4.png"/></a>
-      </div>
+    <div class="slide-container" style="overflow: hidden;position: relative;display: block;">
+        <a href="javascript:;" style="display: block;z-index: 5;">
+          <img src="images/1.png" width="438" height="350"/>
+        </a>
+        <a href="javascript:;" style="display: block;z-index: 0;">
+          <img src="images/2.png" width="438" height="350"/>
+        </a>
+        <a href="javascript:;" style="display: block;z-index: 0;">
+          <img src="images/3.png" width="438" height="350"/>
+        </a><!--
+        <a href="javascript:;" style="display: block;z-index: 0;">
+          <img src="images/4.png" width="438" height="350"/>
+        </a>-->
     </div>
   </div>
+<script src="js/slide.js"></script>
+<script>
+  $(function(){
+     $("#slides").slide({
+       width: 438,
+       height: 350,
+       play: 2000/*,//开启自动播放
+       pause: 1000*/
+     });
+  });
+</script>
 </body>
 </html>
