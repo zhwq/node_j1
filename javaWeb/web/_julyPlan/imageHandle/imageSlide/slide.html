@@ -66,7 +66,7 @@
 <body>
   <div id="slides">
     <div class="slide-container" style="overflow: hidden;position: relative;display: block;">
-        <a href="javascript:;" style="display: block;z-index: 5;">
+        <a href="http://www.baidu.com" target="_blank" style="display: block;z-index: 5;">
           <img src="images/1.png" width="438" height="350"/>
         </a>
         <a href="javascript:;" style="display: block;z-index: 0;">
@@ -74,20 +74,21 @@
         </a>
         <a href="javascript:;" style="display: block;z-index: 0;">
           <img src="images/3.png" width="438" height="350"/>
-        </a><!--
+        </a>
         <a href="javascript:;" style="display: block;z-index: 0;">
           <img src="images/4.png" width="438" height="350"/>
-        </a>-->
+        </a>
     </div>
   </div>
 <script src="js/slide.js"></script>
 <script>
   $(function(){
      $("#slides").slide({
+       slideDir: "v",
        width: 438,
        height: 350,
-       play: 2000/*,//开启自动播放
-       pause: 1000*/
+       play: 2000,//开启自动播放
+       pause: 1000
      });
   });
 </script>
