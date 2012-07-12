@@ -1,0 +1,35 @@
+@charset "utf-8";
+.slide-container {
+  overflow: hidden;
+  display: block;
+}
+.slide-controller {
+  overflow: hidden;
+  position: relative;
+}
+/*手动调整结构ul*/
+.pagination {
+  width:auto;
+  height: 15px;
+}
+.pagination li{
+  float:left;
+  list-style:none;
+}
+.pagination li a {
+  display:block;
+  width: 30px;
+  height: 15px;
+  line-height: 15px;
+  background-color: #000000;
+  color: #ffffff;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
+  float:left;
+  overflow:hidden;
+}
+
+.pagination li.current a {
+  background-color: #f29b32;
+}

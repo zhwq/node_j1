@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>图片播放</title>
+  <meta charset="utf-8"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: "\u5B8B\u4F53", sans-serif; /*宋体*/
+      font-size: 12px;
+      text-align: center;
+    }
+  </style>
+  <link rel="stylesheet" href="slide.css"/>
+  <script src="../../jsLib/jquery-1.7.2.js"></script>
+  <!--<script src="../jquery-ui/js/jquery-1.5.2.min.js"></script>-->
+</head>
+<body>
+  <div id="slides">
+    <div class="slide-container" style="overflow: hidden;position: relative;display: block;">
+        <div class="slide-controller">
+          <a href="http://www.baidu.com" target="_blank" style="display: block;z-index: 5;">
+            <img src="images/1.png" width="438" height="350"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/2.png" width="438" height="350"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/3.png" width="438" height="350"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/4.png" width="438" height="350"/>
+          </a>
+        </div>
+    </div>
+  </div>
+<script src="slide.js"></script>
+<script>
+  $(function(){
+     $("#slides").slide({
+       effect: "fade",
+       paginationType: "hover",
+       play: 3000,//开启自动播放
+       pause: 1000
+     });
+  });
+</script>
+</body>
+</html>

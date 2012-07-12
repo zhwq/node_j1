@@ -38,27 +38,33 @@
     .pagination {
       /*margin:26px auto 0;*/
       width:auto;/*100px*/
+      height: 15px;
     }
 
-    .pagination li {
+    .pagination li{
       float:left;
-      margin:0 1px;
+      /*margin:0 1px;*/
       list-style:none;
     }
-
     .pagination li a {
       display:block;
-      width:12px;
-      height:0;
-      padding-top:12px;
-      background-image:url(images/pagination.png);
-      background-position:0 0;
+      width: 30px;
+      height: 15px;
+      line-height: 15px;
+      background-color: #000000;
+      color: #ffffff;
+      text-decoration: none;
+      text-align: center;
+      font-weight: bold;
+     /* background-image:url(images/pagination.png);
+      background-position:0 0;*/
       float:left;
       overflow:hidden;
     }
 
     .pagination li.current a {
-      background-position:0 -12px;
+      /*background-position:0 -12px;*/
+      background-color: #f29b32;
     }
   </style>
   <script src="../../jsLib/jquery-1.7.2.js"></script>
@@ -66,28 +72,31 @@
 <body>
   <div id="slides">
     <div class="slide-container" style="overflow: hidden;position: relative;display: block;">
-        <a href="http://www.baidu.com" target="_blank" style="display: block;z-index: 5;">
-          <img src="images/1.png" width="438" height="350"/>
-        </a>
-        <a href="javascript:;" style="display: block;z-index: 0;">
-          <img src="images/2.png" width="438" height="350"/>
-        </a>
-        <a href="javascript:;" style="display: block;z-index: 0;">
-          <img src="images/3.png" width="438" height="350"/>
-        </a>
-        <a href="javascript:;" style="display: block;z-index: 0;">
-          <img src="images/4.png" width="438" height="350"/>
-        </a>
+        <div class="slide-controller">
+          <a href="http://www.baidu.com" target="_blank" style="display: block;z-index: 5;">
+            <img src="images/1.png"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/2.png"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/3.png"/>
+          </a>
+          <a href="javascript:;" style="display: block;z-index: 0;">
+            <img src="images/4.png"/>
+          </a>
+        </div>
     </div>
   </div>
 <script src="js/slide.js"></script>
 <script>
   $(function(){
      $("#slides").slide({
-       slideDir: "v",
-       width: 438,
-       height: 350,
-       play: 2000,//开启自动播放
+       effect: "fade",
+       paginationType: "hover",
+       width: 538,
+       height: 450,
+       play: 3000,//开启自动播放
        pause: 1000
      });
   });

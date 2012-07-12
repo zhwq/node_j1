@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>qq图片播放（ie下line方式获取定位有问题)</title>
+  <meta charset="utf-8"/>
+  <link rel="stylesheet" href="css/yule_20100701.css"/>
+  <script src="../../../jsLib/jquery-1.7.2.js"></script>
+  <script src="js/jquery.simpleslider.js"></script>
+</head>
+<body>
+<div class="flash" style="width: 320px;">
+  <div class="focusimg">
+    <ul id="focusimg">
+      <li style="display: list-item; "><a href="http://hb.qq.com/a/20120712/000415.htm" target="_blank"><img
+        src="http://img1.gtimg.com/hb/pics/hv1/108/117/1085/70582068.jpg" alt="王珞丹着齐P小短裤 尺度过大显害羞"
+        sub="日前，王珞丹身着齐P小短裤现身某酒店。由于短裤过短，王珞丹见记者拍照也显得不好意思。在候场时还不忘整理发型…"></a></li>
+
+      <li style="display: list-item; "><a href="http://hb.qq.com/ent/yltp/index.htm" target="_blank"><img
+        src="http://img1.gtimg.com/hb/pics/hv1/114/125/1085/70584114.jpg" alt="日本人气美女泷泽萝拉首推全裸AV"
+        sub="日本网络红人、“国宝级美女”泷泽萝拉下海捞金，2012年7月推出第一部全裸AV引宅男围观…"></a></li>
+
+      <li style="display: list-item; "><a href="http://hb.qq.com/a/20120711/000434.htm#p=1" target="_blank"><img
+        src="http://img1.gtimg.com/hb/pics/hv1/42/127/1084/70519527.jpg" alt="汤唯品酒手舞足蹈 避谈陈冠希爱有缘人"
+        sub="汤唯一身红色修身长裙亮相，女神范儿十足，在现场她显得古灵精怪，还拿了杯酒一饮而尽，随后手舞足蹈搞怪不得…"></a></li>
+
+      <li style="display: list-item; "><a href="http://hb.qq.com/a/20120711/000515.htm#p=1" target="_blank"><img
+        src="http://img1.gtimg.com/hb/pics/hv1/52/127/1084/70519537.jpg" alt="钟楚红张曼玉早期剧照 气质纯净小清新"
+        sub="近日，一组钟楚红、张曼玉1988年拍摄的《流金岁月》电影剧照在微博热传…"></a></li>
+
+      <li style="display: list-item; "><a href="http://myhb.qq.com/t-342025-1.htm" target="_blank"><img
+        src="http://img1.gtimg.com/hb/pics/hv1/62/127/1084/70519547.jpg" alt="楚美人：空港" sub="双鱼座美眉，百变造型…"></a></li>
+
+    </ul>
+    <div class="ctrlbar_bg"></div>
+    <div class="ctrlbar">
+      <div id="focusimg_title"><a href="http://hb.qq.com/a/20120711/000515.htm#p=1" target="_blank">钟楚红张曼玉早期剧照
+        气质纯净小清新</a></div>
+      <div id="focusimg_sub">近日，一组钟楚红、张曼玉1988年拍摄的《流金岁月》电影剧照在微博热传…</div>
+      <ul id="focusimg_index">
+        <!--动态生成
+        <li index="0" class="">1</li>
+        <li index="1" class="">2</li>
+        <li index="2" class="">3</li>
+        <li index="3" class="selected">4</li>
+        <li index="4" class="">5</li>-->
+      </ul>
+    </div>
+  </div>
+  <p><a href="http://t.qq.com/p/t/27410078515363" target="_blank">华谊兄弟武汉影院暑期看电影优惠信息</a></p>
+</div>
+<script>
+  (function ($) {
+    $().ready(function () {
+      $('#focusimg').simpleslider('line', 3000, true, {show:true, link:$('#focusimg_title'), sub:$('#focusimg_sub'), h:$('#focusimg_index')});
+//      $('#countdown').simpleCountdown();
+      var img_effect = $('<div style="display:none;height:20px;line-height:20px;background-color:#000;text-align:center;overflow:hidden;" class="img_effect"></div>').appendTo('body').css('opacity', '0.6');
+      $('img', '.pic_04,.pic_05').hover(
+        function () {
+          var t = $(this);
+          var href = t.closest('a').attr('href');
+          var title = t.attr('alt');
+          img_effect.html('<a href="' + href + '" target="_blank">' + title + '</a>').width(t.width());
+        },
+        function () {
+        }).each(function () {
+        $(this).simplemenu('img_effect', img_effect, true, {_top:-20}, false);
+      });
+    });
+  })(jQuery);
+</script>
+</body>
+</html>

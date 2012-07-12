@@ -32,29 +32,163 @@
  * limitations under the License.
  */
 (function ($) {
+  /**
+   * @class 图片轮播展示
+   * @name slide
+   * @description 图片轮播展示插件
+   * @version 1.0
+   */
   $.fn.slide = function (option) {
     //默认配置
     var defaults = {
+      /**
+       * @name slide#maxNum
+       * @param {Number} maxNum
+       * @description 最多允许展示图片数目
+       * @default {Number} 6
+       * @example
+       *
+       */
       maxNum:6, //最多允许6张图片
-      width:undefined, //数字 控件的宽
-      height:undefined, //数字 控件的高
-      container:'slide-container', //字符串 控件容器class值
+      /**
+       * @name slide#width
+       * @param {Number} width
+       * @description 控件的宽
+       * @default {Number} 438
+       * @example
+       *
+       */
+      width:undefined,
+      /**
+       * @name slide#height
+       * @param {Number} height
+       * @description 控件的高
+       * @default {Number} 350
+       * @example
+       *
+       */
+      height:undefined,
+      /**
+       * @name slide#container
+       * @param {String} container
+       * @description 控件容器class值
+       * @default {String} 'slide-container'
+       * @example
+       *
+       */
+      container:'slide-container',
 //    preload: false, //  布尔型;控制预加载slideshow下的img的图片；
 //    preloadImage: '/img/loading.gif', // 字符串;设定预加载时的加载中标识...(默认值:/img/loading.gif)
-      pagination:true, //手动选择显示的幻灯图片
-      paginationType: "click",//手动触发方式;暂时不提供配置
-      paginationClass:'pagination', // 手动选择入口的容器节点class值
-      currentClass:'current', // 字符串(当前显示动画节点的class值)
-      duration:600, //动画时间  animateSpeed-->duration
-      start:1, // 数字 第一帧
-      effect:"h", //动画效果;1,fade,淡入淡出;2,slide:h 水平;v 垂直
-      play:0, // 数字, 自动播放, 设定为>0的数字将开启自动播放,数值为播放的间隔(表述不准确)
-      pause:0, // 数字, 控制手动播放时停止播放. 定为>0的数字将开启停止播放功能,数值为停止的间隙(表述不准确)
-      hoverPause:false, // 布尔型 设置成ture 鼠标悬浮时会暂停动画
-//    bigTarget:false, // 布尔型 设置成true后点击一张图片将链接到下一张图片 注意img父节点a标签的点击事件
-      animationStart:function () {}, // 动画执行开始前调用的方法
-      animationComplete:function () {}, // 动画执行完毕后的回调方法
-      slideLoaded:function () {} // 当幻灯片都加载好后调用的方法
+      /**
+       * @name slide#height
+       * @param {Boolean} pagination
+       * @description 手动选择显示的幻灯图片开关
+       * @default {Boolean} true
+       * @example
+       *
+       */
+      pagination:true,
+      /**
+       * @name slide#paginationType
+       * @param {String} paginationType
+       * @description 手动触发方式;注意!暂时不提供配置
+       * @default {String} 'click'
+       * @example
+       *
+       */
+      paginationType: 'click',
+      /**
+       * @name slide#paginationClass
+       * @param {String} paginationClass
+       * @description 手动选择入口的容器节点class值
+       * @default {String} 'pagination'
+       * @example
+       *
+       */
+      paginationClass:'pagination',
+      /**
+       * @name slide#currentClass
+       * @param {String} currentClass
+       * @description 当前显示动画节点的class值
+       * @default {String} 'current'
+       * @example
+       *
+       */
+      currentClass:'current',
+      /**
+       * @name slide#duration
+       * @param {Number} duration
+       * @description 过渡动画持续时间
+       * @default {Number} 600
+       * @example
+       *
+       */
+      duration:600,
+      /**
+       * @name slide#start
+       * @param {Number} start
+       * @description 默认显示的图片序号
+       * @default {Number} 1
+       * @example
+       *
+       */
+      start:1,
+      /**
+       * @name slide#effect
+       * @param {String} effect
+       * @description 动画效果;1,fade,淡入淡出;2,slide:h 水平;v 垂直;可选值: "h"; "v"; "slide";
+       * @default {String} 'h'
+       * @example
+       *
+       */
+      effect:'h',
+      /**
+       * @name slide#play
+       * @param {Number} play
+       * @description 自动播放周期(设定为大于0的数字将开启自动播放)
+       * @default {Number} 3000
+       * @example
+       *
+       */
+      play:2000,
+      /**
+       * @name slide#pause
+       * @param {Number} pause
+       * @description 控制手动播放时停止播放. 定为大于0的数字将开启停止播放功能,数值为停止的间隙
+       * @default {Number} 1000
+       * @example
+       *
+       */
+      pause:1000,
+//      hoverPause:false, // 布尔型 设置成ture 鼠标悬浮时会暂停动画
+//      bigTarget:false, // 布尔型 设置成true后点击一张图片将链接到下一张图片 注意img父节点a标签的点击事件
+      /**
+       * @name slide#animationStart
+       * @param {fn} animationStart
+       * @description 动画执行开始前调用的方法
+       * @default {fn} function() {}
+       * @example
+       *
+       */
+      animationStart:function () {},
+      /**
+       * @name slide#animationComplete
+       * @param {fn} animationComplete
+       * @description 动画执行完毕后的回调方法
+       * @default {fn} function() {}
+       * @example
+       *
+       */
+      animationComplete:function () {},
+      /**
+       * @name slide#animationComplete
+       * @param {fn} animationComplete
+       * @description 当幻灯片都加载好后调用的方法
+       * @default {fn} function() {}
+       * @example
+       *
+       */
+      slideLoaded:function () {}
     };
     //加载默认配置和用户自定义配置
     option = $.extend({}, defaults, option || {});
@@ -67,11 +201,12 @@
       var $control = $container.find(">div.slide-controller");
 //            var $control = $('<div class="slide-control"/>'); //此时和dom节点中的不关联;更新dom后获取
       var $slides = /*$container*/$control.children();
+      var $imgs = $slides.find("img");
       var total = $slides.size();//幻灯片数目
       //如果获取准确的宽高
       //1.显式配置;2.在img上设置width,height属性;3,通过脚本判断获取(TODO:未完成)
-      var width = option.width || $slides.outerWidth();
-      var height = option.height || $slides.outerHeight();
+      var width = option.width || $imgs.width()/*$slides.outerWidth()在某些情形下获取值不准确*/;
+      var height = option.height || $imgs.height()/*$slides.outerHeight()*/;
       var start = option.start - 1;
       var next = 0;
       var prev = 0;
@@ -84,19 +219,24 @@
       var direction; //正(左、上)、负向
 //            var imageParent;//预加载时使用
       var duration = option.duration;
+      if ( duration < 2000 ) {
+        duration = 2000;
+      }
       var pauseTimeout;
       var playInterval;
       if (total > option.maxNum) {
         alert("最多允许6张图片!");
         return;
       }
-      if ( (!option.width || !option.height) && (!$slides.attr("width") || !$slides.attr("height")) ) {
+      if ( (!option.width || !option.height) && (!$slides.find("img").attr("width") || !$slides.find("img").attr("height")) ) {
         alert("控件宽高调用错误!");
         return;
       }
       //设定图片的宽、高;在自定义控件宽高时使用
       //此时不使用等比缩放、简单的将容器的宽、高赋值
+      if (!option.width || !option.height) {
       $slides.find("img").attr("width", width).attr("height", height);
+      }
       //设定容器的宽高
       //确定控件容器拥有样式: overflow: hidden; position: relative;
       //设定控制容器的样式
@@ -148,12 +288,11 @@
         option.slideLoaded();
       });
       //生成手动操作入口
-      console.log( option.pagination );
       if (option.pagination) {
         var ulCss = {"position":"absolute", "right":"25px", "bottom":"12px", "z-index":6};
         var ul = '<ul class=' + option.paginationClass + '>';
         for (var i = 0; i < total; i++) {
-          ul += '<li><a href="javascript:;">' + (i) + '</a></li>';
+          ul += '<li><a href="javascript:;">' + (i+1) + '</a></li>';
         }
         ul += '</ul>';
         $(ul).appendTo($container).css(ulCss);
@@ -166,7 +305,8 @@
               if ( option.play ) {
                 _pause();
               }
-              clicked = parseInt($(this).text(), 10);
+              //显示数字从1开始;计算下标由0开始
+              clicked = parseInt($(this).text(), 10)-1;
               if (current != clicked) {
                 _animate('pagination', effect, clicked);
               }
@@ -214,7 +354,7 @@
             break;
           case "pagination":
             prev = $elem.find('.' + option.paginationClass + ' li.' + option.currentClass + ">a").text();
-            prev = parseInt(prev, 10);
+            prev = parseInt(prev, 10)-1;
             next = clicked;
             if (prev < next) {
               if (effect == "h") {
@@ -314,11 +454,17 @@
         }
       }
 
+      /**
+       * 清除自动播放周期
+       */
       function _stop() {
         clearInterval($elem.data('interval'));
       }
 
-      function _pause() { //清除定时器;延时添加定时器
+      /**
+       * 清除定时器;延时添加定时器
+       */
+      function _pause() {
         if (option.pause) {
           clearTimeout($elem.data('pause'));
           clearInterval($elem.data('interval'));
@@ -336,4 +482,7 @@
       }
     });
   };
+  $.extend($.fn.slide(), {
+    version: "1.0"
+  });
 })(jQuery);
