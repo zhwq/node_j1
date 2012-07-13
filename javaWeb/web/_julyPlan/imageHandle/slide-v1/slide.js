@@ -234,8 +234,8 @@
       }
       //设定图片的宽、高;在自定义控件宽高时使用
       //此时不使用等比缩放、简单的将容器的宽、高赋值
-      if (!option.width || !option.height) {
-      $slides.find("img").attr("width", width).attr("height", height);
+      if ( option.width && option.height ) {
+        $slides.find("img").attr("width", width).attr("height", height);
       }
       //设定容器的宽高
       //确定控件容器拥有样式: overflow: hidden; position: relative;
