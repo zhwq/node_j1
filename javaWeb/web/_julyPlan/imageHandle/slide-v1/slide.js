@@ -205,6 +205,7 @@
       var total = $slides.size();//幻灯片数目
       //如果获取准确的宽高
       //1.显式配置;2.在img上设置width,height属性;3,通过脚本判断获取(TODO:未完成)
+      //此时局限了控件为图片播放
       var width = option.width || $imgs.width()/*$slides.outerWidth()在某些情形下获取值不准确*/;
       var height = option.height || $imgs.height()/*$slides.outerHeight()*/;
       var start = option.start - 1;
