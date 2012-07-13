@@ -8,11 +8,25 @@
     <script src="../artDialog4.1.5/plugins/iframeTools.source.js"></script>
 </head>
 <body>
-<h2>我是一个页面</h2>
+<!--<h2>我是一个页面</h2>
 <pre>
 &lt;script>
   alert( "父窗口:" + art.dialog.opener );
 &lt;/script>
-</pre>
+</pre>-->
+<input type="button" value="按钮" id="btn"/>
+<script>
+  var $btn = $("#btn");
+  $btn.click(function(){
+    //存储逻辑父页面
+    art.dialog.data( "loginParent", window );
+    art.dialog.parent.art.dialog.open("childLevel2.html",
+      {
+        "title":"两层art",
+        "lock": true
+      }
+    )
+  });
+</script>
 </body>
 </html>

@@ -1747,12 +1747,25 @@ _path = window['_artDialog_path'] || (function (script, i, me) {
 
 // 无阻塞载入CSS (如"artDialog.js?skin=aero")
 _skin = _thisScript.src.split('skin=')[1];
-if (_skin) {
+/*if (_skin) {
 	var link = document.createElement('link');
 	link.rel = 'stylesheet';
 	link.href = _path + '/skins/' + _skin + '.css?' + artDialog.fn.version;
 	_thisScript.parentNode.insertBefore(link, _thisScript);
-};
+};*/
+//简单封装-为换肤提供更新artDialog样式文件
+//注意artDilaog.source.js的?skin值此时未做更新
+artDialog.loadSkin = function( _skin ){
+    if (_skin) {
+      var link = document.getElementById("_artSkin") || document.createElement('link');
+      link.id = "_artSkin";
+      link.rel = 'stylesheet';
+      link.href = _path + '/skins/' + _skin + '.css?' + artDialog.fn.version;
+      _thisScript.parentNode.insertBefore(link, _thisScript);
+    }
+  };
+artDialog.loadSkin( _skin );
+
 
 
 
