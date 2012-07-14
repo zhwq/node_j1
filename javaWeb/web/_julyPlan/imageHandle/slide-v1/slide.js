@@ -483,7 +483,7 @@
       }
     });
   };
-  $.extend($.fn.slide(), {
+  $.extend($.fn.slide, {
     version: "1.0"
   });
 })(jQuery);
