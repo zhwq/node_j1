@@ -1,0 +1,7 @@
+<MKM version="2.0" imageFileUrl="file:///D:/github/node_j1/javaWeb/web/ui-widget/artDialog3.0.5/skin/red/dialog_bg-red.png">
+  <Marks>
+    <ColorMark defaultDirection="9" direction="6" color="16711680" targetColor="15675697" offsetX="25" offsetY="10" x="3" y="1"/>
+    <ColorMark defaultDirection="9" direction="6" color="16711680" targetColor="12982296" offsetX="25" offsetY="10" x="3" y="16"/>
+    <ColorMark defaultDirection="9" direction="6" color="16711680" targetColor="10814211" offsetX="25" offsetY="10" x="4" y="28"/>
+  </Marks>
+</MKM>

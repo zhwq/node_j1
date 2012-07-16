@@ -1,0 +1,298 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>artDialog v3 demo</title>
+
+<!-- artDialog -->
+<script type="text/javascript" src="../artDialog.js"></script>
+<script>
+(function($){
+	// 改变默认配置
+	var d = $.dialog.defaults;
+	// 预缓存皮肤，数组第一个为默认皮肤
+	d.skin = ['default', 'chrome', 'facebook', 'aero'];
+	d.plus = true;
+	// 是否开启特效
+	//d.effect = true;
+	// 指定超过此面积的对话框拖动的时候用替身
+	//d.showTemp = 0;
+	
+})(art);
+</script>
+<link href="demo.css" rel="stylesheet" type="text/css" />
+<!--代码高亮-->
+<link rel="stylesheet" href="highlight/styles/magula.css">
+<script src="highlight/highlight.pack.js"></script>
+<script src="highlight/languages/javascript.js"></script>
+<script>
+hljs.tabReplace = '    ';
+hljs.initHighlightingOnLoad();
+</script>
+<script>
+// DEMO
+art(function($){
+
+	var getText = function(elems) {
+		var ret = "", elem;
+
+		for ( var i = 0; elems[i]; i++ ) {
+			elem = elems[i];
+			if ( elem.nodeType === 3 || elem.nodeType === 4 ) {
+				ret += elem.nodeValue;
+			} else if ( elem.nodeType !== 8 ) {
+				ret += getText( elem.childNodes );
+			};
+		};
+
+		return ret;
+	};
+
+	$(document).live('click', function(){
+		if ($(this).hasClass('runCode')) {
+			var id = this.name,
+				elem = $('#' + id),
+				code = getText(elem);
+			
+			eval(code);
+		};
+	});
+});
+
+art(function($){
+	var k = [];
+	
+	$(document).bind('keydown', function(e){
+		e = e || window.event;
+		k.push(e.keyCode);
+		
+		// debug
+		if (k.toString().indexOf('68,69,66,85,71') >= 0){
+			k=[];
+			art.dialog({
+				id: 'debugDialog',
+				title: '调试JavaScript',
+				left: 'right',
+				top: 'bottom',
+				fixed: true,
+				content: '<textarea rows="4" cols="60" name="" id="debugText"></textarea><p id="debugInfo" style="color:#F99"></p>'
+			}, function(){
+				var debugInfo = $('#debugInfo')[0];
+				var code = $('#debugText')[0].value;
+				try {
+					eval(code);
+					debugInfo.innerHTML = '';
+				} catch(error) {
+					debugInfo.innerHTML = error;
+				};
+				
+				return false;
+			});
+			setTimeout(function(){
+				$('#debugText')[0].focus();
+			}, 40);
+		};
+	});
+
+});
+</script>
+</head>
+
+<body>
+<div id="main">
+  <div id="demo" class="tabContent">
+   	<h2>配置参数演示</h2>
+	<div style="text-align:right">
+      <select>
+        <option>IE6 Select Test</option>
+</select>
+    </div>
+	<h3>内容 [content]</h3>
+		<div id="demoCode_content">
+<pre><code class="javascript">art.dialog({
+    content: '我支持HTML'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_content">运行&raquo;</button></p> 
+		<h3>按钮 [yesFn &amp; noFn]</h3>
+	<div id="demoCode_button">
+<pre><code class="javascript">art.dialog({
+    content: '如果定义了回调函数才会出现相应的按钮',
+    yesFn: function(){
+    	alert('hello world');
+        //return false; //如果返回false将阻止关闭
+    },
+    noFn: true //为true等价于function(){}
+});</code></pre>
+	</div>
+	<p class="buttons"><button class="runCode" name="demoCode_button">运行&raquo;</button></p> 
+        <h3>锁屏 [lock &amp; lockClick]</h3>
+		<div id="demoCode_lock">
+<pre><code class="javascript">art.dialog({
+	lock: true,
+	content: '中断用户在对话框以外的交互，展示重要操作与消息',
+	yesFn: function(){
+		art.dialog({content: '再来一个锁屏', lock: true});
+        return false;
+	},
+    noFn: true
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_lock">运行&raquo;</button></p>
+        <h3>跟随元素 [follw]</h3>
+		<div id="demoCode_follow">
+<pre><code class="javascript">art.dialog({
+	follow: document.getElementById('followTestBtn'),
+	content: '让对话框跟着某个元素，这里的follw可以是ID字符串'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" id="followTestBtn" title="id=followTestBtn" name="demoCode_follow">运行&raquo;</button></p> 
+        <h3>自定义坐标 [left &amp; top]</h3>
+		<div id="demoCode_position">
+<pre><code class="javascript">art.dialog({
+    left: 100,
+    top: 'center',
+    content: '我改变坐标了'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_position">运行&raquo;</button></p>
+        <h3>设置大小 [width &amp; height]</h3>
+		<div id="demoCode_size">
+<pre><code class="javascript">art.dialog({
+	width: '20em',
+    height: 55,
+	content: '尺寸可以带单位'
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" name="demoCode_size">运行&raquo;</button></p>
+<h3>静止定位 [fixed]</h3>
+		<div id="demoCode_fixed">
+<pre><code class="javascript">art.dialog({
+     fixed: true,
+	content: '请拖动滚动条查看'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_fixed">运行&raquo;</button></p> 
+        <h3>不许拖拽 [drag]</h3>
+		<div id="demoCode_drag">
+<pre><code class="javascript">art.dialog({
+    drag: false,
+	content: '禁止拖拽'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_drag">运行&raquo;</button></p> 
+        <h3>不限制挪动范围 [limit]</h3>
+		<div id="demoCode_limit">
+<pre><code class="javascript">art.dialog({
+    limit: false,
+	content: '我可以不受限制的拖动了'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_limit">运行&raquo;</button></p> 
+        <h3>定时关闭的消息 [time]</h3>
+		<div id="demoCode_time">
+<pre><code class="javascript">art.dialog({
+    time: 2,
+	content: '两秒后关闭'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_time">运行&raquo;</button></p> 
+        <h3>防止重复弹出 [id]</h3>
+		<div id="demoCode_id">
+<pre><code class="javascript">art.dialog({
+    id: 'testID',
+	content: '再次点击运行看看'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_id">运行&raquo;</button></p> 
+        <h3>改变标题 [title]</h3>
+		<div id="demoCode_title">
+<pre><code class="javascript">art.dialog({
+	title: '我是标题',// 如果为false将不显示标题栏
+	content: 'hello world!'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_title">运行&raquo;</button></p>
+        <h3>改变皮肤 [skin]</h3>
+		<div id="demoCode_skin">
+<pre><code class="javascript">art.dialog({
+	skin: 'aero',
+	content: '我是一个漂亮的半透明皮肤，支持IE6哦'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_skin">运行&raquo;</button></p> 
+        <h3>定义消息图标 [icon]</h3>
+		<div id="demoCode_icon">
+<pre><code class="javascript">art.dialog({
+	icon: 'succeed',
+	skin: 'aero',
+	content: '我可以定义消息图标哦'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_icon">运行&raquo;</button></p> 
+        <h3>没有外边框 [border]</h3>
+		<div id="demoCode_no_border">
+<pre><code class="javascript">art.dialog({
+	border: false,
+	content: '并不是所有的皮肤都支持这个选项'
+});</code></pre>
+		</div>
+		<p class="buttons"><button class="runCode" name="demoCode_no_border">运行&raquo;</button></p>
+        <h3>模板解析 [tmpl &amp; content]</h3>
+		<div id="demoCode_tmpl">
+<pre><code class="javascript">var JSON = {
+	code: 0,
+	users: ['糖饼', '月月鸟', '水水', '丽丽', '花花', '大叔'],
+    me: '糖饼',
+    web: 'http://www.planeart.cn'
+};
+var html = '\
+    &lt;% if (code === 0) { %&gt;\
+        &lt;p&gt;当前用户：&lt;a href=&quot;&lt;%=web%&gt;&quot; title=&quot;&lt;%=web%&gt;&quot;&gt;&lt;%=me%&gt;&lt;/a&gt;&lt;/p&gt;\
+        &lt;p&gt;\
+            所有用户：\
+            &lt;% for (i = 0; i &lt; users.length; i++) { %&gt;\
+                &lt;%=i + 1%&gt;.&lt;%=users[i]%&gt;&nbsp;\
+            &lt;% } %&gt;\
+        &lt;/p&gt;\
+    &lt;% } else { %&gt;\
+    	&lt;p&gt;哦，服务器出错了，错误代码：&lt;%=code%&gt;&lt;p&gt;\
+    &lt;% } %&gt;\
+';
+
+art.dialog({
+	content: JSON,
+    tmpl: html
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" name="demoCode_tmpl">运行&raquo;</button></p>
+        <h3>定位焦点 [focus]</h3>
+		<div id="demoCode_focus">
+<pre><code class="javascript">art.dialog({
+	focus: false,// false是取消对话框按钮自动拥有焦点.这里也可以传入元素
+	content: '默认焦点是附加到对话框按钮上的&lt;br /&gt;' +
+			'你可以给focus参数传入元素对象'
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" name="demoCode_focus">运行&raquo;</button></p>
+        <h3>取消ESC [esc]</h3>
+	<div id="demoCode_esc">
+<pre><code class="javascript">art.dialog({
+	esc: false,
+	content: '按esc无法关闭我'
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" name="demoCode_esc">运行&raquo;</button></p>
+        <h3>弹出不显示 [show]</h3>
+		<div id="demoCode_show">
+<pre><code class="javascript">art.dialog({
+	show: false,// 后续可以用内部接口show()恢复显示
+	content: 'hello world'
+});</code></pre>
+</div>
+		<p class="buttons"><button class="runCode" name="demoCode_show">运行&raquo;</button></p>
+
+  </div>
+</div>
+</body>
+</html>

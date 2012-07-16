@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>child</title>
+    <meta charset="utf-8"/>
+    <script src="jquery-1.5.2.js"></script>
+    <script src="../artDialog4.1.5/artDialog.source.js?skin=default"></script>
+    <script src="../artDialog4.1.5/plugins/iframeTools.source.js"></script>
+</head>
+<body>
+<!--<h2>我是一个页面</h2>
+<pre>
+&lt;script>
+  alert( "父窗口:" + art.dialog.opener );
+&lt;/script>
+</pre>-->
+<input type="button" value="按钮" id="btn"/>
+<script>
+  var $btn = $("#btn");
+  $btn.click(function(){
+    //使用
+    art.dialog.data( "loginParent",window);
+    //console.log( artDialog.data( "_p") );
+    console.log( art.dialog.opener.location.href );
+    /*art.dialog.parent.*/art.dialog.open("childLevel2.html",
+      {
+        "id": "child",
+        "title":"两层art",
+        "lock": true,
+        close: function(){
+          alert( "trigger child close." );
+        }
+      }
+    )
+  });
+</script>
+</body>
+</html>

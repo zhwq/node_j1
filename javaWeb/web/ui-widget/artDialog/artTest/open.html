@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>         <!-- debug="true"-->
+<head>
+    <title>art4.1.5 open</title>
+    <meta charset="utf-8"/>
+    <!--<script type="text/javascript" src="https://getfirebug.com/firebug-lite.js"></script>-->
+    <script src="jquery-1.5.2.js"></script>
+    <script src="../artDialog4.1.5/artDialog.source.js?skin=green"></script>
+    <script src="../artDialog4.1.5/plugins/iframeTools.source.js"></script>
+</head>
+<body>
+<input type="button" value="按钮" id="btn"/>
+<script>
+  var $btn = $("#btn");
+  $btn.click(function(){
+      art.dialog.open("child.html",
+              {
+                  "id": "open",
+                  "title":"我是标题",
+                  "lock": true,
+                close: function(){
+                  alert( "trigger open close." );
+                }
+              }
+      )
+  });
+</script>
+</body>
+</html>
