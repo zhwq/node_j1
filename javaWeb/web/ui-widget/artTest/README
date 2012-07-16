@@ -1,5 +1,0 @@
-1,父页面 由 art.dialog.parent --> art.dialog.opener,4.x版本中art.dialog.parent表示最顶级窗口的window对象
-2,样式兼容老版本,更新对应设置即可(修改以default.css为例)
-3,静默换肤：修改artDialog.source.js文件,添加更新link文件方法
-artDialog.loadSkin
-4,链式纵向打开页面-->横向平级打开页面(使用art.dialog.data存储逻辑父页面)
