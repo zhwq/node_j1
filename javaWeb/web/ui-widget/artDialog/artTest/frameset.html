@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>是否穿透iframe</title>
-    <meta charset="utf-8"/>
-    <script src="jquery-1.5.2.js"></script>
+  <title>是否穿透iframe</title>
+  <meta charset="utf-8"/>
+  <script src="jquery-1.5.2.js"></script>
   <script src="jquery-1.5.2.js"></script>
   <script src="../artDialog4.1.5/artDialog.source.js?skin=default"></script>
   <script src="../artDialog4.1.5/plugins/iframeTools.source.js"></script>
 </head>
-<body>
-<iframe src="frameset.html" width="100%" height="600px"></iframe>
-</body>
+<frameset cols="213,*">
+  <frame src="open.html"/>
+  <frame src="http://baidu.com">
+</frameset>
 </html>

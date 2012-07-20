@@ -12,3 +12,4 @@
   3.2,兼容3.x调用方式
     3.2.1,artDialog.parent = artDialog.opener
     3.2.2,回调方法,closeFn, close
+4,artDialog.confirm调用方式的修改:从接受json格式参数转成接受3个参数的方式(1,内容;2,选择确认的回调;3,选择取消时的回调方法)
