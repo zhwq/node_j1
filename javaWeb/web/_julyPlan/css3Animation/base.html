@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>素材-html实现</title>
+  <meta charset="utf-8"/>
+  <style>
+    * {
+      padding: 0;
+      margin: 0;
+    }
+    body {
+      font-family: "\u5B8B\u4F53", SANS-SERIF;  /*宋体*/
+      font-size: 12px;
+    }
+    .container {
+      overflow: hidden;
+      position: relative;
+      left: 150px;
+      top: 120px;
+      width: 500px;
+      height: 300px;
+    }
+  </style>
+  <style>
+    /*三角形*/
+    div.triangle {
+      position: relative;
+      width: 30px;
+      height: 80px;
+      /*background-color: pink;*/
+    }
+    div.triangle b {
+
+      position: absolute;
+      right: 0;
+      top: 5px;
+
+      border: 14px;
+      border-color: #1f3d99 #ffffff #ffffff #ffffff;
+      border-style: solid;
+
+      width: 0;
+      height: 0;
+      font-size: 0;
+      line-height: 0;
+
+      -webkit-transition: -webkit-transform 0.2s ease-in;
+      -moz-transition:    -moz-transform 0.2s ease-in;
+      -o-transition:      -o-transform 0.2s ease-in;
+      transition:         transform 0.2s ease-in;
+    }
+    div.hover b, div.triangle:hover b {
+      -moz-transform:           rotate(180deg);
+      -moz-transform-origin:    50% 20%;
+      -webkit-transform:        rotate(180deg);
+      -webkit-transform-origin: 50% 20%;
+      -o-transform:             rotate(180deg);
+      -o-transform-origin:      50% 20%;
+      transform:                rotate(180deg);
+      transform-origin:         50% 20%;
+
+      filter: progid:DXImageTransform.Microsoft.BasicImage(rotation=2);
+
+    }
+
+  </style>
+</head>
+<body>
+ <div class="container">
+   <h2>三角形</h2>
+   <div  class="triangle">
+     <b></b>
+   </div>
+ </div>
+</body>
+</html>

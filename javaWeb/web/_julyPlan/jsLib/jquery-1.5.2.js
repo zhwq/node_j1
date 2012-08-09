@@ -298,9 +298,9 @@ jQuery.fn = jQuery.prototype = {
 
 	// For internal use only.
 	// Behaves like an Array's method, not like a jQuery method.
-	push: push,
+	push: push, //Array.prototype.push
 	sort: [].sort,
-	splice: [].splice
+	splice: [].splice//插入、删除、替换数组的元素( start, deleteCount, value, ... )
 };
 
 // Give the init function the jQuery prototype for later instantiation
@@ -843,39 +843,40 @@ jQuery.extend({
 	browser: {}
 });
 
-// Populate the class2type map
+// Populate the class2type map 填写class2type映射
 jQuery.each("Boolean Number String Function Array Date RegExp Object".split(" "), function(i, name) {
 	class2type[ "[object " + name + "]" ] = name.toLowerCase();
 });
 
+//浏览器
 browserMatch = jQuery.uaMatch( userAgent );
 if ( browserMatch.browser ) {
 	jQuery.browser[ browserMatch.browser ] = true;
 	jQuery.browser.version = browserMatch.version;
 }
-
 // Deprecated, use jQuery.browser.webkit instead
 if ( jQuery.browser.webkit ) {
 	jQuery.browser.safari = true;
 }
 
-if ( indexOf ) {
-	jQuery.inArray = function( elem, array ) {
+if ( indexOf /*Array.prototype.indexOf*/) {
+	jQuery.inArray = function( elem, array ) { //是否在数组中
 		return indexOf.call( array, elem );
 	};
 }
 
 // IE doesn't match non-breaking spaces with \s
-if ( rnotwhite.test( "\xA0" ) ) {
+if ( rnotwhite.test( "\xA0" ) ) { //IE7,IE8
 	trimLeft = /^[\s\xA0]+/;
 	trimRight = /[\s\xA0]+$/;
 }
 
 // All jQuery objects should point back to these
+//jQuery对象链的根对象//?
 rootjQuery = jQuery(document);
 
 // Cleanup functions for the document ready method
-if ( document.addEventListener ) {
+if ( document.addEventListener ) {  //@+?转移了方法定义
 	DOMContentLoaded = function() {
 		document.removeEventListener( "DOMContentLoaded", DOMContentLoaded, false );
 		jQuery.ready();

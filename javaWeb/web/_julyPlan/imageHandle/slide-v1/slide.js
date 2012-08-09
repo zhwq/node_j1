@@ -443,6 +443,30 @@
                 active = false;
               });
             break;
+            case "zoom":
+                $control.children(":eq(" + next + ")").css({ width:0,height:0,left:3*width/2,top:3*height/2});
+                $control.children(":eq(" + prev + ")").animate({ width:0,height:0,left:3*width/2,top:3*height/2},duration/2,function(){
+                    $control.children(":eq(" + prev + ")").css({
+                        "z-index": 0,
+                        "display": "none",
+                        "width": width,
+                        "height": height,
+                        "top": height,
+                        "left": width
+
+                    });
+                    $control.children(":eq(" + next + ")").animate({ width:width,height:height,left:width,top:height},duration/2);
+                        //重置z-index
+                        $control.children(":eq(" + next + ")").css({
+                            "z-index": 0,
+                            "display": "block",
+                            "opacity": "1"
+                        });
+                        //结束动画
+                        option.animationComplete(next + 1);
+                        active = false;
+                    });
+                break;
           default:
             break;
         }
@@ -478,7 +502,7 @@
           }, option.pause);
           $elem.data('pause', pauseTimeout);
         } else {
-//          _stop();//这种需求很少
+          _stop();//这种需求很少
         }
       }
     });
