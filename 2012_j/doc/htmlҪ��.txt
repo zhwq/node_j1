@@ -1,60 +1,61 @@
-// http://www.smallni.com/web前端开发规范文档/
+// http://www.smallni.com/webǰ�˿����淶�ĵ�/
 // http://mrthink.net/frontend-specification-bymrthink/
 html
-1,文档类型声明及编码
-jsp(html)页面中第一行书写
+1,�ĵ���������������
+jsp(html)ҳ���е�һ����д
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-(1.1)不允许在行首任何形式的空格
-(1.2)在编写一个页面时，
-要使用可以触发各浏览器“标准模式”的DTD，
-并书写符合规范的代码，
-以保证您的页面在各浏览器中可以最大程度的兼容
+(1.1)�������������κ���ʽ�Ŀո�
+(1.2)�ڱ�дһ��ҳ��ʱ��
+Ҫʹ�ÿ��Դ��������������׼ģʽ����DTD��
+����д���Ϲ淶�Ĵ��룬
+�Ա�֤����ҳ���ڸ�������п������̶ȵļ���
 <meta content="text/html;charset=UTF-8" http-equiv="Content-Type"/>
 2,
-所有编码均遵循xhtml标准,
-标签 & 属性 & 属性命名 必须由小写字母及下划线数字组成, 
-且所有标签必须闭合, 包括 br (<br />), hr(<hr />)等; 
-属性值必须用双引号包括
+���б������ѭxhtml��׼,
+��ǩ & ���� & �������� ������Сд��ĸ���»����������, 
+�����б�ǩ����պ�, ���� br (<br />), hr(<hr />)��; 
+����ֵ������˫���Ű���
 3,
-充分利用无兼容性问题的html自身标签, 
-比如span, em, strong, optgroup, label,等等; 
+��������޼����������html������ǩ, 
+����span, em, strong, optgroup, label,�ȵ�; 
 4,
-需要为html元素添加自定义属性的时候, 
-	首先要考虑下有没有默认的已有的合适标签去设置, 
-	如果没有, 可以使用须以”data-”为前缀来添加自定义属性，避免使用”data:”等其他命名方式;
-	禁止使用style,class来设定业务数据
-5,书写链接地址时, 必须避免重定向，例如：href=”http://www.jinher.com/”, 即须在URL地址后面加上“/”；
-6,在页面中尽量避免使用style属性,即style=”…”;
-7,特殊符号使用: 尽可能使用代码替代: 比如 <(<) & >(&gt;) & 空格( ) & »(») 等等
-8,禁用的标签(按照严格标准模式)
+��ҪΪhtmlԪ�������Զ������Ե�ʱ��, 
+	����Ҫ��������û��Ĭ�ϵ����еĺ��ʱ�ǩȥ����, 
+	���û��, ����ʹ�����ԡ�data-��Ϊǰ׺�������Զ������ԣ�����ʹ�á�data:��������������ʽ;
+	��ֹʹ��style,class���趨ҵ������
+5,��д���ӵ�ַʱ, ��������ض������磺href=��http://www.jinher.com/��, ������URL��ַ������ϡ�/����
+6,��ҳ���о�������ʹ��style����,��style=������;
+7,�������ʹ��: ������ʹ�ô������: ���� <(<) & >(&gt;) & �ո�( ) & ?(?) �ȵ�
+8,���õı�ǩ(�����ϸ��׼ģʽ)
 
 javascript
 1,
-文件编码统一为utf-8, 每行代码结束必须有分号
+�ļ�����ͳһΪutf-8, ÿ�д�����������зֺ�
 2,
-变量命名: 
-	要求变量集中声明, 避免全局变量.
-	驼峰式命名
-	原生JavaScript变量要求是纯英文字母, 首字母须小写, 如iXX
+��������: 
+	Ҫ�������������, ����ȫ�ֱ���.
+	�շ�ʽ����
+	ԭ��JavaScript����Ҫ���Ǵ�Ӣ����ĸ, ����ĸ��Сд, ��iXX
 3,
-函数命名: 首字母小写驼峰式命名. 如iXxxYyy()
+��������: ����ĸСд�շ�ʽ����. ��iXxxYyy()
 4,
-命名语义化, 尽可能利用英文单词或其缩写
+�������廯, ����������Ӣ�ĵ��ʻ�����д
 5,
-尽量避免使用存在兼容性及消耗资源的方法或属性, 比如eval_r() & innerText;
+��������ʹ�ô��ڼ����Լ�������Դ�ķ���������, ����eval_r() & innerText;
 6,
-后期优化中, JavaScript非注释类中文字符须转换成unicode编码使用, 以避免编码错误时乱码显示
+�����Ż���, JavaScript��ע���������ַ���ת����unicode����ʹ��, �Ա���������ʱ������ʾ
 7,
-代码结构明了, 加适量注释. 提高函数重用率
+����ṹ����, ������ע��. ��ߺ���������
 
 jQuery
 1,
 
-注释规范
+ע�͹淶
 1,
-html注释: 注释格式 <!–这儿是注释–>, ‘–’只能在注释的始末位置,不可置入注释文字区域;
+htmlע��: ע�͸�ʽ <!�C�����ע�ͨC>, ���C��ֻ����ע�͵�ʼĩλ��,��������ע����������;
 2,
-css注释: 注释格式 ;
+cssע��: ע�͸�ʽ ;
 3,
-JavaScript注释, 单行注释使用’//这儿是单行注释’ ,多行注释使用 ;
+JavaScriptע��, ����ע��ʹ�á�//����ǵ���ע�͡� ,����ע��ʹ�� ;
+
 
